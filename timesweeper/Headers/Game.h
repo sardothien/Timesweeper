@@ -12,3 +12,4 @@ class Game : public QGraphicsView
 };
 
 #endif // GAME_H
+

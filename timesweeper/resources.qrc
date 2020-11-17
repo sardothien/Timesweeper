@@ -1,4 +1,7 @@
 <RCC>
     <qresource prefix="/Images"/>
     <qresource prefix="/Sounds"/>
+    <qresource prefix="/Levels">
+        <file>Resources/level.txt</file>
+    </qresource>
 </RCC>
