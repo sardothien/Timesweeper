@@ -9,11 +9,23 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Source/main.cpp \
-    Source/TimesweeperMainWindow.cpp
+    Source/Character.cpp \
+    Source/EnemyCharacter.cpp \
+    Source/Game.cpp \
+    Source/Level.cpp \
+    Source/NPCharacter.cpp \
+    Source/Pickup.cpp \
+    Source/PlayerCharacter.cpp \
+    Source/main.cpp
 
 HEADERS += \
-    Headers/TimesweeperMainWindow.h
+    Headers/Character.h \
+    Headers/EnemyCharacter.h \
+    Headers/Game.h \
+    Headers/Level.h \
+    Headers/NPCharacter.h \
+    Headers/Pickup.h \
+    Headers/PlayerCharacter.h
 
 FORMS += \
     Forms/TimesweeperMainWindow.ui
