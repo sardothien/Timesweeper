@@ -1,19 +1,14 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include <QGraphicsView>
 #include <QGraphicsScene>
 
-class Level : public QGraphicsView
+class Level
 {
     public:
-        Level (QWidget *parent = nullptr);
-
-        QGraphicsScene *scene;
-
         // Funkcije za ucitavanje nivoa i iscrtavanja objekata
-        void LoadLevel(std::string path, int sizeX, int sizeY);
-        void AddObject(char type, int x, int y);
+        static QGraphicsScene* LoadLevel(std::string path, int sizeX, int sizeY);
+        static void AddObject(QGraphicsScene *scene, char type, int x, int y);
 };
 
 #endif // LEVEL_H

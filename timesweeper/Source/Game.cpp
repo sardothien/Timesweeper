@@ -1,3 +1,4 @@
+#include <iostream>
 #include <QWidget>
 #include "Headers/Game.h"
 #include "Headers/Level.h"
@@ -9,9 +10,14 @@ Game::Game(QWidget *parent)
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(1200, 700);    //za view
 
-    Level lvl1 = new Level();
+
     // TODO - popraviti putanju (tenutno mora da se unese cela putanja do fajla)
-    lvl1.LoadLevel("../Resources/level.txt", 74, 13);
+    QGraphicsScene* lvl1 = Level::LoadLevel(":/Levels/Resources/level.txt", 74, 13);
+    if(lvl1 == nullptr)
+    {
+        std::cout << "nije ucitano kako treba\n";
+    }
+    setScene(lvl1);
 
     PlayerCharacter *player = new PlayerCharacter();
     player->setFlag(QGraphicsItem::ItemIsFocusable);

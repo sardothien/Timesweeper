@@ -4,40 +4,41 @@
 #include <QDir>
 #include <QFile>
 #include <QGraphicsRectItem>
+#include <QGraphicsScene>
 #include <QString>
 
 #include "Headers/Level.h"
+#include "Headers/Game.h"
 
-Level::Level(QWidget *parent)
+
+QGraphicsScene* Level::LoadLevel(std::string path, int sizeX, int sizeY)
 {
-    scene = new QGraphicsScene();
+    QGraphicsScene *scene = new QGraphicsScene();
     scene->setSceneRect(0, 0, 12000,700);
-    setScene(scene);
-}
 
-void Level::LoadLevel(std::string path, int sizeX, int sizeY)
-{
     char tile;
 
     std::fstream levelFile;
     levelFile.open(path);
     if(levelFile.fail()){
         std::cout << "File not found/loaded!" << std::endl;
-        return ;
+        return nullptr;
     }
 
     for(int y = 0; y < sizeY; y++){
         for(int x = 0; x < sizeX; x++){
             levelFile.get(tile);
             // std::cout << tile << " " << x << " " << y << std::endl;
-            AddObject(tile, x*32, y*32);
+            AddObject(scene, tile, x*32, y*32);
         }
     }
 
     levelFile.close();
+
+    return scene;
 }
 
-void Level::AddObject(char type, int x, int y)
+void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
 {
     QGraphicsRectItem *rect;
     switch(type){
