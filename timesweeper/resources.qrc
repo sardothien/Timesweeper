@@ -2,6 +2,9 @@
     <qresource prefix="/Images"/>
     <qresource prefix="/Sounds"/>
     <qresource prefix="/Levels">
-        <file>Resources/level.txt</file>
+        <file>Resources/level1.txt</file>
+        <file>Resources/level2.txt</file>
+        <file>Resources/level3.txt</file>
+        <file>Resources/level4.txt</file>
     </qresource>
 </RCC>
