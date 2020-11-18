@@ -14,7 +14,8 @@
 QGraphicsScene* Level::LoadLevel(std::string path, int sizeX, int sizeY)
 {
     QGraphicsScene *scene = new QGraphicsScene();
-    scene->setSceneRect(0, 0, 12000,700);
+    // y = 700 - brojRedova*32
+    scene->setSceneRect(0, -252, 1200,700);
 
     char tile;
 
@@ -44,12 +45,12 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
     switch(type){
         case '#':
             rect = new QGraphicsRectItem();
-            rect->setRect(x, y, 16, 16);
+            rect->setRect(x, y, 32, 32);
             scene->addItem(rect);
             break;
         case '=':
             rect = new QGraphicsRectItem();
-            rect->setRect(x, y, 16, 16);
+            rect->setRect(x, y, 32, 32);
             scene->addItem(rect);
             break;
         case 'E':

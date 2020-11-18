@@ -12,7 +12,7 @@ Game::Game(QWidget *parent)
 
 
     // TODO - popraviti putanju (tenutno mora da se unese cela putanja do fajla)
-    QGraphicsScene* lvl1 = Level::LoadLevel(":/Levels/Resources/level.txt", 74, 13);
+    QGraphicsScene* lvl1 = Level::LoadLevel("C:/Users/MINA PC/Desktop/06-timesweeper/timesweeper/Resources/level.txt", 74, 14);
     if(lvl1 == nullptr)
     {
         std::cout << "nije ucitano kako treba\n";
