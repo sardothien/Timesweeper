@@ -8,14 +8,12 @@ Game::Game(QWidget *parent)
 {
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setFixedSize(1200, 700);    //za view
+    setFixedSize(1200, 700);    // za view
 
-
-    // TODO - popraviti putanju (tenutno mora da se unese cela putanja do fajla)
-    QGraphicsScene* lvl1 = Level::LoadLevel("C:/Users/MINA PC/Desktop/06-timesweeper/timesweeper/Resources/level.txt", 74, 14);
+    QGraphicsScene* lvl1 = Level::LoadLevel(1);
     if(lvl1 == nullptr)
     {
-        std::cout << "nije ucitano kako treba\n";
+        std::cout << "Nije ucitano kako treba!\n";
     }
     setScene(lvl1);
 
