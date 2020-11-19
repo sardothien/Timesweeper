@@ -1,6 +1,6 @@
 #include "Headers/Character.h"
 
-Character::Character(QGraphicsPixmapItem *parent)
+Character::Character(QGraphicsPixmapItem *parent):QObject()
 {
 
 }
