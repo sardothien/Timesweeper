@@ -20,4 +20,7 @@ Game::Game(QWidget *parent)
     PlayerCharacter *player = new PlayerCharacter();
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
+
+    lvl1->addItem(player);
+    centerOn(player);
 }
