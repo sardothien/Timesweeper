@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/Images">
         <file>Resources/testpixmap.png</file>
+        <file>Resources/testpickup.png</file>
     </qresource>
     <qresource prefix="/Sounds"/>
     <qresource prefix="/Levels">

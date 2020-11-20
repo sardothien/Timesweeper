@@ -1,7 +1,9 @@
 #include <QKeyEvent>
+#include <QList>
+#include <QGraphicsScene>
 #include "Headers/Game.h"
 #include "Headers/PlayerCharacter.h"
-
+#include "Headers/Pickup.h"
 
 extern Game *game;
 
@@ -39,9 +41,7 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         isOnGround = false;
     }
 
-
 }
-
 
 void PlayerCharacter::keyReleaseEvent(QKeyEvent *event)
 {
@@ -58,6 +58,16 @@ void PlayerCharacter::keyReleaseEvent(QKeyEvent *event)
     {
         timerWalk->stop();
     }
+}
+
+int PlayerCharacter::getHealth()
+{
+    return health;
+}
+
+void PlayerCharacter::increaseHealth()
+{
+    health += 10;
 }
 
 
@@ -80,4 +90,15 @@ void PlayerCharacter::walk()
 {
     setPos(x()+ velocityX,y());
     game->centerOn(this);
+
+    QList<QGraphicsItem *> colliding_items = collidingItems();
+      for (int i = 0, n = colliding_items.size(); i < n; i++)
+      {
+          if (typeid(*(colliding_items[i])) == typeid(Pickup))
+          {
+              increaseHealth();
+              scene()->removeItem(colliding_items[i]);
+              delete colliding_items[i];
+          }
+       }
 }

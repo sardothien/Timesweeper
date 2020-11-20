@@ -3,6 +3,7 @@
 #include "Headers/Game.h"
 #include "Headers/Level.h"
 #include "Headers/PlayerCharacter.h"
+#include "Headers/Pickup.h"
 
 Game::Game(QWidget *parent)
 {
@@ -23,4 +24,8 @@ Game::Game(QWidget *parent)
 
     lvl1->addItem(player);
     centerOn(player);
+
+    Pickup *pickup = new Pickup();
+    lvl1->addItem(pickup);
+
 }
