@@ -35,7 +35,7 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         velocityX = -15;
         timerWalk->start(25);
 
-    }else if(event->key() == Qt::Key_Space)
+    }else if(event->key() == Qt::Key_Space && isOnGround)
     {
         velocityY=-12;
         isOnGround = false;
