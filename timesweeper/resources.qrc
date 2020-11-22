@@ -2,6 +2,7 @@
     <qresource prefix="/Images">
         <file>Resources/testpixmap.png</file>
         <file>Resources/testpickup.png</file>
+        <file>Resources/testtile.png</file>
     </qresource>
     <qresource prefix="/Sounds"/>
     <qresource prefix="/Levels">

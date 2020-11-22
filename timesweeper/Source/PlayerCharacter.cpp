@@ -4,6 +4,9 @@
 #include "Headers/Game.h"
 #include "Headers/PlayerCharacter.h"
 #include "Headers/Pickup.h"
+#include "Headers/Tile.h"
+
+#include <iostream>
 
 extern Game *game;
 
@@ -13,14 +16,18 @@ PlayerCharacter::PlayerCharacter(Character *parent)
     setPos(0,320);
     setScale(2);
 
-    timer = new QTimer();
-    connect(timer, &QTimer::timeout, this, &PlayerCharacter::jump);
+    timerJump = new QTimer();
+    connect(timerJump, &QTimer::timeout, this, &PlayerCharacter::jump);
 
     timerWalk = new QTimer();
     connect(timerWalk, &QTimer::timeout, this, &PlayerCharacter::walk);
 
+    timerCollision = new QTimer();
+    connect(timerCollision, &QTimer::timeout, this, &PlayerCharacter::detectCollision);
+
     isOnGround = true;
-    timer->start(25);
+    timerJump->start(25);
+    timerCollision->start(25);
 }
 
 void PlayerCharacter::keyPressEvent(QKeyEvent *event)
@@ -38,6 +45,7 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
     }else if(event->key() == Qt::Key_Space && isOnGround)
     {
         velocityY=-12;
+        setPos(x(),y()+velocityY);
         isOnGround = false;
     }
 
@@ -73,14 +81,11 @@ void PlayerCharacter::increaseHealth()
 
 void PlayerCharacter::jump()
 {
-
     if(!isOnGround)
     {
         setPos(x(),y()+velocityY);
         velocityY += gravity;
 
-        if(y()>=320)
-            isOnGround = true;
     }
 
 
@@ -91,14 +96,30 @@ void PlayerCharacter::walk()
     setPos(x()+ velocityX,y());
     game->centerOn(this);
 
+}
+
+void PlayerCharacter::detectCollision(){
+
     QList<QGraphicsItem *> colliding_items = collidingItems();
-      for (int i = 0, n = colliding_items.size(); i < n; i++)
+
+    if(colliding_items.size())
+
+        for (int i = 0, n = colliding_items.size(); i < n; i++)
       {
           if (typeid(*(colliding_items[i])) == typeid(Pickup))
           {
               increaseHealth();
               scene()->removeItem(colliding_items[i]);
               delete colliding_items[i];
-          }
-       }
+
+          }else if(typeid(*(colliding_items[i])) == typeid(Tile) && y()<colliding_items[i]->y()-5)
+              {
+                isOnGround = true;
+              }
+
+      }
+    else
+        isOnGround = false;
+
 }
+

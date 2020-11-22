@@ -16,6 +16,7 @@ SOURCES += \
     Source/NPCharacter.cpp \
     Source/Pickup.cpp \
     Source/PlayerCharacter.cpp \
+    Source/Tile.cpp \
     Source/main.cpp
 
 HEADERS += \
@@ -25,7 +26,8 @@ HEADERS += \
     Headers/Level.h \
     Headers/NPCharacter.h \
     Headers/Pickup.h \
-    Headers/PlayerCharacter.h
+    Headers/PlayerCharacter.h \
+    Headers/Tile.h
 
 FORMS += \
     Forms/TimesweeperMainWindow.ui

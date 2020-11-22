@@ -3,13 +3,13 @@
 #include <string>
 #include <QCharRef>
 #include <QFile>
-#include <QGraphicsRectItem>
 #include <QGraphicsScene>
 #include <QString>
 #include <QTextStream>
 
-#include "Headers/Level.h"
 #include "Headers/Game.h"
+#include "Headers/Level.h"
+#include "Headers/Tile.h"
 
 QGraphicsScene* Level::LoadLevel(int levelID)
 {
@@ -65,7 +65,7 @@ QGraphicsScene* Level::LoadLevel(int levelID)
         QString tiles = in.readLine();
         for(int x = 0; x <= sizeX; x++){
             // std::cout << tiles[x].toLatin1() << " " << x << " " << y << std::endl;
-            AddObject(scene, tiles[x].toLatin1(), x*32, y*32);
+            AddObject(scene, tiles[x].toLatin1(), x*30, y*30);
         }
     }
 
@@ -76,21 +76,24 @@ QGraphicsScene* Level::LoadLevel(int levelID)
 
 void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
 {
-    QGraphicsRectItem *rect;
+    Tile *rect;
     switch(type){
         case '#':
-            rect = new QGraphicsRectItem();
-            rect->setRect(x, y, 32, 32);
+            rect = new Tile();
+            rect->setPos(x, y);
+            rect->setScale(2);
             scene->addItem(rect);
             break;
         case '=':
-            rect = new QGraphicsRectItem();
-            rect->setRect(x, y, 32, 32);
+            rect = new Tile();
+            rect->setPos(x, y);
+            rect->setScale(2);
             scene->addItem(rect);
             break;
         case 'E':
-            rect = new QGraphicsRectItem();
-            rect->setRect(x, y, 32, 32);
+            rect = new Tile();
+            rect->setPos(x, y);
+            rect->setScale(2);
             scene->addItem(rect);
             break;
         default:

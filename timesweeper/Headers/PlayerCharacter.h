@@ -19,8 +19,9 @@ class PlayerCharacter : public Character
     private slots:
         void jump();
         void walk();
+        void detectCollision();
     private:
-        QTimer *timer,*timerWalk;
+        QTimer *timerJump,*timerWalk,*timerCollision;
         qreal velocityX = 15, velocityY = 1;
         qreal gravity = 0.5;
         bool isOnGround;
