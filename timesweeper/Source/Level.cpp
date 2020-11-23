@@ -8,6 +8,7 @@
 #include <QTextStream>
 
 #include "Headers/Game.h"
+#include "Headers/EnemyCharacter.h"
 #include "Headers/Level.h"
 #include "Headers/Tile.h"
 #include "Headers/Pickup.h"
@@ -79,6 +80,7 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
 {
     Tile *rect;
     Pickup *pickup;
+    EnemyCharacter* enemy;
 
     switch(type){
         case '-': // nista
@@ -108,10 +110,10 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
             scene->addItem(rect);
             break;
         case 'E': // neprijatelj
-            rect = new Tile();
-            rect->setPos(x, y);
-            rect->setScale(2);
-            scene->addItem(rect);
+            enemy = new EnemyCharacter();
+            enemy->setPos(x, y);
+            enemy->setScale(2);
+            scene->addItem(enemy);
             break;
         case '+': // zivoti
             pickup = new Pickup();
