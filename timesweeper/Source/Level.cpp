@@ -10,6 +10,7 @@
 #include "Headers/Game.h"
 #include "Headers/Level.h"
 #include "Headers/Tile.h"
+#include "Headers/Pickup.h"
 
 QGraphicsScene* Level::LoadLevel(int levelID)
 {
@@ -58,7 +59,7 @@ QGraphicsScene* Level::LoadLevel(int levelID)
     //std::cout << sizeX << std::endl;
     //std::cout << sizeY << std::endl;
 
-    scene->setSceneRect(0, sizeY*32-700, 32*(sizeX-1),700);
+    scene->setSceneRect(0, sizeY*32-700, 30*(sizeX-1),700);
 
     // Prolazak kroz matricu i iscrtavanje
     for(int y = 0; y <= sizeY; y++){
@@ -77,20 +78,48 @@ QGraphicsScene* Level::LoadLevel(int levelID)
 void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
 {
     Tile *rect;
+    Pickup *pickup;
+
     switch(type){
-        case '#':
+        case '-': // nista
+            break;
+        case '=': // pod
             rect = new Tile();
             rect->setPos(x, y);
             rect->setScale(2);
             scene->addItem(rect);
             break;
-        case '=':
+        case '#': // plutajuce platforme 1
             rect = new Tile();
             rect->setPos(x, y);
             rect->setScale(2);
             scene->addItem(rect);
             break;
-        case 'E':
+        case '?': // plutajuce platforme 2
+            rect = new Tile();
+            rect->setPos(x, y);
+            rect->setScale(2);
+            scene->addItem(rect);
+            break;
+        case '!': // unutrasnjost platformi
+            rect = new Tile();
+            rect->setPos(x, y);
+            rect->setScale(2);
+            scene->addItem(rect);
+            break;
+        case 'E': // neprijatelj
+            rect = new Tile();
+            rect->setPos(x, y);
+            rect->setScale(2);
+            scene->addItem(rect);
+            break;
+        case '+': // zivoti
+            pickup = new Pickup();
+            pickup->setPos(x, y);
+            pickup->setScale(1);
+            scene->addItem(pickup);
+            break;
+        case '|': // portal
             rect = new Tile();
             rect->setPos(x, y);
             rect->setScale(2);

@@ -24,8 +24,4 @@ Game::Game(QWidget *parent)
 
     lvl1->addItem(player);
     centerOn(player);
-
-    Pickup *pickup = new Pickup();
-    lvl1->addItem(pickup);
-
 }
