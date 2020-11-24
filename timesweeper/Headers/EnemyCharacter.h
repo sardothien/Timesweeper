@@ -1,17 +1,14 @@
 #ifndef ENEMYCHARACTER_H
 #define ENEMYCHARACTER_H
 
-#include "Headers/Character.h"
-
-#include <QList>
-#include <QPointF>
 #include <QTimer>
+
+#include "Headers/Character.h"
 
 class EnemyCharacter : public Character
 {
     public:
         EnemyCharacter (Character *parent = 0);
-        void rotate(QPointF p);
 
     public slots:
         void move();

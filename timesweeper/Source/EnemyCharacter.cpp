@@ -1,7 +1,5 @@
 #include "Headers/EnemyCharacter.h"
-
-#include <qmath.h>
-#include <iostream>
+#include "Headers/Level.h"
 
 EnemyCharacter::EnemyCharacter(Character *parent)
 {
@@ -14,16 +12,16 @@ EnemyCharacter::EnemyCharacter(Character *parent)
     // timer za move()
     timerWalk = new QTimer();
     connect(timerWalk, &QTimer::timeout, this, &EnemyCharacter::move);
-    timerWalk->start(250);
+    timerWalk->start(300);
 }
 
 // Kretanje neprijatelja levo/desno
 void EnemyCharacter::move()
 {
     if(index == 0){
-        setPos(x()+ 15,y());
+        setPos(x()+15,y());
         num++;
-        if(num == 4){
+        if(num == 5){
             index = 1;
             num = 0;
         }
@@ -31,7 +29,7 @@ void EnemyCharacter::move()
     else if(index == 1){
         setPos(x()-15, y());
         num++;
-        if(num == 4){
+        if(num == 5){
             index = 0;
             num = 0;
         }
