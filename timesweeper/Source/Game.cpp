@@ -1,8 +1,8 @@
 #include <iostream>
 #include <QWidget>
+#include "Headers/DialogueHandler.h"
 #include "Headers/Game.h"
 #include "Headers/Level.h"
-#include "Headers/PlayerCharacter.h"
 #include "Headers/Pickup.h"
 
 Game::Game(QWidget *parent)
@@ -11,17 +11,14 @@ Game::Game(QWidget *parent)
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(1200, 700);    // za view
 
-    QGraphicsScene* lvl1 = Level::LoadLevel(1);
-    if(lvl1 == nullptr)
-    {
-        std::cout << "Nije ucitano kako treba!\n";
-    }
-    setScene(lvl1);
-
-    PlayerCharacter *player = new PlayerCharacter();
+    player = new PlayerCharacter();
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
 
+    //prologue level
+    QGraphicsScene* lvl1 = Level::LoadLevel(1);
+    DialogueHandler::initializeDialogue( /*level id*/ 1);
+    setScene(lvl1);
     lvl1->addItem(player);
     centerOn(player);
 }

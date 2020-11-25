@@ -10,6 +10,8 @@ CONFIG += c++17
 
 SOURCES += \
     Source/Character.cpp \
+    Source/DialogueBox.cpp \
+    Source/DialogueHandler.cpp \
     Source/EnemyCharacter.cpp \
     Source/Game.cpp \
     Source/Level.cpp \
@@ -21,6 +23,8 @@ SOURCES += \
 
 HEADERS += \
     Headers/Character.h \
+    Headers/DialogueBox.h \
+    Headers/DialogueHandler.h \
     Headers/EnemyCharacter.h \
     Headers/Game.h \
     Headers/Level.h \

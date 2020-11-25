@@ -1,9 +1,10 @@
 #include <QKeyEvent>
 #include <QList>
 #include <QGraphicsScene>
+#include "Headers/DialogueHandler.h"
 #include "Headers/Game.h"
-#include "Headers/PlayerCharacter.h"
 #include "Headers/Pickup.h"
+#include "Headers/PlayerCharacter.h"
 #include "Headers/Tile.h"
 
 #include <iostream>
@@ -32,6 +33,31 @@ PlayerCharacter::PlayerCharacter(Character *parent)
 
 void PlayerCharacter::keyPressEvent(QKeyEvent *event)
 {
+    if(event->key() == Qt::Key_E && DialogueHandler::isDialogueActive)
+    {
+        DialogueHandler::advanceDialogue();
+    }
+    //NOTE: NE BRISITE KOD ISPOD DOK NE ZAVRSIM CELU IMPLEMENTACIJU DIJALOGA
+
+    /*if(event->key() == Qt::Key_Q){  //test
+        DialogueHandler::setDialogueActive(!DialogueHandler::isDialogueActive);
+    }
+    if(event->key() == Qt::Key_1){  //test
+        DialogueHandler::initializeDialogue(1);
+    }
+    if(event->key() == Qt::Key_2){  //test
+        DialogueHandler::initializeDialogue(2);
+    }
+    if(event->key() == Qt::Key_3){  //test
+        DialogueHandler::initializeDialogue(3);
+    }
+    if(event->key() == Qt::Key_4){  //test
+        DialogueHandler::initializeDialogue(4);
+    }
+    if(event->key() == Qt::Key_5){  //test
+        DialogueHandler::initializeDialogue(5);
+    }*/
+
     if(event->key() == Qt::Key_Right)
     {
         velocityX = 15;
@@ -53,8 +79,8 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
 
 void PlayerCharacter::keyReleaseEvent(QKeyEvent *event)
 {
-    if(event->key() == Qt::Key_Space){
-
+    if(event->key() == Qt::Key_Space)
+    {
         if(velocityY < -6.0)
                 velocityY = -6.0;
 
@@ -85,17 +111,13 @@ void PlayerCharacter::jump()
     {
         setPos(x(),y()+velocityY);
         velocityY += gravity;
-
     }
-
-
 }
 
 void PlayerCharacter::walk()
 {
     setPos(x()+ velocityX,y());
     game->centerOn(this);
-
 }
 
 void PlayerCharacter::detectCollision(){
@@ -116,10 +138,8 @@ void PlayerCharacter::detectCollision(){
               {
                 isOnGround = true;
               }
-
       }
     else
         isOnGround = false;
-
 }
 

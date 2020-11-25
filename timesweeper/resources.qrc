@@ -3,6 +3,7 @@
         <file>Resources/testpixmap.png</file>
         <file>Resources/testpickup.png</file>
         <file>Resources/testtile.png</file>
+        <file>Resources/dialogue_box.png</file>
     </qresource>
     <qresource prefix="/Sounds"/>
     <qresource prefix="/Levels">
