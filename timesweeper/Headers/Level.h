@@ -2,6 +2,7 @@
 #define LEVEL_H
 
 #include <QGraphicsScene>
+#include "EnemyCharacter.h"
 
 class Level
 {

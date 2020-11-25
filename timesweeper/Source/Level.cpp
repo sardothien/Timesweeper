@@ -8,10 +8,11 @@
 #include <QTextStream>
 
 #include "Headers/Game.h"
-#include "Headers/EnemyCharacter.h"
 #include "Headers/Level.h"
 #include "Headers/Tile.h"
 #include "Headers/Pickup.h"
+
+extern Game* game;
 
 QGraphicsScene* Level::LoadLevel(int levelID)
 {
@@ -60,14 +61,16 @@ QGraphicsScene* Level::LoadLevel(int levelID)
     //std::cout << sizeX << std::endl;
     //std::cout << sizeY << std::endl;
 
-    scene->setSceneRect(0, sizeY*32-700, 30*(sizeX-1),700);
+    scene->setSceneRect(0, sizeY*30-700, 30*(sizeX-1), 700);
 
     // Prolazak kroz matricu i iscrtavanje
-    for(int y = 0; y <= sizeY; y++){
+    for(int y = 0; y < sizeY; y++){
         QString tiles = in.readLine();
-        for(int x = 0; x <= sizeX; x++){
-            // std::cout << tiles[x].toLatin1() << " " << x << " " << y << std::endl;
-            AddObject(scene, tiles[x].toLatin1(), x*30, y*30);
+        for(int x = 0; x < sizeX-1; x++){
+            if(levelID == 1)
+                AddObject(scene, tiles[x].toLatin1(), x*44, y*44);
+            else // ostali nivoi
+                AddObject(scene, tiles[x].toLatin1(), x*30, y*30);
         }
     }
 
