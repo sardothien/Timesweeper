@@ -15,10 +15,16 @@ Game::Game(QWidget *parent)
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
 
+    int levelId = 1;
+
     //prologue level
-    currentLevel = Level::LoadLevel(1);
-    currentLevel->setSceneRect(0, 0, 2300, 700);
-    currentLevel->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_1_prologue.png")));
+    currentLevel = Level::LoadLevel(levelId);
+
+    if(levelId == 1){
+        currentLevel->setSceneRect(0, 0, 2300, 700);
+        currentLevel->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_1_prologue.png")));
+    }
+
     DialogueHandler::initializeDialogue( /*level id*/ 1);
     setScene(currentLevel);
     currentLevel->addItem(player);

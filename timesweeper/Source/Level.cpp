@@ -61,7 +61,7 @@ QGraphicsScene* Level::LoadLevel(int levelID)
     //std::cout << sizeX << std::endl;
     //std::cout << sizeY << std::endl;
 
-    scene->setSceneRect(0, sizeY*30-700, 30*(sizeX-1), 700);
+    scene->setSceneRect(0, sizeY*32-700, 30*(sizeX-1), 700);
 
     // Prolazak kroz matricu i iscrtavanje
     for(int y = 0; y < sizeY; y++){
