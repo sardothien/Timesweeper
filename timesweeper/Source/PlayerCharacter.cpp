@@ -13,9 +13,7 @@ extern Game *game;
 
 PlayerCharacter::PlayerCharacter(Character *parent)
 {
-    setPixmap(QPixmap(":/Images/Resources/testpixmap.png"));
-    setPos(0,320);
-    setScale(2);
+    setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_front.png"));
 
     timerJump = new QTimer();
     connect(timerJump, &QTimer::timeout, this, &PlayerCharacter::jump);

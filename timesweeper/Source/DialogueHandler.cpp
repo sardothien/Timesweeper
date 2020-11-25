@@ -4,7 +4,6 @@
 #include "Headers/Game.h"
 
 //inicijalizacija statickih promenljivih klase DialogueHandler
-//QVector<QPair<QString, QString>> DialogueHandler::recenice;
 QVector<QPair<DialogueHandler::Speaker, QString>> DialogueHandler::recenice;
 int DialogueHandler::current_index;
 DialogueBox *DialogueHandler::box;
@@ -17,8 +16,6 @@ void DialogueHandler::initializeDialogue(int levelId)
     current_index = 0;
     recenice = {};
     isDialogueActive = false;
-
-    //recenice1.append(QPair(Speaker::Strauss, "beans"));
 
     //prologue
     if(levelId == 1)

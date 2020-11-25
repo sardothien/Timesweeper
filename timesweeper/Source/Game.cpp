@@ -16,9 +16,12 @@ Game::Game(QWidget *parent)
     player->setFocus();
 
     //prologue level
-    QGraphicsScene* lvl1 = Level::LoadLevel(1);
+    currentLevel = Level::LoadLevel(1);
+    currentLevel->setSceneRect(0, 0, 2300, 700);
+    currentLevel->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_1_prologue.png")));
     DialogueHandler::initializeDialogue( /*level id*/ 1);
-    setScene(lvl1);
-    lvl1->addItem(player);
+    setScene(currentLevel);
+    currentLevel->addItem(player);
     centerOn(player);
+
 }

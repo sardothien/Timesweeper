@@ -12,4 +12,11 @@
         <file>Resources/level3.txt</file>
         <file>Resources/level4.txt</file>
     </qresource>
+    <qresource prefix="/CharacterModels">
+        <file>Resources/CharacterModels/player_front.png</file>
+        <file>Resources/CharacterModels/strauss_front.png</file>
+    </qresource>
+    <qresource prefix="/LevelBackgrounds">
+        <file>Resources/LevelBackgrounds/level_1_prologue.png</file>
+    </qresource>
 </RCC>
