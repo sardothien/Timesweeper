@@ -58,17 +58,17 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
 
     if(event->key() == Qt::Key_Right)
     {
-        velocityX = 15;
+        velocityX = 11;
         timerWalk->start(25);
 
     }else if(event->key() == Qt::Key_Left)
     {
-        velocityX = -15;
+        velocityX = -11;
         timerWalk->start(25);
 
     }else if(event->key() == Qt::Key_Space && isOnGround)
     {
-        velocityY=-12;
+        velocityY=-11;
         setPos(x(),y()+velocityY);
         isOnGround = false;
     }
@@ -132,7 +132,7 @@ void PlayerCharacter::detectCollision(){
               scene()->removeItem(colliding_items[i]);
               delete colliding_items[i];
 
-          }else if(typeid(*(colliding_items[i])) == typeid(Tile) && y()<colliding_items[i]->y()-5)
+          }else if(typeid(*(colliding_items[i])) == typeid(Tile) && y()<colliding_items[i]->y()-105)
               {
                 isOnGround = true;
               }
