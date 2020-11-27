@@ -4,6 +4,7 @@
         <file>Resources/testpickup.png</file>
         <file>Resources/testtile.png</file>
         <file>Resources/dialogue_box.png</file>
+        <file>Resources/testprojectile.png</file>
     </qresource>
     <qresource prefix="/Sounds"/>
     <qresource prefix="/Levels">

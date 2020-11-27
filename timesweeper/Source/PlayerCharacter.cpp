@@ -6,6 +6,7 @@
 #include "Headers/Pickup.h"
 #include "Headers/PlayerCharacter.h"
 #include "Headers/Tile.h"
+#include "Headers/Projectile.h"
 
 #include <iostream>
 
@@ -80,15 +81,20 @@ void PlayerCharacter::keyReleaseEvent(QKeyEvent *event)
     if(event->key() == Qt::Key_Space)
     {
         if(velocityY < -6.0)
-                velocityY = -6.0;
+            velocityY = -6.0;
 
-    }else if(event->key() == Qt::Key_Right)
+    } else if(event->key() == Qt::Key_Right)
     {
         timerWalk->stop();
 
-    }else if(event->key() == Qt::Key_Left)
+    } else if(event->key() == Qt::Key_Left)
     {
         timerWalk->stop();
+    } else if(event->key() == Qt::Key_X)
+    {
+        Projectile *projectile = new Projectile();
+        projectile->setPos(x()+50,y()+70);
+        scene()->addItem(projectile);
     }
 }
 
