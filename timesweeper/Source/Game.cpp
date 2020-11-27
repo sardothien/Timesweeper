@@ -4,6 +4,7 @@
 #include "Headers/Game.h"
 #include "Headers/Level.h"
 #include "Headers/Pickup.h"
+#include <QtMultimedia/QMediaPlayer>
 
 Game::Game(QWidget *parent)
 {
@@ -29,5 +30,10 @@ Game::Game(QWidget *parent)
     setScene(currentLevel);
     currentLevel->addItem(player);
     centerOn(player);
+
+    // play background music
+    QMediaPlayer *music = new QMediaPlayer();
+    music->setMedia(QUrl("qrc:/Sounds/Resources/bgsound.mp3"));
+    music->play();
 
 }
