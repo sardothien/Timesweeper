@@ -6,7 +6,9 @@
         <file>Resources/dialogue_box.png</file>
         <file>Resources/testprojectile.png</file>
     </qresource>
-    <qresource prefix="/Sounds"/>
+    <qresource prefix="/Sounds">
+        <file>Resources/projectile.mp3</file>
+    </qresource>
     <qresource prefix="/Levels">
         <file>Resources/level1.txt</file>
         <file>Resources/level2.txt</file>
@@ -20,4 +22,6 @@
     <qresource prefix="/LevelBackgrounds">
         <file>Resources/LevelBackgrounds/level_1_prologue.png</file>
     </qresource>
+    <qresource prefix="/sounds"/>
+    <qresource prefix="/"/>
 </RCC>

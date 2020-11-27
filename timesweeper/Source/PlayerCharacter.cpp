@@ -28,6 +28,9 @@ PlayerCharacter::PlayerCharacter(Character *parent)
     isOnGround = true;
     timerJump->start(25);
     timerCollision->start(25);
+
+    projectilesound = new QMediaPlayer();
+    projectilesound->setMedia(QUrl("qrc:/Sounds/Resources/projectile.mp3"));
 }
 
 void PlayerCharacter::keyPressEvent(QKeyEvent *event)
@@ -95,6 +98,15 @@ void PlayerCharacter::keyReleaseEvent(QKeyEvent *event)
         Projectile *projectile = new Projectile();
         projectile->setPos(x()+50,y()+70);
         scene()->addItem(projectile);
+
+        if (projectilesound->state() == QMediaPlayer::PlayingState)
+        {
+           projectilesound->setPosition(0);
+        }
+        else if (projectilesound->state() == QMediaPlayer::StoppedState)
+        {
+            projectilesound->play();
+        }
     }
 }
 

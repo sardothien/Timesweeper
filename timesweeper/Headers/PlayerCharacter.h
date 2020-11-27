@@ -3,6 +3,7 @@
 
 #include <QTimer>
 #include "Headers/Character.h"
+#include <QtMultimedia/QMediaPlayer>
 
 class PlayerCharacter : public Character
 {
@@ -24,6 +25,7 @@ class PlayerCharacter : public Character
         qreal velocityX = 15, velocityY = 1;
         qreal gravity = 0.5;
         bool isOnGround;
+        QMediaPlayer *projectilesound;
 
 };
 
