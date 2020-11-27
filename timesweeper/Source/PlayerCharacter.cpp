@@ -92,17 +92,6 @@ void PlayerCharacter::keyReleaseEvent(QKeyEvent *event)
     }
 }
 
-int PlayerCharacter::getHealth()
-{
-    return health;
-}
-
-void PlayerCharacter::increaseHealth()
-{
-    health += 10;
-}
-
-
 void PlayerCharacter::jump()
 {
     if(!isOnGround)

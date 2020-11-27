@@ -10,8 +10,7 @@ class PlayerCharacter : public Character
         PlayerCharacter (Character *parent = nullptr);
         void keyPressEvent(QKeyEvent *event);
         void keyReleaseEvent(QKeyEvent *event);
-        int getHealth();
-        void increaseHealth();
+
     signals:
 
     public slots:
@@ -25,7 +24,6 @@ class PlayerCharacter : public Character
         qreal velocityX = 15, velocityY = 1;
         qreal gravity = 0.5;
         bool isOnGround;
-        int health = 50;
 
 };
 

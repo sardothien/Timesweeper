@@ -9,11 +9,17 @@ class Character :public QObject, public QGraphicsPixmapItem
         Q_OBJECT
     public:
         Character (QGraphicsPixmapItem *parent = nullptr);
+        int getHealth();
+        void increaseHealth();
+
     signals:
 
     public slots:
 
     private slots:
+
+    private:
+        int health = 50;
 
 };
 
