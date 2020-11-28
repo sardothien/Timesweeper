@@ -8,7 +8,7 @@ class Level
 {
     public:
         // Funkcije za ucitavanje nivoa i iscrtavanja objekata
-        static QGraphicsScene* LoadLevel(int levelID);
+        static QGraphicsScene* LoadLevel();
         static void AddObject(QGraphicsScene *scene, char type, int x, int y);
 };
 

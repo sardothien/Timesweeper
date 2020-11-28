@@ -11,14 +11,14 @@ bool DialogueHandler::isDialogueActive;
 
 extern Game *game;
 
-void DialogueHandler::initializeDialogue(int levelId)
+void DialogueHandler::initializeDialogue()
 {
     current_index = 0;
     recenice = {};
     isDialogueActive = false;
 
     //prologue
-    if(levelId == 1)
+    if(game->levelID == 1)
     {
         recenice.append(QPair(Speaker::Strauss, "Hey there intern! So, good news and bad news."));
         recenice.append(QPair(Speaker::Strauss, "Bad news is that we are in a bit of a predicament. The alien swarm has sorounded our base outside, and that big angry boy in the middle is their alpha and is going to blow us  up any minute now."));
@@ -30,7 +30,7 @@ void DialogueHandler::initializeDialogue(int levelId)
         recenice.append(QPair(Speaker::Game, "endsection"));
     }
     //maya
-    else if(levelId == 2)
+    else if(game->levelID == 2)
     {
         recenice.append(QPair(Speaker::Strauss, "Okay, listen up!"));
         recenice.append(QPair(Speaker::Strauss, "These aliens invented time travel, and inserted themselves in various points throughout our history so they can start building the different components for their Alpha aliens' body."));
@@ -62,7 +62,7 @@ void DialogueHandler::initializeDialogue(int levelId)
         recenice.append(QPair(Speaker::Game, "endsection"));
     }
     //dinosaurusi
-    else if(levelId == 3)
+    else if(game->levelID == 3)
     {
        recenice.append(QPair(Speaker::Player, "Wait, what? Dinosaurs?"));
        recenice.append(QPair(Speaker::Strauss, "Yep."));
@@ -83,7 +83,7 @@ void DialogueHandler::initializeDialogue(int levelId)
        recenice.append(QPair(Speaker::Game, "endsection"));
     }
     //wild west
-    else if(levelId == 4)
+    else if(game->levelID == 4)
     {
         recenice.append(QPair(Speaker::Strauss, "Oh nice, I didn't know we were sending you to the wild wild west untill right now!"));
         recenice.append(QPair(Speaker::Strauss, "You're a rootin' tootin' alien shootin' Time Cowboy now, boy!"));
@@ -99,7 +99,7 @@ void DialogueHandler::initializeDialogue(int levelId)
         recenice.append(QPair(Speaker::Game, "endsection"));
     }
     //final lvl
-    else if(levelId == 5)
+    else if(game->levelID == 5)
     {
         recenice.append(QPair(Speaker::Strauss, "Good, you're here! "));
         recenice.append(QPair(Speaker::Strauss, "I don't know what you did back there, but You crippled the Alpha so much, he's trying to make a run for it!"));

@@ -11,7 +11,7 @@ class DialogueHandler : public QObject
 Q_OBJECT
 public:
     //metode
-    static void initializeDialogue(int levelId);
+    static void initializeDialogue();
     static void advanceDialogue();
     static void setDialogueActive(bool isActive);
     enum Speaker{

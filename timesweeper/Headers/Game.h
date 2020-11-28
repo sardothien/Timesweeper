@@ -10,6 +10,7 @@ class Game : public QGraphicsView
     public:
         Game (QWidget *parent = nullptr);
         PlayerCharacter *player;
+        static int levelID;
         QGraphicsScene* currentLevel;
 
 };

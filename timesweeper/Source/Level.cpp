@@ -14,7 +14,7 @@
 
 extern Game* game;
 
-QGraphicsScene* Level::LoadLevel(int levelID)
+QGraphicsScene* Level::LoadLevel()
 {
 
     // Pravljenje scene
@@ -23,16 +23,16 @@ QGraphicsScene* Level::LoadLevel(int levelID)
     QString filename;
 
     // Biranje nivoa
-    if(levelID == 1){
+    if(game->levelID == 1){
         filename = ":/Levels/Resources/level1.txt";
     }
-    else if(levelID == 2){
+    else if(game->levelID == 2){
         filename = ":/Levels/Resources/level2.txt";
     }
-    else if(levelID == 3){
+    else if(game->levelID == 3){
         filename = ":/Levels/Resources/level3.txt";
     }
-    else if(levelID == 4){
+    else if(game->levelID == 4){
         filename = ":/Levels/Resources/level4.txt";
     }
     else{
@@ -67,7 +67,7 @@ QGraphicsScene* Level::LoadLevel(int levelID)
     for(int y = 0; y < sizeY; y++){
         QString tiles = in.readLine();
         for(int x = 0; x < sizeX-1; x++){
-            if(levelID == 1)
+            if(game->levelID == 1)
                 AddObject(scene, tiles[x].toLatin1(), x*44, y*44);
             else // ostali nivoi
                 AddObject(scene, tiles[x].toLatin1(), x*30, y*30);

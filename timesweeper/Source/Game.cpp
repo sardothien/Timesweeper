@@ -6,6 +6,8 @@
 #include "Headers/Pickup.h"
 #include <QtMultimedia/QMediaPlayer>
 
+int Game::levelID;
+
 Game::Game(QWidget *parent)
 {
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -16,17 +18,17 @@ Game::Game(QWidget *parent)
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
 
-    int levelId = 1;
+    levelID = 1;
 
     //prologue level
-    currentLevel = Level::LoadLevel(levelId);
+    currentLevel = Level::LoadLevel();
 
-    if(levelId == 1){
+    if(levelID == 1){
         currentLevel->setSceneRect(0, 0, 2300, 700);
         currentLevel->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_1_prologue.png")));
     }
 
-    DialogueHandler::initializeDialogue( /*level id*/ 1);
+    DialogueHandler::initializeDialogue();
     setScene(currentLevel);
     currentLevel->addItem(player);
     centerOn(player);
