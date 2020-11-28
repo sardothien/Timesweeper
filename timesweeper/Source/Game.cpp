@@ -27,6 +27,9 @@ Game::Game(QWidget *parent)
         currentLevel->setSceneRect(0, 0, 2300, 700);
         currentLevel->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_1_prologue.png")));
     }
+    else{ // u ostalim nivoima igrac je nizi
+        player->setScale(0.8);
+    }
 
     DialogueHandler::initializeDialogue();
     setScene(currentLevel);

@@ -61,7 +61,8 @@ QGraphicsScene* Level::LoadLevel()
     //std::cout << sizeX << std::endl;
     //std::cout << sizeY << std::endl;
 
-    scene->setSceneRect(0, sizeY*32-700, 30*(sizeX-1), 700);
+    // 45x45 - dimenzija tile-a
+    scene->setSceneRect(0, sizeY*45-700, 45*(sizeX-1), 700);
 
     // Prolazak kroz matricu i iscrtavanje
     for(int y = 0; y < sizeY; y++){
@@ -69,8 +70,8 @@ QGraphicsScene* Level::LoadLevel()
         for(int x = 0; x < sizeX-1; x++){
             if(game->levelID == 1)
                 AddObject(scene, tiles[x].toLatin1(), x*44, y*44);
-            else // ostali nivoi
-                AddObject(scene, tiles[x].toLatin1(), x*30, y*30);
+            else // ostali nivoi (45x45 - dimenzija tile-a)
+                AddObject(scene, tiles[x].toLatin1(), x*45, y*45);
         }
     }
 
@@ -91,25 +92,30 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
         case '=': // pod
             rect = new Tile();
             rect->setPos(x, y);
-            rect->setScale(2);
+            // TODO - ukloniti ovaj deo kada se doda odg. tile za I nivo
+            if(game->levelID == 1)
+                rect->setScale(2);
             scene->addItem(rect);
             break;
         case '#': // plutajuce platforme 1
             rect = new Tile();
             rect->setPos(x, y);
-            rect->setScale(2);
+            // TODO - ukloniti ovaj deo kada se doda odg. tile za I nivo
+            if(game->levelID == 1)
+                rect->setScale(2);
             scene->addItem(rect);
             break;
         case '?': // plutajuce platforme 2
             rect = new Tile();
             rect->setPos(x, y);
-            rect->setScale(2);
+            // TODO - ukloniti ovaj deo kada se doda odg. tile za I nivo
+            if(game->levelID == 1)
+                rect->setScale(2);
             scene->addItem(rect);
             break;
         case '!': // unutrasnjost platformi
             rect = new Tile();
             rect->setPos(x, y);
-            rect->setScale(2);
             scene->addItem(rect);
             break;
         case 'E': // neprijatelj
@@ -127,7 +133,6 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
         case '|': // portal
             rect = new Tile();
             rect->setPos(x, y);
-            rect->setScale(2);
             scene->addItem(rect);
             break;
         default:
