@@ -40,25 +40,26 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         DialogueHandler::advanceDialogue();
     }
     //NOTE: NE BRISITE KOD ISPOD DOK NE ZAVRSIM CELU IMPLEMENTACIJU DIJALOGA
-
-    /*if(event->key() == Qt::Key_Q){  //test
+    /*
+    if(event->key() == Qt::Key_Q){  //test
         DialogueHandler::setDialogueActive(!DialogueHandler::isDialogueActive);
     }
     if(event->key() == Qt::Key_1){  //test
-        DialogueHandler::initializeDialogue(1);
+        DialogueHandler::initializeDialogue();
     }
     if(event->key() == Qt::Key_2){  //test
-        DialogueHandler::initializeDialogue(2);
+        DialogueHandler::initializeDialogue();
     }
     if(event->key() == Qt::Key_3){  //test
-        DialogueHandler::initializeDialogue(3);
+        DialogueHandler::initializeDialogue();
     }
     if(event->key() == Qt::Key_4){  //test
-        DialogueHandler::initializeDialogue(4);
+        DialogueHandler::initializeDialogue();
     }
     if(event->key() == Qt::Key_5){  //test
-        DialogueHandler::initializeDialogue(5);
-    }*/
+        DialogueHandler::initializeDialogue();
+    }
+    */
 
     if(event->key() == Qt::Key_Right)
     {
