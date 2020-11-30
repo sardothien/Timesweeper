@@ -23,7 +23,7 @@
     </qresource>
     <qresource prefix="/LevelBackgrounds">
         <file>Resources/LevelBackgrounds/level_1_prologue.png</file>
+        <file>Resources/LevelBackgrounds/level_2_maya.png</file>
     </qresource>
-    <qresource prefix="/sounds"/>
     <qresource prefix="/"/>
 </RCC>
