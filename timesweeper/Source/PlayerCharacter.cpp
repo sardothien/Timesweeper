@@ -40,7 +40,7 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         DialogueHandler::advanceDialogue();
     }
     //NOTE: NE BRISITE KOD ISPOD DOK NE ZAVRSIM CELU IMPLEMENTACIJU DIJALOGA
-    /*
+
     if(event->key() == Qt::Key_Q){  //test
         DialogueHandler::setDialogueActive(!DialogueHandler::isDialogueActive);
     }
@@ -59,7 +59,7 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
     if(event->key() == Qt::Key_5){  //test
         DialogueHandler::initializeDialogue();
     }
-    */
+
 
     if(event->key() == Qt::Key_Right)
     {

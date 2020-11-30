@@ -1,10 +1,10 @@
 #include <iostream>
+#include <QtMultimedia/QMediaPlayer>
 #include <QWidget>
 #include "Headers/DialogueHandler.h"
 #include "Headers/Game.h"
 #include "Headers/Level.h"
 #include "Headers/Pickup.h"
-#include <QtMultimedia/QMediaPlayer>
 
 int Game::levelID;
 

@@ -3,7 +3,6 @@
         <file>Resources/testpixmap.png</file>
         <file>Resources/testpickup.png</file>
         <file>Resources/testtile.png</file>
-        <file>Resources/dialogue_box.png</file>
         <file>Resources/testprojectile.png</file>
         <file>Resources/Level2Tiles/inner_tile_lvl2.png</file>
         <file>Resources/Level2Tiles/single_tile_lvl2.png</file>
@@ -23,10 +22,22 @@
     <qresource prefix="/CharacterModels">
         <file>Resources/CharacterModels/player_front.png</file>
         <file>Resources/CharacterModels/strauss_front.png</file>
+        <file>Resources/CharacterModels/alien_left.png</file>
+        <file>Resources/CharacterModels/alien_right.png</file>
+        <file>Resources/CharacterModels/gun_arm_left.png</file>
+        <file>Resources/CharacterModels/gun_arm_right.png</file>
+        <file>Resources/CharacterModels/player_left.png</file>
+        <file>Resources/CharacterModels/player_no_gun_left.png</file>
+        <file>Resources/CharacterModels/player_no_gun_right.png</file>
+        <file>Resources/CharacterModels/player_right.png</file>
     </qresource>
     <qresource prefix="/LevelBackgrounds">
         <file>Resources/LevelBackgrounds/level_1_prologue.png</file>
         <file>Resources/LevelBackgrounds/level_2_maya.png</file>
     </qresource>
     <qresource prefix="/"/>
+    <qresource prefix="/Other">
+        <file>Resources/Other/dialogue_box.png</file>
+        <file>Resources/Other/dialogue_box_strauss.png</file>
+    </qresource>
 </RCC>

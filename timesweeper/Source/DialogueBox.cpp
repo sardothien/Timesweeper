@@ -6,7 +6,7 @@ extern Game *game;
 DialogueBox::DialogueBox(QPair<DialogueHandler::Speaker, QString> &text)
 {
     //TODO: napraviti da drugaciji dialog box bude u zavisnosti od DialogueHandler::Speaker
-    setPixmap(QPixmap(":/Images/Resources/dialogue_box.png"));
+    setPixmap(QPixmap(":/Other/Resources/Other/dialogue_box.png"));
     currentText = new QGraphicsTextItem(this);
     currentText->setPlainText(text.second);
     currentText->setTextWidth(300);
