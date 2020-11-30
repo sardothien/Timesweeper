@@ -18,7 +18,7 @@ Game::Game(QWidget *parent)
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
 
-    levelID = 1;
+    levelID = 2;
 
     //prologue level
     currentLevel = Level::LoadLevel();
@@ -27,8 +27,9 @@ Game::Game(QWidget *parent)
         currentLevel->setSceneRect(0, 0, 2300, 700);
         currentLevel->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_1_prologue.png")));
     }
-    else{ // u ostalim nivoima igrac je nizi
+    else if(levelID == 2){ // u ostalim nivoima igrac je nizi
         player->setScale(0.8);
+        currentLevel->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_2_maya.png")));
     }
 
     DialogueHandler::initializeDialogue();
