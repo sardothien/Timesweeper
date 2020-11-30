@@ -5,7 +5,9 @@
         <file>Resources/testtile.png</file>
         <file>Resources/dialogue_box.png</file>
         <file>Resources/testprojectile.png</file>
-        <file>Resources/single_tile_lvl2.png</file>
+        <file>Resources/Level2Tiles/inner_tile_lvl2.png</file>
+        <file>Resources/Level2Tiles/single_tile_lvl2.png</file>
+        <file>Resources/Level2Tiles/step_tile_lvl2.png</file>
     </qresource>
     <qresource prefix="/Sounds">
         <file>Resources/projectile.mp3</file>
