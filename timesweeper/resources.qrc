@@ -8,6 +8,7 @@
         <file>Resources/Level2Tiles/inner_tile_lvl2.png</file>
         <file>Resources/Level2Tiles/single_tile_lvl2.png</file>
         <file>Resources/Level2Tiles/step_tile_lvl2.png</file>
+        <file>Resources/Level2Tiles/health_tile_lvl2.png</file>
     </qresource>
     <qresource prefix="/Sounds">
         <file>Resources/projectile.mp3</file>
