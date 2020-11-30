@@ -62,7 +62,7 @@ QGraphicsScene* Level::LoadLevel()
     //std::cout << sizeY << std::endl;
 
     // 45x45 - dimenzija tile-a
-    scene->setSceneRect(0, sizeY*45-700, 45*(sizeX-1), 700);
+    scene->setSceneRect(0, 0, 45*(sizeX-1), 700);
 
     // Prolazak kroz matricu i iscrtavanje
     for(int y = 0; y < sizeY; y++){
@@ -89,35 +89,6 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
     switch(type){
         case '-': // nista
             break;
-        case '=': // pod
-            rect = new Tile();
-            rect->setPos(x, y);
-            // TODO - ukloniti ovaj deo kada se doda odg. tile za I nivo
-            if(game->levelID == 1)
-                rect->setScale(2);
-            scene->addItem(rect);
-            break;
-        case '#': // plutajuce platforme 1
-            rect = new Tile();
-            rect->setPos(x, y);
-            // TODO - ukloniti ovaj deo kada se doda odg. tile za I nivo
-            if(game->levelID == 1)
-                rect->setScale(2);
-            scene->addItem(rect);
-            break;
-        case '?': // plutajuce platforme 2
-            rect = new Tile();
-            rect->setPos(x, y);
-            // TODO - ukloniti ovaj deo kada se doda odg. tile za I nivo
-            if(game->levelID == 1)
-                rect->setScale(2);
-            scene->addItem(rect);
-            break;
-        case '!': // unutrasnjost platformi
-            rect = new Tile();
-            rect->setPos(x, y);
-            scene->addItem(rect);
-            break;
         case 'E': // neprijatelj
             enemy = new EnemyCharacter();
             enemy->setPos(x, y);
@@ -127,15 +98,12 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
         case '+': // zivoti
             pickup = new Pickup();
             pickup->setPos(x, y);
-            pickup->setScale(1);
             scene->addItem(pickup);
             break;
-        case '|': // portal
-            rect = new Tile();
+        default: // sve ostale prepreke
+            rect = new Tile(type);
             rect->setPos(x, y);
             scene->addItem(rect);
-            break;
-        default:
             break;
     }
 }

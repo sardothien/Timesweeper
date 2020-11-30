@@ -6,7 +6,7 @@
 class Tile : public QGraphicsPixmapItem
 {
     public:
-        Tile (QGraphicsPixmapItem *parent = nullptr);
+        Tile (char tile, QGraphicsPixmapItem *parent = nullptr);
 };
 
 #endif // TILE_H
