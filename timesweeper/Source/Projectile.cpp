@@ -40,7 +40,7 @@ void Projectile::move()
     setPos(x()+10,y());
 
     // ako projectile ode van ekrana, unistava se
-    if (pos().x() > 2255)
+    if (pos().x() > game->currentLevel->width())
     {
         scene()->removeItem(this);
         delete this;
