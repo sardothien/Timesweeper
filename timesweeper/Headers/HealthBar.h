@@ -2,6 +2,7 @@
 #define HEALTHBAR_H
 
 #include <QObject>
+#include <QGraphicsRectItem>
 #include <QGraphicsPixmapItem>
 
 class HealthBar : public QObject, public QGraphicsPixmapItem
@@ -10,7 +11,7 @@ class HealthBar : public QObject, public QGraphicsPixmapItem
     public:
         HealthBar(QGraphicsPixmapItem *parent = nullptr);
         ~HealthBar();
-
+        QGraphicsRectItem* bar;
 
 };
 

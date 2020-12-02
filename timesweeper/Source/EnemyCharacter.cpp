@@ -5,6 +5,7 @@
 EnemyCharacter::EnemyCharacter(Character *parent)
 {
     setPixmap(QPixmap(":/Images/Resources/testpixmap.png"));
+
     healthBar = new HealthBar();
 
     // pomocne promenljive za kretanje
@@ -37,7 +38,8 @@ void EnemyCharacter::setLives(int lives)
 void EnemyCharacter::move()
 {
     if(index == 0){
-        setPos(x()+15,y());
+        setPos(x()+15, y());
+        healthBar->setPos(healthBar->x()+15, healthBar->y());
         num++;
         if(num == 5){
             index = 1;
@@ -46,6 +48,7 @@ void EnemyCharacter::move()
     }
     else if(index == 1){
         setPos(x()-15, y());
+        healthBar->setPos(healthBar->x()-15, healthBar->y());
         num++;
         if(num == 5){
             index = 0;
