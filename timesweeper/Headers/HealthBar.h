@@ -11,8 +11,8 @@ class HealthBar : public QObject, public QGraphicsPixmapItem
     public:
         HealthBar(QGraphicsPixmapItem *parent = nullptr);
         ~HealthBar();
-        QGraphicsRectItem* bar;
 
+        QGraphicsRectItem* bar;
 };
 
 #endif // HEALTHBAR_H

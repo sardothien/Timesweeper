@@ -19,9 +19,11 @@ class EnemyCharacter : public Character
 
     public slots:
         void move();
+        void decreaseHealth();
 
     private:
         QTimer* timerWalk;
+        QTimer *timerHealth;
         int index;
         int num;
         int lives = 3;

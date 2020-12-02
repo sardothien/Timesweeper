@@ -93,9 +93,9 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
             enemy = new EnemyCharacter();
             enemy->setPos(x, y);
             enemy->setScale(2);
-            enemy->healthBar->setPos(x, y-35);
+            enemy->healthBar->bar->setPos(x, y-35);
             scene->addItem(enemy);
-            scene->addItem(enemy->healthBar);
+            scene->addItem(enemy->healthBar->bar);
             break;
         case '+': // zivoti
             pickup = new Pickup();
