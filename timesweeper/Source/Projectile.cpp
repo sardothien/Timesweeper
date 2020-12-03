@@ -1,6 +1,8 @@
 #include "Headers/Projectile.h"
 #include "Headers/Game.h"
 #include "Headers/EnemyCharacter.h"
+#include "Headers/Tile.h"
+
 #include <QGraphicsScene>
 #include <QTimer>
 #include <QList>
@@ -22,14 +24,12 @@ void Projectile::move()
 
     for (int i = 0, n = colliding_items.size(); i < n; ++i)
     {
-        if (typeid(*(colliding_items[i])) == typeid(EnemyCharacter))
+        if (typeid(*(colliding_items[i])) == typeid(Tile))
         {
             // brisanje oba objekta sa scene
-            scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);
 
             // brisanje sa hipa
-            delete colliding_items[i];
             delete this;
 
             return;
