@@ -13,6 +13,7 @@
 #include "Headers/Pickup.h"
 
 extern Game* game;
+EnemyCharacter* Level::enemy;
 
 QGraphicsScene* Level::LoadLevel()
 {
@@ -84,7 +85,6 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
 {
     Tile *rect;
     Pickup *pickup;
-    EnemyCharacter* enemy;
 
     switch(type){
         case '-': // nista
@@ -93,7 +93,11 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
             enemy = new EnemyCharacter();
             enemy->setPos(x, y);
             enemy->setScale(2);
+            enemy->healthBar->barFrame->setPos(x, y-35);
+            enemy->healthBar->bar->setPos(x, y-35);
             scene->addItem(enemy);
+            scene->addItem(enemy->healthBar->barFrame);
+            scene->addItem(enemy->healthBar->bar);
             break;
         case '+': // zivoti
             pickup = new Pickup();

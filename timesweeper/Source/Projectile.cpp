@@ -6,6 +6,7 @@
 #include <QGraphicsScene>
 #include <QTimer>
 #include <QList>
+#include <iostream>
 
 extern Game *game;
 
@@ -20,6 +21,7 @@ Projectile::Projectile(QGraphicsItem *parent)
 
 void Projectile::move()
 {
+<<<<<<< HEAD
     QList<QGraphicsItem *> colliding_items = collidingItems();
 
     for (int i = 0, n = colliding_items.size(); i < n; ++i)
@@ -36,6 +38,8 @@ void Projectile::move()
         }
     }
 
+=======
+>>>>>>> feature/enemy-health
     // ako nema kolizije, pomera se projectile
     setPos(x()+10,y());
 

@@ -15,6 +15,7 @@ SOURCES += \
     Source/DialogueHandler.cpp \
     Source/EnemyCharacter.cpp \
     Source/Game.cpp \
+    Source/HealthBar.cpp \
     Source/Level.cpp \
     Source/NPCharacter.cpp \
     Source/Pickup.cpp \
@@ -29,6 +30,7 @@ HEADERS += \
     Headers/DialogueHandler.h \
     Headers/EnemyCharacter.h \
     Headers/Game.h \
+    Headers/HealthBar.h \
     Headers/Level.h \
     Headers/NPCharacter.h \
     Headers/Pickup.h \
