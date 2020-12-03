@@ -1,17 +1,21 @@
 #include "Headers/HealthBar.h"
 
 #include <QPainter>
-#include<iostream>
+#include <iostream>
 
-HealthBar::HealthBar(QGraphicsPixmapItem *parent)
+HealthBar::HealthBar()
 {
-    bar = new QGraphicsRectItem;
-    bar->setRect(x(), y(), 35, 15);
+    barFrame = new QGraphicsRectItem;
+    barFrame->setRect(x(), y(), 35, 15);
+    barFrame->setBrush(Qt::gray);
+
+    bar = new QGraphicsRectItem(x(), y(), 35, 15);
     bar->setBrush(Qt::green);
 }
 
 HealthBar::~HealthBar()
 {
     delete this->bar;
-    std::cout << "Health bar destroyed" << std::endl;
+    delete this->barFrame;
+    std::cout << "Health bar and bar frame destroyed" << std::endl;
 }

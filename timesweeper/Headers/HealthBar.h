@@ -3,15 +3,15 @@
 
 #include <QObject>
 #include <QGraphicsRectItem>
-#include <QGraphicsPixmapItem>
 
-class HealthBar : public QObject, public QGraphicsPixmapItem
+class HealthBar : public QObject, public QGraphicsRectItem
 {
         Q_OBJECT
     public:
-        HealthBar(QGraphicsPixmapItem *parent = nullptr);
+        HealthBar();
         ~HealthBar();
 
+        QGraphicsRectItem* barFrame;
         QGraphicsRectItem* bar;
 };
 
