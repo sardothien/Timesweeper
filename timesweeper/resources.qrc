@@ -34,6 +34,7 @@
     <qresource prefix="/LevelBackgrounds">
         <file>Resources/LevelBackgrounds/level_1_prologue.png</file>
         <file>Resources/LevelBackgrounds/level_2_maya.png</file>
+        <file>Resources/LevelBackgrounds/level_3_wild_west.png</file>
     </qresource>
     <qresource prefix="/"/>
     <qresource prefix="/Other">

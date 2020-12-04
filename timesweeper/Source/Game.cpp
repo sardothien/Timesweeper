@@ -31,6 +31,9 @@ Game::Game(QWidget *parent)
         player->setScale(0.8);
         currentLevel->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_2_maya.png")));
     }
+    else if(levelID == 3){
+        currentLevel->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_3_wild_west.png")));
+    }
 
     DialogueHandler::initializeDialogue();
     setScene(currentLevel);
