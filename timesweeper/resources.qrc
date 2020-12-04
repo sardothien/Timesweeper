@@ -11,7 +11,8 @@
     </qresource>
     <qresource prefix="/Sounds">
         <file>Resources/projectile.mp3</file>
-        <file>Resources/bgsound.mp3</file>
+        <file>Resources/bgsound_level_1.mp3</file>
+        <file>Resources/bgsound_level_3.mp3</file>
     </qresource>
     <qresource prefix="/Levels">
         <file>Resources/level1.txt</file>

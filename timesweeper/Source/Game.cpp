@@ -18,7 +18,7 @@ Game::Game(QWidget *parent)
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
 
-    levelID = 2;
+    levelID = 3;
 
     //prologue level
     currentLevel = Level::LoadLevel();
@@ -42,7 +42,15 @@ Game::Game(QWidget *parent)
 
     // play background music
     QMediaPlayer *music = new QMediaPlayer();
-    music->setMedia(QUrl("qrc:/Sounds/Resources/bgsound.mp3"));
-    music->play();
+    if(levelID == 1)
+    {
+        music->setMedia(QUrl("qrc:/Sounds/Resources/bgsound_level_1.mp3"));
+        music->play();
+    }
+    else if(levelID == 3)
+    {
+        music->setMedia(QUrl("qrc:/Sounds/Resources/bgsound_level_3.mp3"));
+        music->play();
+    }
 
 }
