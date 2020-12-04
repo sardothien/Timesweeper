@@ -1,6 +1,9 @@
+#include <QDebug>
+
 #include <iostream>
 #include <QtMultimedia/QMediaPlayer>
 #include <QWidget>
+
 #include "Headers/DialogueHandler.h"
 #include "Headers/Game.h"
 #include "Headers/Level.h"
@@ -18,7 +21,10 @@ Game::Game(QWidget *parent)
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
 
-    levelID = 3;
+    connect(player, &PlayerCharacter::enteredPortal, this, &Game::changeLevel);
+    connect(player, &PlayerCharacter::nearNPC, this, &Game::triggerDialogue);
+
+    levelID = 1;
 
     //prologue level
     currentLevel = Level::LoadLevel();
@@ -32,6 +38,7 @@ Game::Game(QWidget *parent)
         currentLevel->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_2_maya.png")));
     }
     else if(levelID == 3){
+        player->setScale(0.8);
         currentLevel->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_3_wild_west.png")));
     }
 
@@ -52,5 +59,35 @@ Game::Game(QWidget *parent)
         music->setMedia(QUrl("qrc:/Sounds/Resources/bgsound_level_3.mp3"));
         music->play();
     }
+}
 
+void Game::changeLevel()
+{
+    qDebug() << "signal caught changeLevel!";
+}
+
+void Game::triggerDialogue()
+{
+    qDebug() << "signal caught triggerDialogue";
+}
+
+
+Portal *Game::getCurrentLevelPortal()
+{
+    return currentLevelPortal;
+}
+
+void Game::setCurrentLevelPortal(Portal *portal)
+{
+    currentLevelPortal = portal;
+}
+
+NPCharacter *Game::getCurrentLevelNpc()
+{
+    return currentLevelNpc;
+}
+
+void Game::setCurrentLevelNpc(NPCharacter *npc)
+{
+    currentLevelNpc = npc;
 }

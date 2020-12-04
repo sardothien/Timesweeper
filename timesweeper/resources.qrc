@@ -41,5 +41,6 @@
     <qresource prefix="/Other">
         <file>Resources/Other/dialogue_box.png</file>
         <file>Resources/Other/dialogue_box_strauss.png</file>
+        <file>Resources/Other/portal.png</file>
     </qresource>
 </RCC>

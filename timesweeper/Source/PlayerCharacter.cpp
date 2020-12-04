@@ -122,7 +122,15 @@ void PlayerCharacter::jump()
 
 void PlayerCharacter::walk()
 {
-    setPos(x()+ velocityX,y());
+    setPos(x() + velocityX, y());
+    if(game->currentLevelPortal->x() - x() < 50)
+    {
+        emit enteredPortal();
+    }
+    if(game->currentLevelNpc->x() - x() < 50 )
+    {
+        emit nearNPC();
+    }
     game->centerOn(this);
 }
 

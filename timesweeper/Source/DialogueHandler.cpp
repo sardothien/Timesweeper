@@ -151,3 +151,5 @@ void DialogueHandler::setDialogueActive(bool isActive)
 {
     isDialogueActive = isActive;
 }
+
+

@@ -8,23 +8,24 @@ class DialogueBox;
 
 class DialogueHandler : public QObject
 {
-Q_OBJECT
-public:
-    //metode
-    static void initializeDialogue();
-    static void advanceDialogue();
-    static void setDialogueActive(bool isActive);
-    enum Speaker{
-        Strauss,
-        Player,
-        Game
-    };
-    //polja
-    static bool isDialogueActive;
-private:
-    static int current_index;
-    static QVector<QPair<Speaker, QString>> recenice;
-    static DialogueBox *box;
+    Q_OBJECT
+    public:
+        //metode
+        static void initializeDialogue();
+        static void advanceDialogue();
+        static void setDialogueActive(bool isActive);
+        enum Speaker{
+            Strauss,
+            Player,
+            Game
+        };
+        //polja
+        static bool isDialogueActive;
+
+    private:
+        static int current_index;
+        static QVector<QPair<Speaker, QString>> recenice;
+        static DialogueBox *box;
 };
 
 #endif // DIALOGUEHANDLER_H

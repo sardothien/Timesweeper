@@ -7,12 +7,15 @@
 
 class PlayerCharacter : public Character
 {
+    Q_OBJECT
     public:
         PlayerCharacter (Character *parent = nullptr);
         void keyPressEvent(QKeyEvent *event);
         void keyReleaseEvent(QKeyEvent *event);
 
     signals:
+        void enteredPortal();
+        void nearNPC();
 
     public slots:
 
@@ -20,6 +23,7 @@ class PlayerCharacter : public Character
         void jump();
         void walk();
         void detectCollision();
+
     private:
         QTimer *timerJump,*timerWalk,*timerCollision;
         qreal velocityX = 15, velocityY = 1;

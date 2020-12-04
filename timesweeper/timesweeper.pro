@@ -21,6 +21,7 @@ SOURCES += \
     Source/NPCharacter.cpp \
     Source/Pickup.cpp \
     Source/PlayerCharacter.cpp \
+    Source/Portal.cpp \
     Source/Projectile.cpp \
     Source/Tile.cpp \
     Source/main.cpp
@@ -36,6 +37,7 @@ HEADERS += \
     Headers/NPCharacter.h \
     Headers/Pickup.h \
     Headers/PlayerCharacter.h \
+    Headers/Portal.h \
     Headers/Projectile.h \
     Headers/Tile.h
 

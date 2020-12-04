@@ -1,3 +1,5 @@
+#include <QDebug>
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -8,16 +10,19 @@
 #include <QTextStream>
 
 #include "Headers/Game.h"
+#include "Headers/NPCharacter.h"
 #include "Headers/Level.h"
 #include "Headers/Tile.h"
 #include "Headers/Pickup.h"
+#include "Headers/Portal.h"
 
 extern Game* game;
 EnemyCharacter* Level::enemy;
+NPCharacter *Game::currentLevelNpc;
+Portal *Game::currentLevelPortal;
 
 QGraphicsScene* Level::LoadLevel()
 {
-
     // Pravljenje scene
     QGraphicsScene *scene = new QGraphicsScene();
 
@@ -70,7 +75,7 @@ QGraphicsScene* Level::LoadLevel()
         QString tiles = in.readLine();
         for(int x = 0; x < sizeX-1; x++){
             if(game->levelID == 1) // TODO - obrisati kasnije
-                AddObject(scene, tiles[x].toLatin1(), x*44, y*44);
+                AddObject(scene, tiles[x].toLatin1(), x*45, y*45);
             else // ostali nivoi (45x45 - dimenzija tile-a)
                 AddObject(scene, tiles[x].toLatin1(), x*45, y*45);
         }
@@ -85,6 +90,8 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
 {
     Tile *rect;
     Pickup *pickup;
+    NPCharacter *npc;
+    Portal *portal;
 
     switch(type){
         case '-': // nista
@@ -103,6 +110,20 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
             pickup = new Pickup();
             pickup->setPos(x, y);
             scene->addItem(pickup);
+            break;
+        case 'N': //NPC
+            npc = new NPCharacter();
+            npc->setPos(x,y);
+            scene->addItem(npc);
+            game->setCurrentLevelNpc(npc);
+            //qDebug() << game->getCurrentLevelNpcPosition();
+            break;
+        case 'P': //Portal
+            portal = new Portal();
+            portal->setPos(x,y);
+            scene->addItem(portal);
+            game->setCurrentLevelPortal(portal);
+            //qDebug() << game->getCurrentLevelPortalPosition();
             break;
         default: // sve ostale prepreke
             rect = new Tile(type);
