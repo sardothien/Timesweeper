@@ -14,11 +14,13 @@
 #include "Headers/Level.h"
 #include "Headers/Tile.h"
 #include "Headers/Pickup.h"
+#include "Headers/PlayerCharacter.h"
 #include "Headers/Portal.h"
 
 extern Game* game;
 EnemyCharacter* Level::enemy;
 NPCharacter *Game::currentLevelNpc;
+PlayerCharacter *Game::player;
 Portal *Game::currentLevelPortal;
 
 QGraphicsScene* Level::LoadLevel()
@@ -31,12 +33,16 @@ QGraphicsScene* Level::LoadLevel()
     // Biranje nivoa
     if(game->levelID == 1){
         filename = ":/Levels/Resources/level1.txt";
+        scene->setSceneRect(0, 0, 2300, 700);
+        scene->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_1_prologue.png")));
     }
     else if(game->levelID == 2){
         filename = ":/Levels/Resources/level2.txt";
+        scene->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_2_maya.png")));
     }
     else if(game->levelID == 3){
         filename = ":/Levels/Resources/level3.txt";
+        scene->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_3_wild_west.png")));
     }
     else if(game->levelID == 4){
         filename = ":/Levels/Resources/level4.txt";

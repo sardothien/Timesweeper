@@ -1,7 +1,6 @@
 #include <QDebug>
 
 #include <iostream>
-#include <QtMultimedia/QMediaPlayer>
 #include <QWidget>
 
 #include "Headers/DialogueHandler.h"
@@ -24,31 +23,43 @@ Game::Game(QWidget *parent)
     connect(player, &PlayerCharacter::enteredPortal, this, &Game::changeLevel);
     connect(player, &PlayerCharacter::nearNPC, this, &Game::triggerDialogue);
 
+    music = new QMediaPlayer();
+
+    //NOTE: menjanje nivoa trenutno radi pravilno samo ako ovde prvo stoji levelID = 1, (nisam nasao zasto)
+    //ako krenete odmah od vasih nivoa, desice se da chrashuje kada pokusate da se pomerite levo/desno
+    //Mina, u tvoj nivo sam privremeno dodao neki portal pri pocetku da bi Igor mogao da udje u svoj nivo dok ne popravimo ovaj bag
     levelID = 1;
+    changeLevel();
 
-    //prologue level
+}
+
+void Game::changeLevel()
+{
+    //qDebug() << "signal caught changeLevel!";
     currentLevel = Level::LoadLevel();
-
-    if(levelID == 1){
-        currentLevel->setSceneRect(0, 0, 2300, 700);
-        currentLevel->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_1_prologue.png")));
-    }
-    else if(levelID == 2){ // u ostalim nivoima igrac je nizi
-        player->setScale(0.8);
-        currentLevel->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_2_maya.png")));
-    }
-    else if(levelID == 3){
-        player->setScale(0.8);
-        currentLevel->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_3_wild_west.png")));
-    }
-
     DialogueHandler::initializeDialogue();
     setScene(currentLevel);
+    player->setFocus();
+    player->setPos(60, 400);
+    if(levelID != 1)
+    {
+        player->setScale(0.8);
+    }
     currentLevel->addItem(player);
     centerOn(player);
+    playMusic();
+    levelID++;
+}
 
-    // play background music
-    QMediaPlayer *music = new QMediaPlayer();
+void Game::triggerDialogue()
+{
+    //qDebug() << "signal caught triggerDialogue";
+    DialogueHandler::setDialogueActive(true);
+    DialogueHandler::advanceDialogue();
+}
+
+void Game::playMusic()
+{
     if(levelID == 1)
     {
         music->setMedia(QUrl("qrc:/Sounds/Resources/bgsound_level_1.mp3"));
@@ -60,17 +71,6 @@ Game::Game(QWidget *parent)
         music->play();
     }
 }
-
-void Game::changeLevel()
-{
-    qDebug() << "signal caught changeLevel!";
-}
-
-void Game::triggerDialogue()
-{
-    qDebug() << "signal caught triggerDialogue";
-}
-
 
 Portal *Game::getCurrentLevelPortal()
 {

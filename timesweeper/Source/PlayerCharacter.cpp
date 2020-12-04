@@ -66,18 +66,19 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         velocityX = 11;
         timerWalk->start(25);
 
-    }else if(event->key() == Qt::Key_Left)
+    }
+    else if(event->key() == Qt::Key_Left)
     {
         velocityX = -11;
         timerWalk->start(25);
 
-    }else if(event->key() == Qt::Key_Space && isOnGround)
+    }
+    else if(event->key() == Qt::Key_Space && isOnGround)
     {
         velocityY=-13;
         setPos(x(),y()+velocityY);
         isOnGround = false;
     }
-
 }
 
 void PlayerCharacter::keyReleaseEvent(QKeyEvent *event)
@@ -87,14 +88,17 @@ void PlayerCharacter::keyReleaseEvent(QKeyEvent *event)
         if(velocityY < -6.0)
             velocityY = -6.0;
 
-    } else if(event->key() == Qt::Key_Right)
+    }
+    else if(event->key() == Qt::Key_Right)
     {
         timerWalk->stop();
 
-    } else if(event->key() == Qt::Key_Left)
+    }
+    else if(event->key() == Qt::Key_Left)
     {
         timerWalk->stop();
-    } else if(event->key() == Qt::Key_X)
+    }
+    else if(event->key() == Qt::Key_X)
     {
         Projectile *projectile = new Projectile();
         projectile->setPos(x()+50,y()+70);
@@ -123,37 +127,41 @@ void PlayerCharacter::jump()
 void PlayerCharacter::walk()
 {
     setPos(x() + velocityX, y());
-    if(game->currentLevelPortal->x() - x() < 50)
-    {
-        emit enteredPortal();
-    }
-    if(game->currentLevelNpc->x() - x() < 50 )
+    if((game->currentLevelNpc->x() - x()) <= 200 &&  (game->currentLevelNpc->x() - x()) >= 190)
     {
         emit nearNPC();
     }
     game->centerOn(this);
 }
 
-void PlayerCharacter::detectCollision(){
-
+void PlayerCharacter::detectCollision()
+{
     QList<QGraphicsItem *> colliding_items = collidingItems();
 
     if(colliding_items.size())
-
+    {
         for (int i = 0, n = colliding_items.size(); i < n; i++)
-      {
-          if (typeid(*(colliding_items[i])) == typeid(Pickup))
-          {
-              increaseHealth();
-              scene()->removeItem(colliding_items[i]);
-              delete colliding_items[i];
-
-          }else if(typeid(*(colliding_items[i])) == typeid(Tile) && y()<colliding_items[i]->y()-105)
-              {
+        {
+            if (typeid(*(colliding_items[i])) == typeid(Pickup))
+            {
+                increaseHealth();
+                scene()->removeItem(colliding_items[i]);
+                delete colliding_items[i];
+            }
+            else if(typeid(*(colliding_items[i])) == typeid(Tile) && y() < colliding_items[i]->y() - 105)
+            {
                 isOnGround = true;
-              }
+            }
+            if (typeid(*(colliding_items[i])) == typeid(Portal) && (game->currentLevelPortal->x() - x()) < 30 && (game->currentLevelPortal->y() - y()) < 30)
+            {
+                game->currentLevel->removeItem(game->player);
+                emit enteredPortal();
+            }
       }
+    }
     else
+    {
         isOnGround = false;
+    }
 }
 

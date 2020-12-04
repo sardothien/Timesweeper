@@ -1,6 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <QtMultimedia/QMediaPlayer>
 #include <QObject>
 #include <QWidget>
 #include <QGraphicsView>
@@ -14,16 +15,18 @@ class Game : public QGraphicsView
     Q_OBJECT
     public:
         Game (QWidget *parent = nullptr);
-        PlayerCharacter *player;
+        static PlayerCharacter *player;
         static int levelID;
         QGraphicsScene *currentLevel;
         static NPCharacter *currentLevelNpc;
         static Portal *currentLevelPortal;
+        QMediaPlayer *music;
 
         static NPCharacter *getCurrentLevelNpc();
         static void setCurrentLevelNpc(NPCharacter *npc);
         static Portal *getCurrentLevelPortal();
         static void setCurrentLevelPortal(Portal *portal);
+        void playMusic();
 
     public slots:
         void changeLevel();

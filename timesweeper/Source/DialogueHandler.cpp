@@ -21,7 +21,8 @@ void DialogueHandler::initializeDialogue()
     if(game->levelID == 1)
     {
         recenice.append(QPair(Speaker::Strauss, "Hey there intern! So, good news and bad news."));
-        recenice.append(QPair(Speaker::Strauss, "Bad news is that we are in a bit of a predicament. The alien swarm has sorounded our base outside, and that big angry boy in the middle is their alpha and is going to blow us  up any minute now."));
+        recenice.append(QPair(Speaker::Strauss, "Bad news is that we are in a bit of a predicament."));
+        recenice.append(QPair(Speaker::Strauss, "The alien swarm has sorounded our base outside, and that big angry boy in the middle is their alpha and is going to blow us  up any minute now."));
         recenice.append(QPair(Speaker::Strauss, "AAAnyway, the good news is that you got a promotion!."));
         recenice.append(QPair(Speaker::Strauss, "Congratulations intern, you are the worlds first Timesweeper!"));
         recenice.append(QPair(Speaker::Strauss, "Take this special Time Gun and this special Time Communicator and jump right into that Time Portal there, ill explain everything when you get there"));
