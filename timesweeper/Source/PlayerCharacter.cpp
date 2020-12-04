@@ -152,7 +152,7 @@ void PlayerCharacter::detectCollision()
             {
                 isOnGround = true;
             }
-            if (typeid(*(colliding_items[i])) == typeid(Portal) && (game->currentLevelPortal->x() - x()) < 30 && (game->currentLevelPortal->y() - y()) < 30)
+            else if (typeid(*(colliding_items[i])) == typeid(Portal) && (game->currentLevelPortal->x() - x()) < 30 && (game->currentLevelPortal->y() - y()) < 30)
             {
                 game->currentLevel->removeItem(game->player);
                 emit enteredPortal();
