@@ -100,13 +100,7 @@ void PlayerCharacter::shootProjectile()
 
 void PlayerCharacter::keyReleaseEvent(QKeyEvent *event)
 {
-    if(event->key() == Qt::Key_Space)
-    {
-        if(velocityY < -6.0)
-            velocityY = -6.0;
-
-    }
-    else if(event->key() == Qt::Key_Right)
+    if(event->key() == Qt::Key_Right)
     {
         timerWalk->stop();
 
@@ -135,9 +129,11 @@ void PlayerCharacter::jump()
 {
     if(!isOnGround)
     {
+        //timerWalk->stop();
         setPos(x(),y()+velocityY);
         velocityY += gravity;
     }
+    game->centerOn(this);
 }
 
 void PlayerCharacter::walk()
@@ -147,6 +143,7 @@ void PlayerCharacter::walk()
     {
         emit nearNPC();
     }
+
     game->centerOn(this);
 }
 
@@ -164,7 +161,7 @@ void PlayerCharacter::detectCollision()
                 scene()->removeItem(colliding_items[i]);
                 delete colliding_items[i];
             }
-            else if(typeid(*(colliding_items[i])) == typeid(Tile) && y() < colliding_items[i]->y() - 105)
+            else if(typeid(*(colliding_items[i])) == typeid(Tile))
             {
                 isOnGround = true;
             }

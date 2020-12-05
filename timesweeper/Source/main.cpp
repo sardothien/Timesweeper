@@ -1,14 +1,14 @@
 #include <QApplication>
 #include "Headers/Game.h"
+#include "Headers/Menu.h"
 
-Game *game;
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    game = new Game();
-    game->show();
+    Menu m;
+    m.show();
 
     return a.exec();
 }

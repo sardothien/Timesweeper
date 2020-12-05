@@ -30,7 +30,7 @@ class PlayerCharacter : public Character
 
     private:
         QTimer *timerJump,*timerWalk,*timerCollision;
-        qreal velocityX = 15, velocityY = 1;
+        qreal velocityX, velocityY = 1;
         qreal gravity = 0.5;
         bool isOnGround;
         QMediaPlayer *projectilesound;

@@ -18,6 +18,7 @@ SOURCES += \
     Source/Game.cpp \
     Source/HealthBar.cpp \
     Source/Level.cpp \
+    Source/Menu.cpp \
     Source/NPCharacter.cpp \
     Source/Pickup.cpp \
     Source/PlayerCharacter.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     Headers/Game.h \
     Headers/HealthBar.h \
     Headers/Level.h \
+    Headers/Menu.h \
     Headers/NPCharacter.h \
     Headers/Pickup.h \
     Headers/PlayerCharacter.h \
@@ -42,7 +44,7 @@ HEADERS += \
     Headers/Tile.h
 
 FORMS += \
-    Forms/TimesweeperMainWindow.ui
+    Forms/Menu.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
