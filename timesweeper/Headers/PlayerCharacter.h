@@ -4,6 +4,7 @@
 #include <QTimer>
 #include "Headers/Character.h"
 #include <QtMultimedia/QMediaPlayer>
+#include <QMouseEvent>
 
 class PlayerCharacter : public Character
 {
@@ -12,6 +13,9 @@ class PlayerCharacter : public Character
         PlayerCharacter (Character *parent = nullptr);
         void keyPressEvent(QKeyEvent *event);
         void keyReleaseEvent(QKeyEvent *event);
+        void mousePressEvent(QGraphicsSceneMouseEvent *event);
+        void mouseMoveEvent(QMouseEvent *event);
+        void shootProjectile();
 
     signals:
         void enteredPortal();

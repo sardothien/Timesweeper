@@ -7,6 +7,7 @@
 #include "Headers/PlayerCharacter.h"
 #include "Headers/Tile.h"
 #include "Headers/Projectile.h"
+#include <QGraphicsSceneMouseEvent>
 
 #include <iostream>
 
@@ -81,6 +82,22 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
     }
 }
 
+void PlayerCharacter::shootProjectile()
+{
+    Projectile *projectile = new Projectile();
+    projectile->setPos(x()+50,y()+70);
+    scene()->addItem(projectile);
+
+    if (projectilesound->state() == QMediaPlayer::PlayingState)
+    {
+       projectilesound->setPosition(0);
+    }
+    else if (projectilesound->state() == QMediaPlayer::StoppedState)
+    {
+        projectilesound->play();
+    }
+}
+
 void PlayerCharacter::keyReleaseEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Space)
@@ -100,19 +117,18 @@ void PlayerCharacter::keyReleaseEvent(QKeyEvent *event)
     }
     else if(event->key() == Qt::Key_X)
     {
-        Projectile *projectile = new Projectile();
-        projectile->setPos(x()+50,y()+70);
-        scene()->addItem(projectile);
-
-        if (projectilesound->state() == QMediaPlayer::PlayingState)
-        {
-           projectilesound->setPosition(0);
-        }
-        else if (projectilesound->state() == QMediaPlayer::StoppedState)
-        {
-            projectilesound->play();
-        }
+        shootProjectile();
     }
+}
+
+void PlayerCharacter::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        shootProjectile();
+    }
+
+    QGraphicsItem::mousePressEvent(event);
 }
 
 void PlayerCharacter::jump()
