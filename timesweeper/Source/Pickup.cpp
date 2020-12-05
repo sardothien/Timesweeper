@@ -8,7 +8,7 @@ extern Game *game;
 Pickup::Pickup(QGraphicsPixmapItem *parent)
 {
     if(game->levelID == 2)
-        setPixmap(QPixmap(":/Images/Resources/Level2Tiles/health_tile_lvl2.png"));
+        setPixmap(QPixmap(":/Other/Resources/Other/health_level_2.png"));
     else
         setPixmap(QPixmap(":/Images/Resources/testpickup.png"));
 }

@@ -32,20 +32,20 @@ QGraphicsScene* Level::LoadLevel()
 
     // Biranje nivoa
     if(game->levelID == 1){
-        filename = ":/Levels/Resources/level1.txt";
+        filename = ":/Levels/Resources/Levels/level1.txt";
         scene->setSceneRect(0, 0, 2300, 700);
         scene->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_1_prologue.png")));
     }
     else if(game->levelID == 2){
-        filename = ":/Levels/Resources/level2.txt";
+        filename = ":/Levels/Resources/Levels/level2.txt";
         scene->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_2_maya.png")));
     }
     else if(game->levelID == 3){
-        filename = ":/Levels/Resources/level3.txt";
+        filename = ":/Levels/Resources/Levels/level3.txt";
         scene->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_3_wild_west.png")));
     }
     else if(game->levelID == 4){
-        filename = ":/Levels/Resources/level4.txt";
+        filename = ":/Levels/Resources/Levels/level4.txt";
     }
     else{
         std::cout << "Nije dobar ID nivoa!" << std::endl;

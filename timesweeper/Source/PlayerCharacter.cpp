@@ -31,7 +31,7 @@ PlayerCharacter::PlayerCharacter(Character *parent)
     timerCollision->start(25);
 
     projectilesound = new QMediaPlayer();
-    projectilesound->setMedia(QUrl("qrc:/Sounds/Resources/projectile.mp3"));
+    projectilesound->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/projectile.mp3"));
 }
 
 void PlayerCharacter::keyPressEvent(QKeyEvent *event)

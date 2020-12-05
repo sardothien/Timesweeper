@@ -62,12 +62,12 @@ void Game::playMusic()
 {
     if(levelID == 1)
     {
-        music->setMedia(QUrl("qrc:/Sounds/Resources/bgsound_level_1.mp3"));
+        music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_1.mp3"));
         music->play();
     }
     else if(levelID == 3)
     {
-        music->setMedia(QUrl("qrc:/Sounds/Resources/bgsound_level_3.mp3"));
+        music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_3.mp3"));
         music->play();
     }
 }
