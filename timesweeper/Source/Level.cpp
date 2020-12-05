@@ -81,7 +81,7 @@ QGraphicsScene* Level::LoadLevel()
         QString tiles = in.readLine();
         for(int x = 0; x < sizeX-1; x++){
             if(game->levelID == 1) // TODO - obrisati kasnije
-                AddObject(scene, tiles[x].toLatin1(), x*45, y*45);
+                AddObject(scene, tiles[x].toLatin1(), x*44, y*44);
             else // ostali nivoi (45x45 - dimenzija tile-a)
                 AddObject(scene, tiles[x].toLatin1(), x*45, y*45);
         }

@@ -7,7 +7,7 @@ extern Game *game;
 Tile::Tile(char tile, QGraphicsPixmapItem *parent)
 {
     if(game->levelID == 1){ // TODO - promeniti tile za ovaj nivo!
-        setPixmap(QPixmap(":/Images/Resources/testtile.png"));
+        setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_1_Tiles/floor_tile.png"));
     }
     else if(game->levelID == 2){
         if(tile == '=') // pod
