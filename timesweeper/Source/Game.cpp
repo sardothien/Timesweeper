@@ -12,6 +12,8 @@ int Game::levelID;
 
 Game::Game(QWidget *parent)
 {
+    setMouseTracking(true);
+
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(1200, 700);    // za view
@@ -30,7 +32,22 @@ Game::Game(QWidget *parent)
     //Mina, u tvoj nivo sam privremeno dodao neki portal pri pocetku da bi Igor mogao da udje u svoj nivo dok ne popravimo ovaj bag
     levelID = 1;
     changeLevel();
+}
 
+void Game::mouseMoveEvent(QMouseEvent *event)
+{
+    qDebug() << event->pos();
+    //player->aimAtPoint(event->pos());
+    player->setFocus();
+}
+
+void Game::mousePressEvent(QMouseEvent *event)
+{
+    if(event->button() == Qt::LeftButton)
+    {
+        player->shootProjectile();
+        player->setFocus();
+    }
 }
 
 void Game::changeLevel()

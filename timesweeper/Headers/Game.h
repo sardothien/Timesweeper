@@ -1,10 +1,11 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <QtMultimedia/QMediaPlayer>
-#include <QObject>
-#include <QWidget>
 #include <QGraphicsView>
+#include <QMouseEvent>
+#include <QObject>
+#include <QtMultimedia/QMediaPlayer>
+#include <QWidget>
 
 #include "Headers/PlayerCharacter.h"
 #include "Headers/NPCharacter.h"
@@ -26,6 +27,8 @@ class Game : public QGraphicsView
         static void setCurrentLevelNpc(NPCharacter *npc);
         static Portal *getCurrentLevelPortal();
         static void setCurrentLevelPortal(Portal *portal);
+        void mouseMoveEvent(QMouseEvent *event);
+        void mousePressEvent(QMouseEvent * event);
         void playMusic();
 
     public slots:

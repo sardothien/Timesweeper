@@ -1,15 +1,16 @@
+#include <QDebug>
+
+#include <QGraphicsScene>
+#include <iostream>
 #include <QKeyEvent>
 #include <QList>
-#include <QGraphicsScene>
+
 #include "Headers/DialogueHandler.h"
 #include "Headers/Game.h"
 #include "Headers/Pickup.h"
 #include "Headers/PlayerCharacter.h"
 #include "Headers/Tile.h"
 #include "Headers/Projectile.h"
-#include <QGraphicsSceneMouseEvent>
-
-#include <iostream>
 
 extern Game *game;
 
@@ -62,13 +63,13 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
     }
 
 
-    if(event->key() == Qt::Key_Right)
+    if(event->key() == Qt::Key_D)
     {
         velocityX = 11;
         timerWalk->start(25);
 
     }
-    else if(event->key() == Qt::Key_Left)
+    else if(event->key() == Qt::Key_A)
     {
         velocityX = -11;
         timerWalk->start(25);
@@ -100,29 +101,14 @@ void PlayerCharacter::shootProjectile()
 
 void PlayerCharacter::keyReleaseEvent(QKeyEvent *event)
 {
-    if(event->key() == Qt::Key_Right)
-    {
-        timerWalk->stop();
-
-    }
-    else if(event->key() == Qt::Key_Left)
+    if(event->key() == Qt::Key_D)
     {
         timerWalk->stop();
     }
-    else if(event->key() == Qt::Key_X)
+    else if(event->key() == Qt::Key_A)
     {
-        shootProjectile();
+        timerWalk->stop();
     }
-}
-
-void PlayerCharacter::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-    if (event->button() == Qt::LeftButton)
-    {
-        shootProjectile();
-    }
-
-    QGraphicsItem::mousePressEvent(event);
 }
 
 void PlayerCharacter::jump()
@@ -142,7 +128,6 @@ void PlayerCharacter::jump()
 
 void PlayerCharacter::walk()
 {
-
     // ako Player pokusa da ode van ekrana
     if (x() > game->currentLevel->width()-3*45) // desno
     {

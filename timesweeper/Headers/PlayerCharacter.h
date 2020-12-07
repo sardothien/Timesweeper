@@ -2,9 +2,9 @@
 #define PLAYERCHARACTER_H
 
 #include <QTimer>
-#include "Headers/Character.h"
 #include <QtMultimedia/QMediaPlayer>
-#include <QMouseEvent>
+
+#include "Headers/Character.h"
 
 class PlayerCharacter : public Character
 {
@@ -13,8 +13,6 @@ class PlayerCharacter : public Character
         PlayerCharacter (Character *parent = nullptr);
         void keyPressEvent(QKeyEvent *event);
         void keyReleaseEvent(QKeyEvent *event);
-        void mousePressEvent(QGraphicsSceneMouseEvent *event);
-        void mouseMoveEvent(QMouseEvent *event);
         void shootProjectile();
 
     signals:
@@ -34,7 +32,6 @@ class PlayerCharacter : public Character
         qreal gravity = 0.5;
         bool isOnGround;
         QMediaPlayer *projectilesound;
-
 };
 
 #endif // PLAYERCHARACTER_H
