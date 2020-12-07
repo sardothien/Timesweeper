@@ -27,6 +27,7 @@
         <file>Resources/CharacterModels/player_no_gun_left.png</file>
         <file>Resources/CharacterModels/player_no_gun_right.png</file>
         <file>Resources/CharacterModels/player_right.png</file>
+        <file>Resources/CharacterModels/alien_alpha_front.png</file>
     </qresource>
     <qresource prefix="/LevelBackgrounds">
         <file>Resources/LevelBackgrounds/level_1_prologue.png</file>
@@ -39,6 +40,7 @@
         <file>Resources/Other/dialogue_box_strauss.png</file>
         <file>Resources/Other/portal.png</file>
         <file>Resources/Other/health_level_2.png</file>
+        <file>Resources/Other/splash.png</file>
     </qresource>
     <qresource prefix="/Terrain">
         <file>Resources/Terrain/Level_1_Tiles/floor_tile.png</file>
