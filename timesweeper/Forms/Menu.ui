@@ -6,21 +6,48 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
-    <height>700</height>
+    <width>800</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>TimesweeperMainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">#Menu{
+background: url(:/Other/Resources/Other/splash.png);
+background-repeat: none;
+background-color: black;
+background-position: center top
+}</string>
+  </property>
   <widget class="QPushButton" name="startButton">
    <property name="geometry">
     <rect>
-     <x>470</x>
-     <y>460</y>
-     <width>231</width>
-     <height>31</height>
+     <x>310</x>
+     <y>400</y>
+     <width>161</width>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"> display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px 24px;
+    border: 3px solid #44201d;
+    border-radius: 0px;
+    background: #bc5a50;
+    background: -webkit-gradient(linear, left top, left bottom, from(#bc5a50), to(#44201d));
+    background: -moz-linear-gradient(top, #bc5a50, #44201d);
+    background: linear-gradient(to bottom, #bc5a50, #44201d);
+    -webkit-box-shadow: #e26c60 0px 0px 40px 0px;
+    -moz-box-shadow: #e26c60 0px 0px 40px 0px;
+    box-shadow: #e26c60 0px 0px 40px 0px;
+    text-shadow: #261210 1px 1px 1px;
+    font: normal normal bold 20px courier new;
+    color: #ffffff;
+    text-decoration: none;</string>
    </property>
    <property name="text">
     <string>Start</string>
@@ -29,11 +56,34 @@
   <widget class="QPushButton" name="quitButton">
    <property name="geometry">
     <rect>
-     <x>470</x>
-     <y>510</y>
-     <width>231</width>
-     <height>31</height>
+     <x>310</x>
+     <y>450</y>
+     <width>161</width>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"> display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px 24px;
+    border: 3px solid #44201d;
+    border-radius: 0px;
+    background: #bc5a50;
+    background: -webkit-gradient(linear, left top, left bottom, from(#bc5a50), to(#44201d));
+    background: -moz-linear-gradient(top, #bc5a50, #44201d);
+    background: linear-gradient(to bottom, #bc5a50, #44201d);
+    -webkit-box-shadow: #e26c60 0px 0px 40px 0px;
+    -moz-box-shadow: #e26c60 0px 0px 40px 0px;
+    box-shadow: #e26c60 0px 0px 40px 0px;
+    text-shadow: #261210 1px 1px 1px;
+    font: normal normal bold 20px courier new;
+    color: #ffffff;
+    text-decoration: none;
+</string>
    </property>
    <property name="text">
     <string>Quit</string>

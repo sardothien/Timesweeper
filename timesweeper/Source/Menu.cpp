@@ -6,9 +6,10 @@
 
 Game * game;
 
-Menu::Menu(QWidget *parent) : QWidget(parent), ui(new Ui::Menu)
+Menu::Menu(QWidget *parent) : QMainWindow(parent), ui(new Ui::Menu)
 {
     ui->setupUi(this);
+    setFixedSize(800,500);
 }
 
 Menu::~Menu()
