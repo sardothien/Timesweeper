@@ -74,13 +74,16 @@ QGraphicsScene* Level::LoadLevel()
     //std::cout << sizeY << std::endl;
 
     // 45x45 - dimenzija tile-a
-    scene->setSceneRect(0, 0, 45*(sizeX-1), 700);
+    if(game->levelID == 1)
+        scene->setSceneRect(0, 0, 44*(sizeX-1), 700);
+    else
+        scene->setSceneRect(0, 0, 45*(sizeX-1), 700);
 
     // Prolazak kroz matricu i iscrtavanje
     for(int y = 0; y < sizeY; y++){
         QString tiles = in.readLine();
         for(int x = 0; x < sizeX-1; x++){
-            if(game->levelID == 1) // TODO - obrisati kasnije
+            if(game->levelID == 1)
                 AddObject(scene, tiles[x].toLatin1(), x*44, y*44);
             else // ostali nivoi (45x45 - dimenzija tile-a)
                 AddObject(scene, tiles[x].toLatin1(), x*45, y*45);

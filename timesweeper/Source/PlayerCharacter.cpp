@@ -130,6 +130,10 @@ void PlayerCharacter::jump()
     if(!isOnGround)
     {
         //timerWalk->stop();
+        if(y() < 0) // udara gore
+        {
+            setPos(x(), 0);
+        }
         setPos(x(),y()+velocityY);
         velocityY += gravity;
     }
@@ -138,7 +142,19 @@ void PlayerCharacter::jump()
 
 void PlayerCharacter::walk()
 {
+
+    // ako Player pokusa da ode van ekrana
+    if (x() > game->currentLevel->width()-3*45) // desno
+    {
+        setPos(game->currentLevel->width()-3*45, y());
+    }
+    else if(x() < 0) // levo
+    {
+        setPos(0, y());
+    }
+
     setPos(x() + velocityX, y());
+
     if((game->currentLevelNpc->x() - x()) <= 200 &&  (game->currentLevelNpc->x() - x()) >= 190)
     {
         emit nearNPC();

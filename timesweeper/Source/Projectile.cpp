@@ -19,6 +19,11 @@ Projectile::Projectile(QGraphicsItem *parent)
     timer->start(50);
 }
 
+Projectile::~Projectile()
+{
+    std::cout << "Projectile destroyed!" << std::endl;
+}
+
 void Projectile::move()
 {
     QList<QGraphicsItem *> colliding_items = collidingItems();

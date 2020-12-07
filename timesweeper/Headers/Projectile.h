@@ -10,6 +10,7 @@ class Projectile : public QObject, public QGraphicsPixmapItem
     Q_OBJECT
 public:
     Projectile(QGraphicsItem *parent = nullptr);
+    ~Projectile();
 
 signals:
 
