@@ -65,12 +65,31 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
 
     if(event->key() == Qt::Key_D)
     {
+        if (game->getLevelID() != 2)
+        {
+            setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_right.png"));
+        }
+        else
+        {
+            setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_no_gun_right.png"));
+        }
+
         velocityX = 11;
         timerWalk->start(25);
 
     }
     else if(event->key() == Qt::Key_A)
     {
+        //qDebug() << "levelID je: " << game->getLevelID();
+        if (game->getLevelID() != 2)
+        {
+            setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_left.png"));
+        }
+        else
+        {
+            setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_no_gun_left.png"));
+        }
+
         velocityX = -11;
         timerWalk->start(25);
 
@@ -104,10 +123,20 @@ void PlayerCharacter::keyReleaseEvent(QKeyEvent *event)
     if(event->key() == Qt::Key_D)
     {
         timerWalk->stop();
+
+        if (game->getLevelID() == 2)
+        {
+            setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_front.png"));
+        }
     }
     else if(event->key() == Qt::Key_A)
     {
         timerWalk->stop();
+
+        if (game->getLevelID() == 2)
+        {
+            setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_front.png"));
+        }
     }
 }
 

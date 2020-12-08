@@ -34,6 +34,11 @@ Game::Game(QWidget *parent)
     changeLevel();
 }
 
+int Game::getLevelID()
+{
+    return levelID;
+}
+
 void Game::mouseMoveEvent(QMouseEvent *event)
 {
     qDebug() << event->pos();

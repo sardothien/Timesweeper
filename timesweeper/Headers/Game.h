@@ -31,7 +31,9 @@ class Game : public QGraphicsView
         void mousePressEvent(QMouseEvent * event);
         void playMusic();
 
-    public slots:
+        static int getLevelID();
+
+public slots:
         void changeLevel();
         void triggerDialogue();
 };
