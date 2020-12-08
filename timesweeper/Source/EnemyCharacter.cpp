@@ -9,7 +9,7 @@ extern Game* game;
 
 EnemyCharacter::EnemyCharacter(Character *parent)
 {
-    setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_left.png"));
+    //setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_left.png"));
     healthBar = new HealthBar();
 
     // pomocne promenljive za kretanje
@@ -46,7 +46,9 @@ void EnemyCharacter::setLives(int lives)
 // Kretanje neprijatelja levo/desno
 void EnemyCharacter::move()
 {
-    if(index == 0){
+    if(index == 0)
+    {
+        setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_right.png"));
         setPos(x()+15, y());
         healthBar->bar->setPos(healthBar->bar->x()+15, healthBar->bar->y());
         healthBar->barFrame->setPos(healthBar->barFrame->x()+15, healthBar->barFrame->y());
@@ -56,7 +58,9 @@ void EnemyCharacter::move()
             num = 0;
         }
     }
-    else if(index == 1){
+    else if(index == 1)
+    {
+        setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_left.png"));
         setPos(x()-15, y());
         healthBar->bar->setPos(healthBar->bar->x()-15, healthBar->bar->y());
         healthBar->barFrame->setPos(healthBar->barFrame->x()-15, healthBar->barFrame->y());
