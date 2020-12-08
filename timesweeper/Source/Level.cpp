@@ -107,10 +107,10 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
             break;
         case 'E': // neprijatelj
             enemy = new EnemyCharacter();
-            enemy->setPos(x, y);
-            enemy->setScale(2);
-            enemy->healthBar->barFrame->setPos(x, y-35);
-            enemy->healthBar->bar->setPos(x, y-35);
+            enemy->setPos(x, y-110);
+            enemy->setScale(0.8);
+            enemy->healthBar->barFrame->setPos(x, y-135);
+            enemy->healthBar->bar->setPos(x, y-135);
             scene->addItem(enemy);
             scene->addItem(enemy->healthBar->barFrame);
             scene->addItem(enemy->healthBar->bar);

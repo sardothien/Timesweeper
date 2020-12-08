@@ -9,7 +9,7 @@ extern Game* game;
 
 EnemyCharacter::EnemyCharacter(Character *parent)
 {
-    setPixmap(QPixmap(":/Images/Resources/testpixmap.png"));
+    setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_left.png"));
     healthBar = new HealthBar();
 
     // pomocne promenljive za kretanje
@@ -78,14 +78,14 @@ void EnemyCharacter::decreaseHealth()
         {
             if(this->getLives() == 3){
                 game->currentLevel->removeItem(this->healthBar->bar);
-                this->healthBar->bar = new QGraphicsRectItem(x(), y()-35, 23, 15);
+                this->healthBar->bar = new QGraphicsRectItem(x(), y()-25, 54, 15);
                 this->healthBar->bar->setBrush(Qt::yellow);
                 game->currentLevel->addItem(this->healthBar->bar);
                 this->setLives(2);
             }
             else if(this->getLives() == 2){
                 game->currentLevel->removeItem(this->healthBar->bar);
-                this->healthBar->bar = new QGraphicsRectItem(x(), y()-35, 11, 15);
+                this->healthBar->bar = new QGraphicsRectItem(x(), y()-25, 28, 15);
                 this->healthBar->bar->setBrush(Qt::red);
                 game->currentLevel->addItem(this->healthBar->bar);
                 this->setLives(1);

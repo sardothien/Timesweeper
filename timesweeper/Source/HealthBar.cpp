@@ -6,10 +6,10 @@
 HealthBar::HealthBar()
 {
     barFrame = new QGraphicsRectItem;
-    barFrame->setRect(x(), y(), 35, 15);
+    barFrame->setRect(x(), y(), 80, 15);
     barFrame->setBrush(Qt::gray);
 
-    bar = new QGraphicsRectItem(x(), y(), 35, 15);
+    bar = new QGraphicsRectItem(x(), y(), 80, 15);
     bar->setBrush(Qt::green);
 }
 
