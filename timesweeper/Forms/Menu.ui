@@ -31,23 +31,16 @@ background-position: center top
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true"> display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    padding: 8px 24px;
-    border: 3px solid #44201d;
-    border-radius: 0px;
-    background: #bc5a50;
-    background: -webkit-gradient(linear, left top, left bottom, from(#bc5a50), to(#44201d));
-    background: -moz-linear-gradient(top, #bc5a50, #44201d);
-    background: linear-gradient(to bottom, #bc5a50, #44201d);
-    -webkit-box-shadow: #e26c60 0px 0px 40px 0px;
-    -moz-box-shadow: #e26c60 0px 0px 40px 0px;
-    box-shadow: #e26c60 0px 0px 40px 0px;
-    text-shadow: #261210 1px 1px 1px;
-    font: normal normal bold 20px courier new;
-    color: #ffffff;
-    text-decoration: none;</string>
+    <string notr="true">text-align: center;
+vertical-align: middle;
+padding: 8px 24px;
+border: 3px solid #44201d;
+border-radius: 0px;
+background: #bc5a50;
+background: -webkit-gradient(linear, left top, left bottom, from(#bc5a50), to(#44201d));
+font: normal normal bold 20px courier new;
+color: #ffffff;
+text-decoration: none;</string>
    </property>
    <property name="text">
     <string>Start</string>
@@ -66,27 +59,44 @@ background-position: center top
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true"> display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    padding: 8px 24px;
-    border: 3px solid #44201d;
-    border-radius: 0px;
-    background: #bc5a50;
-    background: -webkit-gradient(linear, left top, left bottom, from(#bc5a50), to(#44201d));
-    background: -moz-linear-gradient(top, #bc5a50, #44201d);
-    background: linear-gradient(to bottom, #bc5a50, #44201d);
-    -webkit-box-shadow: #e26c60 0px 0px 40px 0px;
-    -moz-box-shadow: #e26c60 0px 0px 40px 0px;
-    box-shadow: #e26c60 0px 0px 40px 0px;
-    text-shadow: #261210 1px 1px 1px;
-    font: normal normal bold 20px courier new;
-    color: #ffffff;
-    text-decoration: none;
+    <string notr="true">text-align: center;
+vertical-align: middle;
+padding: 8px 24px;
+border: 3px solid #44201d;
+border-radius: 0px;
+background: #bc5a50;
+background: -webkit-gradient(linear, left top, left bottom, from(#bc5a50), to(#44201d));
+font: normal normal bold 20px courier new;
+color: #ffffff;
+text-decoration: none;
 </string>
    </property>
    <property name="text">
     <string>Quit</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="optionsButton">
+   <property name="geometry">
+    <rect>
+     <x>750</x>
+     <y>10</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"> text-align: center;
+ vertical-align: middle;
+    padding: 8px 24px;
+    border-radius: 0px;
+    background: url(:/Other/Resources/Other/options.png);
+    font: normal normal bold 20px courier new;
+    color: #ffffff;
+    text-decoration: none;
+	background-repeat:none</string>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

@@ -41,6 +41,7 @@
         <file>Resources/Other/portal.png</file>
         <file>Resources/Other/health_level_2.png</file>
         <file>Resources/Other/splash.png</file>
+        <file>Resources/Other/options.png</file>
     </qresource>
     <qresource prefix="/Terrain">
         <file>Resources/Terrain/Level_1_Tiles/floor_tile.png</file>
