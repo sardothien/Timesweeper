@@ -41,8 +41,8 @@ int Game::getLevelID()
 
 void Game::mouseMoveEvent(QMouseEvent *event)
 {
-    qDebug() << event->pos();
-    //player->aimAtPoint(event->pos());
+    //qDebug() << event->pos();
+    player->aimAtPoint(event->pos());
     player->setFocus();
 }
 

@@ -12,6 +12,8 @@
 #include "Headers/Tile.h"
 #include "Headers/Projectile.h"
 
+#include <QGraphicsLineItem>
+
 extern Game *game;
 
 PlayerCharacter::PlayerCharacter(Character *parent)
@@ -105,12 +107,21 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
 void PlayerCharacter::shootProjectile()
 {
     Projectile *projectile = new Projectile();
-    projectile->setPos(x()+50,y()+70);
-    scene()->addItem(projectile);
+    projectile->setPos(x()+80, y()+70);
+
+    QLineF ln(projectile->pos(), targetPoint );
+    //debug linija ciljanja
+    //game->currentLevel->addItem(new QGraphicsLineItem(ln));
+    qreal angle = -1 * ln.angle();
+
+    projectile->setRotation(angle);
+
+    game->currentLevel->addItem(projectile);
 
     if (projectilesound->state() == QMediaPlayer::PlayingState)
     {
        projectilesound->setPosition(0);
+       projectilesound->play();
     }
     else if (projectilesound->state() == QMediaPlayer::StoppedState)
     {
@@ -208,3 +219,18 @@ void PlayerCharacter::detectCollision()
     }
 }
 
+void PlayerCharacter::aimAtPoint(QPoint point)
+{
+    //qDebug() << "trarget:" << targetPoint;
+    //NOTE: pitati asistenta za pomoc ovde! Ako umesto if-ova imamo samo targetPoint = point, ponasanje nije ispravno
+    //otkomentarisi liniju 114 (dodavanje linije na scenu) za testiranje
+    if(x() >= 500)
+    {
+        targetPoint.setX(point.x() + x() - 500);
+        targetPoint.setY(point.y());
+    }
+    else
+    {
+        targetPoint = point;
+    }
+}

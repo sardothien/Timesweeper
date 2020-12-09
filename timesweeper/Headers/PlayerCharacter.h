@@ -14,6 +14,8 @@ class PlayerCharacter : public Character
         void keyPressEvent(QKeyEvent *event);
         void keyReleaseEvent(QKeyEvent *event);
         void shootProjectile();
+        void aimAtPoint(QPoint point);
+        QPoint targetPoint;
 
     signals:
         void enteredPortal();

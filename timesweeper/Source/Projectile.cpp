@@ -4,18 +4,20 @@
 #include "Headers/Tile.h"
 
 #include <QGraphicsScene>
+#include <qmath.h>
 #include <QTimer>
 #include <QList>
 #include <iostream>
 
 extern Game *game;
 
-Projectile::Projectile(QGraphicsItem *parent)
+Projectile::Projectile(QGraphicsPixmapItem *parent)
+    :QGraphicsPixmapItem(parent)
 {
     setPixmap(QPixmap(":/Images/Resources/testprojectile.png"));
 
     QTimer *timer = new QTimer(this);
-    connect(timer,SIGNAL(timeout()),this,SLOT(move()));
+    connect(timer, &QTimer::timeout, this, &Projectile::move);
     timer->start(50);
 }
 
@@ -26,6 +28,16 @@ Projectile::~Projectile()
 
 void Projectile::move()
 {
+    int distanceToMove = 30;
+    qreal angle = rotation(); //u stepenima
+
+    //qDebug() << "ugao" << angle;
+
+    qreal dy = distanceToMove * qSin(qDegreesToRadians(angle));
+    qreal dx = distanceToMove * qCos(qDegreesToRadians(angle));
+
+    setPos(x() + dx, y() + dy);
+
     QList<QGraphicsItem *> colliding_items = collidingItems();
 
     for (int i = 0, n = colliding_items.size(); i < n; ++i)
@@ -34,22 +46,19 @@ void Projectile::move()
         {
             // brisanje oba objekta sa scene
             scene()->removeItem(this);
-
             // brisanje sa hipa
             delete this;
-
             return;
         }
     }
 
-    // ako nema kolizije, pomera se projectile
-    setPos(x()+10,y());
-
-    // ako projectile ode van ekrana, unistava se
-    if (pos().x() > game->currentLevel->width())
+    // ako projectile ode van view-a, unistava se
+    if (x() > game->player->x() + 1200 || x() < game->player->x() - 1200 ||
+        y() > game->player->y() + 700 || y() < game->player->y() - 700)
     {
         scene()->removeItem(this);
         delete this;
     }
 }
+
 
