@@ -14,7 +14,7 @@ extern Game *game;
 Projectile::Projectile(QGraphicsPixmapItem *parent)
     :QGraphicsPixmapItem(parent)
 {
-    setPixmap(QPixmap(":/Images/Resources/testprojectile.png"));
+    setPixmap(QPixmap(":/Other/Resources/Other/projectile.png"));
 
     QTimer *timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &Projectile::move);
