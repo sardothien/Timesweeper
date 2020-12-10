@@ -159,6 +159,7 @@ void PlayerCharacter::jump()
         if(y() < 0) // udara gore
         {
             setPos(x(), 0);
+            velocityY = 5;
         }
         setPos(x(),y()+velocityY);
         velocityY += gravity;
