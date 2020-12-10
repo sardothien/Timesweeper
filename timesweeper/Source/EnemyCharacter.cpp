@@ -13,13 +13,13 @@ EnemyCharacter::EnemyCharacter(Character *parent)
     healthBar = new HealthBar();
 
     // pomocne promenljive za kretanje
-    index = 0;
-    num = 0;
+    side = 0;
+    steps = 0;
 
     // timer za move()
     timerWalk = new QTimer();
     connect(timerWalk, &QTimer::timeout, this, &EnemyCharacter::move);
-    timerWalk->start(300);
+    timerWalk->start(15);
 
     // timer za decreaseHealth()
     timerHealth = new QTimer();
@@ -46,28 +46,32 @@ void EnemyCharacter::setLives(int lives)
 // Kretanje neprijatelja levo/desno
 void EnemyCharacter::move()
 {
-    if(index == 0)
+    if(side == 0) // okrenut ka desno
     {
         setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_right.png"));
-        setPos(x()+15, y());
-        healthBar->bar->setPos(healthBar->bar->x()+15, healthBar->bar->y());
-        healthBar->barFrame->setPos(healthBar->barFrame->x()+15, healthBar->barFrame->y());
-        num++;
-        if(num == 5){
-            index = 1;
-            num = 0;
+        setPos(x()+1, y());
+
+        healthBar->bar->setPos(healthBar->bar->x()+1, healthBar->bar->y());
+        healthBar->barFrame->setPos(healthBar->barFrame->x()+1, healthBar->barFrame->y());
+
+        steps++;
+        if(steps == 60){
+            side = 1;
+            steps = 0;
         }
     }
-    else if(index == 1)
+    else if(side == 1) // okrenut ka levo
     {
         setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_left.png"));
-        setPos(x()-15, y());
-        healthBar->bar->setPos(healthBar->bar->x()-15, healthBar->bar->y());
-        healthBar->barFrame->setPos(healthBar->barFrame->x()-15, healthBar->barFrame->y());
-        num++;
-        if(num == 5){
-            index = 0;
-            num = 0;
+        setPos(x()-1, y());
+
+        healthBar->bar->setPos(healthBar->bar->x()-1, healthBar->bar->y());
+        healthBar->barFrame->setPos(healthBar->barFrame->x()-1, healthBar->barFrame->y());
+
+        steps++;
+        if(steps == 60){
+            side = 0;
+            steps = 0;
         }
     }
 }

@@ -24,8 +24,8 @@ class EnemyCharacter : public Character
     private:
         QTimer* timerWalk;
         QTimer *timerHealth;
-        int index;
-        int num;
+        int side;
+        int steps;
         int lives = 3;
 };
 
