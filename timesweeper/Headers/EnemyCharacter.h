@@ -8,6 +8,7 @@
 
 class EnemyCharacter : public Character
 {
+    Q_OBJECT
     public:
         EnemyCharacter (Character *parent = 0);
         ~EnemyCharacter();
@@ -20,12 +21,15 @@ class EnemyCharacter : public Character
     public slots:
         void move();
         void decreaseHealth();
+        void shoot();
 
     private:
-        QTimer* timerWalk;
+        QTimer *timerWalk;
         QTimer *timerHealth;
+        QTimer *timerShoot;
         int side;
         int steps;
+        bool stopMoving;
         int lives = 3;
 };
 

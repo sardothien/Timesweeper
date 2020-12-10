@@ -9,12 +9,12 @@ extern Game* game;
 
 EnemyCharacter::EnemyCharacter(Character *parent)
 {
-    //setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_left.png"));
     healthBar = new HealthBar();
 
     // pomocne promenljive za kretanje
     side = 0;
     steps = 0;
+    stopMoving = false;
 
     // timer za move()
     timerWalk = new QTimer();
@@ -25,6 +25,11 @@ EnemyCharacter::EnemyCharacter(Character *parent)
     timerHealth = new QTimer();
     connect(timerHealth, &QTimer::timeout, this, &EnemyCharacter::decreaseHealth);
     timerHealth->start(50);
+
+    // timer za shoot()
+    timerShoot = new QTimer();
+    connect(timerShoot, &QTimer::timeout, this, &EnemyCharacter::shoot);
+    timerShoot->start(1000);
 }
 
 EnemyCharacter::~EnemyCharacter()
@@ -49,29 +54,37 @@ void EnemyCharacter::move()
     if(side == 0) // okrenut ka desno
     {
         setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_right.png"));
-        setPos(x()+1, y());
 
-        healthBar->bar->setPos(healthBar->bar->x()+1, healthBar->bar->y());
-        healthBar->barFrame->setPos(healthBar->barFrame->x()+1, healthBar->barFrame->y());
+        if(!stopMoving)
+        {
+            setPos(x()+1, y());
 
-        steps++;
-        if(steps == 60){
-            side = 1;
-            steps = 0;
+            healthBar->bar->setPos(healthBar->bar->x()+1, healthBar->bar->y());
+            healthBar->barFrame->setPos(healthBar->barFrame->x()+1, healthBar->barFrame->y());
+
+            steps++;
+            if(steps == 60){
+                side = 1;
+                steps = 0;
+            }
         }
     }
     else if(side == 1) // okrenut ka levo
     {
         setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_left.png"));
-        setPos(x()-1, y());
 
-        healthBar->bar->setPos(healthBar->bar->x()-1, healthBar->bar->y());
-        healthBar->barFrame->setPos(healthBar->barFrame->x()-1, healthBar->barFrame->y());
+        if(!stopMoving)
+        {
+            setPos(x()-1, y());
 
-        steps++;
-        if(steps == 60){
-            side = 0;
-            steps = 0;
+            healthBar->bar->setPos(healthBar->bar->x()-1, healthBar->bar->y());
+            healthBar->barFrame->setPos(healthBar->barFrame->x()-1, healthBar->barFrame->y());
+
+            steps++;
+            if(steps == 60){
+                side = 0;
+                steps = 0;
+            }
         }
     }
 }
@@ -111,5 +124,35 @@ void EnemyCharacter::decreaseHealth()
 
             return;
         }
+    }
+}
+
+void EnemyCharacter::shoot()
+{
+    if((abs(game->player->x() - x()) < 600) && (abs(game->player->y() - y()) < 50))
+    {
+        if(game->player->x() < x()) // enemy puca ulevo
+        {
+            side = 1;
+            stopMoving = true;
+
+            Projectile *projectile = new Projectile();
+            projectile->setPos(x(), y()+75);
+            projectile->setRotation(-180);
+            game->currentLevel->addItem(projectile);
+        }
+        else // enemy puca udesno
+        {
+            side = 0;
+            stopMoving = true;
+
+            Projectile *projectile = new Projectile();
+            projectile->setPos(x()+120, y()+65);
+            game->currentLevel->addItem(projectile);
+        }
+    }
+    else
+    {
+        stopMoving = false;
     }
 }

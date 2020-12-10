@@ -211,6 +211,12 @@ void PlayerCharacter::detectCollision()
                 game->currentLevel->removeItem(game->player);
                 emit enteredPortal();
             }
+            else if(typeid(*(colliding_items[i])) == typeid(Projectile)){
+                // TODO: decreaseHealth()
+                // NOTE: trenutno Player ima koliziju sa Projectile kad puca
+                // (samo promeniti poziciju Projectile-a)
+                // qDebug() << "Player hit!";
+            }
       }
     }
     else
