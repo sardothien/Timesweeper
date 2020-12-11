@@ -85,11 +85,11 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         //qDebug() << "levelID je: " << game->getLevelID();
         if (game->getLevelID() != 2)
         {
-            setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_left.png"));
+            //setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_left.png"));
         }
         else
         {
-            setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_no_gun_left.png"));
+            //setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_no_gun_left.png"));
         }
 
         velocityX = -11;
@@ -161,7 +161,9 @@ void PlayerCharacter::jump()
             velocityY = 5;
         }
         setPos(x(),y()+velocityY);
-        velocityY += gravity;
+
+        if(velocityY<10)
+            velocityY += gravity;
     }
     game->centerOn(this);
 }
