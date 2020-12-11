@@ -30,8 +30,8 @@ PlayerCharacter::PlayerCharacter(Character *parent)
     connect(timerCollision, &QTimer::timeout, this, &PlayerCharacter::detectCollision);
 
     isOnGround = true;
-    timerJump->start(25);
-    timerCollision->start(25);
+    timerJump->start(15);
+    timerCollision->start(10);
 
     projectilesound = new QMediaPlayer();
     projectilesound->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/projectile.mp3"));
@@ -155,7 +155,6 @@ void PlayerCharacter::jump()
 {
     if(!isOnGround)
     {
-        //timerWalk->stop();
         if(y() < 0) // udara gore
         {
             setPos(x(), 0);
@@ -205,7 +204,26 @@ void PlayerCharacter::detectCollision()
             }
             else if(typeid(*(colliding_items[i])) == typeid(Tile))
             {
-                isOnGround = true;
+                QRectF tileRect = colliding_items[i]->boundingRect();
+                QPolygonF tileRectPoints = colliding_items[i]->mapToScene(tileRect);
+
+                playerRectPoints = mapToScene(boundingRect());
+
+                if(playerRectPoints[2].y() <= tileRectPoints[0].y()+10)
+                {
+                    isOnGround = true;
+                }else if(playerRectPoints[3].x() < tileRectPoints[3].x() && playerRectPoints[1].y() <= tileRectPoints[3].y()-10)
+                {
+                            timerWalk->stop();
+                            setPos(x()-11,y());
+                }else if(playerRectPoints[2].x() >= tileRectPoints[2].x() && playerRectPoints[1].y() <= tileRectPoints[3].y()-10)
+                {
+                            timerWalk->stop();
+                            setPos(x()+11 ,y());
+                }
+                if(playerRectPoints[1].y() <= tileRectPoints[3].y()+10 && playerRectPoints[2].x() > tileRectPoints[3].x()+2 && playerRectPoints[3].x() < tileRectPoints[2].x()-2){
+                        velocityY = 5;
+                }
             }
             else if (typeid(*(colliding_items[i])) == typeid(Portal) && (game->currentLevelPortal->x() - x()) < 30 && (game->currentLevelPortal->y() - y()) < 30)
             {

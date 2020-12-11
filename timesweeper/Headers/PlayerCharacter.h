@@ -34,6 +34,7 @@ class PlayerCharacter : public Character
         qreal gravity = 0.5;
         bool isOnGround;
         QMediaPlayer *projectilesound;
+        QPolygonF playerRectPoints;
 };
 
 #endif // PLAYERCHARACTER_H
