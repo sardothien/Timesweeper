@@ -10,6 +10,7 @@ Menu::Menu(QWidget *parent) : QMainWindow(parent), ui(new Ui::Menu)
 {
     ui->setupUi(this);
     setFixedSize(800,500);
+    setWindowTitle("timesweeper");
 }
 
 Menu::~Menu()
