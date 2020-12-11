@@ -14,11 +14,16 @@
 
 #include <QGraphicsLineItem>
 
+#include "Headers/GunArm.h"
+#include <QGraphicsRectItem>
+
 extern Game *game;
 
 PlayerCharacter::PlayerCharacter(Character *parent)
 {
     setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_front.png"));
+
+    gunArm = new GunArm();
 
     timerJump = new QTimer();
     connect(timerJump, &QTimer::timeout, this, &PlayerCharacter::jump);
@@ -153,6 +158,8 @@ void PlayerCharacter::keyReleaseEvent(QKeyEvent *event)
 
 void PlayerCharacter::jump()
 {
+    gunArm->setPos(pos() + QPoint(35, 60));
+
     if(!isOnGround)
     {
         if(y() < 0) // udara gore
@@ -170,6 +177,9 @@ void PlayerCharacter::jump()
 
 void PlayerCharacter::walk()
 {
+
+    gunArm->setPos(pos() + QPoint(35, 60));
+
     // ako Player pokusa da ode van ekrana
     if (x() > game->currentLevel->width()-3*45) // desno
     {
@@ -248,6 +258,21 @@ void PlayerCharacter::detectCollision()
 
 void PlayerCharacter::aimAtPoint(QPoint point)
 {
+    QLineF ln(pos() + QPoint(50, 70), targetPoint );
+    qreal angle = -1 * ln.angle();
+    if ( angle > -90 || angle < -270){
+        aimDirection = AimDirection::aimingRight;
+        gunArm->setTransformOriginPoint(0, 0);
+        gunArm->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/gun_arm_right.png"));
+    }
+    else
+    {
+        aimDirection = AimDirection::aimingLeft;
+        //gunArm->setTransformOriginPoint(0, 63);
+        gunArm->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/gun_arm_left.png"));
+    }
+    gunArm->setRotation(angle);
+
     //qDebug() << "trarget:" << targetPoint;
     //NOTE: pitati asistenta za pomoc ovde! Ako umesto if-ova imamo samo targetPoint = point, ponasanje nije ispravno
     //otkomentarisi liniju 114 (dodavanje linije na scenu) za testiranje

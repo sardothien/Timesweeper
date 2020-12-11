@@ -5,6 +5,7 @@
 #include <QtMultimedia/QMediaPlayer>
 
 #include "Headers/Character.h"
+#include "Headers/GunArm.h"
 
 class PlayerCharacter : public Character
 {
@@ -16,6 +17,13 @@ class PlayerCharacter : public Character
         void shootProjectile();
         void aimAtPoint(QPoint point);
         QPoint targetPoint;
+        GunArm *gunArm;
+        enum AimDirection
+        {
+            aimingLeft,
+            aimingRight
+        };
+        AimDirection aimDirection;
 
     signals:
         void enteredPortal();

@@ -48,11 +48,11 @@ void Game::mouseMoveEvent(QMouseEvent *event)
 
 void Game::mousePressEvent(QMouseEvent *event)
 {
-    if(event->button() == Qt::LeftButton)
+    if((event->button() == Qt::LeftButton) && (levelID - 1 != 1))
     {
         player->shootProjectile();
-        player->setFocus();
     }
+    player->setFocus();
 }
 
 void Game::changeLevel()
@@ -68,6 +68,10 @@ void Game::changeLevel()
         player->setScale(0.8);
     }
     currentLevel->addItem(player);
+    if(levelID != 1)
+    {
+        currentLevel->addItem(player->gunArm);
+    }
     centerOn(player);
     playMusic();
     levelID++;
