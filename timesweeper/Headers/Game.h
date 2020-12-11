@@ -6,10 +6,16 @@
 #include <QObject>
 #include <QtMultimedia/QMediaPlayer>
 #include <QWidget>
+#include <QLabel>
 
 #include "Headers/PlayerCharacter.h"
 #include "Headers/NPCharacter.h"
 #include "Headers/Portal.h"
+
+namespace Ui
+{
+    class Game;
+}
 
 class Game : public QGraphicsView
 {
@@ -30,12 +36,16 @@ class Game : public QGraphicsView
         void mouseMoveEvent(QMouseEvent *event);
         void mousePressEvent(QMouseEvent * event);
         void playMusic();
+        void setHealthBar();
 
         static int getLevelID();
 
 public slots:
         void changeLevel();
         void triggerDialogue();
+private:
+        Ui::Game *ui;
+        QLabel *label;
 };
 
 #endif // GAME_H

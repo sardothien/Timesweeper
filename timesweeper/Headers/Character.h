@@ -19,7 +19,7 @@ class Character :public QObject, public QGraphicsPixmapItem
     private slots:
 
     private:
-        int health = 50;
+        int health = 5;
 
 };
 

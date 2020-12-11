@@ -46,6 +46,7 @@ HEADERS += \
     Headers/Tile.h
 
 FORMS += \
+    Forms/Game.ui \
     Forms/Menu.ui
 
 # Default rules for deployment.

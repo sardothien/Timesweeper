@@ -12,5 +12,5 @@ int Character::getHealth()
 
 void Character::increaseHealth()
 {
-    health += 10;
+    health++;
 }

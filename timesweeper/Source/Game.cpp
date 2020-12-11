@@ -2,16 +2,38 @@
 
 #include <iostream>
 #include <QWidget>
+#include <QLabel>
 
 #include "Headers/DialogueHandler.h"
 #include "Headers/Game.h"
 #include "Headers/Level.h"
 #include "Headers/Pickup.h"
+#include "ui_Game.h"
 
 int Game::levelID;
 
+void Game::setHealthBar()
+{
+
+    if (player->getHealth() == 5)
+    {
+        label = new QLabel(this);
+        label->setGeometry(10,10,155,55);
+        label->setProperty("foo", "hb5");
+    }
+    else
+    {
+        label = new QLabel(this);
+        label->setGeometry(10,10,155,55);
+        label->setProperty("foo", "hb1");
+    };
+}
+
+
 Game::Game(QWidget *parent)
 {
+    ui->setupUi(this);
+
     setMouseTracking(true);
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -32,6 +54,8 @@ Game::Game(QWidget *parent)
     //Mina, u tvoj nivo sam privremeno dodao neki portal pri pocetku da bi Igor mogao da udje u svoj nivo dok ne popravimo ovaj bag
     levelID = 1;
     changeLevel();
+
+    setHealthBar();
 }
 
 int Game::getLevelID()
