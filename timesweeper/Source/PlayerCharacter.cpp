@@ -90,7 +90,7 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         //qDebug() << "levelID je: " << game->getLevelID();
         if (game->getLevelID() != 2)
         {
-            //setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_left.png"));
+            setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_left.png"));
         }
         else
         {
@@ -177,7 +177,6 @@ void PlayerCharacter::jump()
 
 void PlayerCharacter::walk()
 {
-
     gunArm->setPos(pos() + QPoint(35, 60));
 
     // ako Player pokusa da ode van ekrana
@@ -224,17 +223,21 @@ void PlayerCharacter::detectCollision()
                 if(playerRectPoints[2].y() <= tileRectPoints[0].y()+10)
                 {
                     isOnGround = true;
-                }else if(playerRectPoints[3].x() < tileRectPoints[3].x() && playerRectPoints[1].y() <= tileRectPoints[3].y()-10)
+                    //qDebug()<<"1";
+                }else if(playerRectPoints[3].x() < tileRectPoints[3].x()-25 && playerRectPoints[1].y() <= tileRectPoints[3].y()-20)
                 {
                             timerWalk->stop();
                             setPos(x()-11,y());
-                }else if(playerRectPoints[2].x() >= tileRectPoints[2].x() && playerRectPoints[1].y() <= tileRectPoints[3].y()-10)
+                            qDebug()<<"2"<<playerRectPoints;
+                }else if(playerRectPoints[2].x() >= tileRectPoints[2].x() && playerRectPoints[1].y() <= tileRectPoints[3].y()-20)
                 {
                             timerWalk->stop();
                             setPos(x()+11 ,y());
+                            qDebug()<<"3";
                 }
                 if(playerRectPoints[1].y() <= tileRectPoints[3].y()+10 && playerRectPoints[2].x() > tileRectPoints[3].x()+2 && playerRectPoints[3].x() < tileRectPoints[2].x()-2){
                         velocityY = 5;
+                        //qDebug()<<"4";
                 }
             }
             else if (typeid(*(colliding_items[i])) == typeid(Portal) && (game->currentLevelPortal->x() - x()) < 30 && (game->currentLevelPortal->y() - y()) < 30)
@@ -247,6 +250,9 @@ void PlayerCharacter::detectCollision()
                 // NOTE: trenutno Player ima koliziju sa Projectile kad puca
                 // (samo promeniti poziciju Projectile-a)
                 // qDebug() << "Player hit!";
+            }else if(typeid(*(colliding_items[i])) == typeid(GunArm))
+            {
+                isOnGround = false;
             }
       }
     }
@@ -285,4 +291,9 @@ void PlayerCharacter::aimAtPoint(QPoint point)
     {
         targetPoint = point;
     }
+}
+
+GunArm *PlayerCharacter::getGunArm() const
+{
+    return gunArm;
 }

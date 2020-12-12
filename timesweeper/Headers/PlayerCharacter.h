@@ -25,7 +25,9 @@ class PlayerCharacter : public Character
         };
         AimDirection aimDirection;
 
-    signals:
+        GunArm *getGunArm() const;
+
+signals:
         void enteredPortal();
         void nearNPC();
 
