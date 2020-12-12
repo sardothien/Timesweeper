@@ -42,10 +42,10 @@ QGraphicsScene* Level::LoadLevel()
     }
     else if(game->levelID == 3){
         filename = ":/Levels/Resources/Levels/level3.txt";
-        scene->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_3_wild_west.png")));
     }
     else if(game->levelID == 4){
         filename = ":/Levels/Resources/Levels/level4.txt";
+        scene->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_4_wild_west.png")));
     }
     else{
         std::cout << "Nije dobar ID nivoa!" << std::endl;
