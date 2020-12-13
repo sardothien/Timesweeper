@@ -42,6 +42,18 @@ PlayerCharacter::PlayerCharacter(Character *parent)
     projectilesound->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/projectile.mp3"));
 }
 
+
+int PlayerCharacter::getHealth()
+{
+    return health;
+}
+
+void PlayerCharacter::increaseHealth()
+{
+    health++;
+}
+
+
 void PlayerCharacter::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_E && DialogueHandler::isDialogueActive)
@@ -212,6 +224,7 @@ void PlayerCharacter::detectCollision()
                 increaseHealth();
                 scene()->removeItem(colliding_items[i]);
                 delete colliding_items[i];
+                emit healthPickedUp();
             }
             else if(typeid(*(colliding_items[i])) == typeid(Tile))
             {

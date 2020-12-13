@@ -26,10 +26,13 @@ class PlayerCharacter : public Character
         AimDirection aimDirection;
 
         GunArm *getGunArm() const;
+        int getHealth();
+        void increaseHealth();
 
 signals:
         void enteredPortal();
         void nearNPC();
+        void healthPickedUp();
 
     public slots:
 
@@ -45,6 +48,7 @@ signals:
         bool isOnGround;
         QMediaPlayer *projectilesound;
         QPolygonF playerRectPoints;
+        int health = 5;
 };
 
 #endif // PLAYERCHARACTER_H

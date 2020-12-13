@@ -14,25 +14,52 @@ int Game::levelID;
 
 void Game::setHealthBar()
 {
+    label = new QLabel(this);
+    label->setGeometry(10,10,155,55);
 
-    if (player->getHealth() == 5)
+    if (player->getHealth() == 8)
+    {    
+        label->setProperty("foo", "hb8");
+    }
+    else if (player->getHealth() == 7)
     {
-        label = new QLabel(this);
-        label->setGeometry(10,10,155,55);
+        label->setProperty("foo", "hb7");
+    }
+    else if (player->getHealth() == 6)
+    {
+        label->setProperty("foo", "hb6");
+    }
+    else if (player->getHealth() == 5)
+    {
         label->setProperty("foo", "hb5");
+    }
+    else if (player->getHealth() == 4)
+    {
+        label->setProperty("foo", "hb4");
+    }
+    else if (player->getHealth() == 3)
+    {
+        label->setProperty("foo", "hb3");
+    }
+    else if (player->getHealth() == 2)
+    {
+        label->setProperty("foo", "hb2");
     }
     else
     {
-        label = new QLabel(this);
-        label->setGeometry(10,10,155,55);
         label->setProperty("foo", "hb1");
-    };
+    }
 }
+
 
 
 Game::Game(QWidget *parent)
 {
     ui->setupUi(this);
+
+    label = new QLabel(this);
+    label->setGeometry(10,10,155,55);
+    label->setProperty("foo", "hb5");
 
     setMouseTracking(true);
 
@@ -46,6 +73,7 @@ Game::Game(QWidget *parent)
 
     connect(player, &PlayerCharacter::enteredPortal, this, &Game::changeLevel);
     connect(player, &PlayerCharacter::nearNPC, this, &Game::triggerDialogue);
+    connect(player, &PlayerCharacter::healthPickedUp, this, &Game::setHealthBar);
 
     music = new QMediaPlayer();
 
@@ -55,7 +83,7 @@ Game::Game(QWidget *parent)
     levelID = 1;
     changeLevel();
 
-    setHealthBar();
+    //setHealthBar();
 }
 
 int Game::getLevelID()
