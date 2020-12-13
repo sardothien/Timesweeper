@@ -3,6 +3,7 @@
 #include <iostream>
 #include <QWidget>
 #include <QLabel>
+#include <QStyle>
 
 #include "Headers/DialogueHandler.h"
 #include "Headers/Game.h"
@@ -14,41 +15,19 @@ int Game::levelID;
 
 void Game::setHealthBar()
 {
-    label = new QLabel(this);
-    label->setGeometry(10,10,155,55);
+    QString health;
+    for (int i = 1; i <= 8; i++)
+    {
+        health = QString::number(i);
+        health = "hb" + health;
 
-    if (player->getHealth() == 8)
-    {    
-        label->setProperty("foo", "hb8");
+        if (player->getHealth() == i)
+            label->setProperty("foo", health);
     }
-    else if (player->getHealth() == 7)
-    {
-        label->setProperty("foo", "hb7");
-    }
-    else if (player->getHealth() == 6)
-    {
-        label->setProperty("foo", "hb6");
-    }
-    else if (player->getHealth() == 5)
-    {
-        label->setProperty("foo", "hb5");
-    }
-    else if (player->getHealth() == 4)
-    {
-        label->setProperty("foo", "hb4");
-    }
-    else if (player->getHealth() == 3)
-    {
-        label->setProperty("foo", "hb3");
-    }
-    else if (player->getHealth() == 2)
-    {
-        label->setProperty("foo", "hb2");
-    }
-    else
-    {
-        label->setProperty("foo", "hb1");
-    }
+
+    label->style()->unpolish(label);
+    label->style()->polish(label);
+    label->update();
 }
 
 
@@ -82,8 +61,6 @@ Game::Game(QWidget *parent)
     //Mina, u tvoj nivo sam privremeno dodao neki portal pri pocetku da bi Igor mogao da udje u svoj nivo dok ne popravimo ovaj bag
     levelID = 1;
     changeLevel();
-
-    //setHealthBar();
 }
 
 int Game::getLevelID()

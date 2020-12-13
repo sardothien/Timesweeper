@@ -50,7 +50,8 @@ int PlayerCharacter::getHealth()
 
 void PlayerCharacter::increaseHealth()
 {
-    health++;
+    if (health < 8)
+        health++;
 }
 
 
