@@ -21,6 +21,7 @@ SOURCES += \
     Source/Level.cpp \
     Source/Menu.cpp \
     Source/NPCharacter.cpp \
+    Source/Options.cpp \
     Source/Pickup.cpp \
     Source/PlayerCharacter.cpp \
     Source/Portal.cpp \
@@ -39,6 +40,7 @@ HEADERS += \
     Headers/Level.h \
     Headers/Menu.h \
     Headers/NPCharacter.h \
+    Headers/Options.h \
     Headers/Pickup.h \
     Headers/PlayerCharacter.h \
     Headers/Portal.h \
@@ -47,7 +49,8 @@ HEADERS += \
 
 FORMS += \
     Forms/Game.ui \
-    Forms/Menu.ui
+    Forms/Menu.ui \
+    Forms/Options.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

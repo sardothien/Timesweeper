@@ -1,8 +1,7 @@
 #include "Headers/Menu.h"
 #include "Headers/Game.h"
+#include "Headers/Options.h"
 #include "ui_Menu.h"
-
-#include <iostream>
 
 Game * game;
 
@@ -29,3 +28,12 @@ void Menu::on_quitButton_clicked()
 {
     exit(0);
 }
+
+void Menu::on_optionsButton_clicked()
+{
+    Options *options = new Options();
+    options->show();
+    this->hide();
+}
+
+

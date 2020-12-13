@@ -18,7 +18,7 @@ class Menu : public QMainWindow
     private slots:
         void on_startButton_clicked();
         void on_quitButton_clicked();
-
+        void on_optionsButton_clicked();
 
     private:
         Ui::Menu *ui;

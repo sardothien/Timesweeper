@@ -78,22 +78,23 @@ text-decoration: none;
   <widget class="QPushButton" name="optionsButton">
    <property name="geometry">
     <rect>
-     <x>750</x>
+     <x>730</x>
      <y>10</y>
-     <width>41</width>
+     <width>61</width>
      <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true"> text-align: center;
  vertical-align: middle;
-    padding: 8px 24px;
-    border-radius: 0px;
-    background: url(:/Other/Resources/Other/options.png);
-    font: normal normal bold 20px courier new;
-    color: #ffffff;
-    text-decoration: none;
-	background-repeat:none</string>
+ padding: 8px 24px;
+border-radius: 0px;
+background: url(:/Other/Resources/Other/options.png);
+font: normal normal bold 20px courier new;
+color: #ffffff;
+text-decoration: none;
+background-repeat:none;
+background-position:center;</string>
    </property>
    <property name="text">
     <string/>
