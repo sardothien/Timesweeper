@@ -26,8 +26,9 @@ class PlayerCharacter : public Character
         AimDirection aimDirection;
 
         GunArm *getGunArm() const;
-        int getHealth();
+        int getHealth() const;
         void increaseHealth();
+        void decreaseHealth();
 
 signals:
         void enteredPortal();

@@ -43,7 +43,7 @@ PlayerCharacter::PlayerCharacter(Character *parent)
 }
 
 
-int PlayerCharacter::getHealth()
+int PlayerCharacter::getHealth() const
 {
     return health;
 }
@@ -54,6 +54,11 @@ void PlayerCharacter::increaseHealth()
         health++;
 }
 
+void PlayerCharacter::decreaseHealth()
+{
+    if (health > 0)
+        health--;
+}
 
 void PlayerCharacter::keyPressEvent(QKeyEvent *event)
 {
@@ -227,6 +232,19 @@ void PlayerCharacter::detectCollision()
                 delete colliding_items[i];
                 emit healthPickedUp();
             }
+            else if(typeid(*(colliding_items[i])) == typeid(Projectile))
+            {
+                decreaseHealth();
+                // NOTE: trenutno Player ima koliziju sa Projectile kad puca i
+                // moze sam sebi da oduzme zivote
+                // (nakon popravljanja rotacije ruke i pozicije Projectile-a
+                // otkomentarisati naredne dve linije)
+
+                //scene()->removeItem(colliding_items[i]);
+                //delete colliding_items[i];
+                emit healthPickedUp();
+
+            }
             else if(typeid(*(colliding_items[i])) == typeid(Tile))
             {
                 QRectF tileRect = colliding_items[i]->boundingRect();
@@ -259,12 +277,7 @@ void PlayerCharacter::detectCollision()
                 game->currentLevel->removeItem(game->player);
                 emit enteredPortal();
             }
-            else if(typeid(*(colliding_items[i])) == typeid(Projectile)){
-                // TODO: decreaseHealth()
-                // NOTE: trenutno Player ima koliziju sa Projectile kad puca
-                // (samo promeniti poziciju Projectile-a)
-                // qDebug() << "Player hit!";
-            }else if(typeid(*(colliding_items[i])) == typeid(GunArm))
+            else if(typeid(*(colliding_items[i])) == typeid(GunArm))
             {
                 isOnGround = false;
             }
