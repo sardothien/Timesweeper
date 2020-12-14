@@ -90,34 +90,22 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
 
     if(event->key() == Qt::Key_D)
     {
-        if (game->getLevelID() != 2)
-        {
-            setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_right.png"));
-        }
-        else
+        if (game->getLevelID() == 2)
         {
             setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_no_gun_right.png"));
         }
-
         velocityX = 11;
         timerWalk->start(25);
-
     }
     else if(event->key() == Qt::Key_A)
     {
         //qDebug() << "levelID je: " << game->getLevelID();
-        if (game->getLevelID() != 2)
+        if (game->getLevelID() == 2)
         {
-            setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_left.png"));
+           setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_no_gun_left.png"));
         }
-        else
-        {
-            //setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_no_gun_left.png"));
-        }
-
         velocityX = -11;
         timerWalk->start(25);
-
     }
     else if(event->key() == Qt::Key_Space && isOnGround)
     {
@@ -297,12 +285,20 @@ void PlayerCharacter::aimAtPoint(QPoint point)
         aimDirection = AimDirection::aimingRight;
         gunArm->setTransformOriginPoint(0, 0);
         gunArm->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/gun_arm_right.png"));
+        if(game->getLevelID() != 2 )
+        {
+            setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_right.png"));
+        }
     }
     else
     {
         aimDirection = AimDirection::aimingLeft;
         //gunArm->setTransformOriginPoint(0, 63);
         gunArm->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/gun_arm_left.png"));
+        if(game->getLevelID() != 2 )
+        {
+            setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_left.png"));
+        }
     }
     gunArm->setRotation(angle);
 
