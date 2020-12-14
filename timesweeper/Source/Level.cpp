@@ -22,6 +22,7 @@ EnemyCharacter* Level::enemy;
 NPCharacter *Game::currentLevelNpc;
 PlayerCharacter *Game::player;
 Portal *Game::currentLevelPortal;
+QPointF Game::currentLevelPlayerStartPosition;
 
 QGraphicsScene* Level::LoadLevel()
 {
@@ -46,6 +47,10 @@ QGraphicsScene* Level::LoadLevel()
     else if(game->levelID == 4){
         filename = ":/Levels/Resources/Levels/level4.txt";
         scene->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_4_wild_west.png")));
+    }
+    else if(game->levelID == 5){
+        filename = ":/Levels/Resources/Levels/level5.txt";
+        scene->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_5_final.png")));
     }
     else{
         std::cout << "Nije dobar ID nivoa!" << std::endl;
@@ -133,6 +138,10 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
             scene->addItem(portal);
             game->setCurrentLevelPortal(portal);
             //qDebug() << game->getCurrentLevelPortalPosition();
+            break;
+        case 'S': //Portal
+            Game::currentLevelPlayerStartPosition = QPointF(x, y);
+            //qDebug() << Game::currentLevelPlayerStartPosition;
             break;
         default: // sve ostale prepreke
             rect = new Tile(type);

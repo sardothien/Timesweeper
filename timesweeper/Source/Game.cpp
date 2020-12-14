@@ -92,7 +92,7 @@ void Game::changeLevel()
     DialogueHandler::initializeDialogue();
     setScene(currentLevel);
     player->setFocus();
-    player->setPos(60, 400);
+    player->setPos(currentLevelPlayerStartPosition);
     if(levelID != 1)
     {
         player->setScale(0.8);
@@ -104,7 +104,7 @@ void Game::changeLevel()
     }
     centerOn(player);
     playMusic();
-    levelID++;
+    levelID ++;
 }
 
 void Game::triggerDialogue()
@@ -130,6 +130,12 @@ void Game::playMusic()
     {
         music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_3.mp3"));
         music->play();
+    }
+    else if(levelID == 4)
+    {
+    }
+    else if(levelID == 5)
+    {
     }
 }
 

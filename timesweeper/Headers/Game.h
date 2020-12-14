@@ -27,6 +27,7 @@ class Game : public QGraphicsView
         QGraphicsScene *currentLevel;
         static NPCharacter *currentLevelNpc;
         static Portal *currentLevelPortal;
+        static QPointF currentLevelPlayerStartPosition;
         QMediaPlayer *music;
 
         static NPCharacter *getCurrentLevelNpc();
