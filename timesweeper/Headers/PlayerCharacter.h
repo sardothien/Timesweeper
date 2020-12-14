@@ -24,6 +24,10 @@ class PlayerCharacter : public Character
             aimingRight
         };
         AimDirection aimDirection;
+        QPointF projectileStartPoint;
+        QPointF shoulderPosition;// = QPointF(50, 70);
+
+        void updateShoudlerPosition();
 
         GunArm *getGunArm() const;
         int getHealth() const;

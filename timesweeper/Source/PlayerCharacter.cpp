@@ -17,11 +17,13 @@
 #include "Headers/GunArm.h"
 #include <QGraphicsRectItem>
 
+#include <qmath.h>
+
 extern Game *game;
 
 PlayerCharacter::PlayerCharacter(Character *parent)
 {
-    setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_front.png"));
+    setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_no_gun_right.png"));
 
     gunArm = new GunArm();
 
@@ -41,7 +43,6 @@ PlayerCharacter::PlayerCharacter(Character *parent)
     projectilesound = new QMediaPlayer();
     projectilesound->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/projectile.mp3"));
 }
-
 
 int PlayerCharacter::getHealth() const
 {
@@ -118,12 +119,20 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
 void PlayerCharacter::shootProjectile()
 {
     Projectile *projectile = new Projectile();
-    projectile->setPos(x()+80, y()+70);
 
-    QLineF ln(projectile->pos(), targetPoint );
+    QLineF ln(shoulderPosition, targetPoint );
     //debug linija ciljanja
     //game->currentLevel->addItem(new QGraphicsLineItem(ln));
     qreal angle = -1 * ln.angle();
+
+    qreal dy = 80 * qSin(qDegreesToRadians(angle));
+    qreal dx = 80 * qCos(qDegreesToRadians(angle));
+
+    projectileStartPoint = QPointF(shoulderPosition + QPointF(dx, dy));
+    projectile->setPos(projectileStartPoint.x(), projectileStartPoint.y());
+
+    QLineF ln1(projectileStartPoint, targetPoint );
+    //game->currentLevel->addItem(new QGraphicsLineItem(ln1));
 
     projectile->setRotation(angle);
 
@@ -164,7 +173,9 @@ void PlayerCharacter::keyReleaseEvent(QKeyEvent *event)
 
 void PlayerCharacter::jump()
 {
-    gunArm->setPos(pos() + QPoint(35, 60));
+    //gunArm->setPos(pos() + QPoint(35, 60));
+    updateShoudlerPosition();
+    gunArm->setPos(shoulderPosition);
 
     if(!isOnGround)
     {
@@ -183,7 +194,9 @@ void PlayerCharacter::jump()
 
 void PlayerCharacter::walk()
 {
-    gunArm->setPos(pos() + QPoint(35, 60));
+    //gunArm->setPos(pos() + QPoint(35, 60));
+    updateShoudlerPosition();
+    gunArm->setPos(shoulderPosition);
 
     // ako Player pokusa da ode van ekrana
     if (x() > game->currentLevel->width()-3*45) // desno
@@ -223,13 +236,8 @@ void PlayerCharacter::detectCollision()
             else if(typeid(*(colliding_items[i])) == typeid(Projectile))
             {
                 decreaseHealth();
-                // NOTE: trenutno Player ima koliziju sa Projectile kad puca i
-                // moze sam sebi da oduzme zivote
-                // (nakon popravljanja rotacije ruke i pozicije Projectile-a
-                // otkomentarisati naredne dve linije)
-
-                //scene()->removeItem(colliding_items[i]);
-                //delete colliding_items[i];
+                scene()->removeItem(colliding_items[i]);
+                delete colliding_items[i];
                 emit healthPickedUp();
 
             }
@@ -279,11 +287,12 @@ void PlayerCharacter::detectCollision()
 
 void PlayerCharacter::aimAtPoint(QPoint point)
 {
-    QLineF ln(pos() + QPoint(50, 70), targetPoint );
+    QLineF ln(shoulderPosition, targetPoint );
     qreal angle = -1 * ln.angle();
+
     if ( angle > -90 || angle < -270){
         aimDirection = AimDirection::aimingRight;
-        gunArm->setTransformOriginPoint(0, 0);
+        //gunArm->setTransformOriginPoint(0, 0);
         gunArm->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/gun_arm_right.png"));
         if(game->getLevelID() != 2 )
         {
@@ -313,6 +322,18 @@ void PlayerCharacter::aimAtPoint(QPoint point)
     else
     {
         targetPoint = point;
+    }
+}
+
+void PlayerCharacter::updateShoudlerPosition()
+{
+    if(aimDirection == AimDirection::aimingRight)
+    {
+        shoulderPosition = pos() + QPointF(35, 60);
+    }
+    else if(aimDirection == AimDirection::aimingLeft)
+    {
+        shoulderPosition = pos() + QPointF(80, 60);
     }
 }
 
