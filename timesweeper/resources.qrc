@@ -31,10 +31,10 @@
     </qresource>
     <qresource prefix="/LevelBackgrounds">
         <file>Resources/LevelBackgrounds/level_1_prologue.png</file>
-        <file>Resources/LevelBackgrounds/level_2_maya.png</file>
         <file>Resources/LevelBackgrounds/level_5_final.png</file>
         <file>Resources/LevelBackgrounds/level_4_wild_west.png</file>
         <file>Resources/LevelBackgrounds/level_4_wild_west_v2.png</file>
+        <file>Resources/LevelBackgrounds/level_2_maya.png</file>
     </qresource>
     <qresource prefix="/"/>
     <qresource prefix="/Other">
