@@ -5,9 +5,9 @@
     </qresource>
     <qresource prefix="/Sounds">
         <file>Resources/Sounds/bgsound_level_1.mp3</file>
-        <file>Resources/Sounds/bgsound_level_3.mp3</file>
         <file>Resources/Sounds/projectile.mp3</file>
         <file>Resources/Sounds/bgsound_level_2.mp3</file>
+        <file>Resources/Sounds/bgsound_level_4.mp3</file>
     </qresource>
     <qresource prefix="/Levels">
         <file>Resources/Levels/level1.txt</file>
@@ -66,10 +66,19 @@
         <file>Resources/Terrain/Level_5_Tiles/middle_tile_lvl5.png</file>
         <file>Resources/Terrain/Level_5_Tiles/paltform_tile_lvl5.png</file>
         <file>Resources/Terrain/Level_4_Tiles/inner_tile_lvl4.png</file>
-        <file>Resources/Terrain/Level_4_Tiles/left_tile_lvl4.png</file>
-        <file>Resources/Terrain/Level_4_Tiles/right_tile_lvl4.png</file>
         <file>Resources/Terrain/Level_4_Tiles/single_tile_lvl4.png</file>
         <file>Resources/Terrain/Level_4_Tiles/platform_tile_lvl4.png</file>
-        <file>Resources/Terrain/Level_4_Tiles/step_tile_lvl4.png</file>
+        <file>Resources/Terrain/Level_4_Tiles/platform_left_tile_lvl4.png</file>
+        <file>Resources/Terrain/Level_4_Tiles/platform_right_tile_lvl4.png</file>
+        <file>Resources/Terrain/Level_4_Tiles/tile_1_lvl4.png</file>
+        <file>Resources/Terrain/Level_4_Tiles/tile_2_lvl4.png</file>
+        <file>Resources/Terrain/Level_4_Tiles/tile_3_lvl4.png</file>
+        <file>Resources/Terrain/Level_4_Tiles/tile_4_lvl4.png</file>
+        <file>Resources/Terrain/Level_4_Tiles/tile_5_lvl4.png</file>
+        <file>Resources/Terrain/Level_4_Tiles/tile_6_lvl4.png</file>
+        <file>Resources/Terrain/Level_4_Tiles/tile_7_lvl4.png</file>
+        <file>Resources/Terrain/Level_4_Tiles/tile_8_lvl4.png</file>
+        <file>Resources/Terrain/Level_4_Tiles/tile_down_lvl4.png</file>
+        <file>Resources/Terrain/Level_4_Tiles/tile_9_lvl4.png</file>
     </qresource>
 </RCC>

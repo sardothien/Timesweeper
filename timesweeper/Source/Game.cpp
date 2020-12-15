@@ -93,6 +93,7 @@ void Game::changeLevel()
     setScene(currentLevel);
     player->setFocus();
     player->setPos(currentLevelPlayerStartPosition);
+
     if(levelID != 1)
     {
         player->setScale(0.8);
@@ -104,7 +105,7 @@ void Game::changeLevel()
     }
     centerOn(player);
     playMusic();
-    levelID ++;
+    levelID = 4;
 }
 
 void Game::triggerDialogue()
@@ -128,11 +129,13 @@ void Game::playMusic()
     }
     else if(levelID == 3)
     {
-        music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_3.mp3"));
-        music->play();
+        //music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_3.mp3"));
+        //music->play();
     }
     else if(levelID == 4)
     {
+        music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_4.mp3"));
+        music->play();
     }
     else if(levelID == 5)
     {
