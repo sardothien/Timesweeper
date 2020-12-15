@@ -37,7 +37,7 @@ class PlayerCharacter : public Character
 signals:
         void enteredPortal();
         void nearNPC();
-        void healthPickedUp();
+        void healthChanged();
 
     public slots:
 

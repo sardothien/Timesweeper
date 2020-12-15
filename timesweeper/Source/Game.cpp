@@ -52,7 +52,7 @@ Game::Game(QWidget *parent)
 
     connect(player, &PlayerCharacter::enteredPortal, this, &Game::changeLevel);
     connect(player, &PlayerCharacter::nearNPC, this, &Game::triggerDialogue);
-    connect(player, &PlayerCharacter::healthPickedUp, this, &Game::setHealthBar);
+    connect(player, &PlayerCharacter::healthChanged, this, &Game::setHealthBar);
 
     music = new QMediaPlayer();
 

@@ -231,14 +231,14 @@ void PlayerCharacter::detectCollision()
                 increaseHealth();
                 scene()->removeItem(colliding_items[i]);
                 delete colliding_items[i];
-                emit healthPickedUp();
+                emit healthChanged();
             }
             else if(typeid(*(colliding_items[i])) == typeid(Projectile))
             {
                 decreaseHealth();
                 scene()->removeItem(colliding_items[i]);
                 delete colliding_items[i];
-                emit healthPickedUp();
+                emit healthChanged();
 
             }
             else if(typeid(*(colliding_items[i])) == typeid(Tile))
