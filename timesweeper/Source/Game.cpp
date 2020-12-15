@@ -77,7 +77,7 @@ void Game::mouseMoveEvent(QMouseEvent *event)
 
 void Game::mousePressEvent(QMouseEvent *event)
 {
-    qDebug()<<event->pos();
+    //qDebug()<<event->pos();
     if((event->button() == Qt::LeftButton) && (levelID - 1 != 1))
     {
         player->shootProjectile();
@@ -105,7 +105,7 @@ void Game::changeLevel()
     }
     centerOn(player);
     playMusic();
-    levelID = 4;
+    levelID ++;
 }
 
 void Game::triggerDialogue()

@@ -173,10 +173,6 @@ void PlayerCharacter::keyReleaseEvent(QKeyEvent *event)
 
 void PlayerCharacter::jump()
 {
-    //gunArm->setPos(pos() + QPoint(35, 60));
-    updateShoudlerPosition();
-    gunArm->setPos(shoulderPosition);
-
     if(!isOnGround)
     {
         if(y() < 0) // udara gore
@@ -189,15 +185,16 @@ void PlayerCharacter::jump()
         if(velocityY<10)
             velocityY += gravity;
     }
+
+    //gunArm->setPos(pos() + QPoint(35, 60));
+    updateShoudlerPosition();
+    gunArm->setPos(shoulderPosition);
+
     game->centerOn(this);
 }
 
 void PlayerCharacter::walk()
 {
-    //gunArm->setPos(pos() + QPoint(35, 60));
-    updateShoudlerPosition();
-    gunArm->setPos(shoulderPosition);
-
     // ako Player pokusa da ode van ekrana
     if (x() > game->currentLevel->width()-3*45) // desno
     {
@@ -209,6 +206,10 @@ void PlayerCharacter::walk()
     }
 
     setPos(x() + velocityX, y());
+
+    //gunArm->setPos(pos() + QPoint(35, 60));
+    updateShoudlerPosition();
+    gunArm->setPos(shoulderPosition);
 
     if((game->currentLevelNpc->x() - x()) <= 200 &&  (game->currentLevelNpc->x() - x()) >= 190)
     {
@@ -323,16 +324,21 @@ void PlayerCharacter::aimAtPoint(QPoint point)
     {
         targetPoint = point;
     }
+    /*auto tmp = mapToScene(point);
+    targetPoint = QPoint(tmp.x(), tmp.y());
+    qDebug() << shoulderPosition << tmp << targetPoint;*/
 }
 
 void PlayerCharacter::updateShoudlerPosition()
 {
     if(aimDirection == AimDirection::aimingRight)
     {
+        //shoulderPosition = mapToScene(pos() + QPointF(35, 60));
         shoulderPosition = pos() + QPointF(35, 60);
     }
     else if(aimDirection == AimDirection::aimingLeft)
     {
+        //shoulderPosition = mapToScene(pos() + QPointF(80, 60));
         shoulderPosition = pos() + QPointF(80, 60);
     }
 }

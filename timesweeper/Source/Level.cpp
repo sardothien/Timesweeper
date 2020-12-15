@@ -81,6 +81,8 @@ QGraphicsScene* Level::LoadLevel()
     // 45x45 - dimenzija tile-a
     if(game->levelID == 1)
         scene->setSceneRect(0, 0, 44*(sizeX-1), 700);
+    else if(game->levelID == 5)
+        scene->setSceneRect(0, 0, 45*(sizeX-1), 45*(sizeY-1));
     else
         scene->setSceneRect(0, 0, 45*(sizeX-1), 700);
 

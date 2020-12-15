@@ -60,6 +60,8 @@ Tile::Tile(char tile, QGraphicsPixmapItem *parent)
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_5_Tiles/middle_tile_lvl5.png"));
         else if(tile == '#') // unutrasnjost
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_5_Tiles/inner_tile_lvl5.png"));
+        else if(tile == '%') // platforma
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_5_Tiles/paltform_tile_lvl5.png"));
     }
 
 }
