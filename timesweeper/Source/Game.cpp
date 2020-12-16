@@ -106,7 +106,7 @@ void Game::changeLevel()
     }
     centerOn(player);
     playMusic();
-    levelID ++;
+    levelID++;
 }
 
 void Game::triggerDialogue()
