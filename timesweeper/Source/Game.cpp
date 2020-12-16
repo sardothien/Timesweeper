@@ -35,6 +35,7 @@ void Game::setHealthBar()
 Game::Game(QWidget *parent)
 {
     ui->setupUi(this);
+    setWindowTitle("timesweeper");
 
     label = new QLabel(this);
     label->setGeometry(10,10,155,55);

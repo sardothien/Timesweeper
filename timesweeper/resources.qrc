@@ -56,6 +56,7 @@
         <file>Resources/Other/health_bar_8.png</file>
         <file>Resources/Other/optionsbg.png</file>
         <file>Resources/Other/volume.png</file>
+        <file>Resources/Other/pause.png</file>
     </qresource>
     <qresource prefix="/Terrain">
         <file>Resources/Terrain/Level_1_Tiles/floor_tile.png</file>

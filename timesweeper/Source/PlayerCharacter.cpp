@@ -88,6 +88,24 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         DialogueHandler::initializeDialogue();
     }
 
+    // TODO - stvarno pauzirati igru (ovo je samo iscrtavanje pause slike)
+    if(event->key() == Qt::Key_P && !isPaused){
+        isPaused = true;
+        pauseScreen = new QGraphicsPixmapItem;
+        pauseScreen->setPixmap(QPixmap(":/Other/Resources/Other/pause.png"));
+        pauseScreen->setOpacity(0.9);
+        if(this->x() < 450)
+            pauseScreen->setPos(300, scene()->sceneRect().center().y()-180);
+        else
+            pauseScreen->setPos(this->x()-200, scene()->sceneRect().center().y()-180);
+        game->currentLevel->addItem(pauseScreen);
+    }
+    if((event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) && isPaused){
+        isPaused = false;
+        game->currentLevel->removeItem(pauseScreen);
+        delete pauseScreen;
+    }
+
 
     if(event->key() == Qt::Key_D)
     {

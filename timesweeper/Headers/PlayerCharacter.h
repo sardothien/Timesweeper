@@ -54,6 +54,8 @@ signals:
         QMediaPlayer *projectilesound;
         QPolygonF playerRectPoints;
         int health = 5;
+        QGraphicsPixmapItem *pauseScreen;
+        bool isPaused = false;
 };
 
 #endif // PLAYERCHARACTER_H
