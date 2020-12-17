@@ -10,12 +10,18 @@ Tile::Tile(char tile, QGraphicsPixmapItem *parent)
         setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_1_Tiles/floor_tile.png"));
     }
     else if(game->levelID == 2){
-        if(tile == '=') // pod
+        if(tile == '=')
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/single_tile_lvl2.png"));
-        else if(tile == '#') // unutrasnjost
+        else if(tile == '#')
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/inner_tile_lvl2.png"));
-        else if(tile == '|') // stepenice
+        else if(tile == '|')
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/step_tile_lvl2.png"));
+        else if(tile == '?')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/single_tile_spec_lvl2.png"));
+        else if(tile == 'x')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/single_tile_rot_lvl2.png"));
+        else if(tile == '*')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/step_tile_rot_lvl2.png"));
     }
     else if(game->levelID == 3)
     {

@@ -39,7 +39,7 @@ Game::Game(QWidget *parent)
 
     label = new QLabel(this);
     label->setGeometry(10,10,155,55);
-    label->setProperty("foo", "hb5");
+    label->setProperty("foo", "hb8");
 
     setMouseTracking(true);
 

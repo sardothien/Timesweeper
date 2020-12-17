@@ -53,7 +53,7 @@ signals:
         bool isOnGround;
         QMediaPlayer *projectilesound;
         QPolygonF playerRectPoints;
-        int health = 5;
+        int health = 8;
         QGraphicsPixmapItem *pauseScreen;
         bool isPaused = false;
 };
