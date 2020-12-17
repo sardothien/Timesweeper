@@ -26,6 +26,9 @@ PlayerCharacter::PlayerCharacter(Character *parent)
     setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_no_gun_right.png"));
 
     gunArm = new GunArm();
+    aimDirection = AimDirection::aimingRight;
+    shoulderPosition = pos() + QPointF(35, 60);
+    gunArm->setPos(shoulderPosition);
 
     timerJump = new QTimer();
     connect(timerJump, &QTimer::timeout, this, &PlayerCharacter::jump);
@@ -137,7 +140,6 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
 void PlayerCharacter::shootProjectile()
 {
     Projectile *projectile = new Projectile();
-
     QLineF ln(shoulderPosition, targetPoint );
     //debug linija ciljanja
     //game->currentLevel->addItem(new QGraphicsLineItem(ln));
@@ -146,6 +148,12 @@ void PlayerCharacter::shootProjectile()
     qreal dy = 80 * qSin(qDegreesToRadians(angle));
     qreal dx = 80 * qCos(qDegreesToRadians(angle));
 
+    //potreban nam je dodatni offset od 63px ako igrac cilja na levo, jer smo tretirali da je shoulderPosition
+    //u tom slucaju 17 umesto 80, da nebi bilo treperenja
+    if(aimDirection == AimDirection::aimingLeft)
+    {
+        dx += 63;
+    }
     projectileStartPoint = QPointF(shoulderPosition + QPointF(dx, dy));
     projectile->setPos(projectileStartPoint.x(), projectileStartPoint.y());
 
@@ -311,24 +319,26 @@ void PlayerCharacter::aimAtPoint(QPoint point)
 
     if ( angle > -90 || angle < -270){
         aimDirection = AimDirection::aimingRight;
-        //gunArm->setTransformOriginPoint(0, 0);
         gunArm->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/gun_arm_right.png"));
+        gunArm->setTransformOriginPoint(0, 0);
         if(game->getLevelID() != 2 )
         {
             setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_right.png"));
         }
+        gunArm->setRotation(angle);
     }
     else
     {
         aimDirection = AimDirection::aimingLeft;
-        //gunArm->setTransformOriginPoint(0, 63);
         gunArm->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/gun_arm_left.png"));
+        gunArm->setTransformOriginPoint(gunArm->boundingRect().width(), 0);
         if(game->getLevelID() != 2 )
         {
             setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_left.png"));
         }
+        gunArm->setRotation(180 + angle);
     }
-    gunArm->setRotation(angle);
+
 
     //qDebug() << "trarget:" << targetPoint;
     //NOTE: pitati asistenta za pomoc ovde! Ako umesto if-ova imamo samo targetPoint = point, ponasanje nije ispravno
@@ -351,13 +361,11 @@ void PlayerCharacter::updateShoudlerPosition()
 {
     if(aimDirection == AimDirection::aimingRight)
     {
-        //shoulderPosition = mapToScene(pos() + QPointF(35, 60));
         shoulderPosition = pos() + QPointF(35, 60);
     }
     else if(aimDirection == AimDirection::aimingLeft)
     {
-        //shoulderPosition = mapToScene(pos() + QPointF(80, 60));
-        shoulderPosition = pos() + QPointF(80, 60);
+        shoulderPosition = pos() + QPointF(17, 60);
     }
 }
 

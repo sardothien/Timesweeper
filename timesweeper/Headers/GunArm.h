@@ -6,7 +6,7 @@
 class GunArm : public QGraphicsPixmapItem
 {
     public:
-        GunArm();
+        GunArm(QGraphicsItem *parent = nullptr);
 };
 
 #endif // GUNARM_H
