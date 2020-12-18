@@ -60,6 +60,7 @@
         <file>Resources/Other/help.png</file>
         <file>Resources/Other/helpbg.png</file>
         <file>Resources/Other/crosshair.png</file>
+        <file>Resources/Other/health_level_4.png</file>
     </qresource>
     <qresource prefix="/Terrain">
         <file>Resources/Terrain/Level_1_Tiles/floor_tile.png</file>
