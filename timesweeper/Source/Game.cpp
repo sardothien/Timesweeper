@@ -43,6 +43,10 @@ Game::Game(QWidget *parent)
 
     setMouseTracking(true);
 
+    cursor = QCursor(QPixmap(":/Other/Resources/Other/crosshair.png"), 25 , 25);
+    setCursor(cursor);
+
+
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(1200, 700);    // za view
