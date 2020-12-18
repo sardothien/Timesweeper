@@ -11,6 +11,7 @@ CONFIG += c++17 \
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Source/Building.cpp \
     Source/Character.cpp \
     Source/DialogueBox.cpp \
     Source/DialogueHandler.cpp \
@@ -31,6 +32,7 @@ SOURCES += \
     Source/main.cpp
 
 HEADERS += \
+    Headers/Building.h \
     Headers/Character.h \
     Headers/DialogueBox.h \
     Headers/DialogueHandler.h \

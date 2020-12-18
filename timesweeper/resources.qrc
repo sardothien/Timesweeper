@@ -61,6 +61,15 @@
         <file>Resources/Other/helpbg.png</file>
         <file>Resources/Other/crosshair.png</file>
         <file>Resources/Other/health_level_4.png</file>
+        <file>Resources/Other/sheriff_level_4.png</file>
+        <file>Resources/Other/bank_level_4.png</file>
+        <file>Resources/Other/cantina_level_4.png</file>
+        <file>Resources/Other/drugstore_level_4.png</file>
+        <file>Resources/Other/general_store_level_4.png</file>
+        <file>Resources/Other/hotel_level_4.png</file>
+        <file>Resources/Other/office_level_4.png</file>
+        <file>Resources/Other/post_level_4.png</file>
+        <file>Resources/Other/saloon_level_4.png</file>
     </qresource>
     <qresource prefix="/Terrain">
         <file>Resources/Terrain/Level_1_Tiles/floor_tile.png</file>

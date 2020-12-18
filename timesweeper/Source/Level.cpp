@@ -16,6 +16,7 @@
 #include "Headers/Pickup.h"
 #include "Headers/PlayerCharacter.h"
 #include "Headers/Portal.h"
+#include "Headers/Building.h"
 
 extern Game* game;
 EnemyCharacter* Level::enemy;
@@ -102,6 +103,15 @@ QGraphicsScene* Level::LoadLevel()
     return scene;
 }
 
+void addBuilding(Building::Buildings b, QGraphicsScene *scene, int x, int y)
+{
+    Building *building;
+
+    building = new Building(b);
+    building->setPos(x,y);
+    scene->addItem(building);
+}
+
 void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
 {
     Tile *rect;
@@ -109,7 +119,9 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
     NPCharacter *npc;
     Portal *portal;
 
-    switch(type){
+
+    switch(type)
+    {
         case '-': // nista
             break;
         case 'E': // neprijatelj
@@ -145,10 +157,44 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
             Game::currentLevelPlayerStartPosition = QPointF(x, y);
             //qDebug() << Game::currentLevelPlayerStartPosition;
             break;
-        default: // sve ostale prepreke
+         default: // sve ostale prepreke
             rect = new Tile(type);
             rect->setPos(x, y);
             scene->addItem(rect);
             break;
+    }
+
+    if (game->getLevelID()==4)
+    {
+        switch(type)
+        {
+        case 's': //Building - level 4 - sheriff
+            addBuilding(Building::Buildings::sheriff, scene, x, y);
+            break;
+        case 'a': //Building - level 4 - saloon
+            addBuilding(Building::Buildings::saloon, scene, x, y);
+            break;
+         case 'b': //Building - level 4 - bank
+            addBuilding(Building::Buildings::bank, scene, x, y);
+            break;
+        case 'c': //Building - level 4 - cantina
+            addBuilding(Building::Buildings::cantina, scene, x, y);
+            break;
+        case 'd': //Building - level 4 - drugStore
+            addBuilding(Building::Buildings::drugStore, scene, x, y);
+            break;
+        case 'g': //Building - level 4 - generalStore
+            addBuilding(Building::Buildings::generalStore, scene, x, y);
+            break;
+        case 'o': //Building - level 4 - office
+            addBuilding(Building::Buildings::office, scene, x, y);
+            break;
+         case 'h': //Building - level 4 - hotel
+            addBuilding(Building::Buildings::hotel, scene, x, y);
+            break;
+         case 'p': //Building - level 4 - post
+            addBuilding(Building::Buildings::post, scene, x, y);
+            break;
+        }
     }
 }
