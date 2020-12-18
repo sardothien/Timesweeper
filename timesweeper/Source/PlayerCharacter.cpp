@@ -320,7 +320,7 @@ void PlayerCharacter::aimAtPoint(QPoint point)
     if ( angle > -90 || angle < -270){
         aimDirection = AimDirection::aimingRight;
         gunArm->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/gun_arm_right.png"));
-        gunArm->setTransformOriginPoint(0, 0);
+        gunArm->setTransformOriginPoint(6, 0);
         if(game->getLevelID() != 2 )
         {
             setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_right.png"));
@@ -331,14 +331,13 @@ void PlayerCharacter::aimAtPoint(QPoint point)
     {
         aimDirection = AimDirection::aimingLeft;
         gunArm->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/gun_arm_left.png"));
-        gunArm->setTransformOriginPoint(gunArm->boundingRect().width(), 0);
+        gunArm->setTransformOriginPoint(gunArm->boundingRect().width() - 6, 0);
         if(game->getLevelID() != 2 )
         {
             setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_left.png"));
         }
         gunArm->setRotation(180 + angle);
     }
-
 
     //qDebug() << "trarget:" << targetPoint;
     //NOTE: pitati asistenta za pomoc ovde! Ako umesto if-ova imamo samo targetPoint = point, ponasanje nije ispravno

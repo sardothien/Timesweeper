@@ -97,12 +97,15 @@ void Game::changeLevel()
 
     if(levelID != 1)
     {
+        player->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_right.png"));
         player->setScale(0.8);
     }
     currentLevel->addItem(player);
+    //NOTE: ovaj if ne sme da se spoji sa ovim iznad jer se pixmap igraca iscrta iznad pixmapa puske
     if(levelID != 1)
     {
         currentLevel->addItem(player->getGunArm());
+
     }
     centerOn(player);
     playMusic();
