@@ -18,7 +18,9 @@ class Options : public QMainWindow
     private slots:
 
 
-    private:
+    void on_pushButton_clicked();
+
+private:
         Ui::Options *ui;
 };
 

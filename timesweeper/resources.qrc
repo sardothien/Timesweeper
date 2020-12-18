@@ -57,6 +57,8 @@
         <file>Resources/Other/optionsbg.png</file>
         <file>Resources/Other/volume.png</file>
         <file>Resources/Other/pause.png</file>
+        <file>Resources/Other/help.png</file>
+        <file>Resources/Other/helpbg.png</file>
     </qresource>
     <qresource prefix="/Terrain">
         <file>Resources/Terrain/Level_1_Tiles/floor_tile.png</file>

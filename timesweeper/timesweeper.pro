@@ -18,6 +18,7 @@ SOURCES += \
     Source/Game.cpp \
     Source/GunArm.cpp \
     Source/HealthBar.cpp \
+    Source/Help.cpp \
     Source/Level.cpp \
     Source/Menu.cpp \
     Source/NPCharacter.cpp \
@@ -37,6 +38,7 @@ HEADERS += \
     Headers/Game.h \
     Headers/GunArm.h \
     Headers/HealthBar.h \
+    Headers/Help.h \
     Headers/Level.h \
     Headers/Menu.h \
     Headers/NPCharacter.h \
@@ -49,6 +51,7 @@ HEADERS += \
 
 FORMS += \
     Forms/Game.ui \
+    Forms/Help.ui \
     Forms/Menu.ui \
     Forms/Options.ui
 

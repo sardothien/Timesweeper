@@ -78,9 +78,9 @@ text-decoration: none;
   <widget class="QPushButton" name="optionsButton">
    <property name="geometry">
     <rect>
-     <x>730</x>
+     <x>710</x>
      <y>10</y>
-     <width>61</width>
+     <width>71</width>
      <height>41</height>
     </rect>
    </property>
@@ -90,6 +90,31 @@ text-decoration: none;
  padding: 8px 24px;
 border-radius: 0px;
 background: url(:/Other/Resources/Other/options.png);
+font: normal normal bold 20px courier new;
+color: #ffffff;
+text-decoration: none;
+background-repeat:none;
+background-position:center;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="helpButton">
+   <property name="geometry">
+    <rect>
+     <x>710</x>
+     <y>60</y>
+     <width>71</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"> text-align: center;
+ vertical-align: middle;
+ padding: 8px 24px;
+border-radius: 0px;
+background: url(:/Other/Resources/Other/help.png);
 font: normal normal bold 20px courier new;
 color: #ffffff;
 text-decoration: none;

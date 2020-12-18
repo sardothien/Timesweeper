@@ -1,5 +1,6 @@
 #include "Headers/Menu.h"
 #include "Headers/Game.h"
+#include "Headers/Help.h"
 #include "Headers/Options.h"
 #include "ui_Menu.h"
 
@@ -36,4 +37,9 @@ void Menu::on_optionsButton_clicked()
     this->hide();
 }
 
-
+void Menu::on_helpButton_clicked()
+{
+    Help *help = new Help();
+    help->show();
+    this->hide();
+}

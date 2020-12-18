@@ -1,20 +1,20 @@
+#include "Headers/Help.h"
 #include "Headers/Menu.h"
-#include "Headers/Options.h"
-#include "ui_Options.h"
+#include "ui_Help.h"
 
-Options::Options(QWidget *parent) : QMainWindow(parent), ui(new Ui::Options)
+Help::Help(QWidget *parent) : QMainWindow(parent), ui(new Ui::Help)
 {
     ui->setupUi(this);
     setFixedSize(800,500);
     setWindowTitle("timesweeper");
 }
 
-Options::~Options()
+Help::~Help()
 {
     delete ui;
 }
 
-void Options::on_pushButton_clicked()
+void Help::on_pushButton_clicked()
 {
     Menu *menu = new Menu();
     menu->show();
