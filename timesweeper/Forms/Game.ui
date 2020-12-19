@@ -6,15 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>1200</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QLabel[foo=&quot;hb1&quot;]{background: url(:/Other/Resources/Other/health_bar_1.png);}
+   <string notr="true">QWidget{background: url(:/LevelBackgrounds/Resources/LevelBackgrounds/level_3_dino.jpg);}
+QLabel[foo=&quot;hb1&quot;]{background: url(:/Other/Resources/Other/health_bar_1.png);}
 QLabel[foo=&quot;hb2&quot;]{background: url(:/Other/Resources/Other/health_bar_2.png);}
 QLabel[foo=&quot;hb3&quot;]{background: url(:/Other/Resources/Other/health_bar_3.png);}
 QLabel[foo=&quot;hb4&quot;]{background: url(:/Other/Resources/Other/health_bar_4.png);}

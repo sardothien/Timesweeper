@@ -294,6 +294,7 @@ void PlayerCharacter::detectCollision()
                         velocityY = 5;
                         //qDebug()<<"4";
                 }
+
             }
             else if (typeid(*(colliding_items[i])) == typeid(Portal) && (game->currentLevelPortal->x() - x()) < 30 && (game->currentLevelPortal->y() - y()) < 30)
             {
@@ -347,6 +348,13 @@ void PlayerCharacter::aimAtPoint(QPoint point)
         targetPoint.setX(point.x() + x() - 500);
         targetPoint.setY(point.y());
     }
+
+//    if(y() >= 500)
+//    {
+//        targetPoint.setY(point.y() + y() - 500);
+//        //targetPoint.setX(point.x());
+//    }
+
     else
     {
         targetPoint = point;

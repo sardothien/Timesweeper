@@ -4,8 +4,24 @@
 
 extern Game *game;
 
-Tile::Tile(char tile, QGraphicsPixmapItem *parent)
+Tile::Tile(char tile, QGraphicsPixmapItem *parent):QObject()
 {
+
+    // pomocne promenljive za kretanje
+    side = 0;
+    steps = 0;
+    stopMoving = false;
+
+    // timer za move()
+    if(tile == 'M')
+    {
+        timerWalk = new QTimer();
+        connect(timerWalk, &QTimer::timeout, this, &Tile::move);
+        timerWalk->start(15);
+    }
+
+    type = tile;
+
     if(game->levelID == 1){
         setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_1_Tiles/floor_tile.png"));
     }
@@ -25,7 +41,26 @@ Tile::Tile(char tile, QGraphicsPixmapItem *parent)
     }
     else if(game->levelID == 3)
     {
-
+        if(tile == '=')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/single_tile_lvl3.png"));
+        else if(tile == '#')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/underground_tile_lvl3.png"));
+        else if(tile == 'W')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/water_tile_lvl3.png"));
+        else if(tile == 'L')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/leftside_tile_lvl3.png"));
+        else if(tile == 'R')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/rightside_tile_lvl3.png"));
+        else if(tile == 'l')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/rightside_down_lvl3.png"));
+        else if(tile == 'r')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/leftside_down_lvl3.png"));
+        else if(tile == '1')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/left_platform.png"));
+        else if(tile == '2')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/right_platform.png"));
+        else if(tile == 'M')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/single_tile_lvl3.png"));
     }
     else if(game->levelID == 4)
     {
@@ -70,4 +105,46 @@ Tile::Tile(char tile, QGraphicsPixmapItem *parent)
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_5_Tiles/paltform_tile_lvl5.png"));
     }
 
+}
+
+void Tile::move()
+{
+    if(type == 'M')
+    {
+        if(side == 0) // okrenut ka desno
+        {
+            if(!stopMoving)
+            {
+                setPos(x()+1, y());
+                if(game->player->collidesWithItem(this))
+                    game->player->setPos(game->player->x()+1,game->player->y());
+
+                steps++;
+                if(steps == 360){
+                    side = 1;
+                    steps = 0;
+                }
+            }
+        }
+        else if(side == 1) // okrenut ka levo
+        {
+            if(!stopMoving)
+            {
+                setPos(x()-1, y());
+                if(game->player->collidesWithItem(this))
+                    game->player->setPos(game->player->x()-1, game->player->y());
+
+                steps++;
+                if(steps == 360){
+                    side = 0;
+                    steps = 0;
+                }
+            }
+        }
+    }
+}
+
+char Tile::getType() const
+{
+    return type;
 }

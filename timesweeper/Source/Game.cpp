@@ -112,7 +112,7 @@ void Game::changeLevel()
 
     }
     centerOn(player);
-    playMusic();
+    //playMusic();
     levelID++;
 }
 

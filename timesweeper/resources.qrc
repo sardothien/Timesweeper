@@ -35,6 +35,7 @@
         <file>Resources/LevelBackgrounds/level_4_wild_west.png</file>
         <file>Resources/LevelBackgrounds/level_4_wild_west_v2.png</file>
         <file>Resources/LevelBackgrounds/level_5_final.png</file>
+        <file>Resources/LevelBackgrounds/level_3_dino.jpg</file>
     </qresource>
     <qresource prefix="/"/>
     <qresource prefix="/Other">
@@ -97,5 +98,15 @@
         <file>Resources/Terrain/Level_5_Tiles/inner_tile_lvl5.png</file>
         <file>Resources/Terrain/Level_5_Tiles/middle_tile_lvl5.png</file>
         <file>Resources/Terrain/Level_5_Tiles/paltform_tile_lvl5.png</file>
+        <file>Resources/Terrain/Level_3_Tiles/single_tile_lvl3.png</file>
+        <file>Resources/Terrain/Level_3_Tiles/underground_tile_lvl3.png</file>
+        <file>Resources/Terrain/Level_3_Tiles/water_tile_lvl3.png</file>
+        <file>Resources/Terrain/Level_3_Tiles/leftside_tile_lvl3.png</file>
+        <file>Resources/Terrain/Level_3_Tiles/rightside_tile_lvl3.png</file>
+        <file>Resources/Terrain/Level_3_Tiles/platform_tile_lvl3.png</file>
+        <file>Resources/Terrain/Level_3_Tiles/leftside_down_lvl3.png</file>
+        <file>Resources/Terrain/Level_3_Tiles/rightside_down_lvl3.png</file>
+        <file>Resources/Terrain/Level_3_Tiles/left_platform.png</file>
+        <file>Resources/Terrain/Level_3_Tiles/right_platform.png</file>
     </qresource>
 </RCC>
