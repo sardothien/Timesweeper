@@ -98,6 +98,7 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         pauseScreen = new QGraphicsPixmapItem;
         pauseScreen->setPixmap(QPixmap(":/Other/Resources/Other/pause.png"));
         pauseScreen->setOpacity(0.9);
+        // TODO - popraviti pozicije za 3. i 5. nivo
         if(this->x() < 450)
             pauseScreen->setPos(300, scene()->sceneRect().center().y()-180);
         else
