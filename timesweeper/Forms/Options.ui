@@ -117,7 +117,7 @@ font: normal normal bold 20px courier new;
     <string>Sound:</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="backButton">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -127,7 +127,8 @@ font: normal normal bold 20px courier new;
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">text-align: center;
+    <string notr="true">#backButton{
+text-align: center;
 vertical-align: middle;
 padding: 8px 24px;
 border: 3px solid #44201d;
@@ -136,7 +137,11 @@ background: #bc5a50;
 background: -webkit-gradient(linear, left top, left bottom, from(#bc5a50), to(#44201d));
 font: normal normal bold 20px courier new;
 color: #ffffff;
-text-decoration: none;</string>
+text-decoration: none;
+}
+#backButton:hover{
+background: #3e3a3a;
+}</string>
    </property>
    <property name="text">
     <string>Back</string>

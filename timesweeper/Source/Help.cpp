@@ -14,7 +14,7 @@ Help::~Help()
     delete ui;
 }
 
-void Help::on_pushButton_clicked()
+void Help::on_backButton_clicked()
 {
     Menu *menu = new Menu();
     menu->show();

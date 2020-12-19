@@ -14,7 +14,7 @@ Options::~Options()
     delete ui;
 }
 
-void Options::on_pushButton_clicked()
+void Options::on_backButton_clicked()
 {
     Menu *menu = new Menu();
     menu->show();

@@ -31,7 +31,8 @@ background-position: center top
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">text-align: center;
+    <string notr="true">#startButton{
+text-align: center;
 vertical-align: middle;
 padding: 8px 24px;
 border: 3px solid #44201d;
@@ -40,7 +41,11 @@ background: #bc5a50;
 background: -webkit-gradient(linear, left top, left bottom, from(#bc5a50), to(#44201d));
 font: normal normal bold 20px courier new;
 color: #ffffff;
-text-decoration: none;</string>
+text-decoration: none;
+}
+#startButton:hover{
+background: #3e3a3a;
+}</string>
    </property>
    <property name="text">
     <string>Start</string>
@@ -59,7 +64,8 @@ text-decoration: none;</string>
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">text-align: center;
+    <string notr="true">#quitButton{
+text-align: center;
 vertical-align: middle;
 padding: 8px 24px;
 border: 3px solid #44201d;
@@ -69,7 +75,10 @@ background: -webkit-gradient(linear, left top, left bottom, from(#bc5a50), to(#4
 font: normal normal bold 20px courier new;
 color: #ffffff;
 text-decoration: none;
-</string>
+}
+#quitButton:hover{
+background: #3e3a3a;
+}</string>
    </property>
    <property name="text">
     <string>Quit</string>
@@ -110,7 +119,8 @@ background-position:center;</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true"> text-align: center;
+    <string notr="true">#helpButton{
+ text-align: center;
  vertical-align: middle;
  padding: 8px 24px;
 border-radius: 0px;
@@ -119,7 +129,8 @@ font: normal normal bold 20px courier new;
 color: #ffffff;
 text-decoration: none;
 background-repeat:none;
-background-position:center;</string>
+background-position:center;
+}</string>
    </property>
    <property name="text">
     <string/>

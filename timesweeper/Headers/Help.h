@@ -15,7 +15,7 @@ class Help : public QMainWindow
         ~Help();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_backButton_clicked();
 
 private:
         Ui::Help *ui;

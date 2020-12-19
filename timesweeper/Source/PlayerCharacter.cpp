@@ -92,6 +92,7 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
     }
 
     // TODO - stvarno pauzirati igru (ovo je samo iscrtavanje pause slike)
+    // NOTE - prebaciti u Game klasu
     if(event->key() == Qt::Key_P && !isPaused){
         isPaused = true;
         pauseScreen = new QGraphicsPixmapItem;
@@ -107,6 +108,9 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         isPaused = false;
         game->currentLevel->removeItem(pauseScreen);
         delete pauseScreen;
+    }
+    if(event->key() == Qt::Key_Escape){
+        exit(0);
     }
 
 
