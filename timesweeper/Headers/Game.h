@@ -41,6 +41,10 @@ class Game : public QGraphicsView
 
         static int getLevelID();
 
+        void setSoundOn(bool value);
+
+        bool getSoundOn() const;
+
 public slots:
         void changeLevel();
         void triggerDialogue();
@@ -48,6 +52,7 @@ public slots:
 private:
         Ui::Game *ui;
         QLabel *label;
+        bool soundOn = true;
 };
 
 #endif // GAME_H

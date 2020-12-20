@@ -18,5 +18,5 @@ void Help::on_backButton_clicked()
 {
     Menu *menu = new Menu();
     menu->show();
-    this->hide();
+    this->~Help();
 }

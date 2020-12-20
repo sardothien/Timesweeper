@@ -11,6 +11,7 @@ Menu::Menu(QWidget *parent) : QMainWindow(parent), ui(new Ui::Menu)
     ui->setupUi(this);
     setFixedSize(800,500);
     setWindowTitle("timesweeper");
+    game = new Game();
 }
 
 Menu::~Menu()
@@ -20,7 +21,8 @@ Menu::~Menu()
 
 void Menu::on_startButton_clicked()
 {
-    game = new Game();
+    if(game->getSoundOn())
+        game->music->play();
     game->show();
     this->hide();
 }
@@ -34,7 +36,7 @@ void Menu::on_optionsButton_clicked()
 {
     Options *options = new Options();
     options->show();
-    this->hide();
+    //this->hide();
 }
 
 void Menu::on_helpButton_clicked()

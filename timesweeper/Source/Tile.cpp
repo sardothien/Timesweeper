@@ -25,7 +25,7 @@ Tile::Tile(char tile, QGraphicsPixmapItem *parent):QObject()
     if(game->levelID == 1){
         setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_1_Tiles/floor_tile.png"));
     }
-    else if(game->levelID == 3){
+    else if(game->levelID == 2){
         if(tile == '=')
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/single_tile_lvl2.png"));
         else if(tile == '#')
@@ -39,7 +39,7 @@ Tile::Tile(char tile, QGraphicsPixmapItem *parent):QObject()
         else if(tile == '*')
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/step_tile_rot_lvl2.png"));
     }
-    else if(game->levelID == 2)
+    else if(game->levelID == 3)
     {
         if(tile == '=')
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/single_tile_lvl3.png"));

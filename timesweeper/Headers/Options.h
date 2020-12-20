@@ -17,6 +17,8 @@ class Options : public QMainWindow
 
     private slots:
         void on_backButton_clicked();
+        void on_volume_valueChanged();
+        void on_sound_stateChanged();
 
     private:
         Ui::Options *ui;

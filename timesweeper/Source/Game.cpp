@@ -30,6 +30,16 @@ void Game::setHealthBar()
     label->update();
 }
 
+bool Game::getSoundOn() const
+{
+    return soundOn;
+}
+
+void Game::setSoundOn(bool value)
+{
+    soundOn = value;
+}
+
 
 
 Game::Game(QWidget *parent)
@@ -112,7 +122,7 @@ void Game::changeLevel()
 
     }
     centerOn(player);
-    //playMusic();
+    playMusic();
     levelID++;
 }
 
@@ -128,26 +138,25 @@ void Game::playMusic()
     if(levelID == 1)
     {
         music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_1.mp3"));
-        music->play();
     }
     else if(levelID == 2)
     {
         music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_2.mp3"));
-        music->play();
     }
     else if(levelID == 3)
     {
         //music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_3.mp3"));
-        //music->play();
     }
     else if(levelID == 4)
     {
         music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_4.mp3"));
-        music->play();
     }
     else if(levelID == 5)
     {
     }
+
+    if(soundOn && levelID != 1)
+        music->play();
 }
 
 Portal *Game::getCurrentLevelPortal()

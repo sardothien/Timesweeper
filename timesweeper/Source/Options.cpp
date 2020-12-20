@@ -1,6 +1,11 @@
+#include <QDebug>
+
 #include "Headers/Menu.h"
 #include "Headers/Options.h"
+#include "Headers/Game.h"
 #include "ui_Options.h"
+
+extern Game *game;
 
 Options::Options(QWidget *parent) : QMainWindow(parent), ui(new Ui::Options)
 {
@@ -16,7 +21,19 @@ Options::~Options()
 
 void Options::on_backButton_clicked()
 {
-    Menu *menu = new Menu();
-    menu->show();
     this->hide();
+}
+
+void Options::on_volume_valueChanged()
+{
+    qDebug()<<ui->volume->value();
+    game->music->setVolume(ui->volume->value());
+}
+
+void Options::on_sound_stateChanged()
+{
+    if(ui->sound->checkState() == Qt::Unchecked)
+        game->setSoundOn(false);
+    else
+        game->setSoundOn(true);
 }

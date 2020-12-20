@@ -38,11 +38,11 @@ QGraphicsScene* Level::LoadLevel()
         scene->setSceneRect(0, 0, 2300, 700);
         scene->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_1_prologue.png")));
     }
-    else if(game->levelID == 3){
+    else if(game->levelID == 2){
         filename = ":/Levels/Resources/Levels/level2.txt";
         scene->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_2_maya.png")));
     }
-    else if(game->levelID == 2){
+    else if(game->levelID == 3){
         filename = ":/Levels/Resources/Levels/level3.txt";
     }
     else if(game->levelID == 4){
