@@ -108,5 +108,8 @@
         <file>Resources/Terrain/Level_3_Tiles/rightside_down_lvl3.png</file>
         <file>Resources/Terrain/Level_3_Tiles/left_platform.png</file>
         <file>Resources/Terrain/Level_3_Tiles/right_platform.png</file>
+        <file>Resources/Terrain/Level_3_Tiles/ugao1.png</file>
+        <file>Resources/Terrain/Level_3_Tiles/ugao2.png</file>
+        <file>Resources/Terrain/Level_3_Tiles/bodlje.png</file>
     </qresource>
 </RCC>

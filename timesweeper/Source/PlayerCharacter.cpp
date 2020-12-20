@@ -131,7 +131,7 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
     }
     else if(event->key() == Qt::Key_Space && isOnGround)
     {
-        velocityY=-13;
+        velocityY=-14;
         setPos(x(),y()+velocityY);
         isOnGround = false;
     }

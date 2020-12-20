@@ -17,7 +17,7 @@ Tile::Tile(char tile, QGraphicsPixmapItem *parent):QObject()
     {
         timerWalk = new QTimer();
         connect(timerWalk, &QTimer::timeout, this, &Tile::move);
-        timerWalk->start(15);
+        timerWalk->start(10);
     }
 
     type = tile;
@@ -59,8 +59,14 @@ Tile::Tile(char tile, QGraphicsPixmapItem *parent):QObject()
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/left_platform.png"));
         else if(tile == '2')
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/right_platform.png"));
+        else if(tile == '3')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/ugao1.png"));
+        else if(tile == '4')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/ugao2.png"));
         else if(tile == 'M')
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/single_tile_lvl3.png"));
+        else if(tile == '^')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/bodlje.png"));
     }
     else if(game->levelID == 4)
     {
@@ -116,12 +122,12 @@ void Tile::move()
             if(!stopMoving)
             {
                 if(game->player->collidesWithItem(this))
-                    game->player->setPos(game->player->x()+1,game->player->y());
+                    game->player->setPos(game->player->x()+2,game->player->y());
 
-                setPos(x()+1, y());
+                setPos(x()+2, y());
 
                 steps++;
-                if(steps == 430){
+                if(steps == 120){
                     side = 1;
                     steps = 0;
                 }
@@ -132,12 +138,12 @@ void Tile::move()
             if(!stopMoving)
             {
                 if(game->player->collidesWithItem(this))
-                    game->player->setPos(game->player->x()-1, game->player->y());
+                    game->player->setPos(game->player->x()-2, game->player->y());
 
-                setPos(x()-1, y());
+                setPos(x()-2, y());
 
                 steps++;
-                if(steps == 430){
+                if(steps == 120){
                     side = 0;
                     steps = 0;
                 }
