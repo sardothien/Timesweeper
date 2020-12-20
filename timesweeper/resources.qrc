@@ -71,6 +71,7 @@
         <file>Resources/Other/office_level_4.png</file>
         <file>Resources/Other/post_level_4.png</file>
         <file>Resources/Other/saloon_level_4.png</file>
+        <file>Resources/Other/gameover.png</file>
     </qresource>
     <qresource prefix="/Terrain">
         <file>Resources/Terrain/Level_1_Tiles/floor_tile.png</file>
