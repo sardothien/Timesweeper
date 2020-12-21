@@ -17,14 +17,12 @@ EnemyCharacter::EnemyCharacter(Character *parent)
     stopMoving = false;
 
     // timer za move()
-    timerWalk = new QTimer();
-    connect(timerWalk, &QTimer::timeout, this, &EnemyCharacter::move);
-    timerWalk->start(15);
+    enemyWalkTimer = game->getEnemyWalkTimer();
+    connect(enemyWalkTimer, &QTimer::timeout, this, &EnemyCharacter::move);
 
     // timer za shoot()
-    timerShoot = new QTimer();
-    connect(timerShoot, &QTimer::timeout, this, &EnemyCharacter::shoot);
-    timerShoot->start(1000);
+    enemyShootTimer = game->getEnemyShootTimer();
+    connect(enemyShootTimer, &QTimer::timeout, this, &EnemyCharacter::shoot);
 }
 
 EnemyCharacter::~EnemyCharacter()

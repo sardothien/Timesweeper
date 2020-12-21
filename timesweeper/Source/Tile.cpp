@@ -15,9 +15,8 @@ Tile::Tile(char tile, QGraphicsPixmapItem *parent):QObject()
     // timer za move()
     if(tile == 'M')
     {
-        timerWalk = new QTimer();
-        connect(timerWalk, &QTimer::timeout, this, &Tile::move);
-        timerWalk->start(10);
+        tileMoveTimer = game->getTileMoveTimer();
+        connect(tileMoveTimer, &QTimer::timeout, this, &Tile::move);
     }
 
     type = tile;

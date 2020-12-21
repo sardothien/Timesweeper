@@ -56,7 +56,6 @@ Game::Game(QWidget *parent)
     cursor = QCursor(QPixmap(":/Other/Resources/Other/crosshair.png"), 25 , 25);
     setCursor(cursor);
 
-
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(1200, 700);    // za view
@@ -64,6 +63,18 @@ Game::Game(QWidget *parent)
     player = new PlayerCharacter();
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
+
+    projectileTimer = new QTimer(this);
+    projectileTimer->start(50);
+
+    enemyWalkTimer = new QTimer(this);
+    enemyWalkTimer->start(15);
+
+    enemyShootTimer = new QTimer(this);
+    enemyShootTimer->start(1000);
+
+    tileMoveTimer = new QTimer(this);
+    tileMoveTimer->start(10);
 
     connect(player, &PlayerCharacter::enteredPortal, this, &Game::changeLevel);
     connect(player, &PlayerCharacter::nearNPC, this, &Game::triggerDialogue);
@@ -76,6 +87,26 @@ Game::Game(QWidget *parent)
     //Mina, u tvoj nivo sam privremeno dodao neki portal pri pocetku da bi Igor mogao da udje u svoj nivo dok ne popravimo ovaj bag
     levelID = 1;
     changeLevel();
+}
+
+QTimer *Game::getTileMoveTimer() const
+{
+    return tileMoveTimer;
+}
+
+QTimer *Game::getEnemyShootTimer() const
+{
+    return enemyShootTimer;
+}
+
+QTimer *Game::getEnemyWalkTimer() const
+{
+    return enemyWalkTimer;
+}
+
+QTimer *Game::getProjectileTimer() const
+{
+    return projectileTimer;
 }
 
 int Game::getLevelID()

@@ -16,9 +16,8 @@ Projectile::Projectile(QGraphicsPixmapItem *parent)
 {
     setPixmap(QPixmap(":/Other/Resources/Other/projectile.png"));
 
-    QTimer *timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &Projectile::move);
-    timer->start(50);
+    QTimer *projectileTimer = game->getProjectileTimer();
+    connect(projectileTimer, &QTimer::timeout, this, &Projectile::move);
 }
 
 Projectile::~Projectile()

@@ -20,7 +20,7 @@ public slots:
         int steps;
         bool stopMoving;
         char type;
-        QTimer *timerWalk;
+        QTimer *tileMoveTimer;
 };
 
 #endif // TILE_H

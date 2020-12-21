@@ -30,6 +30,10 @@ class Game : public QGraphicsView
         static QPointF currentLevelPlayerStartPosition;
         QMediaPlayer *music;
         QCursor cursor;
+        QTimer *projectileTimer;
+        QTimer *enemyWalkTimer;
+        QTimer *enemyShootTimer;
+        QTimer *tileMoveTimer;
 
         static NPCharacter *getCurrentLevelNpc();
         static void setCurrentLevelNpc(NPCharacter *npc);
@@ -44,6 +48,11 @@ class Game : public QGraphicsView
         void setSoundOn(bool value);
 
         bool getSoundOn() const;
+
+        QTimer *getProjectileTimer() const;
+        QTimer *getEnemyWalkTimer() const;
+        QTimer *getEnemyShootTimer() const;
+        QTimer *getTileMoveTimer() const;
 
 public slots:
         void changeLevel();

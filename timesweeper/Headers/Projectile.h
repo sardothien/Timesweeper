@@ -8,17 +8,19 @@
 class Projectile : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
-public:
-    Projectile(QGraphicsPixmapItem *parent = nullptr);
-    ~Projectile();
+    public:
+        Projectile(QGraphicsPixmapItem *parent = nullptr);
+        ~Projectile();
 
-signals:
+    signals:
 
-public slots:
-    void move();
+    public slots:
+        void move();
 
-private slots:
+    private slots:
 
+    private:
+        QTimer *projectileTimer;
 };
 
 #endif // PROJECTILE_H

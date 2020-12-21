@@ -24,8 +24,8 @@ class EnemyCharacter : public Character
         void shoot();
 
     private:
-        QTimer *timerWalk;
-        QTimer *timerShoot;
+        QTimer *enemyWalkTimer;
+        QTimer *enemyShootTimer;
         int side;
         int steps;
         bool stopMoving;
