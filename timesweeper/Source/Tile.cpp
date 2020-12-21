@@ -29,6 +29,8 @@ Tile::Tile(char tile, QGraphicsPixmapItem *parent):QObject()
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/single_tile_lvl2.png"));
         else if(tile == '#')
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/inner_tile_lvl2.png"));
+        else if(tile == '^')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/spikes_lvl2.png"));
         else if(tile == '|')
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/step_tile_lvl2.png"));
         else if(tile == '?')

@@ -112,5 +112,6 @@
         <file>Resources/Terrain/Level_3_Tiles/ugao1.png</file>
         <file>Resources/Terrain/Level_3_Tiles/ugao2.png</file>
         <file>Resources/Terrain/Level_3_Tiles/bodlje.png</file>
+        <file>Resources/Terrain/Level_2_Tiles/spikes_lvl2.png</file>
     </qresource>
 </RCC>
