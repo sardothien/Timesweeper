@@ -40,19 +40,19 @@ void EnemyBoss::decreaseHealth()
         {
             auto projectile = dynamic_cast<Projectile*>(colliding_items[i]);
             if(projectile->shooter == Projectile::Player){ // PlayerCharacter puca
-                if(this->getLives() == 3){
+                if(this->getLives() > 4){
+                    setLives(--lives);
                     game->currentLevel->removeItem(this->healthBar->bar);
-                    this->healthBar->bar = new QGraphicsRectItem(x()+60, y()-40, 200, 20);
+                    this->healthBar->bar = new QGraphicsRectItem(x()+60, y()-40, this->healthBar->width * getLives()/10, 20);
                     this->healthBar->bar->setBrush(Qt::yellow);
                     game->currentLevel->addItem(this->healthBar->bar);
-                    this->setLives(2);
                 }
-                else if(this->getLives() == 2){
+                else if(this->getLives() > 1 && this->getLives() <= 4){
+                    setLives(--lives);
                     game->currentLevel->removeItem(this->healthBar->bar);
-                    this->healthBar->bar = new QGraphicsRectItem(x()+60, y()-40, 100, 20);
+                    this->healthBar->bar = new QGraphicsRectItem(x()+60, y()-40, this->healthBar->width * getLives()/10, 20);
                     this->healthBar->bar->setBrush(Qt::red);
                     game->currentLevel->addItem(this->healthBar->bar);
-                    this->setLives(1);
                 }
                 else{
                     // brisanje oba objekta sa scene

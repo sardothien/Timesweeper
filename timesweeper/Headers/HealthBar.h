@@ -13,6 +13,9 @@ class HealthBar : public QObject, public QGraphicsRectItem
 
         QGraphicsRectItem* barFrame;
         QGraphicsRectItem* bar;
+
+        int width;
+        int height;
 };
 
 #endif // HEALTHBAR_H

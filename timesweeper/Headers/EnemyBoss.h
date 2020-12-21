@@ -22,7 +22,7 @@ class EnemyBoss : public Character
         void decreaseHealth();
 
     private:
-        int lives = 3;
+        int lives = 10;
 };
 
 #endif // ENEMYBOSS_H

@@ -4,6 +4,7 @@
 #include <iostream>
 
 HealthBar::HealthBar(int width, int height)
+    : width(width), height(height)
 {
     barFrame = new QGraphicsRectItem;
     barFrame->setRect(x(), y(), width, height);
