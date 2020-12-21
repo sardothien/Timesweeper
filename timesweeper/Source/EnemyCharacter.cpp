@@ -9,7 +9,7 @@ extern Game* game;
 
 EnemyCharacter::EnemyCharacter(Character *parent)
 {
-    healthBar = new HealthBar();
+    healthBar = new HealthBar(80, 15);
 
     // pomocne promenljive za kretanje
     side = 0;
