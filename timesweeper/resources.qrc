@@ -33,7 +33,6 @@
         <file>Resources/LevelBackgrounds/level_1_prologue.png</file>
         <file>Resources/LevelBackgrounds/level_2_maya.png</file>
         <file>Resources/LevelBackgrounds/level_4_wild_west.png</file>
-        <file>Resources/LevelBackgrounds/level_4_wild_west_v2.png</file>
         <file>Resources/LevelBackgrounds/level_5_final.png</file>
         <file>Resources/LevelBackgrounds/level_3_dino.jpg</file>
     </qresource>
@@ -64,14 +63,14 @@
         <file>Resources/Other/health_level_4.png</file>
         <file>Resources/Other/sheriff_level_4.png</file>
         <file>Resources/Other/bank_level_4.png</file>
-        <file>Resources/Other/cantina_level_4.png</file>
-        <file>Resources/Other/drugstore_level_4.png</file>
         <file>Resources/Other/general_store_level_4.png</file>
         <file>Resources/Other/hotel_level_4.png</file>
-        <file>Resources/Other/office_level_4.png</file>
-        <file>Resources/Other/post_level_4.png</file>
         <file>Resources/Other/saloon_level_4.png</file>
         <file>Resources/Other/gameover.png</file>
+        <file>Resources/Other/church_level_4.png</file>
+        <file>Resources/Other/office_level_4.png</file>
+        <file>Resources/Other/big_saloon_level_4.png</file>
+        <file>Resources/Other/sign_level_4.png</file>
     </qresource>
     <qresource prefix="/Terrain">
         <file>Resources/Terrain/Level_1_Tiles/floor_tile.png</file>
@@ -113,5 +112,8 @@
         <file>Resources/Terrain/Level_3_Tiles/ugao2.png</file>
         <file>Resources/Terrain/Level_3_Tiles/bodlje.png</file>
         <file>Resources/Terrain/Level_2_Tiles/spikes_lvl2.png</file>
+        <file>Resources/Terrain/Level_4_Tiles/crate_lvl4.png</file>
+        <file>Resources/Terrain/Level_4_Tiles/stone_lvl4.png</file>
+        <file>Resources/Terrain/Level_4_Tiles/spikes_lvl4.png</file>
     </qresource>
 </RCC>

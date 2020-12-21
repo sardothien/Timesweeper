@@ -177,11 +177,11 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
          case 'b': //Building - level 4 - bank
             addBuilding(Building::Buildings::bank, scene, x, y);
             break;
-        case 'c': //Building - level 4 - cantina
-            addBuilding(Building::Buildings::cantina, scene, x, y);
+        case 'p': //Building - level 4 - big saloon
+            addBuilding(Building::Buildings::bigSaloon, scene, x, y);
             break;
-        case 'd': //Building - level 4 - drugStore
-            addBuilding(Building::Buildings::drugStore, scene, x, y);
+        case 'c': //Building - level 4 - church
+            addBuilding(Building::Buildings::church, scene, x, y);
             break;
         case 'g': //Building - level 4 - generalStore
             addBuilding(Building::Buildings::generalStore, scene, x, y);
@@ -191,10 +191,7 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
             break;
          case 'h': //Building - level 4 - hotel
             addBuilding(Building::Buildings::hotel, scene, x, y);
-            break;
-         case 'p': //Building - level 4 - post
-            addBuilding(Building::Buildings::post, scene, x, y);
-            break;
+            break;      
         }
     }
 }

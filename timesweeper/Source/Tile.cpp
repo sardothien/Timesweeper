@@ -101,6 +101,16 @@ Tile::Tile(char tile, QGraphicsPixmapItem *parent):QObject()
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_9_lvl4.png"));
         else if(tile == '~')
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_down_lvl4.png"));
+        else if(tile == 't')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/crate_lvl4.png"));
+        else if(tile == 'n')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/stone_lvl4.png"));
+        else if(tile == '~')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_down_lvl4.png"));
+        else if(tile == '^')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/spikes_lvl4.png"));
+        else if(tile == 'i')
+            setPixmap(QPixmap(":/Other/Resources/Other/sign_level_4.png"));
 
     }
     else if(game->levelID == 5){

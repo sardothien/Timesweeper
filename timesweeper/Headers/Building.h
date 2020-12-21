@@ -10,13 +10,12 @@ class Building : public QGraphicsPixmapItem
         {
             sheriff,
             saloon,
+            bigSaloon,
             bank,
-            cantina,
-            drugStore,
-            generalStore,
             office,
+            generalStore,
             hotel,
-            post
+            church
         };
 
         Building (Buildings b);
