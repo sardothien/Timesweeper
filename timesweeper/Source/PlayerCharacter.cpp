@@ -144,7 +144,7 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
 
 void PlayerCharacter::shootProjectile()
 {
-    Projectile *projectile = new Projectile();
+    Projectile *projectile = new Projectile(Projectile::Player);
     QLineF ln(shoulderPosition, targetPoint );
     //debug linija ciljanja
     //game->currentLevel->addItem(new QGraphicsLineItem(ln));

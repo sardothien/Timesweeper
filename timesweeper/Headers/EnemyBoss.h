@@ -15,9 +15,14 @@ class EnemyBoss : public Character
 
         HealthBar* healthBar;
 
+        void setLives(int lives);
+        int getLives() const;
+
     public slots:
+        void decreaseHealth();
 
     private:
+        int lives = 3;
 };
 
 #endif // ENEMYBOSS_H

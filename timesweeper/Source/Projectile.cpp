@@ -11,8 +11,8 @@
 
 extern Game *game;
 
-Projectile::Projectile(QGraphicsPixmapItem *parent)
-    :QGraphicsPixmapItem(parent)
+Projectile::Projectile(Shooter shooter, QGraphicsPixmapItem *parent)
+    :shooter(shooter), QGraphicsPixmapItem(parent)
 {
     setPixmap(QPixmap(":/Other/Resources/Other/projectile.png"));
 
