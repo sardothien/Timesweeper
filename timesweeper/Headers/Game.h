@@ -54,14 +54,20 @@ class Game : public QGraphicsView
         QTimer *getEnemyShootTimer() const;
         QTimer *getTileMoveTimer() const;
 
+        QGraphicsPixmapItem *gameOverScreen;
+
+        bool getIsGameOver() const;
+
 public slots:
         void changeLevel();
         void triggerDialogue();
         void setHealthBar();
+        void gameOver();
 private:
         Ui::Game *ui;
         QLabel *label;
         bool soundOn = true;
+        bool isGameOver = false;
 };
 
 #endif // GAME_H

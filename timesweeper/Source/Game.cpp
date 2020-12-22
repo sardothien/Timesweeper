@@ -30,6 +30,30 @@ void Game::setHealthBar()
     label->update();
 }
 
+void Game::gameOver()
+{
+    if (isGameOver == false)
+    {
+        qDebug() <<"Game over";
+        isGameOver = true;
+        gameOverScreen = new QGraphicsPixmapItem;
+        gameOverScreen->setPixmap(QPixmap(":/Other/Resources/Other/gameover.png"));
+        gameOverScreen->setOpacity(0.9);
+        // TODO - popraviti pozicije za 3. i 5. nivo
+        if(player->x() < 450)
+            gameOverScreen->setPos(300, scene()->sceneRect().center().y()-180);
+        else
+            gameOverScreen->setPos(player->x()-200, scene()->sceneRect().center().y()-180);
+
+        currentLevel->addItem(gameOverScreen);
+    }
+}
+
+bool Game::getIsGameOver() const
+{
+    return isGameOver;
+}
+
 bool Game::getSoundOn() const
 {
     return soundOn;
@@ -79,6 +103,7 @@ Game::Game(QWidget *parent)
     connect(player, &PlayerCharacter::enteredPortal, this, &Game::changeLevel);
     connect(player, &PlayerCharacter::nearNPC, this, &Game::triggerDialogue);
     connect(player, &PlayerCharacter::healthChanged, this, &Game::setHealthBar);
+    connect(player, &PlayerCharacter::playerIsDead, this, &Game::gameOver);
 
     music = new QMediaPlayer();
 

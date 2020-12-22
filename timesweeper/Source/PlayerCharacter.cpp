@@ -62,6 +62,9 @@ void PlayerCharacter::decreaseHealth()
 {
     if (health > 0)
         health--;
+
+    if (health == 0)
+        emit playerIsDead();
 }
 
 void PlayerCharacter::keyPressEvent(QKeyEvent *event)
@@ -110,8 +113,20 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         game->currentLevel->removeItem(pauseScreen);
         delete pauseScreen;
     }
-    if(event->key() == Qt::Key_Escape){
+
+    if(event->key() == Qt::Key_Escape)
+    {
         exit(0);
+    }
+
+    if(event->key() == Qt::Key_R && game->getIsGameOver() == true)
+    {
+        game->currentLevel->removeItem(game->gameOverScreen);
+        delete game->gameOverScreen;
+        health = 8;
+        emit healthChanged();
+        game->levelID--;
+        game->changeLevel();
     }
 
 
@@ -299,6 +314,10 @@ void PlayerCharacter::detectCollision()
                         velocityY = 5;
                         //qDebug()<<"4";
                 }
+
+                auto t = dynamic_cast<Tile*>(colliding_items[i]);
+                if (t->getType()=='^' || t->getType()=='W')
+                    emit playerIsDead();
 
             }
             else if (typeid(*(colliding_items[i])) == typeid(Portal) && (game->currentLevelPortal->x() - x()) < 30 && (game->currentLevelPortal->y() - y()) < 30)

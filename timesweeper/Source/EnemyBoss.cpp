@@ -93,7 +93,7 @@ void EnemyBoss::move()
     {
         timerWalk->stop();
         std::cout << "ENEMY BOSS WON" << std::endl;
-        // TODO - emit gameOver();
+        emit game->player->playerIsDead();
     }
 
     // ide ka gore samo kada je PlayerCharacter blizu po x osi

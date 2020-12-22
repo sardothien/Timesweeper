@@ -38,6 +38,7 @@ signals:
         void enteredPortal();
         void nearNPC();
         void healthChanged();
+        void playerIsDead();
 
     public slots:
 
@@ -56,6 +57,7 @@ signals:
         int health = 8;
         QGraphicsPixmapItem *pauseScreen;
         bool isPaused = false;
+
 };
 
 #endif // PLAYERCHARACTER_H
