@@ -12,6 +12,12 @@ EnemyBoss::EnemyBoss(Character *parent)
 
     // Proveravamo koliziju sa Projectile
     connect(game->projectileTimer, &QTimer::timeout, this, &EnemyBoss::decreaseHealth);
+
+    // Timer za kretanje
+    timerWalk = new QTimer();
+    connect(timerWalk, &QTimer::timeout, this, &EnemyBoss::move);
+    // NOTE - ovde menjate brzinu kojom se EnemyBoss krece
+    timerWalk->start(100);
 }
 
 EnemyBoss::~EnemyBoss()
@@ -40,21 +46,31 @@ void EnemyBoss::decreaseHealth()
         {
             auto projectile = dynamic_cast<Projectile*>(colliding_items[i]);
             if(projectile->shooter == Projectile::Player){ // PlayerCharacter puca
-                if(this->getLives() > 4){
+                if(this->getLives() > 17){ // zeleno
                     setLives(--lives);
                     game->currentLevel->removeItem(this->healthBar->bar);
-                    this->healthBar->bar = new QGraphicsRectItem(x()+60, y()-40, this->healthBar->width * getLives()/10, 20);
+                    this->healthBar->bar = new QGraphicsRectItem(x()+60, y()-40, this->healthBar->width * getLives()/maxLives, 20);
+                    this->healthBar->bar->setBrush(Qt::green);
+                    game->currentLevel->addItem(this->healthBar->bar);
+                }
+                else if(this->getLives() > 5 && this->getLives() <= 17){ // zuto
+                    setLives(--lives);
+                    game->currentLevel->removeItem(this->healthBar->bar);
+                    this->healthBar->bar = new QGraphicsRectItem(x()+60, y()-40, this->healthBar->width * getLives()/maxLives, 20);
                     this->healthBar->bar->setBrush(Qt::yellow);
                     game->currentLevel->addItem(this->healthBar->bar);
                 }
-                else if(this->getLives() > 1 && this->getLives() <= 4){
+                else if(this->getLives() > 1 && this->getLives() <= 5){ // crveno
                     setLives(--lives);
                     game->currentLevel->removeItem(this->healthBar->bar);
-                    this->healthBar->bar = new QGraphicsRectItem(x()+60, y()-40, this->healthBar->width * getLives()/10, 20);
+                    this->healthBar->bar = new QGraphicsRectItem(x()+60, y()-40, this->healthBar->width * getLives()/maxLives, 20);
                     this->healthBar->bar->setBrush(Qt::red);
                     game->currentLevel->addItem(this->healthBar->bar);
                 }
-                else{
+                else{ // EnemyBoss je ubijen
+
+                    // TODO - emit gameWon();
+
                     // brisanje oba objekta sa scene
                     scene()->removeItem(colliding_items[i]);
                     scene()->removeItem(this);
@@ -67,5 +83,24 @@ void EnemyBoss::decreaseHealth()
 
             return;
         }
+    }
+}
+
+void EnemyBoss::move()
+{
+    // ako EnemyBoss dodje do vrha scene GameOver
+    if (y() <= 0)
+    {
+        timerWalk->stop();
+        std::cout << "ENEMY BOSS WON" << std::endl;
+        // TODO - emit gameOver();
+    }
+
+    // ide ka gore samo kada je PlayerCharacter blizu po x osi
+    if(x() - game->player->x() < 400)
+    {
+        setPos(x(), y()-10);
+        healthBar->bar->setPos(healthBar->bar->x(), healthBar->bar->y()-10);
+        healthBar->barFrame->setPos(healthBar->barFrame->x(), healthBar->barFrame->y()-10);
     }
 }

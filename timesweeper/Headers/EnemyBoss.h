@@ -20,9 +20,12 @@ class EnemyBoss : public Character
 
     public slots:
         void decreaseHealth();
+        void move();
 
     private:
-        int lives = 10;
+        QTimer* timerWalk;
+        int lives = 20;
+        int maxLives = 20;
 };
 
 #endif // ENEMYBOSS_H
