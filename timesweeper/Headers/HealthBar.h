@@ -8,11 +8,14 @@ class HealthBar : public QObject, public QGraphicsRectItem
 {
         Q_OBJECT
     public:
-        HealthBar();
+        HealthBar(int width, int height);
         ~HealthBar();
 
         QGraphicsRectItem* barFrame;
         QGraphicsRectItem* bar;
+
+        int width;
+        int height;
 };
 
 #endif // HEALTHBAR_H

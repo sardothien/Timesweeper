@@ -2,7 +2,9 @@
 #define LEVEL_H
 
 #include <QGraphicsScene>
-#include "EnemyCharacter.h"
+
+class EnemyCharacter;
+class EnemyBoss;
 
 class Level
 {
@@ -12,6 +14,7 @@ class Level
         static void AddObject(QGraphicsScene *scene, char type, int x, int y);
 
         static EnemyCharacter* enemy;
+        static EnemyBoss* enemyBoss;
 };
 
 #endif // LEVEL_H

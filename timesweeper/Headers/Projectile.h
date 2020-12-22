@@ -9,8 +9,16 @@ class Projectile : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
     public:
-        Projectile(QGraphicsPixmapItem *parent = nullptr);
+
+        enum Shooter {
+            Enemy,
+            Player
+        };
+
+        Projectile(Shooter shooter, QGraphicsPixmapItem *parent = nullptr);
         ~Projectile();
+
+        Shooter shooter;
 
     signals:
 

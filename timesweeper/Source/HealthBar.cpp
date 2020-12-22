@@ -3,13 +3,14 @@
 #include <QPainter>
 #include <iostream>
 
-HealthBar::HealthBar()
+HealthBar::HealthBar(int width, int height)
+    : width(width), height(height)
 {
     barFrame = new QGraphicsRectItem;
-    barFrame->setRect(x(), y(), 80, 15);
+    barFrame->setRect(x(), y(), width, height);
     barFrame->setBrush(Qt::gray);
 
-    bar = new QGraphicsRectItem(x(), y(), 80, 15);
+    bar = new QGraphicsRectItem(x(), y(), width, height);
     bar->setBrush(Qt::green);
 }
 

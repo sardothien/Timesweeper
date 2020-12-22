@@ -10,6 +10,8 @@
 #include <QTextStream>
 
 #include "Headers/Game.h"
+#include "Headers/EnemyBoss.h"
+#include "Headers/EnemyCharacter.h"
 #include "Headers/NPCharacter.h"
 #include "Headers/Level.h"
 #include "Headers/Tile.h"
@@ -20,6 +22,7 @@
 
 extern Game* game;
 EnemyCharacter* Level::enemy;
+EnemyBoss* Level::enemyBoss;
 NPCharacter *Game::currentLevelNpc;
 PlayerCharacter *Game::player;
 Portal *Game::currentLevelPortal;
@@ -119,7 +122,6 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
     NPCharacter *npc;
     Portal *portal;
 
-
     switch(type)
     {
         case '-': // nista
@@ -156,6 +158,16 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
         case 'S': //Portal
             Game::currentLevelPlayerStartPosition = QPointF(x, y);
             //qDebug() << Game::currentLevelPlayerStartPosition;
+            break;
+         case 'F':
+            enemyBoss = new EnemyBoss();
+            enemyBoss->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_alpha_front.png"));
+            enemyBoss->setPos(x, y);
+            enemyBoss->healthBar->barFrame->setPos(x+60, y-40);
+            enemyBoss->healthBar->bar->setPos(x+60, y-40);
+            scene->addItem(enemyBoss);
+            scene->addItem(enemyBoss->healthBar->barFrame);
+            scene->addItem(enemyBoss->healthBar->bar);
             break;
          default: // sve ostale prepreke
             rect = new Tile(type);
