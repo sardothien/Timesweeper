@@ -17,15 +17,17 @@ class EnemyCharacter : public Character
         void setLives(int lives);
 
         HealthBar* healthBar;
-        void decreaseHealth();
+
 
     public slots:
         void move();
         void shoot();
+        void decreaseHealth();
 
     private:
         QTimer *enemyWalkTimer;
         QTimer *enemyShootTimer;
+        QTimer *enemyHealthTimer;
         int side;
         int steps;
         bool stopMoving;

@@ -34,6 +34,7 @@ class Game : public QGraphicsView
         QTimer *enemyWalkTimer;
         QTimer *enemyShootTimer;
         QTimer *tileMoveTimer;
+        QTimer *enemyHealthTimer;
 
         static NPCharacter *getCurrentLevelNpc();
         static void setCurrentLevelNpc(NPCharacter *npc);
@@ -54,6 +55,7 @@ class Game : public QGraphicsView
         QTimer *getEnemyWalkTimer() const;
         QTimer *getEnemyShootTimer() const;
         QTimer *getTileMoveTimer() const;
+        QTimer *getEnemyHealthTimer() const;
 
         QGraphicsPixmapItem *gameOverScreen;
 

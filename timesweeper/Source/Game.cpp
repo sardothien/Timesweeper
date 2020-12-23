@@ -107,10 +107,13 @@ Game::Game(QWidget *parent)
     projectileTimer->start(50);
 
     enemyWalkTimer = new QTimer(this);
-    enemyWalkTimer->start(15);
+    enemyWalkTimer->start(20);
 
     enemyShootTimer = new QTimer(this);
     enemyShootTimer->start(1000);
+
+    enemyHealthTimer = new QTimer(this);
+    enemyHealthTimer->start(50);
 
     tileMoveTimer = new QTimer(this);
     tileMoveTimer->start(10);
@@ -132,6 +135,11 @@ Game::Game(QWidget *parent)
 QTimer *Game::getTileMoveTimer() const
 {
     return tileMoveTimer;
+}
+
+QTimer *Game::getEnemyHealthTimer() const
+{
+    return enemyHealthTimer;
 }
 
 QTimer *Game::getEnemyShootTimer() const
@@ -199,7 +207,7 @@ void Game::changeLevel()
     }
     centerOn(player);
     playMusic();
-    levelID = 3;
+    levelID++;
 }
 
 void Game::triggerDialogue()

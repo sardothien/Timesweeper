@@ -23,6 +23,9 @@ EnemyCharacter::EnemyCharacter(Character *parent)
     // timer za shoot()
     enemyShootTimer = game->getEnemyShootTimer();
     connect(enemyShootTimer, &QTimer::timeout, this, &EnemyCharacter::shoot);
+
+    enemyHealthTimer = game->getEnemyHealthTimer();
+    connect(enemyHealthTimer, &QTimer::timeout, this, &EnemyCharacter::decreaseHealth);
 }
 
 EnemyCharacter::~EnemyCharacter()
@@ -81,7 +84,7 @@ void EnemyCharacter::move()
         }
     }
 
-    decreaseHealth();
+//    decreaseHealth();
 }
 
 void EnemyCharacter::decreaseHealth()
