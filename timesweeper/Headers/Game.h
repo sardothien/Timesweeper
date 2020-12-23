@@ -42,6 +42,7 @@ class Game : public QGraphicsView
         void mouseMoveEvent(QMouseEvent *event);
         void mousePressEvent(QMouseEvent * event);
         void playMusic();
+        void makeGameOverLabel();
 
         static int getLevelID();
 
@@ -57,6 +58,8 @@ class Game : public QGraphicsView
         QGraphicsPixmapItem *gameOverScreen;
 
         bool getIsGameOver() const;
+        Ui::Game *getUi() const;
+        QLabel *getGameOverLabel() const;
 
 public slots:
         void changeLevel();
@@ -66,6 +69,7 @@ public slots:
 private:
         Ui::Game *ui;
         QLabel *label;
+        QLabel* gameOverLabel;
         bool soundOn = true;
         bool isGameOver = false;
 };

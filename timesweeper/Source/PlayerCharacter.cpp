@@ -121,8 +121,9 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
 
     if(event->key() == Qt::Key_R && game->getIsGameOver() == true)
     {
-        game->currentLevel->removeItem(game->gameOverScreen);
-        delete game->gameOverScreen;
+        //game->currentLevel->removeItem(game->gameOverScreen);
+        //delete game->gameOverScreen;
+        game->getGameOverLabel()->hide();
         health = 8;
         emit healthChanged();
         game->levelID--;

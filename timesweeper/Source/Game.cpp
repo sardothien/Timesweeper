@@ -32,21 +32,34 @@ void Game::setHealthBar()
 
 void Game::gameOver()
 {
-    if (isGameOver == false)
-    {
-        qDebug() <<"Game over";
-        isGameOver = true;
-        gameOverScreen = new QGraphicsPixmapItem;
-        gameOverScreen->setPixmap(QPixmap(":/Other/Resources/Other/gameover.png"));
-        gameOverScreen->setOpacity(0.9);
-        // TODO - popraviti pozicije za 3. i 5. nivo
-        if(player->x() < 450)
-            gameOverScreen->setPos(300, scene()->sceneRect().center().y()-180);
-        else
-            gameOverScreen->setPos(player->x()-200, scene()->sceneRect().center().y()-180);
+    isGameOver = true;
+    gameOverLabel->show();
 
-        currentLevel->addItem(gameOverScreen);
-    }
+//    if (isGameOver == false)
+//    {
+
+//        gameOverScreen = new QGraphicsPixmapItem;
+//        gameOverScreen->setPixmap(QPixmap(":/Other/Resources/Other/gameover.png"));
+//        gameOverScreen->setOpacity(0.9);
+//        // TODO - popraviti pozicije za 3. i 5. nivo
+//        if(player->x() < 450)
+//            gameOverScreen->setPos(300, scene()->sceneRect().center().y()-180);
+//        else
+//            gameOverScreen->setPos(player->x()-200, scene()->sceneRect().center().y()-180);
+
+//        currentLevel->addItem(gameOverScreen);
+//    }
+
+}
+
+QLabel *Game::getGameOverLabel() const
+{
+    return gameOverLabel;
+}
+
+Ui::Game *Game::getUi() const
+{
+    return ui;
 }
 
 bool Game::getIsGameOver() const
@@ -74,6 +87,8 @@ Game::Game(QWidget *parent)
     label = new QLabel(this);
     label->setGeometry(10,10,155,55);
     label->setProperty("foo", "hb8");
+
+    makeGameOverLabel();
 
     setMouseTracking(true);
 
@@ -158,8 +173,13 @@ void Game::mousePressEvent(QMouseEvent *event)
 
 void Game::changeLevel()
 {
-    //qDebug() << "signal caught changeLevel!";
+
+//    if(levelID != 1){
+//        currentLevel->clear();
+//    }
+
     currentLevel = Level::LoadLevel();
+
     DialogueHandler::initializeDialogue();
     setScene(currentLevel);
     player->setFocus();
@@ -179,7 +199,7 @@ void Game::changeLevel()
     }
     centerOn(player);
     playMusic();
-    levelID++;
+    levelID = 3;
 }
 
 void Game::triggerDialogue()
@@ -201,7 +221,7 @@ void Game::playMusic()
     }
     else if(levelID == 3)
     {
-        //music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_3.mp3"));
+        music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_3.mp3"));
     }
     else if(levelID == 4)
     {
@@ -213,6 +233,14 @@ void Game::playMusic()
 
     if(soundOn && levelID != 1)
         music->play();
+}
+
+void Game::makeGameOverLabel()
+{
+    gameOverLabel = new QLabel(this);
+    gameOverLabel->setGeometry(300,120,590,360);
+    gameOverLabel->setPixmap(QPixmap(":/Other/Resources/Other/gameover.png"));
+    gameOverLabel->hide();
 }
 
 Portal *Game::getCurrentLevelPortal()
