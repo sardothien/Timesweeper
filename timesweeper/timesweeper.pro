@@ -15,6 +15,7 @@ SOURCES += \
     Source/Character.cpp \
     Source/DialogueBox.cpp \
     Source/DialogueHandler.cpp \
+    Source/DialogueTriggerBox.cpp \
     Source/EnemyBoss.cpp \
     Source/EnemyCharacter.cpp \
     Source/Game.cpp \
@@ -37,6 +38,7 @@ HEADERS += \
     Headers/Character.h \
     Headers/DialogueBox.h \
     Headers/DialogueHandler.h \
+    Headers/DialogueTriggerBox.h \
     Headers/EnemyBoss.h \
     Headers/EnemyCharacter.h \
     Headers/Game.h \

@@ -16,7 +16,7 @@
 
 #include "Headers/GunArm.h"
 #include <QGraphicsRectItem>
-
+#include "Headers/DialogueTriggerBox.h"
 #include <qmath.h>
 
 extern Game *game;
@@ -258,11 +258,6 @@ void PlayerCharacter::walk()
     updateShoudlerPosition();
     gunArm->setPos(shoulderPosition);
 
-    if((game->currentLevelNpc->x() - x()) <= 200 &&  (game->currentLevelNpc->x() - x()) >= 190)
-    {
-        emit nearNPC();
-    }
-
     game->centerOn(this);
 }
 
@@ -274,6 +269,12 @@ void PlayerCharacter::detectCollision()
     {
         for (int i = 0, n = colliding_items.size(); i < n; i++)
         {
+            if (typeid(*(colliding_items[i])) == typeid(DialogueTriggerBox))
+            {
+                scene()->removeItem(colliding_items[i]);
+                //delete colliding_items[i];
+                emit startDialogue();
+            }
             if (typeid(*(colliding_items[i])) == typeid(Pickup))
             {
                 increaseHealth();

@@ -19,11 +19,11 @@
 #include "Headers/PlayerCharacter.h"
 #include "Headers/Portal.h"
 #include "Headers/Building.h"
+#include "Headers/DialogueTriggerBox.h"
 
 extern Game* game;
 EnemyCharacter* Level::enemy;
 EnemyBoss* Level::enemyBoss;
-NPCharacter *Game::currentLevelNpc;
 PlayerCharacter *Game::player;
 Portal *Game::currentLevelPortal;
 QPointF Game::currentLevelPlayerStartPosition;
@@ -121,10 +121,19 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
     Pickup *pickup;
     NPCharacter *npc;
     Portal *portal;
+    //QGraphicsRectItem *dialogueStartPoint;
+    //QGraphicsPixmapItem *triggerBox;
+    DialogueTriggerBox *dialogueStartPoint;
 
     switch(type)
     {
         case '-': // nista
+            break;
+        case 'd': //start za dijalog
+            dialogueStartPoint = new DialogueTriggerBox();
+            dialogueStartPoint->setRect(x, y, 100, 500);
+            //dialogueStartPoint->setOpacity(0.0);   otkomentarisati ovo kada se zavrsi testiranje
+            scene->addItem(dialogueStartPoint);
             break;
         case 'E': // neprijatelj
             enemy = new EnemyCharacter();
@@ -145,8 +154,6 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
             npc = new NPCharacter();
             npc->setPos(x,y);
             scene->addItem(npc);
-            game->setCurrentLevelNpc(npc);
-            //qDebug() << game->getCurrentLevelNpcPosition();
             break;
         case 'P': //Portal
             portal = new Portal();

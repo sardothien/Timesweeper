@@ -36,7 +36,7 @@ class PlayerCharacter : public Character
 
 signals:
         void enteredPortal();
-        void nearNPC();
+        void startDialogue();
         void healthChanged();
         void playerIsDead();
 

@@ -119,7 +119,7 @@ Game::Game(QWidget *parent)
     tileMoveTimer->start(10);
 
     connect(player, &PlayerCharacter::enteredPortal, this, &Game::changeLevel);
-    connect(player, &PlayerCharacter::nearNPC, this, &Game::triggerDialogue);
+    connect(player, &PlayerCharacter::startDialogue, this, &Game::triggerDialogue);
     connect(player, &PlayerCharacter::healthChanged, this, &Game::setHealthBar);
     connect(player, &PlayerCharacter::playerIsDead, this, &Game::gameOver);
 
@@ -212,7 +212,7 @@ void Game::changeLevel()
 
 void Game::triggerDialogue()
 {
-    //qDebug() << "signal caught triggerDialogue";
+    qDebug() << "signal caught triggerDialogue";
     DialogueHandler::setDialogueActive(true);
     DialogueHandler::advanceDialogue();
 }
@@ -259,14 +259,4 @@ Portal *Game::getCurrentLevelPortal()
 void Game::setCurrentLevelPortal(Portal *portal)
 {
     currentLevelPortal = portal;
-}
-
-NPCharacter *Game::getCurrentLevelNpc()
-{
-    return currentLevelNpc;
-}
-
-void Game::setCurrentLevelNpc(NPCharacter *npc)
-{
-    currentLevelNpc = npc;
 }

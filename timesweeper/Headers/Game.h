@@ -9,7 +9,6 @@
 #include <QLabel>
 
 #include "Headers/PlayerCharacter.h"
-#include "Headers/NPCharacter.h"
 #include "Headers/Portal.h"
 
 namespace Ui
@@ -25,7 +24,6 @@ class Game : public QGraphicsView
         static PlayerCharacter *player;
         static int levelID;
         QGraphicsScene *currentLevel;
-        static NPCharacter *currentLevelNpc;
         static Portal *currentLevelPortal;
         static QPointF currentLevelPlayerStartPosition;
         QMediaPlayer *music;
@@ -36,8 +34,6 @@ class Game : public QGraphicsView
         QTimer *tileMoveTimer;
         QTimer *enemyHealthTimer;
 
-        static NPCharacter *getCurrentLevelNpc();
-        static void setCurrentLevelNpc(NPCharacter *npc);
         static Portal *getCurrentLevelPortal();
         static void setCurrentLevelPortal(Portal *portal);
         void mouseMoveEvent(QMouseEvent *event);

@@ -36,7 +36,7 @@ void DialogueHandler::initializeDialogue()
         recenice.append(QPair(Speaker::Strauss, "Okay, listen up!"));
         recenice.append(QPair(Speaker::Strauss, "These aliens invented time travel, and inserted themselves in various points throughout our history so they can start building the different components for their Alpha aliens' body."));
         recenice.append(QPair(Speaker::Strauss, "Apparently it takes them many centuries to do so."));
-        recenice.append(QPair(Speaker::Strauss, "Their plan is to blow up our planet when the Alpha is finished in 2020. "));
+        recenice.append(QPair(Speaker::Strauss, "Their plan is to blow up our planet when the Alpha is finished in 2021. "));
         recenice.append(QPair(Speaker::Player, "Okay, but that is a pretty stupid plan."));
         recenice.append(QPair(Speaker::Player, "Why not just build their Alpha on their planet, wherever that is, and get him to our planet and then blow us up?"));
         recenice.append(QPair(Speaker::Player, "And when even am I?"));
