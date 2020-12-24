@@ -341,6 +341,8 @@ void PlayerCharacter::detectCollision()
 
 void PlayerCharacter::aimAtPoint(QPoint point)
 {
+    targetPoint = game->mapToScene(point);
+
     QLineF ln(shoulderPosition, targetPoint );
     qreal angle = -1 * ln.angle();
 
@@ -365,29 +367,6 @@ void PlayerCharacter::aimAtPoint(QPoint point)
         }
         gunArm->setRotation(180 + angle);
     }
-
-    //qDebug() << "trarget:" << targetPoint;
-    //NOTE: pitati asistenta za pomoc ovde! Ako umesto if-ova imamo samo targetPoint = point, ponasanje nije ispravno
-    //otkomentarisi liniju 114 (dodavanje linije na scenu) za testiranje
-    if(x() >= 500)
-    {
-        targetPoint.setX(point.x() + x() - 500);
-        targetPoint.setY(point.y());
-    }
-
-//    if(y() >= 500)
-//    {
-//        targetPoint.setY(point.y() + y() - 500);
-//        //targetPoint.setX(point.x());
-//    }
-
-    else
-    {
-        targetPoint = point;
-    }
-    /*auto tmp = mapToScene(point);
-    targetPoint = QPoint(tmp.x(), tmp.y());
-    qDebug() << shoulderPosition << tmp << targetPoint;*/
 }
 
 void PlayerCharacter::updateShoudlerPosition()

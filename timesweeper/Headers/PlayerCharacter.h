@@ -16,7 +16,7 @@ class PlayerCharacter : public Character
         void keyReleaseEvent(QKeyEvent *event);
         void shootProjectile();
         void aimAtPoint(QPoint point);
-        QPoint targetPoint;
+        QPointF targetPoint;
         GunArm *gunArm;
         enum AimDirection
         {
