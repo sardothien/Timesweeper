@@ -1,16 +1,18 @@
 #ifndef DIALOGUEBOX_H
 #define DIALOGUEBOX_H
 
-#include <QGraphicsPixmapItem>
 #include "Headers/DialogueHandler.h"
 
-class DialogueBox : public QObject, public QGraphicsPixmapItem{
+#include <QGraphicsPixmapItem>
+
+class DialogueBox : public QObject, public QGraphicsPixmapItem
+{
     Q_OBJECT
     public:
-        DialogueBox (QPair<DialogueHandler::Speaker, QString> &text);
+        DialogueBox(QPair<DialogueHandler::Speaker, QString> &text);
 
     private:
-        QGraphicsTextItem *currentText;
+        QGraphicsTextItem *m_currentText;
 };
 
 #endif // DIALOGUEBOX_H
