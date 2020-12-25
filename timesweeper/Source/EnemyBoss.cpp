@@ -6,6 +6,7 @@ extern Game *game;
 
 EnemyBoss::EnemyBoss()
 {
+    setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_alpha_front.png"));
     m_healthBar = new HealthBar(300, 20);
 }
 

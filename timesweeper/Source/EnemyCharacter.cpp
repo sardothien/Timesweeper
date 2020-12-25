@@ -4,7 +4,7 @@
 
 extern Game* game;
 
-EnemyCharacter::EnemyCharacter(Character *parent)
+EnemyCharacter::EnemyCharacter()
 {
     m_healthBar = new HealthBar(80, 15);
 

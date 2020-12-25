@@ -6,7 +6,7 @@
 class DialogueTriggerBox : public QGraphicsRectItem
 {
     public:
-        DialogueTriggerBox(QObject *parent = nullptr);
+        DialogueTriggerBox();
 };
 
 #endif // DIALOGUETRIGGERBOX_H

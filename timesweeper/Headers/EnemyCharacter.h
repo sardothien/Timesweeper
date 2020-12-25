@@ -8,7 +8,7 @@ class EnemyCharacter : public Character
 {
     Q_OBJECT
     public:
-        EnemyCharacter(Character *parent = 0);
+        EnemyCharacter();
         ~EnemyCharacter();
 
         int getLives() const;
