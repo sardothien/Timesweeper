@@ -12,7 +12,7 @@ EnemyCharacter::EnemyCharacter(Character *parent)
     healthBar = new HealthBar(80, 15);
 
     // pomocne promenljive za kretanje
-    side = 0;
+    m_side = 0;
     steps = 0;
     stopMoving = false;
 
@@ -45,7 +45,7 @@ void EnemyCharacter::setLives(int lives)
 // Kretanje neprijatelja levo/desno
 void EnemyCharacter::move()
 {
-    if(side == 0) // okrenut ka desno
+    if(m_side == 0) // okrenut ka desno
     {
         setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_right.png"));
 
@@ -58,12 +58,12 @@ void EnemyCharacter::move()
 
             steps++;
             if(steps == 60){
-                side = 1;
+                m_side = 1;
                 steps = 0;
             }
         }
     }
-    else if(side == 1) // okrenut ka levo
+    else if(m_side == 1) // okrenut ka levo
     {
         setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_left.png"));
 
@@ -76,7 +76,7 @@ void EnemyCharacter::move()
 
             steps++;
             if(steps == 60){
-                side = 0;
+                m_side = 0;
                 steps = 0;
             }
         }
@@ -132,7 +132,7 @@ void EnemyCharacter::shoot()
     {
         if(game->player->x() < x()) // enemy puca ulevo
         {
-            side = 1;
+            m_side = 1;
             stopMoving = true;
 
             Projectile *projectile = new Projectile(Projectile::Enemy);
@@ -142,7 +142,7 @@ void EnemyCharacter::shoot()
         }
         else // enemy puca udesno
         {
-            side = 0;
+            m_side = 0;
             stopMoving = true;
 
             Projectile *projectile = new Projectile(Projectile::Enemy);
