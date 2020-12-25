@@ -4,15 +4,13 @@
 
 extern Game *game;
 
-Tile::Tile(char tile, QGraphicsPixmapItem *parent):QObject()
+Tile::Tile(char tile)
 {
-
     // pomocne promenljive za kretanje
     side = 0;
     steps = 0;
     stopMoving = false;
 
-    // timer za move()
     if(tile == 'M')
     {
         advance(1);
@@ -110,7 +108,6 @@ Tile::Tile(char tile, QGraphicsPixmapItem *parent):QObject()
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/spikes_lvl4.png"));
         else if(tile == 'i')
             setPixmap(QPixmap(":/Other/Resources/Other/sign_level_4.png"));
-
     }
     else if(game->levelID == 5){
         if(tile == '=') // pod
@@ -120,12 +117,16 @@ Tile::Tile(char tile, QGraphicsPixmapItem *parent):QObject()
         else if(tile == '%') // platforma
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_5_Tiles/paltform_tile_lvl5.png"));
     }
-
 }
 
 Tile::~Tile()
 {
    qDebug() <<"tile dest";
+}
+
+char Tile::getType() const
+{
+    return type;
 }
 
 void Tile::advance(int step)
@@ -135,14 +136,15 @@ void Tile::advance(int step)
 
 void Tile::move()
 {
+    auto player = game->player;
     if(type == 'M')
     {
         if(side == 0) // okrenut ka desno
         {
             if(!stopMoving)
             {
-                if(game->player->collidesWithItem(this))
-                    game->player->setPos(game->player->x()+2,game->player->y());
+                if(player->collidesWithItem(this))
+                    player->setPos(player->x()+2, player->y());
 
                 setPos(x()+2, y());
 
@@ -157,8 +159,8 @@ void Tile::move()
         {
             if(!stopMoving)
             {
-                if(game->player->collidesWithItem(this))
-                    game->player->setPos(game->player->x()-2, game->player->y());
+                if(player->collidesWithItem(this))
+                    player->setPos(player->x()-2, player->y());
 
                 setPos(x()-2, y());
 
@@ -170,9 +172,4 @@ void Tile::move()
             }
         }
     }
-}
-
-char Tile::getType() const
-{
-    return type;
 }

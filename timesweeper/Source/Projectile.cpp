@@ -1,27 +1,20 @@
-#include "Headers/Projectile.h"
-#include "Headers/Game.h"
-#include "Headers/EnemyCharacter.h"
-#include "Headers/Tile.h"
-
-#include <QGraphicsScene>
 #include <qmath.h>
-#include <QTimer>
-#include <QList>
-#include <iostream>
+
+#include "Headers/Game.h"
+#include "Headers/Projectile.h"
+#include "Headers/Tile.h"
 
 extern Game *game;
 
-Projectile::Projectile(Shooter shooter, QGraphicsPixmapItem *parent)
-    :shooter(shooter), QGraphicsPixmapItem(parent)
+Projectile::Projectile(Shooter shooter)
+    :shooter(shooter)
 {
     setPixmap(QPixmap(":/Other/Resources/Other/projectile.png"));
-
-
 }
 
 Projectile::~Projectile()
 {
-    std::cout << "Projectile destroyed!" << std::endl;
+    qDebug() << "Projectile destroyed!\n";
 }
 
 void Projectile::advance(int step)
@@ -31,32 +24,27 @@ void Projectile::advance(int step)
 
 void Projectile::move(int distanceToMove)
 {
-    qreal angle = rotation(); //u stepenima
-
-    //qDebug() << "ugao" << angle;
-
+    qreal angle = rotation();
     qreal dy = distanceToMove * qSin(qDegreesToRadians(angle));
     qreal dx = distanceToMove * qCos(qDegreesToRadians(angle));
 
     setPos(x() + dx, y() + dy);
 
-    QList<QGraphicsItem *> colliding_items = collidingItems();
-
-    for (int i = 0, n = colliding_items.size(); i < n; ++i)
+    QList<QGraphicsItem*> colliding_items = collidingItems();
+    for (int i = 0, n = colliding_items.size(); i < n; i++)
     {
         if (typeid(*(colliding_items[i])) == typeid(Tile))
         {
-            // brisanje oba objekta sa scene
             scene()->removeItem(this);
-            // brisanje sa hipa
             delete this;
             return;
         }
     }
 
     // ako projectile ode van view-a, unistava se
-    if (x() > game->player->x() + 1200 || x() < game->player->x() - 1200 ||
-        y() > game->player->y() + 700 || y() < game->player->y() - 700)
+    auto player = game->player;
+    if (x() > player->x() + 1200 || x() < player->x() - 1200 ||
+        y() > player->y() + 700 || y() < player->y() - 700)
     {
         scene()->removeItem(this);
         delete this;

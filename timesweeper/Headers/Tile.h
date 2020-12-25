@@ -1,20 +1,20 @@
 #ifndef TILE_H
 #define TILE_H
 
-#include <QTimer>
 #include <QGraphicsPixmapItem>
 
 class Tile :public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
     public:
-        Tile (char tile, QGraphicsPixmapItem *parent = nullptr);
+        //metode
+        Tile (char tile);
         ~Tile();
-
-        char getType() const;
-
         void advance(int step) override;
         void move();
+
+        //geteri/seteri
+        char getType() const;
 
     private:
         int side;
