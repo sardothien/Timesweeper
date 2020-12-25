@@ -137,11 +137,11 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
             enemy = new EnemyCharacter();
             enemy->setPos(x, y-110);
             enemy->setScale(0.8);
-            enemy->healthBar->barFrame->setPos(x, y-135);
-            enemy->healthBar->bar->setPos(x, y-135);
+            enemy->getHealtBar()->m_barFrame->setPos(x, y-135);
+            enemy->getHealtBar()->m_bar->setPos(x, y-135);
             scene->addItem(enemy);
-            scene->addItem(enemy->healthBar->barFrame);
-            scene->addItem(enemy->healthBar->bar);
+            scene->addItem(enemy->getHealtBar()->m_barFrame);
+            scene->addItem(enemy->getHealtBar()->m_bar);
             break;
         case '+': // zivoti
             pickup = new Pickup();
@@ -163,11 +163,11 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
             enemyBoss = new EnemyBoss();
             enemyBoss->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_alpha_front.png"));
             enemyBoss->setPos(x, y);
-            enemyBoss->healthBar->barFrame->setPos(x+60, y-40);
-            enemyBoss->healthBar->bar->setPos(x+60, y-40);
+            enemyBoss->getHealtBar()->m_barFrame->setPos(x+60, y-40);
+            enemyBoss->getHealtBar()->m_bar->setPos(x+60, y-40);
             scene->addItem(enemyBoss);
-            scene->addItem(enemyBoss->healthBar->barFrame);
-            scene->addItem(enemyBoss->healthBar->bar);
+            scene->addItem(enemyBoss->getHealtBar()->m_barFrame);
+            scene->addItem(enemyBoss->getHealtBar()->m_bar);
             break;
          default: // sve ostale prepreke
             rect = new Tile(type);
