@@ -1,16 +1,16 @@
 #include <QDebug>
 
-#include "Headers/Menu.h"
 #include "Headers/Options.h"
 #include "Headers/Game.h"
 #include "ui_Options.h"
 
 extern Game *game;
 
-Options::Options(QWidget *parent) : QMainWindow(parent), ui(new Ui::Options)
+Options::Options(QWidget *parent)
+    : QMainWindow(parent), ui(new Ui::Options)
 {
     ui->setupUi(this);
-    setFixedSize(800,500);
+    setFixedSize(800, 500);
     setWindowTitle("timesweeper");
 }
 

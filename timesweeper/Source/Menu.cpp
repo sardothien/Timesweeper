@@ -6,10 +6,11 @@
 
 Game * game;
 
-Menu::Menu(QWidget *parent) : QMainWindow(parent), ui(new Ui::Menu)
+Menu::Menu(QWidget *parent)
+    : QMainWindow(parent), ui(new Ui::Menu)
 {
     ui->setupUi(this);
-    setFixedSize(800,500);
+    setFixedSize(800, 500);
     setWindowTitle("timesweeper");
     game = new Game();
 }
