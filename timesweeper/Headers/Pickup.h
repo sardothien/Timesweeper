@@ -6,7 +6,7 @@
 class Pickup : public QGraphicsPixmapItem
 {
     public:
-        Pickup (QGraphicsPixmapItem *parent = nullptr);
+        Pickup();
 };
 
 #endif // PICKUP_H

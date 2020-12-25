@@ -7,7 +7,7 @@
 #include <QtMultimedia/QMediaPlayer>
 #include <QWidget>
 #include <QLabel>
-
+#include <QTimer>
 #include "Headers/PlayerCharacter.h"
 #include "Headers/Portal.h"
 

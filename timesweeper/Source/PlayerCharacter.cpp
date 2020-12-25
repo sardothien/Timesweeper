@@ -1,27 +1,16 @@
-#include <QDebug>
-
-#include <QGraphicsScene>
-#include <iostream>
-#include <QKeyEvent>
-#include <QList>
+#include <qmath.h>
 
 #include "Headers/DialogueHandler.h"
+#include "Headers/DialogueTriggerBox.h"
 #include "Headers/Game.h"
 #include "Headers/Pickup.h"
 #include "Headers/PlayerCharacter.h"
-#include "Headers/Tile.h"
 #include "Headers/Projectile.h"
-
-#include <QGraphicsLineItem>
-
-#include "Headers/GunArm.h"
-#include <QGraphicsRectItem>
-#include "Headers/DialogueTriggerBox.h"
-#include <qmath.h>
+#include "Headers/Tile.h"
 
 extern Game *game;
 
-PlayerCharacter::PlayerCharacter(Character *parent)
+PlayerCharacter::PlayerCharacter()
 {
     setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_no_gun_right.png"));
 
@@ -30,43 +19,13 @@ PlayerCharacter::PlayerCharacter(Character *parent)
     shoulderPosition = pos() + QPointF(35, 60);
     gunArm->setPos(shoulderPosition);
 
-
     projectilesound = new QMediaPlayer();
     projectilesound->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/projectile.mp3"));
 }
 
 PlayerCharacter::~PlayerCharacter()
 {
-    qDebug() << "del player";
-}
-
-void PlayerCharacter::advance(int step)
-{
-    if(canMove){
-        walk();
-    }
-    jump();
-    detectCollision();
-}
-
-int PlayerCharacter::getHealth() const
-{
-    return health;
-}
-
-void PlayerCharacter::increaseHealth()
-{
-    if (health < 8)
-        health++;
-}
-
-void PlayerCharacter::decreaseHealth()
-{
-    if (health > 0)
-        health--;
-
-    if (health == 0)
-        emit playerIsDead();
+    qDebug() << "delete player";
 }
 
 void PlayerCharacter::keyPressEvent(QKeyEvent *event)
@@ -105,9 +64,9 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         pauseScreen->setOpacity(0.9);
         // TODO - popraviti pozicije za 3. i 5. nivo
         if(this->x() < 450)
-            pauseScreen->setPos(300, scene()->sceneRect().center().y()-180);
+            pauseScreen->setPos(300, scene()->sceneRect().center().y() - 180);
         else
-            pauseScreen->setPos(this->x()-200, scene()->sceneRect().center().y()-180);
+            pauseScreen->setPos(this->x() - 200, scene()->sceneRect().center().y() - 180);
         game->currentLevel->addItem(pauseScreen);
     }
     if((event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) && isPaused){
@@ -144,7 +103,6 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
     }
     else if(event->key() == Qt::Key_A)
     {
-        //qDebug() << "levelID je: " << game->getLevelID();
         if (game->getLevelID() == 2)
         {
            setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_no_gun_left.png"));
@@ -154,47 +112,9 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
     }
     else if(event->key() == Qt::Key_Space && isOnGround)
     {
-        velocityY=-14;
-        setPos(x(),y()+velocityY);
+        velocityY = -14;
+        setPos(x(), y() + velocityY);
         isOnGround = false;
-    }
-}
-
-void PlayerCharacter::shootProjectile()
-{
-    Projectile *projectile = new Projectile(Projectile::Player);
-    QLineF ln(shoulderPosition, targetPoint );
-    //debug linija ciljanja
-    //game->currentLevel->addItem(new QGraphicsLineItem(ln));
-    qreal angle = -1 * ln.angle();
-
-    qreal dy = 80 * qSin(qDegreesToRadians(angle));
-    qreal dx = 80 * qCos(qDegreesToRadians(angle));
-
-    //potreban nam je dodatni offset od 63px ako igrac cilja na levo, jer smo tretirali da je shoulderPosition
-    //u tom slucaju 17 umesto 80, da nebi bilo treperenja
-    if(aimDirection == AimDirection::aimingLeft)
-    {
-        dx += 63;
-    }
-    projectileStartPoint = QPointF(shoulderPosition + QPointF(dx, dy));
-    projectile->setPos(projectileStartPoint.x(), projectileStartPoint.y());
-
-    QLineF ln1(projectileStartPoint, targetPoint );
-    //game->currentLevel->addItem(new QGraphicsLineItem(ln1));
-
-    projectile->setRotation(angle);
-
-    game->currentLevel->addItem(projectile);
-
-    if (projectilesound->state() == QMediaPlayer::PlayingState)
-    {
-       projectilesound->setPosition(0);
-       projectilesound->play();
-    }
-    else if (projectilesound->state() == QMediaPlayer::StoppedState)
-    {
-        projectilesound->play();
     }
 }
 
@@ -220,125 +140,13 @@ void PlayerCharacter::keyReleaseEvent(QKeyEvent *event)
     }
 }
 
-void PlayerCharacter::jump()
+void PlayerCharacter::advance(int step)
 {
-    if(!isOnGround)
-    {
-        if(y() < 0) // udara gore
-        {
-            setPos(x(), 0);
-            velocityY = 5;
-        }
-        setPos(x(),y()+velocityY);
-
-        if(velocityY<10)
-            velocityY += gravity;
+    if(canMove){
+        walk();
     }
-
-    //gunArm->setPos(pos() + QPoint(35, 60));
-    updateShoudlerPosition();
-    gunArm->setPos(shoulderPosition);
-
-    game->centerOn(this);
-}
-
-void PlayerCharacter::walk()
-{
-    // ako Player pokusa da ode van ekrana
-    if (x() > game->currentLevel->width()-3*45) // desno
-    {
-        setPos(game->currentLevel->width()-3*45, y());
-    }
-    else if(x() < 0) // levo
-    {
-        setPos(0, y());
-    }
-
-    setPos(x() + velocityX, y());
-
-    //gunArm->setPos(pos() + QPoint(35, 60));
-    updateShoudlerPosition();
-    gunArm->setPos(shoulderPosition);
-
-    game->centerOn(this);
-}
-
-void PlayerCharacter::detectCollision()
-{
-    QList<QGraphicsItem *> colliding_items = collidingItems();
-
-    if(colliding_items.size())
-    {
-        for (int i = 0, n = colliding_items.size(); i < n; i++)
-        {
-            if (typeid(*(colliding_items[i])) == typeid(DialogueTriggerBox))
-            {
-                scene()->removeItem(colliding_items[i]);
-                //delete colliding_items[i];
-                emit startDialogue();
-            }
-            if (typeid(*(colliding_items[i])) == typeid(Pickup))
-            {
-                increaseHealth();
-                scene()->removeItem(colliding_items[i]);
-                //delete colliding_items[i];
-                emit healthChanged();
-            }
-            else if(typeid(*(colliding_items[i])) == typeid(Projectile))
-            {
-                decreaseHealth();
-                scene()->removeItem(colliding_items[i]);
-                delete colliding_items[i];
-                emit healthChanged();
-
-            }
-            else if(typeid(*(colliding_items[i])) == typeid(Tile))
-            {
-                QRectF tileRect = colliding_items[i]->boundingRect();
-                QPolygonF tileRectPoints = colliding_items[i]->mapToScene(tileRect);
-
-                playerRectPoints = mapToScene(boundingRect());
-
-                if(playerRectPoints[2].y() <= tileRectPoints[0].y()+10)
-                {
-                    isOnGround = true;
-                    //qDebug()<<"1";
-                }else if(playerRectPoints[3].x() < tileRectPoints[3].x()-25 && playerRectPoints[1].y() <= tileRectPoints[3].y()-20)
-                {
-
-                            setPos(x()-11,y());
-                            qDebug()<<"2"<<playerRectPoints;
-                }else if(playerRectPoints[2].x() >= tileRectPoints[2].x() && playerRectPoints[1].y() <= tileRectPoints[3].y()-20)
-                {
-
-                            setPos(x()+11 ,y());
-                            qDebug()<<"3";
-                }
-                if(playerRectPoints[1].y() <= tileRectPoints[3].y()+10 && playerRectPoints[2].x() > tileRectPoints[3].x()+2 && playerRectPoints[3].x() < tileRectPoints[2].x()-2){
-                        velocityY = 5;
-                        //qDebug()<<"4";
-                }
-
-                auto t = dynamic_cast<Tile*>(colliding_items[i]);
-                if (t->getType()=='^' || t->getType()=='W')
-                    emit playerIsDead();
-
-            }
-            else if (typeid(*(colliding_items[i])) == typeid(Portal) && (game->currentLevelPortal->x() - x()) < 30 && (game->currentLevelPortal->y() - y()) < 30)
-            {
-                game->currentLevel->removeItem(game->player);
-                emit enteredPortal();
-            }
-            else if(typeid(*(colliding_items[i])) == typeid(GunArm))
-            {
-                isOnGround = false;
-            }
-      }
-    }
-    else
-    {
-        isOnGround = false;
-    }
+    jump();
+    detectCollision();
 }
 
 void PlayerCharacter::aimAtPoint(QPoint point)
@@ -383,7 +191,178 @@ void PlayerCharacter::updateShoudlerPosition()
     }
 }
 
+void PlayerCharacter::shootProjectile()
+{
+    Projectile *projectile = new Projectile(Projectile::Player);
+
+    QLineF ln(shoulderPosition, targetPoint );
+    qreal angle = -1 * ln.angle();
+    qreal dy = 80 * qSin(qDegreesToRadians(angle));
+    qreal dx = 80 * qCos(qDegreesToRadians(angle));
+
+    projectileStartPoint = QPointF(shoulderPosition + QPointF(dx, dy));
+    projectile->setPos(projectileStartPoint.x(), projectileStartPoint.y());
+    projectile->setRotation(angle);
+
+    game->currentLevel->addItem(projectile);
+
+    if (projectilesound->state() == QMediaPlayer::PlayingState)
+    {
+       projectilesound->setPosition(0);
+       projectilesound->play();
+    }
+    else if (projectilesound->state() == QMediaPlayer::StoppedState)
+    {
+        projectilesound->play();
+    }
+}
+
+void PlayerCharacter::increaseHealth()
+{
+    if (health < 8)
+        health++;
+}
+
+void PlayerCharacter::decreaseHealth()
+{
+    if (health > 0)
+        health--;
+    else if (health == 0)
+        emit playerIsDead();
+}
+
+//----------------GETERI/SETERI-------------------
+
 GunArm *PlayerCharacter::getGunArm() const
 {
     return gunArm;
+}
+
+int PlayerCharacter::getHealth() const
+{
+    return health;
+}
+
+//----------------SLOTOVI-------------------
+
+void PlayerCharacter::jump()
+{
+    if(!isOnGround)
+    {
+        if(y() < 0) // udara gore
+        {
+            setPos(x(), 0);
+            velocityY = 5;
+        }
+        setPos(x(), y() + velocityY);
+
+        if(velocityY < 10)
+            velocityY += gravity;
+    }
+
+    updateShoudlerPosition();
+    gunArm->setPos(shoulderPosition);
+
+    game->centerOn(this);
+}
+
+void PlayerCharacter::walk()
+{
+    // ako Player pokusa da ode van ekrana
+    if (x() > game->currentLevel->width() - 3 * 45) // desno
+    {
+        setPos(game->currentLevel->width() - 3 * 45, y());
+    }
+    else if(x() < 0) // levo
+    {
+        setPos(0, y());
+    }
+
+    setPos(x() + velocityX, y());
+
+    updateShoudlerPosition();
+    gunArm->setPos(shoulderPosition);
+
+    game->centerOn(this);
+}
+
+void PlayerCharacter::detectCollision()
+{
+    QList<QGraphicsItem *> colliding_items = collidingItems();
+
+    if(colliding_items.size())
+    {
+        for (int i = 0, n = colliding_items.size(); i < n; i++)
+        {
+            if (typeid(*(colliding_items[i])) == typeid(DialogueTriggerBox))
+            {
+                scene()->removeItem(colliding_items[i]);
+                //delete colliding_items[i];
+                emit startDialogue();
+            }
+            if (typeid(*(colliding_items[i])) == typeid(Pickup))
+            {
+                increaseHealth();
+                scene()->removeItem(colliding_items[i]);
+                //delete colliding_items[i];
+                emit healthChanged();
+            }
+            else if(typeid(*(colliding_items[i])) == typeid(Projectile))
+            {
+                decreaseHealth();
+                scene()->removeItem(colliding_items[i]);
+                delete colliding_items[i];
+                emit healthChanged();
+
+            }
+            else if(typeid(*(colliding_items[i])) == typeid(Tile))
+            {
+                QRectF tileRect = colliding_items[i]->boundingRect();
+                QPolygonF tileRectPoints = colliding_items[i]->mapToScene(tileRect);
+
+                playerRectPoints = mapToScene(boundingRect());
+
+                if(playerRectPoints[2].y() <= tileRectPoints[0].y() + 10)
+                {
+                    isOnGround = true;
+                    //qDebug()<<"1";
+                }
+                else if(playerRectPoints[3].x() < tileRectPoints[3].x() - 25 && playerRectPoints[1].y() <= tileRectPoints[3].y() - 20)
+                {
+                    setPos(x() - 11, y());
+                    //qDebug()<<"2"<<playerRectPoints;
+                }
+                else if(playerRectPoints[2].x() >= tileRectPoints[2].x() && playerRectPoints[1].y() <= tileRectPoints[3].y() - 20)
+                {
+                     setPos(x() + 11, y());
+                     //qDebug()<<"3";
+                }
+                if(playerRectPoints[1].y() <= tileRectPoints[3].y() + 10 && playerRectPoints[2].x() > tileRectPoints[3].x() + 2
+                   && playerRectPoints[3].x() < tileRectPoints[2].x() - 2)
+                {
+                        velocityY = 5;
+                        //qDebug()<<"4";
+                }
+
+                auto t = dynamic_cast<Tile*>(colliding_items[i]);
+                if (t->getType() == '^' || t->getType() == 'W')
+                {
+                    emit playerIsDead();
+                }
+            }
+            else if (typeid(*(colliding_items[i])) == typeid(Portal) && (game->currentLevelPortal->x() - x()) < 30 && (game->currentLevelPortal->y() - y()) < 30)
+            {
+                game->currentLevel->removeItem(game->player);
+                emit enteredPortal();
+            }
+            else if(typeid(*(colliding_items[i])) == typeid(GunArm))
+            {
+                isOnGround = false;
+            }
+      }
+    }
+    else
+    {
+        isOnGround = false;
+    }
 }
