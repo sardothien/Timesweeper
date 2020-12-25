@@ -24,7 +24,6 @@ SOURCES += \
     Source/Help.cpp \
     Source/Level.cpp \
     Source/Menu.cpp \
-    Source/NPCharacter.cpp \
     Source/Options.cpp \
     Source/Pickup.cpp \
     Source/PlayerCharacter.cpp \
@@ -47,7 +46,6 @@ HEADERS += \
     Headers/Help.h \
     Headers/Level.h \
     Headers/Menu.h \
-    Headers/NPCharacter.h \
     Headers/Options.h \
     Headers/Pickup.h \
     Headers/PlayerCharacter.h \

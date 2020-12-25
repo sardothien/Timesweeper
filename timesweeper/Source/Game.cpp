@@ -12,7 +12,6 @@
 #include "ui_Game.h"
 
 #include "Headers/Tile.h"
-#include "Headers/NPCharacter.h"
 
 int Game::levelID;
 
