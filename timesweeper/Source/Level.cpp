@@ -12,7 +12,6 @@
 #include "Headers/Game.h"
 #include "Headers/EnemyBoss.h"
 #include "Headers/EnemyCharacter.h"
-#include "Headers/NPCharacter.h"
 #include "Headers/Level.h"
 #include "Headers/Tile.h"
 #include "Headers/Pickup.h"
@@ -119,7 +118,6 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
 {
     Tile *rect;
     Pickup *pickup;
-    NPCharacter *npc;
     Portal *portal;
     //QGraphicsRectItem *dialogueStartPoint;
     //QGraphicsPixmapItem *triggerBox;
@@ -149,11 +147,6 @@ void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
             pickup = new Pickup();
             pickup->setPos(x, y);
             scene->addItem(pickup);
-            break;
-        case 'N': //NPC
-            npc = new NPCharacter();
-            npc->setPos(x,y);
-            scene->addItem(npc);
             break;
         case 'P': //Portal
             portal = new Portal();
