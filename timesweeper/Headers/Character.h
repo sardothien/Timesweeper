@@ -4,12 +4,11 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 
-class Character :public QObject, public QGraphicsPixmapItem
+class Character : public QObject, public QGraphicsPixmapItem
 {
-        Q_OBJECT
+    Q_OBJECT
     public:
-        Character (QGraphicsPixmapItem *parent = nullptr);
-
+        Character(QGraphicsPixmapItem *parent = nullptr);
 
     signals:
 
