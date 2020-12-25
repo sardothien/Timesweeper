@@ -22,8 +22,7 @@ class EnemyCharacter : public Character
         void decreaseHealth();
 
     private:
-
-        int side;
+        int m_side;
         int steps;
         bool stopMoving;
         int lives = 3;
