@@ -67,6 +67,8 @@ Tile::Tile(char tile, QGraphicsPixmapItem *parent):QObject()
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/single_tile_lvl3.png"));
         else if(tile == '^')
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/bodlje.png"));
+        else if(tile == 'D')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/down.png"));
     }
     else if(game->levelID == 4)
     {

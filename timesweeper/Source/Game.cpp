@@ -182,7 +182,7 @@ void Game::changeLevel()
     }
     centerOn(player);
     playMusic();
-    levelID++;
+    levelID=3;
 }
 
 void Game::triggerDialogue()
