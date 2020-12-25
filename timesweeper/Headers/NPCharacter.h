@@ -3,10 +3,11 @@
 
 #include "Headers/Character.h"
 
-class NPCharacter : public Character
+class NPCharacter : public QObject, public QGraphicsPixmapItem
 {
     public:
-        NPCharacter (Character *parent = nullptr);
+        NPCharacter (QGraphicsPixmapItem *parent = nullptr);
+        ~NPCharacter();
 };
 
 #endif // NPCHARACTER_H

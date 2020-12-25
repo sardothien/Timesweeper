@@ -12,6 +12,7 @@ class PlayerCharacter : public Character
     Q_OBJECT
     public:
         PlayerCharacter (Character *parent = nullptr);
+        ~PlayerCharacter();
         void keyPressEvent(QKeyEvent *event);
         void keyReleaseEvent(QKeyEvent *event);
         void shootProjectile();
@@ -34,6 +35,8 @@ class PlayerCharacter : public Character
         void increaseHealth();
         void decreaseHealth();
 
+        void advance(int step) override;
+
 signals:
         void enteredPortal();
         void startDialogue();
@@ -48,7 +51,6 @@ signals:
         void detectCollision();
 
     private:
-        QTimer *timerJump,*timerWalk,*timerCollision;
         qreal velocityX, velocityY = 1;
         qreal gravity = 0.5;
         bool isOnGround;
@@ -57,7 +59,7 @@ signals:
         int health = 8;
         QGraphicsPixmapItem *pauseScreen;
         bool isPaused = false;
-
+        bool canMove = false;
 };
 
 #endif // PLAYERCHARACTER_H

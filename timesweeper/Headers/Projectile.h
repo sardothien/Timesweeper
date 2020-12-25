@@ -19,16 +19,8 @@ class Projectile : public QObject, public QGraphicsPixmapItem
         ~Projectile();
 
         Shooter shooter;
-
-    signals:
-
-    public slots:
-        void move();
-
-    private slots:
-
-    private:
-        QTimer *projectileTimer;
+     void advance(int step) override;
+       void move(int distanceToMove);
 };
 
 #endif // PROJECTILE_H

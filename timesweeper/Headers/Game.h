@@ -28,11 +28,7 @@ class Game : public QGraphicsView
         static QPointF currentLevelPlayerStartPosition;
         QMediaPlayer *music;
         QCursor cursor;
-        QTimer *projectileTimer;
-        QTimer *enemyWalkTimer;
-        QTimer *enemyShootTimer;
-        QTimer *tileMoveTimer;
-        QTimer *enemyHealthTimer;
+        QTimer *mainTimer;
 
         static Portal *getCurrentLevelPortal();
         static void setCurrentLevelPortal(Portal *portal);
@@ -44,14 +40,7 @@ class Game : public QGraphicsView
         static int getLevelID();
 
         void setSoundOn(bool value);
-
         bool getSoundOn() const;
-
-        QTimer *getProjectileTimer() const;
-        QTimer *getEnemyWalkTimer() const;
-        QTimer *getEnemyShootTimer() const;
-        QTimer *getTileMoveTimer() const;
-        QTimer *getEnemyHealthTimer() const;
 
         QGraphicsPixmapItem *gameOverScreen;
 

@@ -10,20 +10,19 @@ EnemyBoss::EnemyBoss(Character *parent)
 {
     healthBar = new HealthBar(300, 20);
 
-    // Proveravamo koliziju sa Projectile
-    connect(game->projectileTimer, &QTimer::timeout, this, &EnemyBoss::decreaseHealth);
 
-    // Timer za kretanje
-    timerWalk = new QTimer();
-    connect(timerWalk, &QTimer::timeout, this, &EnemyBoss::move);
-    // NOTE - ovde menjate brzinu kojom se EnemyBoss krece
-    timerWalk->start(100);
 }
 
 EnemyBoss::~EnemyBoss()
 {
     std::cout << "Enemy Boss destroyed!" << std::endl;
     delete this->healthBar;
+}
+
+void EnemyBoss::advance(int step)
+{
+    move();
+    decreaseHealth();
 }
 
 void EnemyBoss::setLives(int lives)
@@ -91,8 +90,7 @@ void EnemyBoss::move()
     // ako EnemyBoss dodje do vrha scene GameOver
     if (y() <= 0)
     {
-        timerWalk->stop();
-        std::cout << "ENEMY BOSS WON" << std::endl;
+
         emit game->player->playerIsDead();
     }
 

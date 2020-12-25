@@ -18,6 +18,7 @@ class Character :public QObject, public QGraphicsPixmapItem
     private slots:
 
     private:
+        virtual void advance(int step) override = 0;
 };
 
 #endif // CHARACTER_H

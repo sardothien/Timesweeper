@@ -30,21 +30,23 @@ PlayerCharacter::PlayerCharacter(Character *parent)
     shoulderPosition = pos() + QPointF(35, 60);
     gunArm->setPos(shoulderPosition);
 
-    timerJump = new QTimer();
-    connect(timerJump, &QTimer::timeout, this, &PlayerCharacter::jump);
-
-    timerWalk = new QTimer();
-    connect(timerWalk, &QTimer::timeout, this, &PlayerCharacter::walk);
-
-    timerCollision = new QTimer();
-    connect(timerCollision, &QTimer::timeout, this, &PlayerCharacter::detectCollision);
-
-    isOnGround = true;
-    timerJump->start(15);
-    timerCollision->start(10);
 
     projectilesound = new QMediaPlayer();
     projectilesound->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/projectile.mp3"));
+}
+
+PlayerCharacter::~PlayerCharacter()
+{
+    qDebug() << "del player";
+}
+
+void PlayerCharacter::advance(int step)
+{
+    if(canMove){
+        walk();
+    }
+    jump();
+    detectCollision();
 }
 
 int PlayerCharacter::getHealth() const
@@ -137,8 +139,8 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         {
             setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_no_gun_right.png"));
         }
+        canMove = true;
         velocityX = 11;
-        timerWalk->start(25);
     }
     else if(event->key() == Qt::Key_A)
     {
@@ -147,8 +149,8 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         {
            setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_no_gun_left.png"));
         }
+        canMove = true;
         velocityX = -11;
-        timerWalk->start(25);
     }
     else if(event->key() == Qt::Key_Space && isOnGround)
     {
@@ -200,8 +202,8 @@ void PlayerCharacter::keyReleaseEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_D)
     {
-        timerWalk->stop();
-
+        velocityX = 0;
+        canMove = false;
         if (game->getLevelID() == 2)
         {
             setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_front.png"));
@@ -209,8 +211,8 @@ void PlayerCharacter::keyReleaseEvent(QKeyEvent *event)
     }
     else if(event->key() == Qt::Key_A)
     {
-        timerWalk->stop();
-
+        velocityX = 0;
+        canMove = false;
         if (game->getLevelID() == 2)
         {
             setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_front.png"));
@@ -279,7 +281,7 @@ void PlayerCharacter::detectCollision()
             {
                 increaseHealth();
                 scene()->removeItem(colliding_items[i]);
-                delete colliding_items[i];
+                //delete colliding_items[i];
                 emit healthChanged();
             }
             else if(typeid(*(colliding_items[i])) == typeid(Projectile))
@@ -303,12 +305,12 @@ void PlayerCharacter::detectCollision()
                     //qDebug()<<"1";
                 }else if(playerRectPoints[3].x() < tileRectPoints[3].x()-25 && playerRectPoints[1].y() <= tileRectPoints[3].y()-20)
                 {
-                            timerWalk->stop();
+
                             setPos(x()-11,y());
                             qDebug()<<"2"<<playerRectPoints;
                 }else if(playerRectPoints[2].x() >= tileRectPoints[2].x() && playerRectPoints[1].y() <= tileRectPoints[3].y()-20)
                 {
-                            timerWalk->stop();
+
                             setPos(x()+11 ,y());
                             qDebug()<<"3";
                 }

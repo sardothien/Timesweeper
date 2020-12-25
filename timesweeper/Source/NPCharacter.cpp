@@ -1,6 +1,11 @@
 #include "Headers/NPCharacter.h"
-
-NPCharacter::NPCharacter(Character *parent)
+#include <QDebug>
+NPCharacter::NPCharacter(QGraphicsPixmapItem *parent)
 {
     setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/strauss_front.png"));
+}
+
+NPCharacter::~NPCharacter()
+{
+    qDebug() << "del npc";
 }

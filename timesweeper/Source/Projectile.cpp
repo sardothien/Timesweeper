@@ -16,8 +16,7 @@ Projectile::Projectile(Shooter shooter, QGraphicsPixmapItem *parent)
 {
     setPixmap(QPixmap(":/Other/Resources/Other/projectile.png"));
 
-    QTimer *projectileTimer = game->getProjectileTimer();
-    connect(projectileTimer, &QTimer::timeout, this, &Projectile::move);
+
 }
 
 Projectile::~Projectile()
@@ -25,9 +24,13 @@ Projectile::~Projectile()
     std::cout << "Projectile destroyed!" << std::endl;
 }
 
-void Projectile::move()
+void Projectile::advance(int step)
 {
-    int distanceToMove = 30;
+    move(30);
+}
+
+void Projectile::move(int distanceToMove)
+{
     qreal angle = rotation(); //u stepenima
 
     //qDebug() << "ugao" << angle;

@@ -1,7 +1,6 @@
 #ifndef ENEMYBOSS_H
 #define ENEMYBOSS_H
 
-#include <QTimer>
 
 #include "Headers/Character.h"
 #include "Headers/HealthBar.h"
@@ -18,12 +17,12 @@ class EnemyBoss : public Character
         void setLives(int lives);
         int getLives() const;
 
-    public slots:
+    //public slots:
+        void advance(int step) override;
         void decreaseHealth();
         void move();
 
     private:
-        QTimer* timerWalk;
         int lives = 20;
         int maxLives = 20;
 };

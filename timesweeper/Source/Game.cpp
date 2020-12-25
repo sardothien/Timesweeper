@@ -11,6 +11,9 @@
 #include "Headers/Pickup.h"
 #include "ui_Game.h"
 
+#include "Headers/Tile.h"
+#include "Headers/NPCharacter.h"
+
 int Game::levelID;
 
 void Game::setHealthBar()
@@ -103,20 +106,6 @@ Game::Game(QWidget *parent)
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
 
-    projectileTimer = new QTimer(this);
-    projectileTimer->start(50);
-
-    enemyWalkTimer = new QTimer(this);
-    enemyWalkTimer->start(20);
-
-    enemyShootTimer = new QTimer(this);
-    enemyShootTimer->start(1000);
-
-    enemyHealthTimer = new QTimer(this);
-    enemyHealthTimer->start(50);
-
-    tileMoveTimer = new QTimer(this);
-    tileMoveTimer->start(10);
 
     connect(player, &PlayerCharacter::enteredPortal, this, &Game::changeLevel);
     connect(player, &PlayerCharacter::startDialogue, this, &Game::triggerDialogue);
@@ -129,33 +118,10 @@ Game::Game(QWidget *parent)
     //ako krenete odmah od vasih nivoa, desice se da chrashuje kada pokusate da se pomerite levo/desno
     //Mina, u tvoj nivo sam privremeno dodao neki portal pri pocetku da bi Igor mogao da udje u svoj nivo dok ne popravimo ovaj bag
     levelID = 1;
+    mainTimer = new QTimer(this);
     changeLevel();
 }
 
-QTimer *Game::getTileMoveTimer() const
-{
-    return tileMoveTimer;
-}
-
-QTimer *Game::getEnemyHealthTimer() const
-{
-    return enemyHealthTimer;
-}
-
-QTimer *Game::getEnemyShootTimer() const
-{
-    return enemyShootTimer;
-}
-
-QTimer *Game::getEnemyWalkTimer() const
-{
-    return enemyWalkTimer;
-}
-
-QTimer *Game::getProjectileTimer() const
-{
-    return projectileTimer;
-}
 
 int Game::getLevelID()
 {
@@ -181,12 +147,21 @@ void Game::mousePressEvent(QMouseEvent *event)
 
 void Game::changeLevel()
 {
-
-//    if(levelID != 1){
-//        currentLevel->clear();
-//    }
+    /*if(levelID != 1){
+        auto allItems = currentLevel->items();
+        for (auto item : allItems)
+        {
+            if(typeid (*item) == typeid (PlayerCharacter))
+            {
+                //currentLevel->removeItem(item);
+                delete item;
+            }
+        }
+    }*/
 
     currentLevel = Level::LoadLevel();
+    QObject::connect(mainTimer, SIGNAL(timeout()), currentLevel, SLOT(advance()) );
+    mainTimer->start(40);
 
     DialogueHandler::initializeDialogue();
     setScene(currentLevel);

@@ -16,16 +16,14 @@ EnemyCharacter::EnemyCharacter(Character *parent)
     steps = 0;
     stopMoving = false;
 
-    // timer za move()
-    enemyWalkTimer = game->getEnemyWalkTimer();
-    connect(enemyWalkTimer, &QTimer::timeout, this, &EnemyCharacter::move);
 
-    // timer za shoot()
-    enemyShootTimer = game->getEnemyShootTimer();
-    connect(enemyShootTimer, &QTimer::timeout, this, &EnemyCharacter::shoot);
+}
 
-    enemyHealthTimer = game->getEnemyHealthTimer();
-    connect(enemyHealthTimer, &QTimer::timeout, this, &EnemyCharacter::decreaseHealth);
+void EnemyCharacter::advance(int step)
+{
+    move();
+    shoot();
+    decreaseHealth();
 }
 
 EnemyCharacter::~EnemyCharacter()

@@ -15,8 +15,7 @@ Tile::Tile(char tile, QGraphicsPixmapItem *parent):QObject()
     // timer za move()
     if(tile == 'M')
     {
-        tileMoveTimer = game->getTileMoveTimer();
-        connect(tileMoveTimer, &QTimer::timeout, this, &Tile::move);
+        advance(1);
     }
 
     type = tile;
@@ -122,6 +121,16 @@ Tile::Tile(char tile, QGraphicsPixmapItem *parent):QObject()
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_5_Tiles/paltform_tile_lvl5.png"));
     }
 
+}
+
+Tile::~Tile()
+{
+   qDebug() <<"tile dest";
+}
+
+void Tile::advance(int step)
+{
+    move();
 }
 
 void Tile::move()

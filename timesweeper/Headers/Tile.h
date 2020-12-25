@@ -9,10 +9,11 @@ class Tile :public QObject, public QGraphicsPixmapItem
     Q_OBJECT
     public:
         Tile (char tile, QGraphicsPixmapItem *parent = nullptr);
+        ~Tile();
 
         char getType() const;
 
-public slots:
+        void advance(int step) override;
         void move();
 
     private:
@@ -20,7 +21,6 @@ public slots:
         int steps;
         bool stopMoving;
         char type;
-        QTimer *tileMoveTimer;
 };
 
 #endif // TILE_H
