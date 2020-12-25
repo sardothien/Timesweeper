@@ -2,7 +2,6 @@
 #define HEALTHBAR_H
 
 #include <QGraphicsRectItem>
-#include <QObject>
 
 class HealthBar : public QObject, public QGraphicsRectItem
 {

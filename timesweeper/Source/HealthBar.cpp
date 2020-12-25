@@ -1,7 +1,7 @@
-#include "Headers/HealthBar.h"
-
 #include <QPainter>
 #include <iostream>
+
+#include "Headers/HealthBar.h"
 
 HealthBar::HealthBar(int width, int height)
     : m_width(width), m_height(height)

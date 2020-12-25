@@ -1,9 +1,6 @@
 #include "Headers/EnemyCharacter.h"
 #include "Headers/Game.h"
-#include "Headers/Level.h"
 #include "Headers/Projectile.h"
-
-#include<iostream>
 
 extern Game* game;
 
@@ -19,7 +16,7 @@ EnemyCharacter::EnemyCharacter(Character *parent)
 
 EnemyCharacter::~EnemyCharacter()
 {
-    std::cout << "Enemy destroyed" << std::endl;
+    qDebug() << "Enemy destroyed";
     delete m_healthBar;
 }
 

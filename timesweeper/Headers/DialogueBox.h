@@ -1,9 +1,9 @@
 #ifndef DIALOGUEBOX_H
 #define DIALOGUEBOX_H
 
-#include "Headers/DialogueHandler.h"
-
 #include <QGraphicsPixmapItem>
+
+#include "Headers/DialogueHandler.h"
 
 class DialogueBox : public QObject, public QGraphicsPixmapItem
 {

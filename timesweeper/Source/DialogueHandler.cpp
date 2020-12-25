@@ -2,9 +2,7 @@
 #include "Headers/DialogueBox.h"
 #include "Headers/Game.h"
 
-#include <QDebug>
-
-// inicijalizacija statickih promenljivih klase DialogueHandler
+//staticke promenljivie klase DialogueHandler
 QVector<QPair<DialogueHandler::Speaker, QString>> DialogueHandler::m_recenice;
 int DialogueHandler::m_currentIndex;
 DialogueBox *DialogueHandler::m_box;
@@ -127,8 +125,6 @@ void DialogueHandler::initializeDialogue()
 
 void DialogueHandler::advanceDialogue()
 {
-    // qDebug() << current_index << m_recenice.size();
-
     if(m_box != nullptr)
     {
         game->scene()->removeItem(m_box);

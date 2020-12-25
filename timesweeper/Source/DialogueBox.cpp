@@ -5,8 +5,6 @@ extern Game *game;
 
 DialogueBox::DialogueBox(QPair<DialogueHandler::Speaker, QString> &text)
 {
-    // TODO: napraviti da drugaciji dialog box bude u zavisnosti od
-    // DialogueHandler::Speaker
     m_currentText = new QGraphicsTextItem(this);
     m_currentText->setPlainText(text.second);
 

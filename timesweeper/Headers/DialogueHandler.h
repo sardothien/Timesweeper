@@ -2,7 +2,6 @@
 #define DIALOGUEHANDLER_H
 
 #include <QObject>
-#include <QVector>
 
 class DialogueBox;
 

@@ -8,7 +8,7 @@ class EnemyBoss : public Character
 {
     Q_OBJECT
     public:
-        EnemyBoss(Character *parent = 0);
+        EnemyBoss();
         ~EnemyBoss();
 
         HealthBar* m_healthBar;

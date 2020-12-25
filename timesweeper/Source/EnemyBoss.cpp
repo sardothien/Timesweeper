@@ -2,18 +2,16 @@
 #include "Headers/Game.h"
 #include "Headers/Projectile.h"
 
-#include<iostream>
-
 extern Game *game;
 
-EnemyBoss::EnemyBoss(Character *parent)
+EnemyBoss::EnemyBoss()
 {
     m_healthBar = new HealthBar(300, 20);
 }
 
 EnemyBoss::~EnemyBoss()
 {
-    std::cout << "Enemy Boss destroyed!" << std::endl;
+    qDebug() << "Enemy Boss destroyed!";
     delete this->m_healthBar;
 }
 
