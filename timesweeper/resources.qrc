@@ -73,6 +73,7 @@
         <file>Resources/Other/big_saloon_level_4.png</file>
         <file>Resources/Other/sign_level_4.png</file>
         <file>Resources/Other/health_level_3.png</file>
+        <file>Resources/Other/enemy_projectile.png</file>
     </qresource>
     <qresource prefix="/Terrain">
         <file>Resources/Terrain/Level_1_Tiles/floor_tile.png</file>

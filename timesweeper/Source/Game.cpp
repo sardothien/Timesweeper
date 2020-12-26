@@ -142,7 +142,7 @@ void Game::changeLevel()
 
     playMusic();
 
-    m_levelID++;
+    m_levelID=3;
 }
 
 void Game::triggerDialogue()
