@@ -37,7 +37,7 @@ void EnemyBoss::decreaseHealth()
         if(typeid(*(colliding_item)) == typeid(Projectile))
         {
             auto projectile = dynamic_cast<Projectile *>(colliding_item);
-            if(projectile->shooter == Projectile::Player) // PlayerCharacter puca
+            if(projectile->getShooter() == Projectile::Player) // PlayerCharacter puca
             {
                 if(this->getLives() > 17) // zeleno
                 {

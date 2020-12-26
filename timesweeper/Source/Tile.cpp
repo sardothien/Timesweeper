@@ -1,174 +1,266 @@
-#include "Headers/Game.h"
 #include "Headers/Tile.h"
+#include "Headers/Game.h"
 #include "Headers/PlayerCharacter.h"
 
 extern Game *game;
 
 Tile::Tile(char tile)
+    : m_type(tile)
 {
     // pomocne promenljive za kretanje
-    side = 0;
-    steps = 0;
-    stopMoving = false;
+    m_side       = 0;
+    m_steps      = 0;
+    m_stopMoving = false;
 
-    if(tile == 'M')
-    {
-        advance(1);
-    }
-
-    type = tile;
-
-    if(game->levelID == 1){
-        setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_1_Tiles/floor_tile.png"));
-    }
-    else if(game->levelID == 2){
-        if(tile == '=')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/single_tile_lvl2.png"));
-        else if(tile == '#')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/inner_tile_lvl2.png"));
-        else if(tile == '^')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/spikes_lvl2.png"));
-        else if(tile == '|')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/step_tile_lvl2.png"));
-        else if(tile == '?')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/single_tile_spec_lvl2.png"));
-        else if(tile == 'x')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/single_tile_rot_lvl2.png"));
-        else if(tile == '*')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/step_tile_rot_lvl2.png"));
-    }
-    else if(game->levelID == 3)
-    {
-        if(tile == '=')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/single_tile_lvl3.png"));
-        else if(tile == '#')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/underground_tile_lvl3.png"));
-        else if(tile == 'W')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/water_tile_lvl3.png"));
-        else if(tile == 'L')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/leftside_tile_lvl3.png"));
-        else if(tile == 'R')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/rightside_tile_lvl3.png"));
-        else if(tile == 'l')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/rightside_down_lvl3.png"));
-        else if(tile == 'r')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/leftside_down_lvl3.png"));
-        else if(tile == '1')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/left_platform.png"));
-        else if(tile == '2')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/right_platform.png"));
-        else if(tile == '3')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/ugao1.png"));
-        else if(tile == '4')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/ugao2.png"));
-        else if(tile == 'M')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/single_tile_lvl3.png"));
-        else if(tile == '^')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/bodlje.png"));
-    }
-    else if(game->levelID == 4)
-    {
-        if(tile == '=') // pod
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/single_tile_lvl4.png"));
-        else if(tile == '#') // unutrasnjost
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/inner_tile_lvl4.png"));
-        else if(tile == '*') // platforma
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/platform_tile_lvl4.png"));
-        else if(tile == 'l') // leva ivica platforme
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/platform_left_tile_lvl4.png"));
-        else if(tile == 'r') // desna ivica platforme
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/platform_right_tile_lvl4.png"));
-        else if(tile == '1')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_1_lvl4.png"));
-        else if(tile == '2')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_2_lvl4.png"));
-        else if(tile == '3')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_3_lvl4.png"));
-        else if(tile == '4')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_4_lvl4.png"));
-        else if(tile == '5')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_5_lvl4.png"));
-        else if(tile == '6')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_6_lvl4.png"));
-        else if(tile == '7')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_7_lvl4.png"));
-        else if(tile == '8')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_8_lvl4.png"));
-        else if(tile == '9')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_9_lvl4.png"));
-        else if(tile == '~')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_down_lvl4.png"));
-        else if(tile == 't')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/crate_lvl4.png"));
-        else if(tile == 'n')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/stone_lvl4.png"));
-        else if(tile == '~')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_down_lvl4.png"));
-        else if(tile == '^')
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/spikes_lvl4.png"));
-        else if(tile == 'i')
-            setPixmap(QPixmap(":/Other/Resources/Other/sign_level_4.png"));
-    }
-    else if(game->levelID == 5){
-        if(tile == '=') // pod
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_5_Tiles/middle_tile_lvl5.png"));
-        else if(tile == '#') // unutrasnjost
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_5_Tiles/inner_tile_lvl5.png"));
-        else if(tile == '%') // platforma
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_5_Tiles/paltform_tile_lvl5.png"));
-    }
+    drawTile();
 }
 
 Tile::~Tile()
 {
-   qDebug() <<"tile dest";
+   qDebug() << "tile dest";
 }
 
-char Tile::getType() const
+char Tile::getType() const { return m_type; }
+
+void Tile::drawTile()
 {
-    return type;
+    if(game->getLevelID() == 1)
+    {
+        setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_1_Tiles/floor_tile.png"));
+    }
+    else if(game->getLevelID() == 2)
+    {
+        if(m_type == '=')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/single_tile_lvl2.png"));
+        }
+        else if(m_type == '#')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/inner_tile_lvl2.png"));
+        }
+        else if(m_type == '^')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/spikes_lvl2.png"));
+        }
+        else if(m_type == '|')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/step_tile_lvl2.png"));
+        }
+        else if(m_type == '?')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/single_tile_spec_lvl2.png"));
+        }
+        else if(m_type == 'x')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/single_tile_rot_lvl2.png"));
+        }
+        else if(m_type == '*')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_2_Tiles/step_tile_rot_lvl2.png"));
+        }
+    }
+    else if(game->getLevelID() == 3)
+    {
+        if(m_type == '=')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/single_tile_lvl3.png"));
+        }
+        else if(m_type == '#')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/underground_tile_lvl3.png"));
+        }
+        else if(m_type == 'W')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/water_tile_lvl3.png"));
+        }
+        else if(m_type == 'L')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/leftside_tile_lvl3.png"));
+        }
+        else if(m_type == 'R')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/rightside_tile_lvl3.png"));
+        }
+        else if(m_type == 'l')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/rightside_down_lvl3.png"));
+        }
+        else if(m_type == 'r')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/leftside_down_lvl3.png"));
+        }
+        else if(m_type == '1')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/left_platform.png"));
+        }
+        else if(m_type == '2')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/right_platform.png"));
+        }
+        else if(m_type == '3')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/ugao1.png"));
+        }
+        else if(m_type == '4')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/ugao2.png"));
+        }
+        else if(m_type == 'M')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/single_tile_lvl3.png"));
+        }
+        else if(m_type == '^')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/bodlje.png"));
+        }
+    }
+    else if(game->getLevelID() == 4)
+    {
+        if(m_type == '=')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/single_tile_lvl4.png"));
+        }
+        else if(m_type == '#')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/inner_tile_lvl4.png"));
+        }
+        else if(m_type == '*')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/platform_tile_lvl4.png"));
+        }
+        else if(m_type == 'l')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/platform_left_tile_lvl4.png"));
+        }
+        else if(m_type == 'r')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/platform_right_tile_lvl4.png"));
+        }
+        else if(m_type == '1')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_1_lvl4.png"));
+        }
+        else if(m_type == '2')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_2_lvl4.png"));
+        }
+        else if(m_type == '3')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_3_lvl4.png"));
+        }
+        else if(m_type == '4')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_4_lvl4.png"));
+        }
+        else if(m_type == '5')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_5_lvl4.png"));
+        }
+        else if(m_type == '6')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_6_lvl4.png"));
+        }
+        else if(m_type == '7')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_7_lvl4.png"));
+        }
+        else if(m_type == '8')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_8_lvl4.png"));
+        }
+        else if(m_type == '9')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_9_lvl4.png"));
+        }
+        else if(m_type == '~')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_down_lvl4.png"));
+        }
+        else if(m_type == 't')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/crate_lvl4.png"));
+        }
+        else if(m_type == 'n')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/stone_lvl4.png"));
+        }
+        else if(m_type == '~')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_down_lvl4.png"));
+        }
+        else if(m_type == '^')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/spikes_lvl4.png"));
+        }
+        else if(m_type == 'i')
+        {
+            setPixmap(QPixmap(":/Other/Resources/Other/sign_level_4.png"));
+        }
+    }
+    else if(game->getLevelID() == 5)
+    {
+        if(m_type == '=')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_5_Tiles/middle_tile_lvl5.png"));
+        }
+        else if(m_type == '#')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_5_Tiles/inner_tile_lvl5.png"));
+        }
+        else if(m_type == '%')
+        {
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_5_Tiles/paltform_tile_lvl5.png"));
+        }
+    }
 }
 
 void Tile::advance(int step)
 {
-    move();
+    if(m_type == 'M')
+    {
+        move();
+    }
 }
 
 void Tile::move()
 {
-    auto player = game->player;
-    if(type == 'M')
+    if(m_side == 0) // ka desno
     {
-        if(side == 0) // okrenut ka desno
+        if(!m_stopMoving)
         {
-            if(!stopMoving)
+            if(game->player->collidesWithItem(this))
             {
-                if(player->collidesWithItem(this))
-                    player->setPos(player->x()+2, player->y());
+                game->player->setPos(game->player->x() + 2,
+                                     game->player->y());
+            }
 
-                setPos(x()+2, y());
+            setPos(x() + 2, y());
 
-                steps++;
-                if(steps == 120){
-                    side = 1;
-                    steps = 0;
-                }
+            m_steps++;
+            if(m_steps == 120)
+            {
+                m_side  = 1;
+                m_steps = 0;
             }
         }
-        else if(side == 1) // okrenut ka levo
+    }
+    else if(m_side == 1) // ka levo
+    {
+        if(!m_stopMoving)
         {
-            if(!stopMoving)
+            if(game->player->collidesWithItem(this))
             {
-                if(player->collidesWithItem(this))
-                    player->setPos(player->x()-2, player->y());
+                game->player->setPos(game->player->x() - 2,
+                                     game->player->y());
+            }
 
-                setPos(x()-2, y());
+            setPos(x() - 2, y());
 
-                steps++;
-                if(steps == 120){
-                    side = 0;
-                    steps = 0;
-                }
+            m_steps++;
+            if(m_steps == 120)
+            {
+                m_side  = 0;
+                m_steps = 0;
             }
         }
     }

@@ -89,7 +89,7 @@ void EnemyCharacter::decreaseHealth()
         if(typeid(*(colliding_item)) == typeid(Projectile))
         {
             auto projectile = dynamic_cast<Projectile *>(colliding_item);
-            if(projectile->shooter == Projectile::Player) // Ako ga puca PlayerCharacter
+            if(projectile->getShooter() == Projectile::Player) // Ako ga puca PlayerCharacter
             {
                 if(this->getLives() == 3)
                 {

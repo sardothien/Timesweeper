@@ -11,14 +11,19 @@ class Projectile : public QObject, public QGraphicsPixmapItem
             Enemy,
             Player
         };
-        //metode
+
+        // metode
         Projectile(Shooter shooter);
         ~Projectile();
+
+        Shooter getShooter() const;
+
+    private:
         void advance(int step) override;
         void move(int distanceToMove);
 
-        //polja
-        Shooter shooter;
+    private:
+        Shooter m_shooter;
 };
 
 #endif // PROJECTILE_H

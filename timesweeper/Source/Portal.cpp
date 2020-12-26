@@ -1,6 +1,6 @@
-#include <QDebug>
-
 #include "Headers/Portal.h"
+
+#include <QDebug>
 
 Portal::Portal()
 {

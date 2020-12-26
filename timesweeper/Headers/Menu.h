@@ -21,8 +21,8 @@ class Menu : public QMainWindow
         void on_optionsButton_clicked();
         void on_helpButton_clicked();
 
-private:
-        Ui::Menu *ui;
+    private:
+            Ui::Menu *ui;
 };
 
 #endif // MENU_H
