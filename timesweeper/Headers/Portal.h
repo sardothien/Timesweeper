@@ -6,7 +6,8 @@
 class Portal : public QGraphicsPixmapItem
 {
     public:
-        Portal (QObject *parent = nullptr);
+        Portal();
+        ~Portal();
 };
 
 #endif // PORTAL_H

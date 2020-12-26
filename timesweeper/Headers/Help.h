@@ -3,7 +3,8 @@
 
 #include <QMainWindow>
 
-namespace Ui {
+namespace Ui
+{
     class Help;
 }
 
@@ -14,11 +15,11 @@ class Help : public QMainWindow
         explicit Help(QWidget *parent = nullptr);
         ~Help();
 
-private slots:
-    void on_backButton_clicked();
+    private slots:
+        void on_backButton_clicked();
 
-private:
-        Ui::Help *ui;
+    private:
+            Ui::Help *ui;
 };
 
 #endif // HELP_H

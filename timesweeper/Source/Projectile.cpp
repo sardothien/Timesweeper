@@ -1,28 +1,30 @@
 #include "Headers/Projectile.h"
 #include "Headers/Game.h"
-#include "Headers/EnemyCharacter.h"
 #include "Headers/Tile.h"
 
-#include <QGraphicsScene>
 #include <qmath.h>
-#include <QTimer>
-#include <QList>
-#include <iostream>
 
 extern Game *game;
 
-Projectile::Projectile(Shooter shooter, QGraphicsPixmapItem *parent)
-    :shooter(shooter), QGraphicsPixmapItem(parent)
+Projectile::Projectile(Shooter shooter)
+    : m_shooter(shooter)
 {
-    setPixmap(QPixmap(":/Other/Resources/Other/projectile.png"));
-
-
+    if(m_shooter == Shooter::Player)
+    {
+        setPixmap(QPixmap(":/Other/Resources/Other/player_projectile.png"));
+    }
+    else
+    {
+        setPixmap(QPixmap(":/Other/Resources/Other/enemy_projectile.png"));
+    }
 }
 
 Projectile::~Projectile()
 {
-    std::cout << "Projectile destroyed!" << std::endl;
+    qDebug() << "Projectile destroyed!\n";
 }
+
+Projectile::Shooter Projectile::getShooter() const { return m_shooter; }
 
 void Projectile::advance(int step)
 {
@@ -31,36 +33,28 @@ void Projectile::advance(int step)
 
 void Projectile::move(int distanceToMove)
 {
-    qreal angle = rotation(); //u stepenima
-
-    //qDebug() << "ugao" << angle;
-
-    qreal dy = distanceToMove * qSin(qDegreesToRadians(angle));
-    qreal dx = distanceToMove * qCos(qDegreesToRadians(angle));
+    qreal angle = rotation();
+    qreal dy    = distanceToMove * qSin(qDegreesToRadians(angle));
+    qreal dx    = distanceToMove * qCos(qDegreesToRadians(angle));
 
     setPos(x() + dx, y() + dy);
 
     QList<QGraphicsItem *> colliding_items = collidingItems();
-
-    for (int i = 0, n = colliding_items.size(); i < n; ++i)
+    for(auto &colliding_item : colliding_items)
     {
-        if (typeid(*(colliding_items[i])) == typeid(Tile))
+        if(typeid(*(colliding_item)) == typeid(Tile))
         {
-            // brisanje oba objekta sa scene
             scene()->removeItem(this);
-            // brisanje sa hipa
             delete this;
             return;
         }
     }
 
     // ako projectile ode van view-a, unistava se
-    if (x() > game->player->x() + 1200 || x() < game->player->x() - 1200 ||
-        y() > game->player->y() + 700 || y() < game->player->y() - 700)
+    if(x() > game->m_player->x() + 1200 || x() < game->m_player->x() - 1200 ||
+       y() > game->m_player->y() + 700 || y() < game->m_player->y() - 700)
     {
         scene()->removeItem(this);
         delete this;
     }
 }
-
-

@@ -31,10 +31,10 @@
         <file>Resources/CharacterModels/alien_alpha_front.png</file>
     </qresource>
     <qresource prefix="/LevelBackgrounds">
-        <file>Resources/LevelBackgrounds/level_1_prologue.png</file>
-        <file>Resources/LevelBackgrounds/level_2_maya.png</file>
-        <file>Resources/LevelBackgrounds/level_4_wild_west.png</file>
-        <file>Resources/LevelBackgrounds/level_5_final.png</file>
+        <file>Resources/LevelBackgrounds/level_1.png</file>
+        <file>Resources/LevelBackgrounds/level_2.png</file>
+        <file>Resources/LevelBackgrounds/level_4.png</file>
+        <file>Resources/LevelBackgrounds/level_5.png</file>
         <file>Resources/LevelBackgrounds/level_3_dino.jpg</file>
     </qresource>
     <qresource prefix="/"/>
@@ -46,7 +46,7 @@
         <file>Resources/Other/splash.png</file>
         <file>Resources/Other/options.png</file>
         <file>Resources/Other/icon.png</file>
-        <file>Resources/Other/projectile.png</file>
+        <file>Resources/Other/player_projectile.png</file>
         <file>Resources/Other/health_bar_1.png</file>
         <file>Resources/Other/health_bar_2.png</file>
         <file>Resources/Other/health_bar_3.png</file>

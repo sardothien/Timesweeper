@@ -1,237 +1,177 @@
 #include <QDebug>
-
-#include <iostream>
-#include <QWidget>
-#include <QLabel>
 #include <QStyle>
 
 #include "Headers/DialogueHandler.h"
 #include "Headers/Game.h"
 #include "Headers/Level.h"
-#include "Headers/Pickup.h"
 #include "ui_Game.h"
 
-#include "Headers/Tile.h"
-#include "Headers/NPCharacter.h"
+int Game::m_levelID;
 
-int Game::levelID;
-
-void Game::setHealthBar()
-{
-    QString health;
-    for (int i = 1; i <= 8; i++)
-    {
-        health = QString::number(i);
-        health = "hb" + health;
-
-        if (player->getHealth() == i)
-            label->setProperty("foo", health);
-    }
-
-    label->style()->unpolish(label);
-    label->style()->polish(label);
-    label->update();
-}
-
-void Game::gameOver()
-{
-    isGameOver = true;
-    gameOverLabel->show();
-
-//    if (isGameOver == false)
-//    {
-
-//        gameOverScreen = new QGraphicsPixmapItem;
-//        gameOverScreen->setPixmap(QPixmap(":/Other/Resources/Other/gameover.png"));
-//        gameOverScreen->setOpacity(0.9);
-//        // TODO - popraviti pozicije za 3. i 5. nivo
-//        if(player->x() < 450)
-//            gameOverScreen->setPos(300, scene()->sceneRect().center().y()-180);
-//        else
-//            gameOverScreen->setPos(player->x()-200, scene()->sceneRect().center().y()-180);
-
-//        currentLevel->addItem(gameOverScreen);
-//    }
-
-}
-
-QLabel *Game::getGameOverLabel() const
-{
-    return gameOverLabel;
-}
-
-Ui::Game *Game::getUi() const
-{
-    return ui;
-}
-
-bool Game::getIsGameOver() const
-{
-    return isGameOver;
-}
-
-bool Game::getSoundOn() const
-{
-    return soundOn;
-}
-
-void Game::setSoundOn(bool value)
-{
-    soundOn = value;
-}
-
-
-
-Game::Game(QWidget *parent)
+Game::Game()
 {
     ui->setupUi(this);
     setWindowTitle("timesweeper");
 
-    label = new QLabel(this);
-    label->setGeometry(10,10,155,55);
-    label->setProperty("foo", "hb8");
+    m_label = new QLabel(this);
+    m_label->setGeometry(10, 10, 155, 55);
+    m_label->setProperty("foo", "hb8");
 
     makeGameOverLabel();
 
     setMouseTracking(true);
-
-    cursor = QCursor(QPixmap(":/Other/Resources/Other/crosshair.png"), 25 , 25);
-    setCursor(cursor);
+    m_cursor = QCursor(QPixmap(":/Other/Resources/Other/crosshair.png"), 25 , 25);
+    setCursor(m_cursor);
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setFixedSize(1200, 700);    // za view
+    setFixedSize(1200, 700);
 
-    player = new PlayerCharacter();
-    player->setFlag(QGraphicsItem::ItemIsFocusable);
-    player->setFocus();
+    m_player = new PlayerCharacter();
+    m_player->setFlag(QGraphicsItem::ItemIsFocusable);
+    m_player->setFocus();
 
+    connect(m_player, &PlayerCharacter::enteredPortal, this, &Game::changeLevel);
+    connect(m_player, &PlayerCharacter::startDialogue, this, &Game::triggerDialogue);
+    connect(m_player, &PlayerCharacter::healthChanged, this, &Game::setHealthBar);
+    connect(m_player, &PlayerCharacter::playerIsDead, this, &Game::gameOver);
 
-    connect(player, &PlayerCharacter::enteredPortal, this, &Game::changeLevel);
-    connect(player, &PlayerCharacter::startDialogue, this, &Game::triggerDialogue);
-    connect(player, &PlayerCharacter::healthChanged, this, &Game::setHealthBar);
-    connect(player, &PlayerCharacter::playerIsDead, this, &Game::gameOver);
+    m_music = new QMediaPlayer();
 
-    music = new QMediaPlayer();
+    //NOTE: ne dirati ovde levelID
+    m_levelID = 1;
+    m_mainTimer = new QTimer(this);
 
-    //NOTE: menjanje nivoa trenutno radi pravilno samo ako ovde prvo stoji levelID = 1, (nisam nasao zasto)
-    //ako krenete odmah od vasih nivoa, desice se da chrashuje kada pokusate da se pomerite levo/desno
-    //Mina, u tvoj nivo sam privremeno dodao neki portal pri pocetku da bi Igor mogao da udje u svoj nivo dok ne popravimo ovaj bag
-    levelID = 1;
-    mainTimer = new QTimer(this);
     changeLevel();
-}
-
-
-int Game::getLevelID()
-{
-    return levelID;
 }
 
 void Game::mouseMoveEvent(QMouseEvent *event)
 {
-    //qDebug() << event->pos();
-    player->aimAtPoint(event->pos());
-    player->setFocus();
+    m_player->aimAtPoint(event->pos());
+    m_player->setFocus();
 }
 
 void Game::mousePressEvent(QMouseEvent *event)
 {
-    //qDebug()<<event->pos();
-    if((event->button() == Qt::LeftButton) && (levelID - 1 != 1))
+    if((event->button() == Qt::LeftButton) && (getLevelID() - 1 != 1))
     {
-        player->shootProjectile();
+        m_player->shootProjectile();
     }
-    player->setFocus();
-}
-
-void Game::changeLevel()
-{
-    /*if(levelID != 1){
-        auto allItems = currentLevel->items();
-        for (auto item : allItems)
-        {
-            if(typeid (*item) == typeid (PlayerCharacter))
-            {
-                //currentLevel->removeItem(item);
-                delete item;
-            }
-        }
-    }*/
-
-    currentLevel = Level::LoadLevel();
-    QObject::connect(mainTimer, SIGNAL(timeout()), currentLevel, SLOT(advance()) );
-    mainTimer->start(40);
-
-    DialogueHandler::initializeDialogue();
-    setScene(currentLevel);
-    player->setFocus();
-    player->setPos(currentLevelPlayerStartPosition);
-
-    if(levelID != 1)
-    {
-        player->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_right.png"));
-        player->setScale(0.8);
-    }
-    currentLevel->addItem(player);
-    //NOTE: ovaj if ne sme da se spoji sa ovim iznad jer se pixmap igraca iscrta iznad pixmapa puske
-    if(levelID != 1)
-    {
-        currentLevel->addItem(player->getGunArm());
-
-    }
-    centerOn(player);
-    playMusic();
-    levelID=3;
-}
-
-void Game::triggerDialogue()
-{
-    qDebug() << "signal caught triggerDialogue";
-    DialogueHandler::setDialogueActive(true);
-    DialogueHandler::advanceDialogue();
+    m_player->setFocus();
 }
 
 void Game::playMusic()
 {
-    if(levelID == 1)
+    m_music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_"
+                           + QString::number(getLevelID()) + ".mp3"));
+    if(m_soundOn && getLevelID() != 1)
     {
-        music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_1.mp3"));
+        m_music->play();
     }
-    else if(levelID == 2)
-    {
-        music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_2.mp3"));
-    }
-    else if(levelID == 3)
-    {
-        music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_3.mp3"));
-    }
-    else if(levelID == 4)
-    {
-        music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_4.mp3"));
-    }
-    else if(levelID == 5)
-    {
-    }
-
-    if(soundOn && levelID != 1)
-        music->play();
 }
 
 void Game::makeGameOverLabel()
 {
-    gameOverLabel = new QLabel(this);
-    gameOverLabel->setGeometry(300,120,590,360);
-    gameOverLabel->setPixmap(QPixmap(":/Other/Resources/Other/gameover.png"));
-    gameOverLabel->hide();
+    m_gameOverLabel = new QLabel(this);
+    m_gameOverLabel->setGeometry(300, 120, 590, 360);
+    m_gameOverLabel->setPixmap(QPixmap(":/Other/Resources/Other/gameover.png"));
+    m_gameOverLabel->hide();
 }
 
-Portal *Game::getCurrentLevelPortal()
+//----------GETERI/SETERI---------------
+
+Portal *Game::getCurrentLevelPortal() { return m_currentLevelPortal; }
+
+void Game::setCurrentLevelPortal(Portal *portal) { m_currentLevelPortal = portal; }
+
+int Game::getLevelID() { return m_levelID; }
+
+bool Game::getSoundOn() const { return m_soundOn; }
+
+void Game::setSoundOn(bool value) { m_soundOn = value; }
+
+bool Game::getIsGameOver() const { return m_isGameOver; }
+
+Ui::Game *Game::getUi() const { return ui; }
+
+QLabel *Game::getGameOverLabel() const { return m_gameOverLabel; }
+
+//----------SLOTOVI---------------------
+
+void Game::changeLevel()
 {
-    return currentLevelPortal;
+    //NOTE: pitati asistenta ovde za dealokaciju
+    if(getLevelID() != 1)
+    {
+        auto allItems = m_currentLevel->items();
+        for (auto item : allItems)
+        {
+            if(typeid(*item) != typeid(PlayerCharacter))
+            {
+                m_currentLevel->removeItem(item);
+                //delete item;
+            }
+        }
+    }
+
+    m_currentLevel = Level::LoadLevel();
+    QObject::connect(m_mainTimer, SIGNAL(timeout()), m_currentLevel, SLOT(advance()) );
+    m_mainTimer->start(40);
+
+    DialogueHandler::initializeDialogue();
+
+    setScene(m_currentLevel);
+
+    m_player->setFocus();
+    m_player->setPos(m_currentLevelPlayerStartPosition);
+
+    if(getLevelID() != 1)
+    {
+        m_player->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_right.png"));
+        m_player->setScale(0.8);
+    }
+    m_currentLevel->addItem(m_player);
+
+    //NOTE: ovaj if ne sme da se spoji sa ovim iznad jer se pixmap igraca iscrta iznad pixmapa puske
+    if(getLevelID() != 1)
+    {
+        m_currentLevel->addItem(m_player->getGunArm());
+
+    }
+    centerOn(m_player);
+
+    playMusic();
+
+    m_levelID++;
 }
 
-void Game::setCurrentLevelPortal(Portal *portal)
+void Game::triggerDialogue()
 {
-    currentLevelPortal = portal;
+    DialogueHandler::setDialogueActive(true);
+    DialogueHandler::advanceDialogue();
+}
+
+void Game::setHealthBar()
+{
+    QString health;
+    for(int i = 1; i <= 8; i++)
+    {
+        health = QString::number(i);
+        health = "hb" + health;
+
+        if(m_player->getHealth() == i)
+        {
+            m_label->setProperty("foo", health);
+        }
+    }
+
+    m_label->style()->unpolish(m_label);
+    m_label->style()->polish(m_label);
+    m_label->update();
+}
+
+void Game::gameOver()
+{
+    m_isGameOver = true;
+    m_gameOverLabel->show();
 }

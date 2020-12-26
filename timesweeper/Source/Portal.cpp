@@ -1,6 +1,13 @@
 #include "Headers/Portal.h"
 
-Portal::Portal(QObject *parent)
+#include <QDebug>
+
+Portal::Portal()
 {
     setPixmap(QPixmap(":/Other/Resources/Other/portal.png"));
+}
+
+Portal::~Portal()
+{
+    qDebug() << "portal destroyed\n";
 }

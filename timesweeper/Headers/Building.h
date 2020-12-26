@@ -18,7 +18,7 @@ class Building : public QGraphicsPixmapItem
             church
         };
 
-        Building (Buildings b);
+        Building(Buildings b);
 };
 
 #endif // BUILDING_H

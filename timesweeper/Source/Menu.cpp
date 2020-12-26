@@ -6,10 +6,11 @@
 
 Game * game;
 
-Menu::Menu(QWidget *parent) : QMainWindow(parent), ui(new Ui::Menu)
+Menu::Menu(QWidget *parent)
+    : QMainWindow(parent), ui(new Ui::Menu)
 {
     ui->setupUi(this);
-    setFixedSize(800,500);
+    setFixedSize(800, 500);
     setWindowTitle("timesweeper");
     game = new Game();
 }
@@ -22,7 +23,9 @@ Menu::~Menu()
 void Menu::on_startButton_clicked()
 {
     if(game->getSoundOn())
-        game->music->play();
+    {
+        game->m_music->play();
+    }
     game->show();
     this->hide();
 }

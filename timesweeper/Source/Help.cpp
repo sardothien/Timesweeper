@@ -2,10 +2,11 @@
 #include "Headers/Menu.h"
 #include "ui_Help.h"
 
-Help::Help(QWidget *parent) : QMainWindow(parent), ui(new Ui::Help)
+Help::Help(QWidget *parent)
+    : QMainWindow(parent), ui(new Ui::Help)
 {
     ui->setupUi(this);
-    setFixedSize(800,500);
+    setFixedSize(800, 500);
     setWindowTitle("timesweeper");
 }
 

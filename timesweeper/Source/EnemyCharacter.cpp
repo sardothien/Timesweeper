@@ -1,23 +1,30 @@
 #include "Headers/EnemyCharacter.h"
-#include "Headers/Level.h"
-#include "Headers/Projectile.h"
 #include "Headers/Game.h"
-
-#include<iostream>
+#include "Headers/Projectile.h"
 
 extern Game* game;
 
-EnemyCharacter::EnemyCharacter(Character *parent)
+EnemyCharacter::EnemyCharacter()
 {
-    healthBar = new HealthBar(80, 15);
+    m_healthBar = new HealthBar(80, 15);
 
     // pomocne promenljive za kretanje
-    side = 0;
-    steps = 0;
-    stopMoving = false;
-
-
+    m_side       = 0;
+    m_steps      = 0;
+    m_stopMoving = false;
 }
+
+EnemyCharacter::~EnemyCharacter()
+{
+    qDebug() << "Enemy destroyed";
+    delete m_healthBar;
+}
+
+int EnemyCharacter::getLives() const { return m_lives; }
+
+void EnemyCharacter::setLives(int lives) { m_lives = lives; }
+
+HealthBar *EnemyCharacter::getHealtBar() const { return m_healthBar; }
 
 void EnemyCharacter::advance(int step)
 {
@@ -26,99 +33,91 @@ void EnemyCharacter::advance(int step)
     decreaseHealth();
 }
 
-EnemyCharacter::~EnemyCharacter()
-{
-    std::cout << "Enemy destroyed" << std::endl;
-    delete this->healthBar;
-}
-
-int EnemyCharacter::getLives() const
-{
-    return this->lives;
-}
-
-void EnemyCharacter::setLives(int lives)
-{
-    this->lives = lives;
-}
-
 // Kretanje neprijatelja levo/desno
 void EnemyCharacter::move()
 {
-    if(side == 0) // okrenut ka desno
+    if(m_side == 0) // okrenut ka desno
     {
         setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_right.png"));
 
-        if(!stopMoving)
+        if(!m_stopMoving)
         {
-            setPos(x()+1, y());
+            setPos(x() + 1, y());
 
-            healthBar->bar->setPos(healthBar->bar->x()+1, healthBar->bar->y());
-            healthBar->barFrame->setPos(healthBar->barFrame->x()+1, healthBar->barFrame->y());
+            m_healthBar->m_bar->setPos(m_healthBar->m_bar->x() + 1,
+                                     m_healthBar->m_bar->y());
+            m_healthBar->m_barFrame->setPos(m_healthBar->m_barFrame->x() + 1,
+                                          m_healthBar->m_barFrame->y());
 
-            steps++;
-            if(steps == 60){
-                side = 1;
-                steps = 0;
+            m_steps++;
+            if(m_steps == 60)
+            {
+                m_side  = 1;
+                m_steps = 0;
             }
         }
     }
-    else if(side == 1) // okrenut ka levo
+    else if(m_side == 1) // okrenut ka levo
     {
         setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_left.png"));
 
-        if(!stopMoving)
+        if(!m_stopMoving)
         {
-            setPos(x()-1, y());
+            setPos(x() - 1, y());
 
-            healthBar->bar->setPos(healthBar->bar->x()-1, healthBar->bar->y());
-            healthBar->barFrame->setPos(healthBar->barFrame->x()-1, healthBar->barFrame->y());
+            m_healthBar->m_bar->setPos(m_healthBar->m_bar->x() - 1,
+                                     m_healthBar->m_bar->y());
+            m_healthBar->m_barFrame->setPos(m_healthBar->m_barFrame->x() - 1,
+                                          m_healthBar->m_barFrame->y());
 
-            steps++;
-            if(steps == 60){
-                side = 0;
-                steps = 0;
+            m_steps++;
+            if(m_steps == 60)
+            {
+                m_side  = 0;
+                m_steps = 0;
             }
         }
     }
-
-//    decreaseHealth();
 }
 
 void EnemyCharacter::decreaseHealth()
 {
     QList<QGraphicsItem *> colliding_items = collidingItems();
 
-    for (int i = 0, n = colliding_items.size(); i < n; ++i)
+    for(auto & colliding_item : colliding_items)
     {
-        if (typeid(*(colliding_items[i])) == typeid(Projectile))
+        if(typeid(*(colliding_item)) == typeid(Projectile))
         {
-            auto projectile = dynamic_cast<Projectile*>(colliding_items[i]);
-            if(projectile->shooter == Projectile::Player){ // Ako ga puca PlayerCharacter
-                if(this->getLives() == 3){
-                    game->currentLevel->removeItem(this->healthBar->bar);
-                    this->healthBar->bar = new QGraphicsRectItem(x(), y()-25, 54, 15);
-                    this->healthBar->bar->setBrush(Qt::yellow);
-                    game->currentLevel->addItem(this->healthBar->bar);
+            auto projectile = dynamic_cast<Projectile *>(colliding_item);
+            if(projectile->getShooter() == Projectile::Player) // Ako ga puca PlayerCharacter
+            {
+                if(this->getLives() == 3)
+                {
+                    game->m_currentLevel->removeItem(this->m_healthBar->m_bar);
+                    this->m_healthBar->m_bar = new QGraphicsRectItem(x(), y() - 25, 54, 15);
+                    this->m_healthBar->m_bar->setBrush(Qt::yellow);
+                    game->m_currentLevel->addItem(this->m_healthBar->m_bar);
                     this->setLives(2);
                 }
-                else if(this->getLives() == 2){
-                    game->currentLevel->removeItem(this->healthBar->bar);
-                    this->healthBar->bar = new QGraphicsRectItem(x(), y()-25, 28, 15);
-                    this->healthBar->bar->setBrush(Qt::red);
-                    game->currentLevel->addItem(this->healthBar->bar);
+                else if(this->getLives() == 2)
+                {
+                    game->m_currentLevel->removeItem(this->m_healthBar->m_bar);
+                    this->m_healthBar->m_bar = new QGraphicsRectItem(x(), y() - 25, 28, 15);
+                    this->m_healthBar->m_bar->setBrush(Qt::red);
+                    game->m_currentLevel->addItem(this->m_healthBar->m_bar);
                     this->setLives(1);
                 }
-                else{
+                else
+                {
                     // brisanje oba objekta sa scene
-                    scene()->removeItem(colliding_items[i]);
+                    scene()->removeItem(colliding_item);
                     scene()->removeItem(this);
 
                     delete this;
                 }
 
                 // brisanje sa hipa
-                delete colliding_items[i];
+                delete colliding_item;
             }
 
             return;
@@ -128,30 +127,31 @@ void EnemyCharacter::decreaseHealth()
 
 void EnemyCharacter::shoot()
 {
-    if((abs(game->player->x() - x()) < 600) && (abs(game->player->y() - y()) < 50))
+    if((abs(game->m_player->x() - x()) < 600) &&
+       (abs(game->m_player->y() - y()) < 50))
     {
-        if(game->player->x() < x()) // enemy puca ulevo
+        if(game->m_player->x() < x()) // enemy puca ulevo
         {
-            side = 1;
-            stopMoving = true;
+            m_side       = 1;
+            m_stopMoving = true;
 
-            Projectile *projectile = new Projectile(Projectile::Enemy);
-            projectile->setPos(x(), y()+75);
+            auto *projectile = new Projectile(Projectile::Enemy);
+            projectile->setPos(x(), y() + 75);
             projectile->setRotation(-180);
-            game->currentLevel->addItem(projectile);
+            game->m_currentLevel->addItem(projectile);
         }
         else // enemy puca udesno
         {
-            side = 0;
-            stopMoving = true;
+            m_side       = 0;
+            m_stopMoving = true;
 
-            Projectile *projectile = new Projectile(Projectile::Enemy);
-            projectile->setPos(x()+120, y()+65);
-            game->currentLevel->addItem(projectile);
+            auto *projectile = new Projectile(Projectile::Enemy);
+            projectile->setPos(x() + 120, y() + 65);
+            game->m_currentLevel->addItem(projectile);
         }
     }
     else
     {
-        stopMoving = false;
+        m_stopMoving = false;
     }
 }

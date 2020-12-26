@@ -1,75 +1,51 @@
 #include <QDebug>
 
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <QCharRef>
-#include <QFile>
-#include <QGraphicsScene>
-#include <QString>
-#include <QTextStream>
-
-#include "Headers/Game.h"
+#include "Headers/Building.h"
+#include "Headers/DialogueTriggerBox.h"
 #include "Headers/EnemyBoss.h"
 #include "Headers/EnemyCharacter.h"
-#include "Headers/NPCharacter.h"
+#include "Headers/Game.h"
 #include "Headers/Level.h"
-#include "Headers/Tile.h"
 #include "Headers/Pickup.h"
 #include "Headers/PlayerCharacter.h"
 #include "Headers/Portal.h"
-#include "Headers/Building.h"
-#include "Headers/DialogueTriggerBox.h"
+#include "Headers/Tile.h"
 
 extern Game* game;
-EnemyCharacter* Level::enemy;
-EnemyBoss* Level::enemyBoss;
-PlayerCharacter *Game::player;
-Portal *Game::currentLevelPortal;
-QPointF Game::currentLevelPlayerStartPosition;
+PlayerCharacter *Game::m_player;
+Portal *Game::m_currentLevelPortal;
+QPointF Game::m_currentLevelPlayerStartPosition;
+QGraphicsScene *Level::m_scene;
 
 QGraphicsScene* Level::LoadLevel()
 {
     // Pravljenje scene
-    QGraphicsScene *scene = new QGraphicsScene();
+    m_scene = new QGraphicsScene();
 
     QString filename;
+    filename = ":/Levels/Resources/Levels/level" + QString::number(game->getLevelID()) + ".txt";
+    m_scene->setBackgroundBrush(QBrush(QImage(
+                  ":/LevelBackgrounds/Resources/LevelBackgrounds/level_"
+                  + QString::number(game->getLevelID()) + ".png")));
 
-    // Biranje nivoa
-    if(game->levelID == 1){
-        filename = ":/Levels/Resources/Levels/level1.txt";
-        scene->setSceneRect(0, 0, 2300, 700);
-        scene->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_1_prologue.png")));
-    }
-    else if(game->levelID == 2){
-        filename = ":/Levels/Resources/Levels/level2.txt";
-        scene->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_2_maya.png")));
-    }
-    else if(game->levelID == 3){
-        filename = ":/Levels/Resources/Levels/level3.txt";
-    }
-    else if(game->levelID == 4){
-        filename = ":/Levels/Resources/Levels/level4.txt";
-        scene->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_4_wild_west.png")));
-    }
-    else if(game->levelID == 5){
-        filename = ":/Levels/Resources/Levels/level5.txt";
-        scene->setBackgroundBrush(QBrush(QImage(":/LevelBackgrounds/Resources/LevelBackgrounds/level_5_final.png")));
-    }
-    else{
-        std::cout << "Nije dobar ID nivoa!" << std::endl;
-        return nullptr;
-    }
+    parseLevelFile(filename);
 
+    return m_scene;
+}
+
+void Level::parseLevelFile(QString filename)
+{
     // Otvaranje datoteke sa nivoom
     QFile file(filename);
-    if(!file.exists()){
-        std::cout << "Fajl ne postoji!" << std::endl;
-        return nullptr;
+    if(!file.exists())
+    {
+        qDebug() << "Fajl ne postoji!\n";
+        return ;
     }
-    if(!file.open(QIODevice::ReadOnly)){
-        std::cout << "Nije uspelo otvaranje fajla!" << std::endl;
-        return nullptr;
+    if(!file.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Nije uspelo otvaranje fajla!\n";
+        return ;
     }
 
     // Citanje podataka
@@ -79,138 +55,130 @@ QGraphicsScene* Level::LoadLevel()
     QStringList line = in.readLine().split(" ");
     int sizeX = line[0].toInt();
     int sizeY = line[1].toInt();
-    //std::cout << sizeX << std::endl;
-    //std::cout << sizeY << std::endl;
 
-    // 45x45 - dimenzija tile-a
-    if(game->levelID == 1)
-        scene->setSceneRect(0, 0, 44*(sizeX-1), 700);
-    else if(game->levelID == 5 || game->levelID == 3)
-        scene->setSceneRect(0, 0, 45*(sizeX-1), 45*(sizeY-1));
+    if(game->getLevelID() == 1)
+    {
+        m_scene->setSceneRect(0, 0, 44 * (sizeX - 1), 700);
+    }
+    else if(game->getLevelID() == 5 || game->getLevelID() == 3)
+    {
+        m_scene->setSceneRect(0, 0, 45 * (sizeX - 1), 45 * (sizeY - 1));
+    }
     else
-        scene->setSceneRect(0, 0, 45*(sizeX-1), 700);
+    {
+        m_scene->setSceneRect(0, 0, 45 * (sizeX - 1), 700);
+    }
 
     // Prolazak kroz matricu i iscrtavanje
-    for(int y = 0; y < sizeY; y++){
+    for(int y = 0; y < sizeY; y++)
+    {
         QString tiles = in.readLine();
-        for(int x = 0; x < sizeX-1; x++){
-            if(game->levelID == 1)
-                AddObject(scene, tiles[x].toLatin1(), x*44, y*44);
-            else // ostali nivoi (45x45 - dimenzija tile-a)
-                AddObject(scene, tiles[x].toLatin1(), x*45, y*45);
+        for(int x = 0; x < sizeX-1; x++)
+        {
+            if(game->getLevelID() == 1)
+            {
+                AddObject(tiles[x].toLatin1(), x * 44, y * 44);
+            }
+            else
+            {
+                AddObject(tiles[x].toLatin1(), x * 45, y * 45);
+            }
         }
     }
 
     file.close();
-
-    return scene;
 }
 
-void addBuilding(Building::Buildings b, QGraphicsScene *scene, int x, int y)
+void Level::AddObject(char type, int x, int y)
 {
-    Building *building;
-
-    building = new Building(b);
-    building->setPos(x,y);
-    scene->addItem(building);
-}
-
-void Level::AddObject(QGraphicsScene *scene, char type, int x, int y)
-{
-    Tile *rect;
-    Pickup *pickup;
-    NPCharacter *npc;
-    Portal *portal;
-    //QGraphicsRectItem *dialogueStartPoint;
-    //QGraphicsPixmapItem *triggerBox;
+    EnemyCharacter *enemy;
+    EnemyBoss *enemyBoss;
     DialogueTriggerBox *dialogueStartPoint;
+    Pickup *pickup;
+    Portal *portal;
+    Tile *tile;
 
     switch(type)
     {
         case '-': // nista
             break;
-        case 'd': //start za dijalog
+        case 'd': // start za dijalog
             dialogueStartPoint = new DialogueTriggerBox();
             dialogueStartPoint->setRect(x, y, 100, 500);
             //dialogueStartPoint->setOpacity(0.0);   otkomentarisati ovo kada se zavrsi testiranje
-            scene->addItem(dialogueStartPoint);
+            m_scene->addItem(dialogueStartPoint);
             break;
         case 'E': // neprijatelj
             enemy = new EnemyCharacter();
             enemy->setPos(x, y-110);
             enemy->setScale(0.8);
-            enemy->healthBar->barFrame->setPos(x, y-135);
-            enemy->healthBar->bar->setPos(x, y-135);
-            scene->addItem(enemy);
-            scene->addItem(enemy->healthBar->barFrame);
-            scene->addItem(enemy->healthBar->bar);
+            enemy->getHealtBar()->m_barFrame->setPos(x, y-135);
+            enemy->getHealtBar()->m_bar->setPos(x, y-135);
+            m_scene->addItem(enemy);
+            m_scene->addItem(enemy->getHealtBar()->m_barFrame);
+            m_scene->addItem(enemy->getHealtBar()->m_bar);
             break;
         case '+': // zivoti
             pickup = new Pickup();
             pickup->setPos(x, y);
-            scene->addItem(pickup);
+            m_scene->addItem(pickup);
             break;
-        case 'N': //NPC
-            npc = new NPCharacter();
-            npc->setPos(x,y);
-            scene->addItem(npc);
-            break;
-        case 'P': //Portal
+        case 'P': // portal
             portal = new Portal();
-            portal->setPos(x,y);
-            scene->addItem(portal);
+            portal->setPos(x, y);
+            m_scene->addItem(portal);
             game->setCurrentLevelPortal(portal);
             //qDebug() << game->getCurrentLevelPortalPosition();
             break;
-        case 'S': //Portal
-            Game::currentLevelPlayerStartPosition = QPointF(x, y);
+        case 'S': // pocetna pozicija igraca
+            Game::m_currentLevelPlayerStartPosition = QPointF(x, y);
             //qDebug() << Game::currentLevelPlayerStartPosition;
             break;
-         case 'F':
+         case 'F': // enemy boss
             enemyBoss = new EnemyBoss();
-            enemyBoss->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_alpha_front.png"));
             enemyBoss->setPos(x, y);
-            enemyBoss->healthBar->barFrame->setPos(x+60, y-40);
-            enemyBoss->healthBar->bar->setPos(x+60, y-40);
-            scene->addItem(enemyBoss);
-            scene->addItem(enemyBoss->healthBar->barFrame);
-            scene->addItem(enemyBoss->healthBar->bar);
+            enemyBoss->getHealtBar()->m_barFrame->setPos(x + 60, y - 40);
+            enemyBoss->getHealtBar()->m_bar->setPos(x + 60, y - 40);
+            m_scene->addItem(enemyBoss);
+            m_scene->addItem(enemyBoss->getHealtBar()->m_barFrame);
+            m_scene->addItem(enemyBoss->getHealtBar()->m_bar);
+            break;
+        case 's': // Building - level 4 - sheriff
+            addBuilding(Building::Buildings::sheriff, x, y);
+            break;
+        case 'a': // Building - level 4 - saloon
+            addBuilding(Building::Buildings::saloon, x, y);
+            break;
+         case 'b': // Building - level 4 - bank
+            addBuilding(Building::Buildings::bank, x, y);
+            break;
+        case 'p': // Building - level 4 - big saloon
+            addBuilding(Building::Buildings::bigSaloon, x, y);
+            break;
+        case 'c': // Building - level 4 - church
+            addBuilding(Building::Buildings::church, x, y);
+            break;
+        case 'g': // Building - level 4 - generalStore
+            addBuilding(Building::Buildings::generalStore, x, y);
+            break;
+        case 'o': // Building - level 4 - office
+            addBuilding(Building::Buildings::office, x, y);
+            break;
+         case 'h': // Building - level 4 - hotel
+            addBuilding(Building::Buildings::hotel, x, y);
             break;
          default: // sve ostale prepreke
-            rect = new Tile(type);
-            rect->setPos(x, y);
-            scene->addItem(rect);
+            tile = new Tile(type);
+            tile->setPos(x, y);
+            m_scene->addItem(tile);
             break;
     }
+}
 
-    if (game->getLevelID()==4)
-    {
-        switch(type)
-        {
-        case 's': //Building - level 4 - sheriff
-            addBuilding(Building::Buildings::sheriff, scene, x, y);
-            break;
-        case 'a': //Building - level 4 - saloon
-            addBuilding(Building::Buildings::saloon, scene, x, y);
-            break;
-         case 'b': //Building - level 4 - bank
-            addBuilding(Building::Buildings::bank, scene, x, y);
-            break;
-        case 'p': //Building - level 4 - big saloon
-            addBuilding(Building::Buildings::bigSaloon, scene, x, y);
-            break;
-        case 'c': //Building - level 4 - church
-            addBuilding(Building::Buildings::church, scene, x, y);
-            break;
-        case 'g': //Building - level 4 - generalStore
-            addBuilding(Building::Buildings::generalStore, scene, x, y);
-            break;
-        case 'o': //Building - level 4 - office
-            addBuilding(Building::Buildings::office, scene, x, y);
-            break;
-         case 'h': //Building - level 4 - hotel
-            addBuilding(Building::Buildings::hotel, scene, x, y);
-            break;      
-        }
-    }
+
+void Level::addBuilding(Building::Buildings b, int x, int y)
+{
+    auto building = new Building(b);
+    building->setPos(x, y);
+    m_scene->addItem(building);
 }

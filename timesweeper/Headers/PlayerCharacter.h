@@ -1,65 +1,68 @@
 #ifndef PLAYERCHARACTER_H
 #define PLAYERCHARACTER_H
 
-#include <QTimer>
-#include <QtMultimedia/QMediaPlayer>
-
 #include "Headers/Character.h"
 #include "Headers/GunArm.h"
+
+class QMediaPlayer;
 
 class PlayerCharacter : public Character
 {
     Q_OBJECT
     public:
-        PlayerCharacter (Character *parent = nullptr);
+        // metode
+        PlayerCharacter();
         ~PlayerCharacter();
-        void keyPressEvent(QKeyEvent *event);
-        void keyReleaseEvent(QKeyEvent *event);
-        void shootProjectile();
+
+        void keyPressEvent(QKeyEvent *event) override;
+        void keyReleaseEvent(QKeyEvent *event) override;
+
         void aimAtPoint(QPoint point);
-        QPointF targetPoint;
-        GunArm *gunArm;
+        void updateShoudlerPosition();
+        void shootProjectile();
+        void increaseHealth();
+        void decreaseHealth();
+
+        // geteri/seteri
+        GunArm *getGunArm() const;
+        int getHealth() const;
+
         enum AimDirection
         {
             aimingLeft,
             aimingRight
         };
-        AimDirection aimDirection;
-        QPointF projectileStartPoint;
-        QPointF shoulderPosition;// = QPointF(50, 70);
 
-        void updateShoudlerPosition();
+        // polja
+        AimDirection m_aimDirection;
+        QPointF m_targetPoint;
+        GunArm *m_gunArm;
+        QPointF m_projectileStartPoint;
+        QPointF m_shoulderPosition;
 
-        GunArm *getGunArm() const;
-        int getHealth() const;
-        void increaseHealth();
-        void decreaseHealth();
-
+    private:
         void advance(int step) override;
+        void jump();
+        void walk();
+        void detectCollision();
 
-signals:
+    signals:
         void enteredPortal();
         void startDialogue();
         void healthChanged();
         void playerIsDead();
 
-    public slots:
-
-    private slots:
-        void jump();
-        void walk();
-        void detectCollision();
-
     private:
-        qreal velocityX, velocityY = 1;
-        qreal gravity = 0.5;
-        bool isOnGround;
-        QMediaPlayer *projectilesound;
-        QPolygonF playerRectPoints;
-        int health = 8;
-        QGraphicsPixmapItem *pauseScreen;
-        bool isPaused = false;
-        bool canMove = false;
+        qreal m_velocityX;
+        qreal m_velocityY = 1;
+        qreal m_gravity   = 0.5;
+        int m_health      = 8;
+        bool m_isPaused   = false;
+        bool m_canMove    = false;
+        bool m_isOnGround;
+        QMediaPlayer *m_projectileSound;
+        QGraphicsPixmapItem *m_pauseScreen;
+        QPolygonF m_playerRectPoints;
 };
 
 #endif // PLAYERCHARACTER_H
