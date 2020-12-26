@@ -20,7 +20,7 @@ Game::Game()
     makeGameOverLabel();
 
     setMouseTracking(true);
-    m_cursor = QCursor(QPixmap(":/Other/Resources/Other/crosshair.png"), 25 , 25);
+    m_cursor = QCursor(QPixmap(":/Other/Resources/Other/crosshair.png"), 17, 17);
     setCursor(m_cursor);
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -142,7 +142,7 @@ void Game::changeLevel()
 
     playMusic();
 
-    m_levelID=3;
+    m_levelID++;
 }
 
 void Game::triggerDialogue()

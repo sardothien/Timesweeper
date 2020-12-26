@@ -9,6 +9,7 @@
         <file>Resources/Sounds/bgsound_level_2.mp3</file>
         <file>Resources/Sounds/bgsound_level_4.mp3</file>
         <file>Resources/Sounds/bgsound_level_3.mp3</file>
+        <file>Resources/Sounds/bgsound_level_5.mp3</file>
     </qresource>
     <qresource prefix="/Levels">
         <file>Resources/Levels/level1.txt</file>
@@ -74,6 +75,7 @@
         <file>Resources/Other/sign_level_4.png</file>
         <file>Resources/Other/health_level_3.png</file>
         <file>Resources/Other/enemy_projectile.png</file>
+        <file>Resources/Other/health_level_5.png</file>
     </qresource>
     <qresource prefix="/Terrain">
         <file>Resources/Terrain/Level_1_Tiles/floor_tile.png</file>
