@@ -19,16 +19,16 @@ class Game : public QGraphicsView
 {
     Q_OBJECT
     public:
-        //metode
+        // metode
         Game();
         void mouseMoveEvent(QMouseEvent *event);
         void mousePressEvent(QMouseEvent *event);
         void playMusic();
         void makeGameOverLabel();
 
-        //geteri/seteri
+        // geteri/seteri
         static Portal *getCurrentLevelPortal();
-        static void setCurrentLevelPortal(Portal *portal);     
+        static void setCurrentLevelPortal(Portal *portal);
         static int getLevelID();
         bool getSoundOn() const;
         void setSoundOn(bool value);
@@ -36,30 +36,29 @@ class Game : public QGraphicsView
         Ui::Game *getUi() const;
         QLabel *getGameOverLabel() const;
 
-        //polja
-        static PlayerCharacter *player;
-        static int levelID;
-        QGraphicsScene *currentLevel;
-        static Portal *currentLevelPortal;
-        static QPointF currentLevelPlayerStartPosition;
-        QMediaPlayer *music;
-        QCursor cursor;
-        QTimer *mainTimer;
-        QGraphicsPixmapItem *gameOverScreen;
+        // polja
+        static PlayerCharacter *m_player;
+        static int m_levelID;
+        QGraphicsScene *m_currentLevel;
+        static Portal *m_currentLevelPortal;
+        static QPointF m_currentLevelPlayerStartPosition;
+        QMediaPlayer *m_music;
+        QCursor m_cursor;
+        QTimer *m_mainTimer;
+        QGraphicsPixmapItem *m_gameOverScreen;
 
-public slots:
+    public slots:
         void changeLevel();
         void triggerDialogue();
         void setHealthBar();
         void gameOver();
 
-private:
+    private:
         Ui::Game *ui;
-        QLabel *label;
-        QLabel *gameOverLabel;
-        bool soundOn = true;
-        bool isGameOver = false;
+        QLabel *m_label;
+        QLabel *m_gameOverLabel;
+        bool m_soundOn    = true;
+        bool m_isGameOver = false;
 };
 
 #endif // GAME_H
-

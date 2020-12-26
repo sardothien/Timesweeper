@@ -24,7 +24,7 @@ void Menu::on_startButton_clicked()
 {
     if(game->getSoundOn())
     {
-        game->music->play();
+        game->m_music->play();
     }
     game->show();
     this->hide();

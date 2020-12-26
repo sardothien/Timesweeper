@@ -228,10 +228,10 @@ void Tile::move()
     {
         if(!m_stopMoving)
         {
-            if(game->player->collidesWithItem(this))
+            if(game->m_player->collidesWithItem(this))
             {
-                game->player->setPos(game->player->x() + 2,
-                                     game->player->y());
+                game->m_player->setPos(game->m_player->x() + 2,
+                                     game->m_player->y());
             }
 
             setPos(x() + 2, y());
@@ -248,10 +248,10 @@ void Tile::move()
     {
         if(!m_stopMoving)
         {
-            if(game->player->collidesWithItem(this))
+            if(game->m_player->collidesWithItem(this))
             {
-                game->player->setPos(game->player->x() - 2,
-                                     game->player->y());
+                game->m_player->setPos(game->m_player->x() - 2,
+                                     game->m_player->y());
             }
 
             setPos(x() - 2, y());

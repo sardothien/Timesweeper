@@ -12,7 +12,7 @@ DialogueBox::DialogueBox(QPair<DialogueHandler::Speaker, QString> &text)
     {
         setPixmap(QPixmap(":/Other/Resources/Other/dialogue_box_strauss.png"));
         m_currentText->setTextWidth(280);
-        m_currentText->setPos(10, 20); //pozicija od gornjeg levog ugla pixmapa
+        m_currentText->setPos(10, 20); // pozicija od gornjeg levog ugla pixmapa
     }
     else
     {
@@ -21,6 +21,6 @@ DialogueBox::DialogueBox(QPair<DialogueHandler::Speaker, QString> &text)
         m_currentText->setPos(5, 5);
     }
 
-    QPointF playerPosition = game->player->pos();
+    QPointF playerPosition = game->m_player->pos();
     setPos(playerPosition + QPointF(50, -100));
 }

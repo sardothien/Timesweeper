@@ -51,8 +51,8 @@ void Projectile::move(int distanceToMove)
     }
 
     // ako projectile ode van view-a, unistava se
-    if(x() > game->player->x() + 1200 || x() < game->player->x() - 1200 ||
-       y() > game->player->y() + 700 || y() < game->player->y() - 700)
+    if(x() > game->m_player->x() + 1200 || x() < game->m_player->x() - 1200 ||
+       y() > game->m_player->y() + 700 || y() < game->m_player->y() - 700)
     {
         scene()->removeItem(this);
         delete this;

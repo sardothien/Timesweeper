@@ -93,18 +93,18 @@ void EnemyCharacter::decreaseHealth()
             {
                 if(this->getLives() == 3)
                 {
-                    game->currentLevel->removeItem(this->m_healthBar->m_bar);
+                    game->m_currentLevel->removeItem(this->m_healthBar->m_bar);
                     this->m_healthBar->m_bar = new QGraphicsRectItem(x(), y() - 25, 54, 15);
                     this->m_healthBar->m_bar->setBrush(Qt::yellow);
-                    game->currentLevel->addItem(this->m_healthBar->m_bar);
+                    game->m_currentLevel->addItem(this->m_healthBar->m_bar);
                     this->setLives(2);
                 }
                 else if(this->getLives() == 2)
                 {
-                    game->currentLevel->removeItem(this->m_healthBar->m_bar);
+                    game->m_currentLevel->removeItem(this->m_healthBar->m_bar);
                     this->m_healthBar->m_bar = new QGraphicsRectItem(x(), y() - 25, 28, 15);
                     this->m_healthBar->m_bar->setBrush(Qt::red);
-                    game->currentLevel->addItem(this->m_healthBar->m_bar);
+                    game->m_currentLevel->addItem(this->m_healthBar->m_bar);
                     this->setLives(1);
                 }
                 else
@@ -127,10 +127,10 @@ void EnemyCharacter::decreaseHealth()
 
 void EnemyCharacter::shoot()
 {
-    if((abs(game->player->x() - x()) < 600) &&
-       (abs(game->player->y() - y()) < 50))
+    if((abs(game->m_player->x() - x()) < 600) &&
+       (abs(game->m_player->y() - y()) < 50))
     {
-        if(game->player->x() < x()) // enemy puca ulevo
+        if(game->m_player->x() < x()) // enemy puca ulevo
         {
             m_side       = 1;
             m_stopMoving = true;
@@ -138,7 +138,7 @@ void EnemyCharacter::shoot()
             auto *projectile = new Projectile(Projectile::Enemy);
             projectile->setPos(x(), y() + 75);
             projectile->setRotation(-180);
-            game->currentLevel->addItem(projectile);
+            game->m_currentLevel->addItem(projectile);
         }
         else // enemy puca udesno
         {
@@ -147,7 +147,7 @@ void EnemyCharacter::shoot()
 
             auto *projectile = new Projectile(Projectile::Enemy);
             projectile->setPos(x() + 120, y() + 65);
-            game->currentLevel->addItem(projectile);
+            game->m_currentLevel->addItem(projectile);
         }
     }
     else
