@@ -112,7 +112,8 @@ void Tile::drawTile()
         else if(m_type == '^')
         {
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/bodlje.png"));
-        }
+        else if(tile == 'D')
+            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_3_Tiles/down.png"));
     }
     else if(game->getLevelID() == 4)
     {

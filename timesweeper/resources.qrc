@@ -72,7 +72,7 @@
         <file>Resources/Other/office_level_4.png</file>
         <file>Resources/Other/big_saloon_level_4.png</file>
         <file>Resources/Other/sign_level_4.png</file>
-        <file>Resources/Other/enemy_projectile.png</file>
+        <file>Resources/Other/health_level_3.png</file>
     </qresource>
     <qresource prefix="/Terrain">
         <file>Resources/Terrain/Level_1_Tiles/floor_tile.png</file>
@@ -117,5 +117,6 @@
         <file>Resources/Terrain/Level_4_Tiles/crate_lvl4.png</file>
         <file>Resources/Terrain/Level_4_Tiles/stone_lvl4.png</file>
         <file>Resources/Terrain/Level_4_Tiles/spikes_lvl4.png</file>
+        <file>Resources/Terrain/Level_3_Tiles/down.png</file>
     </qresource>
 </RCC>
