@@ -17,6 +17,11 @@
         <file>Resources/Levels/level3.txt</file>
         <file>Resources/Levels/level4.txt</file>
         <file>Resources/Levels/level5.txt</file>
+        <file>Resources/Levels/level1_dialogue.txt</file>
+        <file>Resources/Levels/level2_dialogue.txt</file>
+        <file>Resources/Levels/level3_dialogue.txt</file>
+        <file>Resources/Levels/level4_dialogue.txt</file>
+        <file>Resources/Levels/level5_dialogue.txt</file>
     </qresource>
     <qresource prefix="/CharacterModels">
         <file>Resources/CharacterModels/player_front.png</file>
