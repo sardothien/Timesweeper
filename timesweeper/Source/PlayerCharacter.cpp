@@ -242,8 +242,9 @@ void PlayerCharacter::decreaseHealth()
     }
 }
 
-void PlayerCharacter::advance(int step)
+void PlayerCharacter::advance(int phase)
 {
+    QGraphicsItem::advance(phase);
     if(m_canMove)
     {
         walk();

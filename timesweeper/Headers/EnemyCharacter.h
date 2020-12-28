@@ -2,7 +2,7 @@
 #define ENEMYCHARACTER_H
 
 #include "Headers/Character.h"
-#include "Headers/HealthBar.h"
+#include "Headers/EnemyHealthBar.h"
 
 class EnemyCharacter : public Character
 {
@@ -14,11 +14,11 @@ class EnemyCharacter : public Character
         int getLives() const;
         void setLives(int lives);
 
-        HealthBar* m_healthBar;
-        HealthBar *getHealtBar() const;
+        EnemyHealthBar* m_healthBar;
+        EnemyHealthBar *getHealtBar() const;
 
     private:
-        void advance (int step) override;
+        void advance (int phase) override;
         void move();
         void shoot();
         void decreaseHealth();
@@ -27,7 +27,8 @@ class EnemyCharacter : public Character
         int m_side;
         int m_steps;
         bool m_stopMoving;
-        int m_lives = 3;
+        int m_timeToShoot = 0;
+        int m_lives       = 3;
 };
 
 #endif // ENEMYCHARACTER_H

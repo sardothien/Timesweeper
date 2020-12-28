@@ -2,7 +2,7 @@
 #define ENEMYBOSS_H
 
 #include "Headers/Character.h"
-#include "Headers/HealthBar.h"
+#include "Headers/EnemyHealthBar.h"
 
 class EnemyBoss : public Character
 {
@@ -11,14 +11,14 @@ class EnemyBoss : public Character
         EnemyBoss();
         ~EnemyBoss();
 
-        HealthBar* m_healthBar;
-        HealthBar *getHealtBar() const;
+        EnemyHealthBar* m_healthBar;
+        EnemyHealthBar *getHealtBar() const;
 
         void setLives(int lives);
         int getLives() const;
 
     private:
-        void advance(int step) override;
+        void advance(int phase) override;
         void decreaseHealth();
         void move();
 

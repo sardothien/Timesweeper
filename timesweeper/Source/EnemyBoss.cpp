@@ -7,7 +7,7 @@ extern Game *game;
 EnemyBoss::EnemyBoss()
 {
     setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_alpha_front.png"));
-    m_healthBar = new HealthBar(300, 20);
+    m_healthBar = new EnemyHealthBar(300, 20);
 }
 
 EnemyBoss::~EnemyBoss()
@@ -16,14 +16,15 @@ EnemyBoss::~EnemyBoss()
     delete this->m_healthBar;
 }
 
-HealthBar *EnemyBoss::getHealtBar() const { return m_healthBar; }
+EnemyHealthBar *EnemyBoss::getHealtBar() const { return m_healthBar; }
 
 void EnemyBoss::setLives(int lives) { m_lives = lives; }
 
 int EnemyBoss::getLives() const { return m_lives; }
 
-void EnemyBoss::advance(int step)
+void EnemyBoss::advance(int phase)
 {
+    QGraphicsItem::advance(phase);
     move();
     decreaseHealth();
 }

@@ -14,7 +14,7 @@ class Tile : public QObject, public QGraphicsPixmapItem
 
     private:
         void drawTile();
-        void advance(int step) override;
+        void advance(int phase) override;
         void move();
 
     private:

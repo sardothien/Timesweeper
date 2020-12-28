@@ -1,9 +1,9 @@
 #include <QPainter>
 #include <iostream>
 
-#include "Headers/HealthBar.h"
+#include "Headers/EnemyHealthBar.h"
 
-HealthBar::HealthBar(int width, int height)
+EnemyHealthBar::EnemyHealthBar(int width, int height)
     : m_width(width), m_height(height)
 {
     m_barFrame = new QGraphicsRectItem;
@@ -14,11 +14,11 @@ HealthBar::HealthBar(int width, int height)
     m_bar->setBrush(Qt::green);
 }
 
-HealthBar::~HealthBar()
+EnemyHealthBar::~EnemyHealthBar()
 {
     delete m_bar;
     delete m_barFrame;
     std::cout << "Health bar and bar frame destroyed" << std::endl;
 }
 
-int HealthBar::getWidth() const { return m_width; }
+int EnemyHealthBar::getWidth() const { return m_width; }

@@ -6,7 +6,7 @@ extern Game* game;
 
 EnemyCharacter::EnemyCharacter()
 {
-    m_healthBar = new HealthBar(80, 15);
+    m_healthBar = new EnemyHealthBar(80, 15);
 
     // pomocne promenljive za kretanje
     m_side       = 0;
@@ -24,10 +24,11 @@ int EnemyCharacter::getLives() const { return m_lives; }
 
 void EnemyCharacter::setLives(int lives) { m_lives = lives; }
 
-HealthBar *EnemyCharacter::getHealtBar() const { return m_healthBar; }
+EnemyHealthBar *EnemyCharacter::getHealtBar() const { return m_healthBar; }
 
-void EnemyCharacter::advance(int step)
+void EnemyCharacter::advance(int phase)
 {
+    QGraphicsItem::advance(phase);
     move();
     shoot();
     decreaseHealth();
@@ -135,23 +136,33 @@ void EnemyCharacter::shoot()
             m_side       = 1;
             m_stopMoving = true;
 
-            auto *projectile = new Projectile(Projectile::Enemy);
-            projectile->setPos(x(), y() + 75);
-            projectile->setRotation(-180);
-            game->m_currentLevel->addItem(projectile);
+            if(m_timeToShoot % 30 == 0)
+            {
+                m_timeToShoot    = 0;
+                auto *projectile = new Projectile(Projectile::Enemy);
+                projectile->setPos(x() + 30, y() + 72);
+                projectile->setRotation(-180);
+                game->m_currentLevel->addItem(projectile);
+            }
         }
         else // enemy puca udesno
         {
             m_side       = 0;
             m_stopMoving = true;
 
-            auto *projectile = new Projectile(Projectile::Enemy);
-            projectile->setPos(x() + 120, y() + 65);
-            game->m_currentLevel->addItem(projectile);
+            if(m_timeToShoot % 30 == 0)
+            {
+                m_timeToShoot    = 0;
+                auto *projectile = new Projectile(Projectile::Enemy);
+                projectile->setPos(x() + 90, y() + 65);
+                game->m_currentLevel->addItem(projectile);
+            }
         }
     }
     else
     {
         m_stopMoving = false;
     }
+
+    m_timeToShoot++;
 }

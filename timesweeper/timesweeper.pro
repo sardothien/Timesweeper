@@ -18,9 +18,9 @@ SOURCES += \
     Source/DialogueTriggerBox.cpp \
     Source/EnemyBoss.cpp \
     Source/EnemyCharacter.cpp \
+    Source/EnemyHealthBar.cpp \
     Source/Game.cpp \
     Source/GunArm.cpp \
-    Source/HealthBar.cpp \
     Source/Help.cpp \
     Source/Level.cpp \
     Source/Menu.cpp \
@@ -40,9 +40,9 @@ HEADERS += \
     Headers/DialogueTriggerBox.h \
     Headers/EnemyBoss.h \
     Headers/EnemyCharacter.h \
+    Headers/EnemyHealthBar.h \
     Headers/Game.h \
     Headers/GunArm.h \
-    Headers/HealthBar.h \
     Headers/Help.h \
     Headers/Level.h \
     Headers/Menu.h \

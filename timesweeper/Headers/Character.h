@@ -10,7 +10,7 @@ class Character : public QObject, public QGraphicsPixmapItem
         Character();
 
     private:
-        virtual void advance(int step) override = 0;
+        virtual void advance(int phase) override = 0;
 };
 
 #endif // CHARACTER_H

@@ -218,8 +218,9 @@ void Tile::drawTile()
     }
 }
 
-void Tile::advance(int step)
+void Tile::advance(int phase)
 {
+    QGraphicsItem::advance(phase);
     if(m_type == 'M')
     {
         move();

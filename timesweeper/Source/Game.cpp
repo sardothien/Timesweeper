@@ -116,7 +116,7 @@ void Game::changeLevel()
 
     m_currentLevel = Level::LoadLevel();
     QObject::connect(m_mainTimer, SIGNAL(timeout()), m_currentLevel, SLOT(advance()) );
-    m_mainTimer->start(40);
+    m_mainTimer->start(16);
 
     DialogueHandler::initializeDialogue();
 

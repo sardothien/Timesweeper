@@ -41,7 +41,7 @@ class PlayerCharacter : public Character
         QPointF m_shoulderPosition;
 
     private:
-        void advance(int step) override;
+        void advance(int phase) override;
         void jump();
         void walk();
         void detectCollision();

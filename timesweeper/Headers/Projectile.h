@@ -19,7 +19,7 @@ class Projectile : public QObject, public QGraphicsPixmapItem
         Shooter getShooter() const;
 
     private:
-        void advance(int step) override;
+        void advance(int phase) override;
         void move(int distanceToMove);
 
     private:

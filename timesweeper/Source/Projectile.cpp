@@ -26,8 +26,9 @@ Projectile::~Projectile()
 
 Projectile::Shooter Projectile::getShooter() const { return m_shooter; }
 
-void Projectile::advance(int step)
+void Projectile::advance(int phase)
 {
+    QGraphicsItem::advance(phase);
     move(30);
 }
 
