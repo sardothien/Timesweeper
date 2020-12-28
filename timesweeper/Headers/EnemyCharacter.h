@@ -17,11 +17,12 @@ class EnemyCharacter : public Character
         EnemyHealthBar* m_healthBar;
         EnemyHealthBar *getHealtBar() const;
 
+        void decreaseHealth();
+
     private:
         void advance (int phase) override;
         void move();
-        void shoot();
-        void decreaseHealth();
+        void shoot();        
 
     private:
         int m_side;

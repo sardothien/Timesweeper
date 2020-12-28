@@ -1,4 +1,6 @@
 #include "Headers/Projectile.h"
+#include "Headers/EnemyBoss.h"
+#include "Headers/EnemyCharacter.h"
 #include "Headers/Game.h"
 #include "Headers/Tile.h"
 
@@ -47,8 +49,43 @@ void Projectile::move(int distanceToMove)
         {
             scene()->removeItem(this);
             delete this;
-            return;
         }
+        else if(typeid(*(colliding_item)) == typeid(EnemyCharacter))
+        {
+            auto enemy = dynamic_cast<EnemyCharacter *>(colliding_item);
+            if(getShooter() == Projectile::Player)
+            {
+                enemy->decreaseHealth();
+                if(enemy->getLives() == 0)
+                {
+                    scene()->removeItem(enemy);
+                    scene()->removeItem(enemy->m_healthBar->m_bar);
+                    scene()->removeItem(enemy->m_healthBar->m_barFrame);
+                }
+
+                scene()->removeItem(this);
+                delete this;
+            }
+        }
+        else if(typeid(*(colliding_item)) == typeid(EnemyBoss))
+        {
+            auto enemyBoss = dynamic_cast<EnemyBoss *>(colliding_item);
+            if(getShooter() == Projectile::Player)
+            {
+                enemyBoss->decreaseHealth();
+                if(enemyBoss->getLives() == 0)
+                {
+                    scene()->removeItem(enemyBoss);
+                    scene()->removeItem(enemyBoss->m_healthBar->m_bar);
+                    scene()->removeItem(enemyBoss->m_healthBar->m_barFrame);
+                }
+
+                scene()->removeItem(this);
+                delete this;
+            }
+        }
+
+        return;
     }
 
     // ako projectile ode van view-a, unistava se

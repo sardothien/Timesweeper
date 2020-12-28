@@ -1,5 +1,6 @@
 #include "Headers/EnemyCharacter.h"
 #include "Headers/Game.h"
+#include "Headers/PlayerCharacter.h"
 #include "Headers/Projectile.h"
 
 extern Game* game;
@@ -31,7 +32,6 @@ void EnemyCharacter::advance(int phase)
     QGraphicsItem::advance(phase);
     move();
     shoot();
-    decreaseHealth();
 }
 
 // Kretanje neprijatelja levo/desno
@@ -43,15 +43,15 @@ void EnemyCharacter::move()
 
         if(!m_stopMoving)
         {
-            setPos(x() + 1, y());
+            setPos(x() + 0.3, y());
 
-            m_healthBar->m_bar->setPos(m_healthBar->m_bar->x() + 1,
+            m_healthBar->m_bar->setPos(m_healthBar->m_bar->x() + 0.3,
                                      m_healthBar->m_bar->y());
-            m_healthBar->m_barFrame->setPos(m_healthBar->m_barFrame->x() + 1,
+            m_healthBar->m_barFrame->setPos(m_healthBar->m_barFrame->x() + 0.3,
                                           m_healthBar->m_barFrame->y());
 
             m_steps++;
-            if(m_steps == 60)
+            if(m_steps % 150 == 0)
             {
                 m_side  = 1;
                 m_steps = 0;
@@ -64,64 +64,19 @@ void EnemyCharacter::move()
 
         if(!m_stopMoving)
         {
-            setPos(x() - 1, y());
+            setPos(x() - 0.3, y());
 
-            m_healthBar->m_bar->setPos(m_healthBar->m_bar->x() - 1,
+            m_healthBar->m_bar->setPos(m_healthBar->m_bar->x() - 0.3,
                                      m_healthBar->m_bar->y());
-            m_healthBar->m_barFrame->setPos(m_healthBar->m_barFrame->x() - 1,
+            m_healthBar->m_barFrame->setPos(m_healthBar->m_barFrame->x() - 0.3,
                                           m_healthBar->m_barFrame->y());
 
             m_steps++;
-            if(m_steps == 60)
+            if(m_steps % 150 == 0)
             {
                 m_side  = 0;
                 m_steps = 0;
             }
-        }
-    }
-}
-
-void EnemyCharacter::decreaseHealth()
-{
-    QList<QGraphicsItem *> colliding_items = collidingItems();
-
-    for(auto & colliding_item : colliding_items)
-    {
-        if(typeid(*(colliding_item)) == typeid(Projectile))
-        {
-            auto projectile = dynamic_cast<Projectile *>(colliding_item);
-            if(projectile->getShooter() == Projectile::Player) // Ako ga puca PlayerCharacter
-            {
-                if(this->getLives() == 3)
-                {
-                    game->m_currentLevel->removeItem(this->m_healthBar->m_bar);
-                    this->m_healthBar->m_bar = new QGraphicsRectItem(x(), y() - 25, 54, 15);
-                    this->m_healthBar->m_bar->setBrush(Qt::yellow);
-                    game->m_currentLevel->addItem(this->m_healthBar->m_bar);
-                    this->setLives(2);
-                }
-                else if(this->getLives() == 2)
-                {
-                    game->m_currentLevel->removeItem(this->m_healthBar->m_bar);
-                    this->m_healthBar->m_bar = new QGraphicsRectItem(x(), y() - 25, 28, 15);
-                    this->m_healthBar->m_bar->setBrush(Qt::red);
-                    game->m_currentLevel->addItem(this->m_healthBar->m_bar);
-                    this->setLives(1);
-                }
-                else
-                {
-                    // brisanje oba objekta sa scene
-                    scene()->removeItem(colliding_item);
-                    scene()->removeItem(this);
-
-                    delete this;
-                }
-
-                // brisanje sa hipa
-                delete colliding_item;
-            }
-
-            return;
         }
     }
 }
@@ -136,11 +91,11 @@ void EnemyCharacter::shoot()
             m_side       = 1;
             m_stopMoving = true;
 
-            if(m_timeToShoot % 30 == 0)
+            if(m_timeToShoot % 100 == 0)
             {
                 m_timeToShoot    = 0;
                 auto *projectile = new Projectile(Projectile::Enemy);
-                projectile->setPos(x() + 30, y() + 72);
+                projectile->setPos(x() + 10, y() + 72);
                 projectile->setRotation(-180);
                 game->m_currentLevel->addItem(projectile);
             }
@@ -150,11 +105,11 @@ void EnemyCharacter::shoot()
             m_side       = 0;
             m_stopMoving = true;
 
-            if(m_timeToShoot % 30 == 0)
+            if(m_timeToShoot % 100 == 0)
             {
                 m_timeToShoot    = 0;
                 auto *projectile = new Projectile(Projectile::Enemy);
-                projectile->setPos(x() + 90, y() + 65);
+                projectile->setPos(x() + 120, y() + 65);
                 game->m_currentLevel->addItem(projectile);
             }
         }
@@ -165,4 +120,28 @@ void EnemyCharacter::shoot()
     }
 
     m_timeToShoot++;
+}
+
+void EnemyCharacter::decreaseHealth()
+{
+    if(this->getLives() == 3)
+    {
+        game->m_currentLevel->removeItem(this->m_healthBar->m_bar);
+        this->m_healthBar->m_bar = new QGraphicsRectItem(x(), y() - 25, 54, 15);
+        this->m_healthBar->m_bar->setBrush(Qt::yellow);
+        game->m_currentLevel->addItem(this->m_healthBar->m_bar);
+        this->setLives(2);
+    }
+    else if(this->getLives() == 2)
+    {
+        game->m_currentLevel->removeItem(this->m_healthBar->m_bar);
+        this->m_healthBar->m_bar = new QGraphicsRectItem(x(), y() - 25, 28, 15);
+        this->m_healthBar->m_bar->setBrush(Qt::red);
+        game->m_currentLevel->addItem(this->m_healthBar->m_bar);
+        this->setLives(1);
+    }
+    else
+    {
+        this->setLives(0);
+    }
 }

@@ -17,9 +17,10 @@ class EnemyBoss : public Character
         void setLives(int lives);
         int getLives() const;
 
+        void decreaseHealth();
+
     private:
         void advance(int phase) override;
-        void decreaseHealth();
         void move();
 
     private:
