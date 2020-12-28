@@ -64,7 +64,6 @@
         <file>Resources/Other/optionsbg.png</file>
         <file>Resources/Other/volume.png</file>
         <file>Resources/Other/pause.png</file>
-        <file>Resources/Other/help.png</file>
         <file>Resources/Other/helpbg.png</file>
         <file>Resources/Other/crosshair.png</file>
         <file>Resources/Other/health_level_4.png</file>
@@ -81,6 +80,7 @@
         <file>Resources/Other/health_level_3.png</file>
         <file>Resources/Other/enemy_projectile.png</file>
         <file>Resources/Other/health_level_5.png</file>
+        <file>Resources/Other/help.png</file>
     </qresource>
     <qresource prefix="/Terrain">
         <file>Resources/Terrain/Level_1_Tiles/floor_tile.png</file>

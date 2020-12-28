@@ -188,10 +188,6 @@ void Tile::drawTile()
         {
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/stone_lvl4.png"));
         }
-        else if(m_type == '~')
-        {
-            setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/tile_down_lvl4.png"));
-        }
         else if(m_type == '^')
         {
             setPixmap(QPixmap(":/Terrain/Resources/Terrain/Level_4_Tiles/spikes_lvl4.png"));
