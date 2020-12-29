@@ -1,7 +1,8 @@
-11
+12
 0 # Good, you're here!
-0 # I don't know what you did back there, but You crippled the Alpha so much, he's trying to make a run for it!
-0 # Look, He's going to our rocket launch rig. He's trying to climb it and launch himself into space and escape!
+0 # I don't know what you did back there, but You crippled the Alpha!
+0 # He's trying to make a run for it! Look, he's going to our rocket launch rig.
+0 # He's trying to climb it and launch himself into space and escape!
 0 # You have to stop him!
 1 # On it doctor!
 2 # endsection

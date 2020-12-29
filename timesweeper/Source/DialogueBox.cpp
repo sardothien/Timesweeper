@@ -7,18 +7,19 @@ DialogueBox::DialogueBox(QPair<DialogueHandler::Speaker, QString> &text)
 {
     m_currentText = new QGraphicsTextItem(this);
     m_currentText->setPlainText(text.second);
+    m_currentText->setFont(QFont("Adventure", 11));
 
     if(text.first == DialogueHandler::Speaker::Strauss)
     {
         setPixmap(QPixmap(":/Other/Resources/Other/dialogue_box_strauss.png"));
         m_currentText->setTextWidth(280);
-        m_currentText->setPos(10, 20); // pozicija od gornjeg levog ugla pixmapa
+        m_currentText->setPos(5, 15); // pozicija od gornjeg levog ugla pixmapa
     }
     else
     {
         setPixmap(QPixmap(":/Other/Resources/Other/dialogue_box.png"));
         m_currentText->setTextWidth(300);
-        m_currentText->setPos(5, 5);
+        m_currentText->setPos(2, 2);
     }
 
     QPointF playerPosition = game->m_player->pos();

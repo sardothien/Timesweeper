@@ -1,10 +1,12 @@
-26
+29
 0 # Okay, listen up!
-0 # These aliens invented time travel, and inserted themselves in various points throughout our history so they can start building the different components for their Alpha aliens' body.
+0 # These aliens invented time travel, and inserted themselves in various points throughout...
+0 # our history so they can start building the different parts their Alpha aliens' body.
 0 # Apparently it takes them many centuries to do so.
 0 # Their plan is to blow up our planet when the Alpha is finished in 2021.
 1 # Okay, but that is a pretty stupid plan.
-1 # Why not just build their Alpha on their planet, wherever that is, and get him to our planet and then blow us up?
+1 # Why not just build their Alpha on their planet, wherever that is...
+1 # and get him to our planet and then blow us up?
 1 # And when even am I?
 0 # I have aboslutely no clue, im just a scientist, not an alien army strategist!
 0 # Yeah, now that I think about it they, are a pretty big dissapointment.
@@ -16,7 +18,8 @@
 2 # endsection
 1 # I got him doctor Strauss!
 0 # Aw heck, I forgot about one small detail.
-0 # We all share the same timeline, so when you change something in the past, it could change other things in the future, not just the aliens!
+0 # We all share the same timeline, so when you change something in the past...
+0 # it could change other things in the future, not just the aliens!
 0 # For some reason killing that particular alien, caused my office walls to change color!
 0 # Its okay, lets jsut hope your actions only have minor consequences like this one.
 0 # Also, try not to cause any paradoxes!
