@@ -13,6 +13,11 @@ Menu::Menu(QWidget *parent)
     setFixedSize(800, 500);
     setWindowTitle("timesweeper");
     game = new Game();
+
+    connect(ui->startButton, &QPushButton::clicked, this, &Menu::startButtonClicked);
+    connect(ui->quitButton, &QPushButton::clicked, this, &Menu::quitButtonClicked);
+    connect(ui->optionsButton, &QPushButton::clicked, this, &Menu::optionsButtonClicked);
+    connect(ui->helpButton, &QPushButton::clicked, this, &Menu::helpButtonClicked);
 }
 
 Menu::~Menu()
@@ -20,7 +25,7 @@ Menu::~Menu()
     delete ui;
 }
 
-void Menu::on_startButton_clicked()
+void Menu::startButtonClicked()
 {
     if(game->getSoundOn())
     {
@@ -30,21 +35,21 @@ void Menu::on_startButton_clicked()
     this->hide();
 }
 
-void Menu::on_quitButton_clicked()
+void Menu::quitButtonClicked()
 {
     exit(0);
 }
 
-void Menu::on_optionsButton_clicked()
+void Menu::optionsButtonClicked()
 {
     Options *options = new Options();
     options->show();
-    //this->hide();
+    // this->hide();
 }
 
-void Menu::on_helpButton_clicked()
+void Menu::helpButtonClicked()
 {
     Help *help = new Help();
     help->show();
-    this->hide();
+    // this->hide();
 }

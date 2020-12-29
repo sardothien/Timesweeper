@@ -8,6 +8,8 @@ Help::Help(QWidget *parent)
     ui->setupUi(this);
     setFixedSize(800, 500);
     setWindowTitle("timesweeper");
+
+    connect(ui->backButton, &QPushButton::clicked, this, &Help::backButtonClicked);
 }
 
 Help::~Help()
@@ -15,9 +17,7 @@ Help::~Help()
     delete ui;
 }
 
-void Help::on_backButton_clicked()
+void Help::backButtonClicked()
 {
-    Menu *menu = new Menu();
-    menu->show();
     this->~Help();
 }

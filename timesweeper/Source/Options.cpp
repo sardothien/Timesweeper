@@ -12,6 +12,10 @@ Options::Options(QWidget *parent)
     ui->setupUi(this);
     setFixedSize(800, 500);
     setWindowTitle("timesweeper");
+
+    connect(ui->backButton, &QPushButton::clicked, this, &Options::backButtonClicked);
+    connect(ui->volume, &QSlider::valueChanged, this, &Options::volumeValueChanged);
+    connect(ui->sound, &QCheckBox::stateChanged, this, &Options::soundStateChanged);
 }
 
 Options::~Options()
@@ -19,18 +23,18 @@ Options::~Options()
     delete ui;
 }
 
-void Options::on_backButton_clicked()
+void Options::backButtonClicked()
 {
     this->hide();
 }
 
-void Options::on_volume_valueChanged()
+void Options::volumeValueChanged()
 {
-    qDebug() << ui->volume->value();
+    // qDebug() << ui->volume->value();
     game->m_music->setVolume(ui->volume->value());
 }
 
-void Options::on_sound_stateChanged()
+void Options::soundStateChanged()
 {
     if(ui->sound->checkState() == Qt::Unchecked)
     {
