@@ -16,10 +16,10 @@ class Menu : public QMainWindow
         ~Menu();
 
     private slots:
-        void on_startButton_clicked();
-        void on_quitButton_clicked();
-        void on_optionsButton_clicked();
-        void on_helpButton_clicked();
+        void startButtonClicked();
+        void quitButtonClicked();
+        void optionsButtonClicked();
+        void helpButtonClicked();
 
     private:
             Ui::Menu *ui;
