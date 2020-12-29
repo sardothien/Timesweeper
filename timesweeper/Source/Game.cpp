@@ -155,7 +155,7 @@ void Game::changeLevel()
 
     playMusic();
 
-    m_levelID = 3;
+    m_levelID++;
 }
 
 void Game::triggerDialogue()
