@@ -61,7 +61,6 @@ class PlayerCharacter : public Character
         bool m_canMove    = false;
         bool m_isOnGround;
         QMediaPlayer *m_projectileSound;
-        QGraphicsPixmapItem *m_pauseScreen;
         QPolygonF m_playerRectPoints;
 };
 

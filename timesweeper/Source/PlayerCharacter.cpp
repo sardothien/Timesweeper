@@ -70,29 +70,18 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
     }
 
     // TODO - stvarno pauzirati igru (ovo je samo iscrtavanje pause slike)
-    // TODO - postaviti isto kao i za GameOver screen
     if(event->key() == Qt::Key_P && !m_isPaused)
     {
-        m_isPaused    = true;
-        m_pauseScreen = new QGraphicsPixmapItem;
-        m_pauseScreen->setPixmap(QPixmap(":/Other/Resources/Other/pause.png"));
-        m_pauseScreen->setOpacity(0.9);
-        if(this->x() < 450)
-            m_pauseScreen->setPos(300, scene()->sceneRect().center().y() - 180);
-        else
-            m_pauseScreen->setPos(this->x() - 200, scene()->sceneRect().center().y() - 180);
-        game->m_currentLevel->addItem(m_pauseScreen);
+        m_isPaused = true;
+        game->getPauseLabel()->show();
     }
     else if((event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) && m_isPaused)
     {
         m_isPaused = false;
-        game->m_currentLevel->removeItem(m_pauseScreen);
-        delete m_pauseScreen;
+        game->getPauseLabel()->hide();
     }
     else if(event->key() == Qt::Key_R && game->getIsGameOver() == true)
     {
-        //game->currentLevel->removeItem(game->gameOverScreen);
-        //delete game->gameOverScreen;
         game->getGameOverLabel()->hide();
         m_health = 8;
         emit healthChanged();

@@ -25,6 +25,7 @@ class Game : public QGraphicsView
         void mousePressEvent(QMouseEvent *event);
         void playMusic();
         void makeGameOverLabel();
+        void makePauseLabel();
 
         // geteri/seteri
         static Portal *getCurrentLevelPortal();
@@ -35,6 +36,7 @@ class Game : public QGraphicsView
         bool getIsGameOver() const;
         Ui::Game *getUi() const;
         QLabel *getGameOverLabel() const;
+        QLabel *getPauseLabel() const;
 
         // polja
         static PlayerCharacter *m_player;
@@ -57,8 +59,9 @@ class Game : public QGraphicsView
         Ui::Game *ui;
         QLabel *m_label;
         QLabel *m_gameOverLabel;
+        QLabel *m_pauseLabel;
         bool m_soundOn    = true;
-        bool m_isGameOver = false;
+        bool m_isGameOver = false;   
 };
 
 #endif // GAME_H

@@ -20,6 +20,7 @@ Game::Game()
     m_label->setProperty("foo", "hb8");
 
     makeGameOverLabel();
+    makePauseLabel();
 
     setMouseTracking(true);
     m_cursor = QCursor(QPixmap(":/Other/Resources/Other/crosshair.png"), 17, 17);
@@ -80,6 +81,14 @@ void Game::makeGameOverLabel()
     m_gameOverLabel->hide();
 }
 
+void Game::makePauseLabel()
+{
+    m_pauseLabel = new QLabel(this);
+    m_pauseLabel->setGeometry(300, 120, 590, 360);
+    m_pauseLabel->setPixmap(QPixmap(":/Other/Resources/Other/pause.png"));
+    m_pauseLabel->hide();
+}
+
 //----------GETERI/SETERI---------------
 
 Portal *Game::getCurrentLevelPortal() { return m_currentLevelPortal; }
@@ -97,6 +106,8 @@ bool Game::getIsGameOver() const { return m_isGameOver; }
 Ui::Game *Game::getUi() const { return ui; }
 
 QLabel *Game::getGameOverLabel() const { return m_gameOverLabel; }
+
+QLabel *Game::getPauseLabel() const { return m_pauseLabel; }
 
 //----------SLOTOVI---------------------
 
