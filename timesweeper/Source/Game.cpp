@@ -2,8 +2,10 @@
 #include <QStyle>
 
 #include "Headers/DialogueHandler.h"
+#include "Headers/EnemyCharacter.h"
 #include "Headers/Game.h"
 #include "Headers/Level.h"
+#include "Headers/Tile.h"
 #include "ui_Game.h"
 
 int Game::m_levelID;
@@ -31,7 +33,7 @@ Game::Game()
     m_player->setFlag(QGraphicsItem::ItemIsFocusable);
     m_player->setFocus();
 
-    connect(m_player, &PlayerCharacter::enteredPortal, this, &Game::changeLevel);
+    connect(m_player, &PlayerCharacter::enteredPortal, this, &Game::changeLevel, Qt::QueuedConnection);
     connect(m_player, &PlayerCharacter::startDialogue, this, &Game::triggerDialogue);
     connect(m_player, &PlayerCharacter::healthChanged, this, &Game::setHealthBar);
     connect(m_player, &PlayerCharacter::playerIsDead, this, &Game::gameOver);
@@ -104,12 +106,12 @@ void Game::changeLevel()
     if(getLevelID() != 1)
     {
         auto allItems = m_currentLevel->items();
-        for (auto item : allItems)
+        for(auto item : allItems)
         {
-            if(typeid(*item) != typeid(PlayerCharacter))
+            if(typeid(*item) == typeid(Tile) || typeid(*item) == typeid(EnemyCharacter) || typeid(*item) == typeid(Portal))
             {
                 m_currentLevel->removeItem(item);
-                //delete item;
+                delete item;
             }
         }
     }

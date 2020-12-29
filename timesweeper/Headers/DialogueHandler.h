@@ -25,7 +25,7 @@ class DialogueHandler : public QObject
 
     private:
         static int m_currentIndex;
-        static QVector<QPair<Speaker, QString>> m_recenice;
+        static QVector<QPair<Speaker, QString>> m_sentances;
         static DialogueBox *m_box;
 };
 

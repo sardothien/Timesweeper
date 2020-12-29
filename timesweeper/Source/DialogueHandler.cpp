@@ -3,7 +3,7 @@
 #include "Headers/Game.h"
 
 //staticke promenljivie klase DialogueHandler
-QVector<QPair<DialogueHandler::Speaker, QString>> DialogueHandler::m_recenice;
+QVector<QPair<DialogueHandler::Speaker, QString>> DialogueHandler::m_sentances;
 int DialogueHandler::m_currentIndex;
 DialogueBox *DialogueHandler::m_box;
 bool DialogueHandler::isDialogueActive;
@@ -13,7 +13,7 @@ extern Game *game;
 void DialogueHandler::initializeDialogue()
 {
     m_currentIndex   = 0;
-    m_recenice       = {};
+    m_sentances      = {};
     isDialogueActive = false;
 
     QString filename = ":/Levels/Resources/Levels/level" + QString::number(game->getLevelID()) + "_dialogue.txt";
@@ -44,13 +44,13 @@ void DialogueHandler::initializeDialogue()
         switch(speaker)
         {
             case 0:
-                m_recenice.append(qMakePair(Speaker::Strauss, line.at(1)));
+                m_sentances.append(qMakePair(Speaker::Strauss, line.at(1)));
                 break;
             case 1:
-                m_recenice.append(qMakePair(Speaker::Player, line.at(1)));
+                m_sentances.append(qMakePair(Speaker::Player, line.at(1)));
                 break;
             case 2:
-                m_recenice.append(qMakePair(Speaker::Game, line.at(1)));
+                m_sentances.append(qMakePair(Speaker::Game, line.at(1)));
                 break;
             default:
                 qDebug() << "Los broj za enum!\n";
@@ -67,17 +67,17 @@ void DialogueHandler::advanceDialogue()
         game->scene()->removeItem(m_box);
     }
 
-    if(QString::compare(m_recenice[m_currentIndex].second, "endsection") == 0)
+    if(QString::compare(m_sentances[m_currentIndex].second, "endsection") == 0)
     {
         setDialogueActive(false);
     }
-    else if(m_currentIndex < m_recenice.size())
+    else if(m_currentIndex < m_sentances.size())
     {
-            m_box = new DialogueBox(m_recenice[m_currentIndex]);
+            m_box = new DialogueBox(m_sentances[m_currentIndex]);
             game->scene()->addItem(m_box);
     }
 
-    if(m_currentIndex < m_recenice.size() - 1)
+    if(m_currentIndex < m_sentances.size() - 1)
     {
         m_currentIndex++;
     }
