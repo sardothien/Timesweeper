@@ -31,7 +31,7 @@ void EnemyBoss::advance(int phase)
 void EnemyBoss::move()
 {
     // ako EnemyBoss dodje do vrha scene GameOver
-    if(y() <= 0)
+    if(y() + boundingRect().height() <= 0)
     {
         emit game->m_player->playerIsDead();
     }
@@ -39,17 +39,17 @@ void EnemyBoss::move()
     // ide ka gore samo kada je PlayerCharacter blizu po x osi
     if(x() - game->m_player->x() < 400)
     {
-        setPos(x(), y() - 1);
+        setPos(x(), y() - 0.5);
         m_healthBar->m_bar->setPos(m_healthBar->m_bar->x(),
-                                 m_healthBar->m_bar->y() - 1);
+                                 m_healthBar->m_bar->y() - 0.5);
         m_healthBar->m_barFrame->setPos(m_healthBar->m_barFrame->x(),
-                                      m_healthBar->m_barFrame->y() - 1);
+                                      m_healthBar->m_barFrame->y() - 0.5);
     }
 }
 
 void EnemyBoss::decreaseHealth()
 {
-    if(this->getLives() > 17) // zeleno
+    if(this->getLives() > 40) // zeleno
     {
         setLives(--m_lives);
         game->m_currentLevel->removeItem(this->m_healthBar->m_bar);
@@ -59,7 +59,7 @@ void EnemyBoss::decreaseHealth()
         this->m_healthBar->m_bar->setBrush(Qt::green);
         game->m_currentLevel->addItem(this->m_healthBar->m_bar);
      }
-     else if(this->getLives() > 5 && this->getLives() <= 17) // zuto
+     else if(this->getLives() > 15 && this->getLives() <= 40) // zuto
      {
         setLives(--m_lives);
         game->m_currentLevel->removeItem(this->m_healthBar->m_bar);
@@ -69,7 +69,7 @@ void EnemyBoss::decreaseHealth()
         this->m_healthBar->m_bar->setBrush(Qt::yellow);
         game->m_currentLevel->addItem(this->m_healthBar->m_bar);
     }
-    else if(this->getLives() > 1 && this->getLives() <= 5) // crveno
+    else if(this->getLives() > 1 && this->getLives() <= 15) // crveno
     {
         setLives(--m_lives);
         game->m_currentLevel->removeItem(this->m_healthBar->m_bar);

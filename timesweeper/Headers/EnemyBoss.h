@@ -24,8 +24,8 @@ class EnemyBoss : public Character
         void move();
 
     private:
-        int m_lives    = 20;
-        int m_maxLives = 20;
+        int m_lives    = 80;
+        int m_maxLives = 80;
 };
 
 #endif // ENEMYBOSS_H

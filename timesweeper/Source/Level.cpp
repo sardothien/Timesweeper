@@ -69,6 +69,12 @@ void Level::parseLevelFile(QString filename)
         m_scene->setSceneRect(0, 0, 45 * (sizeX - 1), 700);
     }
 
+    //specijalno hardcodujemo ovde poziciju bossa da bi se prvo iscrato, iza svih prepreka
+    if(game->getLevelID() == 5)
+    {
+        AddObject('F', 2170, 4320);
+    }
+
     // Prolazak kroz matricu i iscrtavanje
     for(int y = 0; y < sizeY; y++)
     {
