@@ -7,20 +7,41 @@ extern Game *game;
 EnemyBoss::EnemyBoss()
 {
     setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_alpha_front.png"));
-    m_healthBar = new EnemyHealthBar(300, 20);
+
+    drawHealthBar();
 }
 
 EnemyBoss::~EnemyBoss()
 {
     qDebug() << "Enemy Boss destroyed!";
-    delete this->m_healthBar;
 }
-
-EnemyHealthBar *EnemyBoss::getHealtBar() const { return m_healthBar; }
 
 void EnemyBoss::setLives(int lives) { m_lives = lives; }
 
 int EnemyBoss::getLives() const { return m_lives; }
+
+void EnemyBoss::drawHealthBar()
+{
+    game->m_bossHead = new QLabel(game);
+    game->m_bossHead->setGeometry(game->width() - 300,
+                                  game->height() - 60,
+                                  50,
+                                  38);
+    game->m_bossHead->setProperty("foo", "boss");
+
+    game->m_bossHealthBar = new QProgressBar(game);
+    game->m_bossHealthBar->setMinimum(0);
+    game->m_bossHealthBar->setMaximum(80);
+    game->m_bossHealthBar->setValue(80);
+    game->m_bossHealthBar->setTextVisible(false);
+    game->m_bossHealthBar->setGeometry(game->width() - 250,
+                                     game->height() - 50,
+                                     200,
+                                     20);
+
+    game->m_bossHead->show();
+    game->m_bossHealthBar->show();
+}
 
 void EnemyBoss::advance(int phase)
 {
@@ -40,48 +61,16 @@ void EnemyBoss::move()
     if(x() - game->m_player->x() < 400)
     {
         setPos(x(), y() - 0.5);
-        m_healthBar->m_bar->setPos(m_healthBar->m_bar->x(),
-                                 m_healthBar->m_bar->y() - 0.5);
-        m_healthBar->m_barFrame->setPos(m_healthBar->m_barFrame->x(),
-                                      m_healthBar->m_barFrame->y() - 0.5);
     }
 }
 
 void EnemyBoss::decreaseHealth()
 {
-    if(this->getLives() > 40) // zeleno
+    setLives(--m_lives);
+    game->m_bossHealthBar->setValue(getLives());
+
+    if(getLives() == 0)
     {
-        setLives(--m_lives);
-        game->m_currentLevel->removeItem(this->m_healthBar->m_bar);
-        this->m_healthBar->m_bar = new QGraphicsRectItem(
-                       x() + 60, y() - 40,
-                       this->m_healthBar->getWidth() * getLives() / m_maxLives, 20);
-        this->m_healthBar->m_bar->setBrush(Qt::green);
-        game->m_currentLevel->addItem(this->m_healthBar->m_bar);
-     }
-     else if(this->getLives() > 15 && this->getLives() <= 40) // zuto
-     {
-        setLives(--m_lives);
-        game->m_currentLevel->removeItem(this->m_healthBar->m_bar);
-        this->m_healthBar->m_bar = new QGraphicsRectItem(
-                       x() + 60, y() - 40,
-                       this->m_healthBar->getWidth() * getLives() / m_maxLives, 20);
-        this->m_healthBar->m_bar->setBrush(Qt::yellow);
-        game->m_currentLevel->addItem(this->m_healthBar->m_bar);
-    }
-    else if(this->getLives() > 1 && this->getLives() <= 15) // crveno
-    {
-        setLives(--m_lives);
-        game->m_currentLevel->removeItem(this->m_healthBar->m_bar);
-        this->m_healthBar->m_bar = new QGraphicsRectItem(
-                       x() + 60, y() - 40,
-                       this->m_healthBar->getWidth() * getLives() / m_maxLives, 20);
-        this->m_healthBar->m_bar->setBrush(Qt::red);
-        game->m_currentLevel->addItem(this->m_healthBar->m_bar);
-     }
-     else // EnemyBoss je ubijen
-     {
-        setLives(0);
         // TODO - emit gameWon();
-     }
+    }
 }

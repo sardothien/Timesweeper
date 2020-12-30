@@ -11,9 +11,6 @@ class EnemyBoss : public Character
         EnemyBoss();
         ~EnemyBoss();
 
-        EnemyHealthBar* m_healthBar;
-        EnemyHealthBar *getHealtBar() const;
-
         void setLives(int lives);
         int getLives() const;
 
@@ -22,6 +19,7 @@ class EnemyBoss : public Character
     private:
         void advance(int phase) override;
         void move();
+        void drawHealthBar();
 
     private:
         int m_lives    = 80;

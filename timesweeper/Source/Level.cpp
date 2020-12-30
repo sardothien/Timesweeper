@@ -143,11 +143,7 @@ void Level::AddObject(char type, int x, int y)
          case 'F': // enemy boss
             enemyBoss = new EnemyBoss();
             enemyBoss->setPos(x, y);
-            enemyBoss->getHealtBar()->m_barFrame->setPos(x + 60, y - 40);
-            enemyBoss->getHealtBar()->m_bar->setPos(x + 60, y - 40);
             m_scene->addItem(enemyBoss);
-            m_scene->addItem(enemyBoss->getHealtBar()->m_barFrame);
-            m_scene->addItem(enemyBoss->getHealtBar()->m_bar);
             break;
         case 's': // Building - level 4 - sheriff
             addBuilding(Building::Buildings::sheriff, x, y);

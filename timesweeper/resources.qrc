@@ -81,6 +81,7 @@
         <file>Resources/Other/enemy_projectile.png</file>
         <file>Resources/Other/health_level_5.png</file>
         <file>Resources/Other/help.png</file>
+        <file>Resources/Other/boss.png</file>
     </qresource>
     <qresource prefix="/Terrain">
         <file>Resources/Terrain/Level_1_Tiles/floor_tile.png</file>

@@ -4,6 +4,7 @@
 #include <QGraphicsView>
 #include <QLabel>
 #include <QMouseEvent>
+#include <QProgressBar>
 #include <QTimer>
 #include <QtMultimedia/QMediaPlayer>
 
@@ -48,6 +49,9 @@ class Game : public QGraphicsView
         QCursor m_cursor;
         QTimer *m_mainTimer;
         QGraphicsPixmapItem *m_gameOverScreen;
+
+        QProgressBar *m_bossHealthBar;
+        QLabel *m_bossHead;
 
     public slots:
         void changeLevel();

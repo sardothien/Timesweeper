@@ -76,8 +76,6 @@ void Projectile::move(int distanceToMove)
                 if(enemyBoss->getLives() == 0)
                 {
                     scene()->removeItem(enemyBoss);
-                    scene()->removeItem(enemyBoss->m_healthBar->m_bar);
-                    scene()->removeItem(enemyBoss->m_healthBar->m_barFrame);
                 }
 
                 scene()->removeItem(this);
