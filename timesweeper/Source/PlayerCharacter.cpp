@@ -77,12 +77,14 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
     if(event->key() == Qt::Key_P && !m_isPaused)
     {
         game->m_mainTimer->stop();
+        game->m_music->stop();
         m_isPaused = true;
         game->getPauseLabel()->show();
     }
     else if((event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) && m_isPaused)
     {
         game->m_mainTimer->start(16);
+        game->m_music->play();
         m_isPaused = false;
         game->getPauseLabel()->hide();
     }
