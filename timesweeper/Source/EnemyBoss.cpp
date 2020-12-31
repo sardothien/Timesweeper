@@ -11,11 +11,6 @@ EnemyBoss::EnemyBoss()
     drawHealthBar();
 }
 
-EnemyBoss::~EnemyBoss()
-{
-    qDebug() << "Enemy Boss destroyed!";
-}
-
 void EnemyBoss::setLives(int lives) { m_lives = lives; }
 
 int EnemyBoss::getLives() const { return m_lives; }

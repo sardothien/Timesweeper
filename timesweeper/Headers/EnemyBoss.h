@@ -9,7 +9,6 @@ class EnemyBoss : public Character
     Q_OBJECT
     public:
         EnemyBoss();
-        ~EnemyBoss();
 
         void setLives(int lives);
         int getLives() const;

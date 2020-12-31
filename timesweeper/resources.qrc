@@ -1,8 +1,4 @@
 <RCC>
-    <qresource prefix="/Images">
-        <file>Resources/testpickup.png</file>
-        <file>Resources/testtile.png</file>
-    </qresource>
     <qresource prefix="/Sounds">
         <file>Resources/Sounds/projectile.mp3</file>
         <file>Resources/Sounds/bgsound_level_1.mp3</file>
@@ -82,6 +78,7 @@
         <file>Resources/Other/health_level_5.png</file>
         <file>Resources/Other/help.png</file>
         <file>Resources/Other/boss.png</file>
+        <file>Resources/Other/credits.png</file>
     </qresource>
     <qresource prefix="/Terrain">
         <file>Resources/Terrain/Level_1_Tiles/floor_tile.png</file>

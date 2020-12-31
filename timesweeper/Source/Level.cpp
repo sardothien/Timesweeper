@@ -111,7 +111,7 @@ void Level::AddObject(char type, int x, int y)
         case 'd': // start za dijalog
             dialogueStartPoint = new DialogueTriggerBox();
             dialogueStartPoint->setRect(x, y, 100, 500);
-            //dialogueStartPoint->setOpacity(0.0);   otkomentarisati ovo kada se zavrsi testiranje
+            dialogueStartPoint->setOpacity(0.0);
             m_scene->addItem(dialogueStartPoint);
             break;
         case 'E': // neprijatelj
@@ -134,11 +134,9 @@ void Level::AddObject(char type, int x, int y)
             portal->setPos(x, y);
             m_scene->addItem(portal);
             game->setCurrentLevelPortal(portal);
-            //qDebug() << game->getCurrentLevelPortalPosition();
             break;
         case 'S': // pocetna pozicija igraca
             Game::m_currentLevelPlayerStartPosition = QPointF(x, y);
-            //qDebug() << Game::currentLevelPlayerStartPosition;
             break;
          case 'F': // enemy boss
             enemyBoss = new EnemyBoss();

@@ -23,11 +23,6 @@ PlayerCharacter::PlayerCharacter()
     m_projectileSound->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/projectile.mp3"));
 }
 
-PlayerCharacter::~PlayerCharacter()
-{
-    qDebug() << "delete player";
-}
-
 //----------------GETERI/SETERI-------------------
 
 GunArm *PlayerCharacter::getGunArm() const { return m_gunArm; }
@@ -42,38 +37,11 @@ void PlayerCharacter::setSoundEffectOn(bool value) { m_soundEffectOn = value; }
 
 void PlayerCharacter::keyPressEvent(QKeyEvent *event)
 {
-    if(event->key() == Qt::Key_E && DialogueHandler::isDialogueActive)
+    if(event->key() == Qt::Key_E && DialogueHandler::isDialogueActive && !m_isPaused)
     {
         DialogueHandler::advanceDialogue();
     }
-    //NOTE: NE BRISITE KOD ISPOD DOK NE ZAVRSIM CELU IMPLEMENTACIJU DIJALOGA
 
-    if(event->key() == Qt::Key_Q) // test
-    {
-        DialogueHandler::setDialogueActive(!DialogueHandler::isDialogueActive);
-    }
-    if(event->key() == Qt::Key_1) // test
-    {
-        DialogueHandler::initializeDialogue();
-    }
-    if(event->key() == Qt::Key_2) // test
-    {
-        DialogueHandler::initializeDialogue();
-    }
-    if(event->key() == Qt::Key_3) // test
-    {
-        DialogueHandler::initializeDialogue();
-    }
-    if(event->key() == Qt::Key_4) // test
-    {
-        DialogueHandler::initializeDialogue();
-    }
-    if(event->key() == Qt::Key_5) // test
-    {
-        DialogueHandler::initializeDialogue();
-    }
-
-    // TODO - stvarno pauzirati igru (ovo je samo iscrtavanje pause slike)
     if(event->key() == Qt::Key_P && !m_isPaused)
     {
         game->m_mainTimer->stop();
@@ -83,7 +51,7 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
     }
     else if((event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) && m_isPaused)
     {
-        game->m_mainTimer->start(16);
+        game->m_mainTimer->start(20);
         game->m_music->play();
         m_isPaused = false;
         game->getPauseLabel()->hide();
@@ -97,7 +65,7 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         game->changeLevel();
     }
 
-    if(event->key() == Qt::Key_D)
+    if(event->key() == Qt::Key_D && !DialogueHandler::isDialogueActive)
     {
         if (game->getLevelID() == 2)
         {
@@ -106,7 +74,7 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         m_canMove   = true;
         m_velocityX = 9;
     }
-    else if(event->key() == Qt::Key_A)
+    else if(event->key() == Qt::Key_A  && !DialogueHandler::isDialogueActive)
     {
         if (game->getLevelID() == 2)
         {
@@ -115,7 +83,7 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         m_canMove   = true;
         m_velocityX = -9;
     }
-    else if(event->key() == Qt::Key_Space && m_isOnGround)
+    else if(event->key() == Qt::Key_Space && m_isOnGround  && !DialogueHandler::isDialogueActive)
     {
         m_velocityY = -14;
         setPos(x(), y() + m_velocityY);
@@ -152,32 +120,35 @@ void PlayerCharacter::keyReleaseEvent(QKeyEvent *event)
 
 void PlayerCharacter::aimAtPoint(QPoint point)
 {
-    m_targetPoint = game->mapToScene(point);
-
-    QLineF ln(m_shoulderPosition, m_targetPoint );
-    qreal angle = -1 * ln.angle();
-
-    if(angle > -90 || angle < -270)
+    if(!m_isPaused)
     {
-        m_aimDirection = AimDirection::aimingRight;
-        m_gunArm->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/gun_arm_right.png"));
-        m_gunArm->setTransformOriginPoint(6, 0);
-        if(game->getLevelID() != 2)
+        m_targetPoint = game->mapToScene(point);
+
+        QLineF ln(m_shoulderPosition, m_targetPoint );
+        qreal angle = -1 * ln.angle();
+
+        if(angle > -90 || angle < -270)
         {
-            setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_right.png"));
+            m_aimDirection = AimDirection::aimingRight;
+            m_gunArm->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/gun_arm_right.png"));
+            m_gunArm->setTransformOriginPoint(6, 0);
+            if(game->getLevelID() != 2)
+            {
+                setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_right.png"));
+            }
+            m_gunArm->setRotation(angle);
         }
-        m_gunArm->setRotation(angle);
-    }
-    else
-    {
-        m_aimDirection = AimDirection::aimingLeft;
-        m_gunArm->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/gun_arm_left.png"));
-        m_gunArm->setTransformOriginPoint(m_gunArm->boundingRect().width() - 6, 0);
-        if(game->getLevelID() != 2)
+        else
         {
-            setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_left.png"));
+            m_aimDirection = AimDirection::aimingLeft;
+            m_gunArm->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/gun_arm_left.png"));
+            m_gunArm->setTransformOriginPoint(m_gunArm->boundingRect().width() - 6, 0);
+            if(game->getLevelID() != 2)
+            {
+                setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_left.png"));
+            }
+            m_gunArm->setRotation(180 + angle);
         }
-        m_gunArm->setRotation(180 + angle);
     }
 }
 
@@ -195,29 +166,31 @@ void PlayerCharacter::updateShoudlerPosition()
 
 void PlayerCharacter::shootProjectile()
 {
-    auto *projectile = new Projectile(Projectile::Player);
+    if(!m_isPaused){
+        auto *projectile = new Projectile(Projectile::Player);
 
-    QLineF ln(m_shoulderPosition, m_targetPoint);
-    qreal angle = -1 * ln.angle();
-    qreal dy    = 80 * qSin(qDegreesToRadians(angle));
-    qreal dx    = 80 * qCos(qDegreesToRadians(angle));
+        QLineF ln(m_shoulderPosition, m_targetPoint);
+        qreal angle = -1 * ln.angle();
+        qreal dy    = 80 * qSin(qDegreesToRadians(angle));
+        qreal dx    = 80 * qCos(qDegreesToRadians(angle));
 
-    m_projectileStartPoint = QPointF(m_shoulderPosition + QPointF(dx, dy));
-    projectile->setPos(m_projectileStartPoint.x(), m_projectileStartPoint.y());
-    projectile->setRotation(angle);
+        m_projectileStartPoint = QPointF(m_shoulderPosition + QPointF(dx, dy));
+        projectile->setPos(m_projectileStartPoint.x(), m_projectileStartPoint.y());
+        projectile->setRotation(angle);
 
-    game->m_currentLevel->addItem(projectile);
+        game->m_currentLevel->addItem(projectile);
 
-    if(m_projectileSound->state() == QMediaPlayer::PlayingState)
-    {
-       m_projectileSound->setPosition(0);
-       if(m_soundEffectOn)
-            m_projectileSound->play();
-    }
-    else if(m_projectileSound->state() == QMediaPlayer::StoppedState)
-    {
-        if(m_soundEffectOn)
-            m_projectileSound->play();
+        if(m_projectileSound->state() == QMediaPlayer::PlayingState)
+        {
+           m_projectileSound->setPosition(0);
+           if(m_soundEffectOn)
+                m_projectileSound->play();
+        }
+        else if(m_projectileSound->state() == QMediaPlayer::StoppedState)
+        {
+            if(m_soundEffectOn)
+                m_projectileSound->play();
+        }
     }
 }
 

@@ -17,7 +17,6 @@ EnemyCharacter::EnemyCharacter()
 
 EnemyCharacter::~EnemyCharacter()
 {
-    qDebug() << "Enemy destroyed";
     delete m_healthBar;
 }
 

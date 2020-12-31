@@ -7,7 +7,6 @@ class Portal : public QGraphicsPixmapItem
 {
     public:
         Portal();
-        ~Portal();
 };
 
 #endif // PORTAL_H

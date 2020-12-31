@@ -21,11 +21,6 @@ Projectile::Projectile(Shooter shooter)
     }
 }
 
-Projectile::~Projectile()
-{
-    qDebug() << "Projectile destroyed!\n";
-}
-
 Projectile::Shooter Projectile::getShooter() const { return m_shooter; }
 
 void Projectile::advance(int phase)

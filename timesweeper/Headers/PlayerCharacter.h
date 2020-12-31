@@ -12,7 +12,6 @@ class PlayerCharacter : public Character
     public:
         // metode
         PlayerCharacter();
-        ~PlayerCharacter();
 
         void keyPressEvent(QKeyEvent *event) override;
         void keyReleaseEvent(QKeyEvent *event) override;

@@ -18,7 +18,6 @@ EnemyHealthBar::~EnemyHealthBar()
 {
     delete m_bar;
     delete m_barFrame;
-    std::cout << "Health bar and bar frame destroyed" << std::endl;
 }
 
 int EnemyHealthBar::getWidth() const { return m_width; }

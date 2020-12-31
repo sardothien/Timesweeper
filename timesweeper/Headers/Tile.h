@@ -8,7 +8,6 @@ class Tile : public QObject, public QGraphicsPixmapItem
     Q_OBJECT
     public:
         Tile(char tile);
-        ~Tile();
 
         char getType() const;
 

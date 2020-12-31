@@ -15,11 +15,6 @@ Tile::Tile(char tile)
     drawTile();
 }
 
-Tile::~Tile()
-{
-   qDebug() << "tile dest";
-}
-
 char Tile::getType() const { return m_type; }
 
 void Tile::drawTile()
