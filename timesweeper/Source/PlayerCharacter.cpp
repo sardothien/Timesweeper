@@ -76,11 +76,13 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
     // TODO - stvarno pauzirati igru (ovo je samo iscrtavanje pause slike)
     if(event->key() == Qt::Key_P && !m_isPaused)
     {
+        game->m_mainTimer->stop();
         m_isPaused = true;
         game->getPauseLabel()->show();
     }
     else if((event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) && m_isPaused)
     {
+        game->m_mainTimer->start(16);
         m_isPaused = false;
         game->getPauseLabel()->hide();
     }
