@@ -104,7 +104,7 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
             setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_no_gun_right.png"));
         }
         m_canMove   = true;
-        m_velocityX = 5;
+        m_velocityX = 9;
     }
     else if(event->key() == Qt::Key_A)
     {
@@ -113,7 +113,7 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
            setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_no_gun_left.png"));
         }
         m_canMove   = true;
-        m_velocityX = -5;
+        m_velocityX = -9;
     }
     else if(event->key() == Qt::Key_Space && m_isOnGround)
     {

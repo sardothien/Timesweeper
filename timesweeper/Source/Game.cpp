@@ -41,7 +41,6 @@ Game::Game()
 
     m_music = new QMediaPlayer();
 
-    //NOTE: ne dirati ovde levelID
     m_levelID = 1;
     m_mainTimer = new QTimer(this);
 
@@ -113,7 +112,6 @@ QLabel *Game::getPauseLabel() const { return m_pauseLabel; }
 
 void Game::changeLevel()
 {
-    //NOTE: pitati asistenta ovde za dealokaciju
     if(getLevelID() != 1)
     {
         auto allItems = m_currentLevel->items();
@@ -128,8 +126,8 @@ void Game::changeLevel()
     }
 
     m_currentLevel = Level::LoadLevel();
-    QObject::connect(m_mainTimer, SIGNAL(timeout()), m_currentLevel, SLOT(advance()) );
-    m_mainTimer->start(16);
+    QObject::connect(m_mainTimer, SIGNAL(timeout()), m_currentLevel, SLOT(advance()));
+    m_mainTimer->start(20);
 
     DialogueHandler::initializeDialogue();
 
@@ -145,7 +143,6 @@ void Game::changeLevel()
     }
     m_currentLevel->addItem(m_player);
 
-    //NOTE: ovaj if ne sme da se spoji sa ovim iznad jer se pixmap igraca iscrta iznad pixmapa puske
     if(getLevelID() != 1)
     {
         m_currentLevel->addItem(m_player->getGunArm());

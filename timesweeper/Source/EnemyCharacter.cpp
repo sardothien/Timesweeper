@@ -43,15 +43,15 @@ void EnemyCharacter::move()
 
         if(!m_stopMoving)
         {
-            setPos(x() + 0.3, y());
+            setPos(x() + 0.5, y());
 
-            m_healthBar->m_bar->setPos(m_healthBar->m_bar->x() + 0.3,
+            m_healthBar->m_bar->setPos(m_healthBar->m_bar->x() + 0.5,
                                      m_healthBar->m_bar->y());
-            m_healthBar->m_barFrame->setPos(m_healthBar->m_barFrame->x() + 0.3,
+            m_healthBar->m_barFrame->setPos(m_healthBar->m_barFrame->x() + 0.5,
                                           m_healthBar->m_barFrame->y());
 
             m_steps++;
-            if(m_steps % 150 == 0)
+            if(m_steps % 120 == 0)
             {
                 m_side  = 1;
                 m_steps = 0;
@@ -64,15 +64,15 @@ void EnemyCharacter::move()
 
         if(!m_stopMoving)
         {
-            setPos(x() - 0.3, y());
+            setPos(x() - 0.5, y());
 
-            m_healthBar->m_bar->setPos(m_healthBar->m_bar->x() - 0.3,
+            m_healthBar->m_bar->setPos(m_healthBar->m_bar->x() - 0.5,
                                      m_healthBar->m_bar->y());
-            m_healthBar->m_barFrame->setPos(m_healthBar->m_barFrame->x() - 0.3,
+            m_healthBar->m_barFrame->setPos(m_healthBar->m_barFrame->x() - 0.5,
                                           m_healthBar->m_barFrame->y());
 
             m_steps++;
-            if(m_steps % 150 == 0)
+            if(m_steps % 120 == 0)
             {
                 m_side  = 0;
                 m_steps = 0;
@@ -91,7 +91,7 @@ void EnemyCharacter::shoot()
             m_side       = 1;
             m_stopMoving = true;
 
-            if(m_timeToShoot % 100 == 0)
+            if(m_timeToShoot % 50 == 0)
             {
                 m_timeToShoot    = 0;
                 auto *projectile = new Projectile(Projectile::Enemy);
@@ -105,7 +105,7 @@ void EnemyCharacter::shoot()
             m_side       = 0;
             m_stopMoving = true;
 
-            if(m_timeToShoot % 100 == 0)
+            if(m_timeToShoot % 50 == 0)
             {
                 m_timeToShoot    = 0;
                 auto *projectile = new Projectile(Projectile::Enemy);
