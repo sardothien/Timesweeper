@@ -10,4 +10,4 @@
 0 # Wow I think you did. I guess the planet is safe.
 0 # At least untill some other aliens get the same idea.
 1 # Lets just hope we didn't miss any.
-2 # endsection
+2 # credits

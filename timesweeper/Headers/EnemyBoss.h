@@ -17,6 +17,7 @@ class EnemyBoss : public Character
 
     signals:
         void alphaDied();
+        void alphaEscaped();
 
     private:
         void advance(int phase) override;

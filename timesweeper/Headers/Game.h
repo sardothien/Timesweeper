@@ -24,12 +24,12 @@ class Game : public QGraphicsView
         Game();
         void mouseMoveEvent(QMouseEvent *event);
         void mousePressEvent(QMouseEvent *event);
+        void showCredits();
         void playMusic();
         void makeGameOverLabel();
         void makePauseLabel();
 
         // geteri/seteri
-        static Portal *getCurrentLevelPortal();
         static void setCurrentLevelPortal(Portal *portal);
         static int getLevelID();
         bool getSoundOn() const;

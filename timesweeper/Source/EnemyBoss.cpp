@@ -8,6 +8,7 @@ EnemyBoss::EnemyBoss()
 {
     setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_alpha_front.png"));
     connect(this, &EnemyBoss::alphaDied, game, &Game::triggerDialogue);
+    connect(this, &EnemyBoss::alphaEscaped, game, &Game::gameOver);
     drawHealthBar();
 }
 
@@ -50,13 +51,14 @@ void EnemyBoss::move()
     // ako EnemyBoss dodje do vrha scene GameOver
     if(y() + boundingRect().height() <= 0)
     {
-        emit game->m_player->playerIsDead();
+        game->scene()->removeItem(this);
+        emit alphaEscaped();
     }
 
     // ide ka gore samo kada je PlayerCharacter blizu po x osi
-    if(x() - game->m_player->x() < 400)
+    if(x() - game->m_player->x() < 600)
     {
-        setPos(x(), y() - 0.7);
+        setPos(x(), y() - 1);
     }
 }
 

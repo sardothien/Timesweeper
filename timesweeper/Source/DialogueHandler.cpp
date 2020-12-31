@@ -67,7 +67,12 @@ void DialogueHandler::advanceDialogue()
         game->scene()->removeItem(m_box);
     }
 
-    if(QString::compare(m_sentances[m_currentIndex].second, "endsection") == 0)
+    if(QString::compare(m_sentances[m_currentIndex].second, "credits") == 0)
+    {
+        //kraj igre
+        game->showCredits();
+    }
+    else if(QString::compare(m_sentances[m_currentIndex].second, "endsection") == 0)
     {
         setDialogueActive(false);
     }

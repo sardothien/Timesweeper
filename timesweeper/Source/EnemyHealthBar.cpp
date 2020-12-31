@@ -19,5 +19,3 @@ EnemyHealthBar::~EnemyHealthBar()
     delete m_bar;
     delete m_barFrame;
 }
-
-int EnemyHealthBar::getWidth() const { return m_width; }

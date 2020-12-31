@@ -62,6 +62,14 @@ void Game::mousePressEvent(QMouseEvent *event)
     m_player->setFocus();
 }
 
+void Game::showCredits()
+{
+    QLabel *m_creditsLabel = new QLabel(this);
+    m_creditsLabel->setGeometry(0, 0, 1200, 700);
+    m_creditsLabel->setPixmap(QPixmap(":/Other/Resources/Other/credits.png"));
+    m_creditsLabel->show();
+}
+
 void Game::playMusic()
 {
     m_music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_"
@@ -89,9 +97,6 @@ void Game::makePauseLabel()
 }
 
 //----------GETERI/SETERI---------------
-
-Portal *Game::getCurrentLevelPortal() { return m_currentLevelPortal; }
-
 void Game::setCurrentLevelPortal(Portal *portal) { m_currentLevelPortal = portal; }
 
 int Game::getLevelID() { return m_levelID; }
