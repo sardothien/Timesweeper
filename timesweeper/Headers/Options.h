@@ -19,6 +19,7 @@ class Options : public QMainWindow
         void backButtonClicked();
         void volumeValueChanged();
         void soundStateChanged();
+        void soundEffectStateChanged();
 
     private:
         Ui::Options *ui;

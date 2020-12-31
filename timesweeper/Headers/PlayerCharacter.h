@@ -26,6 +26,8 @@ class PlayerCharacter : public Character
         // geteri/seteri
         GunArm *getGunArm() const;
         int getHealth() const;
+        bool getSoundEffectOn() const;
+        void setSoundEffectOn(bool value);
 
         enum AimDirection
         {
@@ -40,7 +42,8 @@ class PlayerCharacter : public Character
         QPointF m_projectileStartPoint;
         QPointF m_shoulderPosition;
 
-    private:
+
+private:
         void advance(int phase) override;
         void jump();
         void walk();
@@ -60,6 +63,7 @@ class PlayerCharacter : public Character
         bool m_isPaused   = false;
         bool m_canMove    = false;
         bool m_isOnGround;
+        bool m_soundEffectOn = true;
         QMediaPlayer *m_projectileSound;
         QPolygonF m_playerRectPoints;
 };

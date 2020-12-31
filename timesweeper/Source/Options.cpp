@@ -16,6 +16,7 @@ Options::Options(QWidget *parent)
     connect(ui->backButton, &QPushButton::clicked, this, &Options::backButtonClicked);
     connect(ui->volume, &QSlider::valueChanged, this, &Options::volumeValueChanged);
     connect(ui->sound, &QCheckBox::stateChanged, this, &Options::soundStateChanged);
+    connect(ui->soundEffect, &QCheckBox::stateChanged, this, &Options::soundEffectStateChanged);
 }
 
 Options::~Options()
@@ -45,3 +46,16 @@ void Options::soundStateChanged()
         game->setSoundOn(true);
     }
 }
+
+void Options::soundEffectStateChanged()
+{
+    if(ui->soundEffect->checkState() == Qt::Unchecked)
+    {
+        game->m_player->setSoundEffectOn(false);
+    }
+    else
+    {
+        game->m_player->setSoundEffectOn(true);
+    }
+}
+

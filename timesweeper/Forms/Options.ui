@@ -153,6 +153,40 @@ background: #3e3a3a;
     <string>Back</string>
    </property>
   </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>160</y>
+     <width>171</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:white;
+font: normal normal bold 20px courier new;
+</string>
+   </property>
+   <property name="text">
+    <string>Sound effects:</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="soundEffect">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>160</y>
+     <width>70</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

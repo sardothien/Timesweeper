@@ -34,6 +34,10 @@ GunArm *PlayerCharacter::getGunArm() const { return m_gunArm; }
 
 int PlayerCharacter::getHealth() const { return m_health; }
 
+bool PlayerCharacter::getSoundEffectOn() const { return m_soundEffectOn; }
+
+void PlayerCharacter::setSoundEffectOn(bool value) { m_soundEffectOn = value; }
+
 //------------------------------------------------
 
 void PlayerCharacter::keyPressEvent(QKeyEvent *event)
@@ -203,11 +207,13 @@ void PlayerCharacter::shootProjectile()
     if(m_projectileSound->state() == QMediaPlayer::PlayingState)
     {
        m_projectileSound->setPosition(0);
-       m_projectileSound->play();
+       if(m_soundEffectOn)
+            m_projectileSound->play();
     }
     else if(m_projectileSound->state() == QMediaPlayer::StoppedState)
     {
-        m_projectileSound->play();
+        if(m_soundEffectOn)
+            m_projectileSound->play();
     }
 }
 
