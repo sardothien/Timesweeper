@@ -56,7 +56,7 @@ void EnemyBoss::move()
     }
 
     // ide ka gore samo kada je PlayerCharacter blizu po x osi
-    if(x() - game->m_player->x() < 600)
+    if(x() - game->m_player->x() < 650)
     {
         setPos(x(), y() - 1);
     }

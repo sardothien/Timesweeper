@@ -59,13 +59,14 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
     else if(event->key() == Qt::Key_R && game->getIsGameOver() == true)
     {
         game->getGameOverLabel()->hide();
+        game->setIsGameOver(false);
         m_health = 8;
         emit healthChanged();
         game->m_levelID--;
         game->changeLevel();
     }
 
-    if(event->key() == Qt::Key_D && !DialogueHandler::isDialogueActive)
+    if(event->key() == Qt::Key_D && !DialogueHandler::isDialogueActive && !m_isPaused)
     {
         if (game->getLevelID() == 2)
         {
@@ -74,7 +75,7 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         m_canMove   = true;
         m_velocityX = 9;
     }
-    else if(event->key() == Qt::Key_A  && !DialogueHandler::isDialogueActive)
+    else if(event->key() == Qt::Key_A  && !DialogueHandler::isDialogueActive && !m_isPaused)
     {
         if (game->getLevelID() == 2)
         {

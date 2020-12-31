@@ -35,6 +35,7 @@ class Game : public QGraphicsView
         bool getSoundOn() const;
         void setSoundOn(bool value);
         bool getIsGameOver() const;
+        void setIsGameOver(bool isGameOver);
         Ui::Game *getUi() const;
         QLabel *getGameOverLabel() const;
         QLabel *getPauseLabel() const;

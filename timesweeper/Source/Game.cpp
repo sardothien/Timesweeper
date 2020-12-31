@@ -107,6 +107,8 @@ void Game::setSoundOn(bool value) { m_soundOn = value; }
 
 bool Game::getIsGameOver() const { return m_isGameOver; }
 
+void Game::setIsGameOver(bool isGameOver) { m_isGameOver = isGameOver; }
+
 Ui::Game *Game::getUi() const { return ui; }
 
 QLabel *Game::getGameOverLabel() const { return m_gameOverLabel; }
