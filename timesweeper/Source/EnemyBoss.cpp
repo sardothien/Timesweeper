@@ -38,6 +38,7 @@ void EnemyBoss::drawHealthBar()
                                      game->height() - 50,
                                      200,
                                      20);
+    game->m_bossHealthBar->setStyleSheet("QProgressBar::chunk { background: green; }");
 
     game->m_bossHead->show();
     game->m_bossHealthBar->show();
@@ -68,6 +69,17 @@ void EnemyBoss::decreaseHealth()
 {
     setLives(--m_lives);
     game->m_bossHealthBar->setValue(getLives());
+
+    if(getLives() > 20 && getLives() <= 50)
+    {
+        game->m_bossHealthBar->setStyleSheet("QProgressBar::chunk { background: orange; }");
+    }
+    else if(getLives() > 0 && getLives() <= 20)
+    {
+        game->m_bossHealthBar->setStyleSheet("QProgressBar::chunk { background: red; }");
+    }
+
+    game->m_bossHealthBar->update();
 
     if(getLives() == 0)
     {
