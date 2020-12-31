@@ -16,6 +16,9 @@ class EnemyBoss : public Character
 
         void decreaseHealth();
 
+    signals:
+        void alphaDied();
+
     private:
         void advance(int phase) override;
         void move();

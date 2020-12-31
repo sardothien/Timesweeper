@@ -7,7 +7,7 @@ extern Game *game;
 EnemyBoss::EnemyBoss()
 {
     setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_alpha_front.png"));
-
+    connect(this, &EnemyBoss::alphaDied, game, &Game::triggerDialogue);
     drawHealthBar();
 }
 
@@ -83,6 +83,6 @@ void EnemyBoss::decreaseHealth()
 
     if(getLives() == 0)
     {
-        // TODO - emit gameWon();
+        emit alphaDied();
     }
 }
