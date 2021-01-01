@@ -28,7 +28,7 @@ Game::Game()
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setFixedSize(1200, 700);
+    //setFixedSize(1200, 700);
 
     m_player = new PlayerCharacter();
     m_player->setFlag(QGraphicsItem::ItemIsFocusable);
@@ -159,7 +159,7 @@ void Game::changeLevel()
 
     playMusic();
 
-    m_levelID++;
+    m_levelID = 3;
 }
 
 void Game::triggerDialogue()

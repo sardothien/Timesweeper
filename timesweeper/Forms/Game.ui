@@ -14,7 +14,10 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget{background: url(:/LevelBackgrounds/Resources/LevelBackgrounds/level_3_dino.jpg);}
+   <string notr="true">QWidget
+{
+background: url(:/LevelBackgrounds/Resources/LevelBackgrounds/level_3_dino.jpg);
+}
 QLabel[foo=&quot;hb1&quot;]{background: url(:/Other/Resources/Other/health_bar_1.png);}
 QLabel[foo=&quot;hb2&quot;]{background: url(:/Other/Resources/Other/health_bar_2.png);}
 QLabel[foo=&quot;hb3&quot;]{background: url(:/Other/Resources/Other/health_bar_3.png);}

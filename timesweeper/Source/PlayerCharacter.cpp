@@ -2,6 +2,8 @@
 #include "Headers/DialogueHandler.h"
 #include "Headers/DialogueTriggerBox.h"
 #include "Headers/Game.h"
+#include "Headers/Help.h"
+#include "Headers/Options.h"
 #include "Headers/Pickup.h"
 #include "Headers/Projectile.h"
 #include "Headers/Tile.h"
@@ -55,6 +57,16 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         game->m_music->play();
         m_isPaused = false;
         game->getPauseLabel()->hide();
+    }
+    else if((event->key() == Qt::Key_O) && m_isPaused)
+    {
+        Options *options = new Options();
+        options->show();
+    }
+    else if((event->key() == Qt::Key_H) && m_isPaused)
+    {
+        Help *help = new Help();
+        help->show();
     }
     else if(event->key() == Qt::Key_R && game->getIsGameOver() == true)
     {
