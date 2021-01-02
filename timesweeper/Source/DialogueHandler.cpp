@@ -2,7 +2,7 @@
 #include "Headers/DialogueBox.h"
 #include "Headers/Game.h"
 
-//staticke promenljivie klase DialogueHandler
+// staticke promenljivie klase DialogueHandler
 QVector<QPair<DialogueHandler::Speaker, QString>> DialogueHandler::m_sentances;
 int DialogueHandler::m_currentIndex;
 DialogueBox *DialogueHandler::m_box;
@@ -32,14 +32,14 @@ void DialogueHandler::initializeDialogue()
 
     QTextStream in(&file);
 
-    //prva linija u fajlu govori koliko ce recenica biti
+    // prva linija u fajlu govori koliko ce recenica biti
     int numberOfLines = in.readLine().toInt();
 
     QStringList line;
     for(int i = 0; i < numberOfLines; i++)
     {
         line = in.readLine().split(" # ");
-        //qDebug() << line.at(0) << line.at(1);
+
         int speaker = line.at(0).toInt();
         switch(speaker)
         {
@@ -69,7 +69,7 @@ void DialogueHandler::advanceDialogue()
 
     if(QString::compare(m_sentances[m_currentIndex].second, "credits") == 0)
     {
-        //kraj igre
+        // kraj igre
         game->showCredits();
     }
     else if(QString::compare(m_sentances[m_currentIndex].second, "endsection") == 0)

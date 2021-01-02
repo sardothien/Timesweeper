@@ -31,7 +31,6 @@ void Options::backButtonClicked()
 
 void Options::volumeValueChanged()
 {
-    // qDebug() << ui->volume->value();
     game->m_music->setVolume(ui->volume->value());
 }
 

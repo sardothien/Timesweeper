@@ -5,5 +5,6 @@ extern Game *game;
 
 Pickup::Pickup()
 {
-    setPixmap(QPixmap(":/Other/Resources/Other/health_level_" + QString::number(game->getLevelID()) + ".png"));
+    setPixmap(QPixmap(":/Other/Resources/Other/health_level_" +
+                      QString::number(game->getLevelID()) + ".png"));
 }

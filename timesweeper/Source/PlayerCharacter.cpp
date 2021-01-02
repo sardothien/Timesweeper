@@ -47,7 +47,7 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
     if(event->key() == Qt::Key_P && !m_isPaused)
     {
         game->m_mainTimer->stop();
-        game->m_music->stop();
+        game->m_music->pause();
         m_isPaused = true;
         game->getPauseLabel()->show();
     }
@@ -291,14 +291,12 @@ void PlayerCharacter::detectCollision()
             if(typeid(*(colliding_item)) == typeid(DialogueTriggerBox))
             {
                 scene()->removeItem(colliding_item);
-                //delete colliding_items[i];
                 emit startDialogue();
             }
             if(typeid(*(colliding_item)) == typeid(Pickup))
             {
                 increaseHealth();
                 scene()->removeItem(colliding_item);
-                //delete colliding_items[i];
                 emit healthChanged();
             }
             else if(typeid(*(colliding_item)) == typeid(Projectile))
@@ -318,26 +316,22 @@ void PlayerCharacter::detectCollision()
                 if(m_playerRectPoints[2].y() <= tileRectPoints[0].y() + 10)
                 {
                     m_isOnGround = true;
-                    //qDebug()<<"1";
                 }
                 else if(m_playerRectPoints[3].x() < tileRectPoints[3].x() - 25 &&
                         m_playerRectPoints[1].y() <= tileRectPoints[3].y() - 20)
                 {
                     setPos(x() - 11, y());
-                    //qDebug()<<"2"<<playerRectPoints;
                 }
                 else if(m_playerRectPoints[2].x() >= tileRectPoints[2].x() &&
                         m_playerRectPoints[1].y() <= tileRectPoints[3].y() - 20)
                 {
                     setPos(x() + 11, y());
-                    //qDebug()<<"3";
                 }
                 if(m_playerRectPoints[1].y() <= tileRectPoints[3].y() + 10 &&
                    m_playerRectPoints[2].x() > tileRectPoints[3].x() + 2 &&
                    m_playerRectPoints[3].x() < tileRectPoints[2].x() - 2)
                 {
                     m_velocityY = 5;
-                    //qDebug()<<"4";
                 }
 
                 auto t = dynamic_cast<Tile*>(colliding_item);

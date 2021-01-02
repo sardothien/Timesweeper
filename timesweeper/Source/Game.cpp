@@ -43,7 +43,7 @@ Game::Game()
 
     m_music = new QMediaPlayer();
 
-    m_levelID = 1;
+    m_levelID   = 1;
     m_mainTimer = new QTimer(this);
 
     changeLevel();
