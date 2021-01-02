@@ -2,9 +2,11 @@
 #include <QStyle>
 
 #include "Headers/DialogueHandler.h"
+#include "Headers/EnemyBoss.h"
 #include "Headers/EnemyCharacter.h"
 #include "Headers/Game.h"
 #include "Headers/Level.h"
+#include "Headers/Pickup.h"
 #include "Headers/Tile.h"
 #include "ui_Game.h"
 
@@ -124,7 +126,9 @@ void Game::changeLevel()
         auto allItems = m_currentLevel->items();
         for(auto item : allItems)
         {
-            if(typeid(*item) == typeid(Tile) || typeid(*item) == typeid(EnemyCharacter) || typeid(*item) == typeid(Portal))
+            if(typeid(*item) == typeid(Tile) || typeid(*item) == typeid(EnemyCharacter) ||
+               typeid(*item) == typeid(Portal) || typeid(*item) == typeid(EnemyBoss) ||
+               typeid(*item) == typeid(Pickup))
             {
                 m_currentLevel->removeItem(item);
                 delete item;
@@ -159,7 +163,7 @@ void Game::changeLevel()
 
     playMusic();
 
-    m_levelID = 3;
+    m_levelID++;
 }
 
 void Game::triggerDialogue()
