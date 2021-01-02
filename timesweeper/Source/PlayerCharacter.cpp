@@ -133,7 +133,7 @@ void PlayerCharacter::keyReleaseEvent(QKeyEvent *event)
 
 void PlayerCharacter::aimAtPoint(QPoint point)
 {
-    if(!m_isPaused)
+    if(!m_isPaused && !game->getIsGameOver())
     {
         m_targetPoint = game->mapToScene(point);
 
@@ -179,7 +179,8 @@ void PlayerCharacter::updateShoudlerPosition()
 
 void PlayerCharacter::shootProjectile()
 {
-    if(!m_isPaused){
+    if(!m_isPaused && !game->getIsGameOver())
+    {
         auto *projectile = new Projectile(Projectile::Player);
 
         QLineF ln(m_shoulderPosition, m_targetPoint);

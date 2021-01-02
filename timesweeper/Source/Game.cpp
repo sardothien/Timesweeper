@@ -193,6 +193,8 @@ void Game::setHealthBar()
 
 void Game::gameOver()
 {
+    m_mainTimer->stop();
+    m_music->pause();
     m_isGameOver = true;
     m_gameOverLabel->show();
 }
