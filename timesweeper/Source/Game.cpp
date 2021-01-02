@@ -74,8 +74,6 @@ void Game::showCredits()
 
 void Game::playMusic()
 {
-    m_music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_"
-                           + QString::number(getLevelID()) + ".mp3"));
     if(m_soundOn && getLevelID() != 1)
     {
         m_music->play();
@@ -161,6 +159,8 @@ void Game::changeLevel()
     }
     centerOn(m_player);
 
+    m_music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_"
+                           + QString::number(getLevelID()) + ".mp3"));
     playMusic();
 
     m_levelID++;

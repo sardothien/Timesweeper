@@ -19,5 +19,5 @@ Help::~Help()
 
 void Help::backButtonClicked()
 {
-    this->~Help();
+    this->hide();
 }

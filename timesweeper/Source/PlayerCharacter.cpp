@@ -3,6 +3,7 @@
 #include "Headers/DialogueTriggerBox.h"
 #include "Headers/Game.h"
 #include "Headers/Help.h"
+#include "Headers/Menu.h"
 #include "Headers/Options.h"
 #include "Headers/Pickup.h"
 #include "Headers/Projectile.h"
@@ -54,19 +55,17 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
     else if((event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) && m_isPaused)
     {
         game->m_mainTimer->start(20);
-        game->m_music->play();
+        game->playMusic();
         m_isPaused = false;
         game->getPauseLabel()->hide();
     }
     else if((event->key() == Qt::Key_O) && m_isPaused)
     {
-        Options *options = new Options();
-        options->show();
+        Menu::m_options->show();
     }
     else if((event->key() == Qt::Key_H) && m_isPaused)
     {
-        Help *help = new Help();
-        help->show();
+        Menu::m_help->show();
     }
     else if(event->key() == Qt::Key_R && game->getIsGameOver() == true)
     {

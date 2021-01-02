@@ -8,12 +8,18 @@ namespace Ui
     class Menu;
 }
 
+class Help;
+class Options;
+
 class Menu : public QMainWindow
 {
     Q_OBJECT
     public:
         explicit Menu(QWidget *parent = nullptr);
         ~Menu();
+
+        static Help *m_help;
+        static Options *m_options;
 
     private slots:
         void startButtonClicked();

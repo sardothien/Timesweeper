@@ -6,6 +6,9 @@
 
 Game * game;
 
+Help* Menu::m_help;
+Options* Menu::m_options;
+
 Menu::Menu(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::Menu)
 {
@@ -18,6 +21,9 @@ Menu::Menu(QWidget *parent)
     connect(ui->quitButton, &QPushButton::clicked, this, &Menu::quitButtonClicked);
     connect(ui->optionsButton, &QPushButton::clicked, this, &Menu::optionsButtonClicked);
     connect(ui->helpButton, &QPushButton::clicked, this, &Menu::helpButtonClicked);
+
+    m_options = new Options();
+    m_help = new Help();
 }
 
 Menu::~Menu()
@@ -42,14 +48,10 @@ void Menu::quitButtonClicked()
 
 void Menu::optionsButtonClicked()
 {
-    Options *options = new Options();
-    options->show();
-    // this->hide();
+    m_options->show();
 }
 
 void Menu::helpButtonClicked()
 {
-    Help *help = new Help();
-    help->show();
-    // this->hide();
+    m_help->show();
 }
