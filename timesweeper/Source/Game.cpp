@@ -30,7 +30,7 @@ Game::Game()
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //setFixedSize(1200, 700);
+    setFixedSize(1200, 700);
 
     m_player = new PlayerCharacter();
     m_player->setFlag(QGraphicsItem::ItemIsFocusable);
@@ -96,7 +96,7 @@ void Game::makePauseLabel()
     m_pauseLabel->hide();
 }
 
-//----------GETERI/SETERI---------------
+//----------Getters/Setters---------------
 void Game::setCurrentLevelPortal(Portal *portal) { m_currentLevelPortal = portal; }
 
 int Game::getLevelID() { return m_levelID; }
@@ -115,7 +115,7 @@ QLabel *Game::getGameOverLabel() const { return m_gameOverLabel; }
 
 QLabel *Game::getPauseLabel() const { return m_pauseLabel; }
 
-//----------SLOTOVI---------------------
+//----------Slots---------------------
 
 void Game::changeLevel()
 {

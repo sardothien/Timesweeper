@@ -33,10 +33,10 @@ void EnemyCharacter::advance(int phase)
     shoot();
 }
 
-// Kretanje neprijatelja levo/desno
+// enemy left/right movement
 void EnemyCharacter::move()
 {
-    if(m_side == 0) // okrenut ka desno
+    if(m_side == 0) // enemy looking right
     {
         setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_right.png"));
 
@@ -57,7 +57,7 @@ void EnemyCharacter::move()
             }
         }
     }
-    else if(m_side == 1) // okrenut ka levo
+    else if(m_side == 1) // enemy looking left
     {
         setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/alien_left.png"));
 
@@ -85,7 +85,7 @@ void EnemyCharacter::shoot()
     if((abs(game->m_player->x() - x()) < 600) &&
        (abs(game->m_player->y() - y()) < 50))
     {
-        if(game->m_player->x() < x()) // enemy puca ulevo
+        if(game->m_player->x() < x()) // enemy shooting left
         {
             m_side       = 1;
             m_stopMoving = true;
@@ -99,7 +99,7 @@ void EnemyCharacter::shoot()
                 game->m_currentLevel->addItem(projectile);
             }
         }
-        else // enemy puca udesno
+        else // enemy shooting right
         {
             m_side       = 0;
             m_stopMoving = true;

@@ -7,7 +7,7 @@ extern Game *game;
 Tile::Tile(char tile)
     : m_type(tile)
 {
-    // pomocne promenljive za kretanje
+    // helper variables for platform movement
     m_side       = 0;
     m_steps      = 0;
     m_stopMoving = false;
@@ -220,7 +220,7 @@ void Tile::advance(int phase)
 
 void Tile::move()
 {
-    if(m_side == 0) // ka desno
+    if(m_side == 0) // mobing right
     {
         if(!m_stopMoving)
         {
@@ -240,7 +240,7 @@ void Tile::move()
             }
         }
     }
-    else if(m_side == 1) // ka levo
+    else if(m_side == 1) // moiving left
     {
         if(!m_stopMoving)
         {

@@ -2,7 +2,6 @@
 #include "Headers/DialogueBox.h"
 #include "Headers/Game.h"
 
-// staticke promenljivie klase DialogueHandler
 QVector<QPair<DialogueHandler::Speaker, QString>> DialogueHandler::m_sentances;
 int DialogueHandler::m_currentIndex;
 DialogueBox *DialogueHandler::m_box;
@@ -21,18 +20,18 @@ void DialogueHandler::initializeDialogue()
 
     if(!file.exists())
     {
-        qDebug() << "Fajl ne postoji!\n";
+        qDebug() << "File doesn't exist!\n";
         return ;
     }
     if(!file.open(QIODevice::ReadOnly))
     {
-        qDebug() << "Nije uspelo otvaranje fajla!\n";
+        qDebug() << "File open failed!\n";
         return ;
     }
 
     QTextStream in(&file);
 
-    // prva linija u fajlu govori koliko ce recenica biti
+    // number if sentances is stored in the first line
     int numberOfLines = in.readLine().toInt();
 
     QStringList line;
@@ -53,7 +52,7 @@ void DialogueHandler::initializeDialogue()
                 m_sentances.append(qMakePair(Speaker::Game, line.at(1)));
                 break;
             default:
-                qDebug() << "Los broj za enum!\n";
+                qDebug() << "Ivalid number given for enum!\n";
         }
     }
 

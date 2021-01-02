@@ -10,7 +10,7 @@ class PlayerCharacter : public Character
 {
     Q_OBJECT
     public:
-        // metode
+        // Methods
         PlayerCharacter();
 
         void keyPressEvent(QKeyEvent *event) override;
@@ -22,7 +22,7 @@ class PlayerCharacter : public Character
         void increaseHealth();
         void decreaseHealth();
 
-        // geteri/seteri
+        // Getters/Setters
         GunArm *getGunArm() const;
         int getHealth() const;
         bool getSoundEffectOn() const;
@@ -34,13 +34,12 @@ class PlayerCharacter : public Character
             aimingRight
         };
 
-        // polja
+        // Fields
         AimDirection m_aimDirection;
         QPointF m_targetPoint;
         GunArm *m_gunArm;
         QPointF m_projectileStartPoint;
         QPointF m_shoulderPosition;
-
 
     private:
         void advance(int phase) override;

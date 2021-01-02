@@ -20,7 +20,7 @@ class Game : public QGraphicsView
 {
     Q_OBJECT
     public:
-        // metode
+        // Methods
         Game();
         void mouseMoveEvent(QMouseEvent *event);
         void mousePressEvent(QMouseEvent *event);
@@ -29,7 +29,7 @@ class Game : public QGraphicsView
         void makeGameOverLabel();
         void makePauseLabel();
 
-        // geteri/seteri
+        // Getters/Setters
         static void setCurrentLevelPortal(Portal *portal);
         static int getLevelID();
         bool getSoundOn() const;
@@ -40,7 +40,7 @@ class Game : public QGraphicsView
         QLabel *getGameOverLabel() const;
         QLabel *getPauseLabel() const;
 
-        // polja
+        // Fields
         static PlayerCharacter *m_player;
         static int m_levelID;
         QGraphicsScene *m_currentLevel;
@@ -50,7 +50,6 @@ class Game : public QGraphicsView
         QCursor m_cursor;
         QTimer *m_mainTimer;
         QGraphicsPixmapItem *m_gameOverScreen;
-
         QProgressBar *m_bossHealthBar;
         QLabel *m_bossHead;
 

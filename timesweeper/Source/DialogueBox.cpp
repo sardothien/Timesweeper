@@ -13,7 +13,7 @@ DialogueBox::DialogueBox(QPair<DialogueHandler::Speaker, QString> &text)
     {
         setPixmap(QPixmap(":/Other/Resources/Other/dialogue_box_strauss.png"));
         m_currentText->setTextWidth(280);
-        m_currentText->setPos(5, 15); // pozicija od gornjeg levog ugla pixmapa
+        m_currentText->setPos(5, 15); //from top left of the pixmap
     }
     else
     {

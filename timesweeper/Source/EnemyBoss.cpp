@@ -48,14 +48,14 @@ void EnemyBoss::advance(int phase)
 
 void EnemyBoss::move()
 {
-    // ako EnemyBoss dodje do vrha scene GameOver
+    // if EnemyBoss leaves the scene it's Game Over
     if(y() + boundingRect().height() <= 0)
     {
         game->scene()->removeItem(this);
         emit alphaEscaped();
     }
 
-    // ide ka gore samo kada je PlayerCharacter blizu po x osi
+    // EnemyBoss starts moving when the player is near
     if(x() - game->m_player->x() < 650)
     {
         setPos(x(), y() - 1);

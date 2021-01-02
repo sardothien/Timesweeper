@@ -35,16 +35,16 @@ QGraphicsScene* Level::LoadLevel()
 
 void Level::parseLevelFile(QString filename)
 {
-    // Otvaranje datoteke sa nivoom
+    // opening the file containing the level layout
     QFile file(filename);
     if(!file.exists())
     {
-        qDebug() << "Fajl ne postoji!\n";
+        qDebug() << "Level layout file doesn't exist!\n";
         return ;
     }
     if(!file.open(QIODevice::ReadOnly))
     {
-        qDebug() << "Nije uspelo otvaranje fajla!\n";
+        qDebug() << "Level layout file open failed!\n";
         return ;
     }
 
@@ -69,14 +69,14 @@ void Level::parseLevelFile(QString filename)
         m_scene->setSceneRect(0, 0, 45 * (sizeX - 1), 700);
     }
 
-    // Specijalno hardcodujemo ovde poziciju boss-a da bi se prvo iscrato,
-    // iza svih prepreka
+    // We are hardcoding the position of the final boss so it will be rendered
+    // first, behind all platforms and other enemies
     if(game->getLevelID() == 5)
     {
         AddObject('F', 2170, 4320);
     }
 
-    // Prolazak kroz matricu i iscrtavanje
+    // Going through the matrix and drawing objects
     for(int y = 0; y < sizeY; y++)
     {
         QString tiles = in.readLine();
@@ -107,15 +107,15 @@ void Level::AddObject(char type, int x, int y)
 
     switch(type)
     {
-        case '-': // nista
+        case '-': // empty space
             break;
-        case 'd': // start za dijalog
+        case 'd': // start point for dialogue
             dialogueStartPoint = new DialogueTriggerBox();
             dialogueStartPoint->setRect(x, y, 100, 500);
             dialogueStartPoint->setOpacity(0.0);
             m_scene->addItem(dialogueStartPoint);
             break;
-        case 'E': // neprijatelj
+        case 'E': // basic enemy
             enemy = new EnemyCharacter();
             enemy->setPos(x, y-110);
             enemy->setScale(0.8);
@@ -125,7 +125,7 @@ void Level::AddObject(char type, int x, int y)
             m_scene->addItem(enemy->getHealtBar()->m_barFrame);
             m_scene->addItem(enemy->getHealtBar()->m_bar);
             break;
-        case '+': // zivoti
+        case '+': // health pickups
             pickup = new Pickup();
             pickup->setPos(x, y);
             m_scene->addItem(pickup);
@@ -136,7 +136,7 @@ void Level::AddObject(char type, int x, int y)
             m_scene->addItem(portal);
             game->setCurrentLevelPortal(portal);
             break;
-        case 'S': // pocetna pozicija igraca
+        case 'S': // player start position in current level
             Game::m_currentLevelPlayerStartPosition = QPointF(x, y);
             break;
          case 'F': // enemy boss
@@ -168,14 +168,13 @@ void Level::AddObject(char type, int x, int y)
          case 'h': // Building - level 4 - hotel
             addBuilding(Building::Buildings::hotel, x, y);
             break;
-         default: // sve ostale prepreke
+         default: // all other obstacles are Tiles
             tile = new Tile(type);
             tile->setPos(x, y);
             m_scene->addItem(tile);
             break;
     }
 }
-
 
 void Level::addBuilding(Building::Buildings b, int x, int y)
 {

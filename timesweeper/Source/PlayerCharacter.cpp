@@ -26,7 +26,7 @@ PlayerCharacter::PlayerCharacter()
     m_projectileSound->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/projectile.mp3"));
 }
 
-//----------------GETERI/SETERI-------------------
+//----------------Getters/Setters-------------------
 
 GunArm *PlayerCharacter::getGunArm() const { return m_gunArm; }
 
@@ -242,7 +242,7 @@ void PlayerCharacter::jump()
 {
     if(!m_isOnGround)
     {
-        if(y() < 0) // udara gore
+        if(y() < 0) // player is hitting the top of the scene
         {
             setPos(x(), 0);
             m_velocityY = 5;
@@ -262,12 +262,12 @@ void PlayerCharacter::jump()
 
 void PlayerCharacter::walk()
 {
-    // ako Player pokusa da ode van ekrana
-    if(x() > game->m_currentLevel->width() - 3 * 45) // desno
+    // if the player tries to move outside the playable area in the scene
+    if(x() > game->m_currentLevel->width() - 3 * 45) // right
     {
         setPos(game->m_currentLevel->width() - 3 * 45, y());
     }
-    else if(x() < 0) // levo
+    else if(x() < 0) // left
     {
         setPos(0, y());
     }

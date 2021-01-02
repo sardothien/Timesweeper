@@ -9,7 +9,6 @@ class DialogueHandler : public QObject
 {
     Q_OBJECT
     public:
-        // metode
         static void initializeDialogue();
         static void advanceDialogue();
         static void setDialogueActive(bool isActive);
@@ -20,7 +19,6 @@ class DialogueHandler : public QObject
             Game
         };
 
-        // polja
         static bool isDialogueActive;
 
     private:

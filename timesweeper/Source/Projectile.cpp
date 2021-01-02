@@ -81,7 +81,7 @@ void Projectile::move(int distanceToMove)
         return;
     }
 
-    // ako projectile ode van view-a, unistava se
+    // if the projectile goes outside its range we remove it
     if(x() > game->m_player->x() + 1200 || x() < game->m_player->x() - 1200 ||
        y() > game->m_player->y() + 700 || y() < game->m_player->y() - 700)
     {

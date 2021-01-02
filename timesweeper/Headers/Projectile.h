@@ -12,7 +12,6 @@ class Projectile : public QObject, public QGraphicsPixmapItem
             Player
         };
 
-        // metode
         Projectile(Shooter shooter);
 
         Shooter getShooter() const;
