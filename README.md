@@ -1,4 +1,4 @@
-[splash](https://gitlab.com/matf-bg-ac-rs/course-rs/projects-2020-2021/06-timesweeper/-/blob/develop/timesweeper/Resources/Other/splash.png)
+![splash](https://gitlab.com/matf-bg-ac-rs/course-rs/projects-2020-2021/06-timesweeper/-/blob/develop/timesweeper/Resources/Other/splash.png)
 
 Grab your trusty Time gun, jump into a Time Portal, avoid some obstacles and shoot up some Time travelling aliens
 
