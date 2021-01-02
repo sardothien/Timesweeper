@@ -1,6 +1,7 @@
-# Project 06-timesweeper
+[](https://gitlab.com/matf-bg-ac-rs/course-rs/projects-2020-2021/06-timesweeper/-/blob/develop/timesweeper/Resources/Other/splash.png)
 
-2d platformer sa kratkom pričom sa putovanjem kroz vreme, vanzemaljcima i sl.
+Grab your trusty Time gun, jump into a Time Portal, avoid some obstacles and shoot up some Time travelling aliens
+
 
 ## Developers
 
