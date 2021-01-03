@@ -39,6 +39,9 @@ Thumbs.db
 *.pro.user*
 build*/
 
+# cmake generated files
+*.user*
+
 # xemacs temporary files
 *.flc
 
