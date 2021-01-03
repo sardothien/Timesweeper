@@ -28,7 +28,7 @@ Download the latest release version from [this link](https://gitlab.com/matf-bg-
 
 - <b>Option 2 - Run from source code:</b><br>
 
-Download and install the [Qt](https://www.qt.io/) library (minimum 3.16) and Qt Creator. <br>
+Download and install the [Qt](https://www.qt.io/) library and Qt Creator. <br>
 If you are using linux, also install the multimedia addon with the following terminal command:<br>
 <br>
 `sudo apt-get install qtmultimedia5-dev` 
