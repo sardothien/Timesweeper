@@ -14,7 +14,7 @@ class EnemyCharacter : public Character
         int getLives() const;
         void setLives(int lives);
 
-        EnemyHealthBar* m_healthBar;
+        EnemyHealthBar* healthBar;
         EnemyHealthBar *getHealtBar() const;
 
         void decreaseHealth();
@@ -22,7 +22,7 @@ class EnemyCharacter : public Character
     private:
         void advance (int phase) override;
         void move();
-        void shoot();        
+        void shoot();
 
     private:
         int m_side;

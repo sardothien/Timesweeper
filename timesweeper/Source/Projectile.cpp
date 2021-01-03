@@ -54,8 +54,8 @@ void Projectile::move(int distanceToMove)
                 if(enemy->getLives() == 0)
                 {
                     scene()->removeItem(enemy);
-                    scene()->removeItem(enemy->m_healthBar->m_bar);
-                    scene()->removeItem(enemy->m_healthBar->m_barFrame);
+                    scene()->removeItem(enemy->healthBar->bar);
+                    scene()->removeItem(enemy->healthBar->barFrame);
                 }
 
                 scene()->removeItem(this);
@@ -82,8 +82,8 @@ void Projectile::move(int distanceToMove)
     }
 
     // if the projectile goes outside its range we remove it
-    if(x() > game->m_player->x() + 1200 || x() < game->m_player->x() - 1200 ||
-       y() > game->m_player->y() + 700 || y() < game->m_player->y() - 700)
+    if(x() > game->player->x() + 1200 || x() < game->player->x() - 1200 ||
+       y() > game->player->y() + 700 || y() < game->player->y() - 700)
     {
         scene()->removeItem(this);
         delete this;

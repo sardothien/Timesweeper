@@ -6,8 +6,8 @@
 
 Game * game;
 
-Help* Menu::m_help;
-Options* Menu::m_options;
+Help* Menu::help;
+Options* Menu::options;
 
 Menu::Menu(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::Menu)
@@ -22,20 +22,15 @@ Menu::Menu(QWidget *parent)
     connect(ui->optionsButton, &QPushButton::clicked, this, &Menu::optionsButtonClicked);
     connect(ui->helpButton, &QPushButton::clicked, this, &Menu::helpButtonClicked);
 
-    m_options = new Options();
-    m_help = new Help();
-}
-
-Menu::~Menu()
-{
-    delete ui;
+    options = new Options();
+    help = new Help();
 }
 
 void Menu::startButtonClicked()
 {
     if(game->getSoundOn())
     {
-        game->m_music->play();
+        game->music->play();
     }
     game->show();
     this->hide();
@@ -48,10 +43,10 @@ void Menu::quitButtonClicked()
 
 void Menu::optionsButtonClicked()
 {
-    m_options->show();
+    options->show();
 }
 
 void Menu::helpButtonClicked()
 {
-    m_help->show();
+    help->show();
 }

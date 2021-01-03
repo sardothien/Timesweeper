@@ -12,11 +12,6 @@ Help::Help(QWidget *parent)
     connect(ui->backButton, &QPushButton::clicked, this, &Help::backButtonClicked);
 }
 
-Help::~Help()
-{
-    delete ui;
-}
-
 void Help::backButtonClicked()
 {
     this->hide();

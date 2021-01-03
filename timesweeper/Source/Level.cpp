@@ -12,12 +12,12 @@
 #include "Headers/Tile.h"
 
 extern Game* game;
-PlayerCharacter *Game::m_player;
-Portal *Game::m_currentLevelPortal;
-QPointF Game::m_currentLevelPlayerStartPosition;
+PlayerCharacter *Game::player;
+Portal *Game::currentLevelPortal;
+QPointF Game::currentLevelPlayerStartPosition;
 QGraphicsScene *Level::m_scene;
 
-QGraphicsScene* Level::LoadLevel()
+QGraphicsScene* Level::loadLevel()
 {
     // Pravljenje scene
     m_scene = new QGraphicsScene();
@@ -73,7 +73,7 @@ void Level::parseLevelFile(QString filename)
     // first, behind all platforms and other enemies
     if(game->getLevelID() == 5)
     {
-        AddObject('F', 2170, 4320);
+        addObject('F', 2170, 4320);
     }
 
     // Going through the matrix and drawing objects
@@ -84,11 +84,11 @@ void Level::parseLevelFile(QString filename)
         {
             if(game->getLevelID() == 1)
             {
-                AddObject(tiles[x].toLatin1(), x * 44, y * 44);
+                addObject(tiles[x].toLatin1(), x * 44, y * 44);
             }
             else
             {
-                AddObject(tiles[x].toLatin1(), x * 45, y * 45);
+                addObject(tiles[x].toLatin1(), x * 45, y * 45);
             }
         }
     }
@@ -96,7 +96,7 @@ void Level::parseLevelFile(QString filename)
     file.close();
 }
 
-void Level::AddObject(char type, int x, int y)
+void Level::addObject(char type, int x, int y)
 {
     EnemyCharacter *enemy;
     EnemyBoss *enemyBoss;
@@ -119,11 +119,11 @@ void Level::AddObject(char type, int x, int y)
             enemy = new EnemyCharacter();
             enemy->setPos(x, y-110);
             enemy->setScale(0.8);
-            enemy->getHealtBar()->m_barFrame->setPos(x, y-135);
-            enemy->getHealtBar()->m_bar->setPos(x, y-135);
+            enemy->getHealtBar()->barFrame->setPos(x, y-135);
+            enemy->getHealtBar()->bar->setPos(x, y-135);
             m_scene->addItem(enemy);
-            m_scene->addItem(enemy->getHealtBar()->m_barFrame);
-            m_scene->addItem(enemy->getHealtBar()->m_bar);
+            m_scene->addItem(enemy->getHealtBar()->barFrame);
+            m_scene->addItem(enemy->getHealtBar()->bar);
             break;
         case '+': // health pickups
             pickup = new Pickup();
@@ -137,7 +137,7 @@ void Level::AddObject(char type, int x, int y)
             game->setCurrentLevelPortal(portal);
             break;
         case 'S': // player start position in current level
-            Game::m_currentLevelPlayerStartPosition = QPointF(x, y);
+            Game::currentLevelPlayerStartPosition = QPointF(x, y);
             break;
          case 'F': // enemy boss
             enemyBoss = new EnemyBoss();

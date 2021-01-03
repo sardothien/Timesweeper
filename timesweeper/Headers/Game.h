@@ -22,8 +22,8 @@ class Game : public QGraphicsView
     public:
         // Methods
         Game();
-        void mouseMoveEvent(QMouseEvent *event);
-        void mousePressEvent(QMouseEvent *event);
+        void mouseMoveEvent(QMouseEvent *event) override;
+        void mousePressEvent(QMouseEvent *event) override;
         void showCredits();
         void playMusic();
         void makeGameOverLabel();
@@ -41,17 +41,17 @@ class Game : public QGraphicsView
         QLabel *getPauseLabel() const;
 
         // Fields
-        static PlayerCharacter *m_player;
-        static int m_levelID;
-        QGraphicsScene *m_currentLevel;
-        static Portal *m_currentLevelPortal;
-        static QPointF m_currentLevelPlayerStartPosition;
-        QMediaPlayer *m_music;
-        QCursor m_cursor;
-        QTimer *m_mainTimer;
-        QGraphicsPixmapItem *m_gameOverScreen;
-        QProgressBar *m_bossHealthBar;
-        QLabel *m_bossHead;
+        static PlayerCharacter *player;
+        static int levelID;
+        QGraphicsScene *currentLevel;
+        static Portal *currentLevelPortal;
+        static QPointF currentLevelPlayerStartPosition;
+        QMediaPlayer *music;
+        QCursor cursor;
+        QTimer *mainTimer;
+        QGraphicsPixmapItem *gameOverScreen;
+        QProgressBar *bossHealthBar;
+        QLabel *bossHead;
 
     public slots:
         void changeLevel();

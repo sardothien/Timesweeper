@@ -7,7 +7,7 @@ extern Game* game;
 
 EnemyCharacter::EnemyCharacter()
 {
-    m_healthBar = new EnemyHealthBar(80, 15);
+    healthBar = new EnemyHealthBar(80, 15);
 
     // pomocne promenljive za kretanje
     m_side       = 0;
@@ -17,14 +17,14 @@ EnemyCharacter::EnemyCharacter()
 
 EnemyCharacter::~EnemyCharacter()
 {
-    delete m_healthBar;
+    delete healthBar;
 }
 
 int EnemyCharacter::getLives() const { return m_lives; }
 
 void EnemyCharacter::setLives(int lives) { m_lives = lives; }
 
-EnemyHealthBar *EnemyCharacter::getHealtBar() const { return m_healthBar; }
+EnemyHealthBar *EnemyCharacter::getHealtBar() const { return healthBar; }
 
 void EnemyCharacter::advance(int phase)
 {
@@ -44,10 +44,10 @@ void EnemyCharacter::move()
         {
             setPos(x() + 0.5, y());
 
-            m_healthBar->m_bar->setPos(m_healthBar->m_bar->x() + 0.5,
-                                     m_healthBar->m_bar->y());
-            m_healthBar->m_barFrame->setPos(m_healthBar->m_barFrame->x() + 0.5,
-                                          m_healthBar->m_barFrame->y());
+            healthBar->bar->setPos(healthBar->bar->x() + 0.5,
+                                   healthBar->bar->y());
+            healthBar->barFrame->setPos(healthBar->barFrame->x() + 0.5,
+                                        healthBar->barFrame->y());
 
             m_steps++;
             if(m_steps % 120 == 0)
@@ -65,10 +65,10 @@ void EnemyCharacter::move()
         {
             setPos(x() - 0.5, y());
 
-            m_healthBar->m_bar->setPos(m_healthBar->m_bar->x() - 0.5,
-                                     m_healthBar->m_bar->y());
-            m_healthBar->m_barFrame->setPos(m_healthBar->m_barFrame->x() - 0.5,
-                                          m_healthBar->m_barFrame->y());
+            healthBar->bar->setPos(healthBar->bar->x() - 0.5,
+                                   healthBar->bar->y());
+            healthBar->barFrame->setPos(healthBar->barFrame->x() - 0.5,
+                                        healthBar->barFrame->y());
 
             m_steps++;
             if(m_steps % 120 == 0)
@@ -82,10 +82,10 @@ void EnemyCharacter::move()
 
 void EnemyCharacter::shoot()
 {
-    if((abs(game->m_player->x() - x()) < 600) &&
-       (abs(game->m_player->y() - y()) < 50))
+    if((abs(game->player->x() - x()) < 600) &&
+       (abs(game->player->y() - y()) < 50))
     {
-        if(game->m_player->x() < x()) // enemy shooting left
+        if(game->player->x() < x()) // enemy shooting left
         {
             m_side       = 1;
             m_stopMoving = true;
@@ -96,7 +96,7 @@ void EnemyCharacter::shoot()
                 auto *projectile = new Projectile(Projectile::Enemy);
                 projectile->setPos(x() + 10, y() + 72);
                 projectile->setRotation(-180);
-                game->m_currentLevel->addItem(projectile);
+                game->currentLevel->addItem(projectile);
             }
         }
         else // enemy shooting right
@@ -109,7 +109,7 @@ void EnemyCharacter::shoot()
                 m_timeToShoot    = 0;
                 auto *projectile = new Projectile(Projectile::Enemy);
                 projectile->setPos(x() + 120, y() + 65);
-                game->m_currentLevel->addItem(projectile);
+                game->currentLevel->addItem(projectile);
             }
         }
     }
@@ -125,18 +125,18 @@ void EnemyCharacter::decreaseHealth()
 {
     if(this->getLives() == 3)
     {
-        game->m_currentLevel->removeItem(this->m_healthBar->m_bar);
-        this->m_healthBar->m_bar = new QGraphicsRectItem(x(), y() - 25, 54, 15);
-        this->m_healthBar->m_bar->setBrush(Qt::yellow);
-        game->m_currentLevel->addItem(this->m_healthBar->m_bar);
+        game->currentLevel->removeItem(this->healthBar->bar);
+        this->healthBar->bar = new QGraphicsRectItem(x(), y() - 25, 54, 15);
+        this->healthBar->bar->setBrush(Qt::yellow);
+        game->currentLevel->addItem(this->healthBar->bar);
         this->setLives(2);
     }
     else if(this->getLives() == 2)
     {
-        game->m_currentLevel->removeItem(this->m_healthBar->m_bar);
-        this->m_healthBar->m_bar = new QGraphicsRectItem(x(), y() - 25, 28, 15);
-        this->m_healthBar->m_bar->setBrush(Qt::red);
-        game->m_currentLevel->addItem(this->m_healthBar->m_bar);
+        game->currentLevel->removeItem(this->healthBar->bar);
+        this->healthBar->bar = new QGraphicsRectItem(x(), y() - 25, 28, 15);
+        this->healthBar->bar->setBrush(Qt::red);
+        game->currentLevel->addItem(this->healthBar->bar);
         this->setLives(1);
     }
     else

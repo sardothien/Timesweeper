@@ -25,8 +25,7 @@ class EnemyBoss : public Character
         void drawHealthBar();
 
     private:
-        int m_lives    = 80;
-        int m_maxLives = 80;
+        int m_lives = 80;
 };
 
 #endif // ENEMYBOSS_H

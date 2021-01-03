@@ -18,26 +18,26 @@ int EnemyBoss::getLives() const { return m_lives; }
 
 void EnemyBoss::drawHealthBar()
 {
-    game->m_bossHead = new QLabel(game);
-    game->m_bossHead->setGeometry(game->width() - 300,
+    game->bossHead = new QLabel(game);
+    game->bossHead->setGeometry(game->width() - 300,
                                   game->height() - 60,
                                   50,
                                   38);
-    game->m_bossHead->setProperty("foo", "boss");
+    game->bossHead->setProperty("foo", "boss");
 
-    game->m_bossHealthBar = new QProgressBar(game);
-    game->m_bossHealthBar->setMinimum(0);
-    game->m_bossHealthBar->setMaximum(80);
-    game->m_bossHealthBar->setValue(80);
-    game->m_bossHealthBar->setTextVisible(false);
-    game->m_bossHealthBar->setGeometry(game->width() - 250,
+    game->bossHealthBar = new QProgressBar(game);
+    game->bossHealthBar->setMinimum(0);
+    game->bossHealthBar->setMaximum(80);
+    game->bossHealthBar->setValue(80);
+    game->bossHealthBar->setTextVisible(false);
+    game->bossHealthBar->setGeometry(game->width() - 250,
                                      game->height() - 50,
                                      200,
                                      20);
-    game->m_bossHealthBar->setStyleSheet("QProgressBar::chunk { background: green; }");
+    game->bossHealthBar->setStyleSheet("QProgressBar::chunk { background: green; }");
 
-    game->m_bossHead->show();
-    game->m_bossHealthBar->show();
+    game->bossHead->show();
+    game->bossHealthBar->show();
 }
 
 void EnemyBoss::advance(int phase)
@@ -56,7 +56,7 @@ void EnemyBoss::move()
     }
 
     // EnemyBoss starts moving when the player is near
-    if(x() - game->m_player->x() < 650)
+    if(x() - game->player->x() < 650)
     {
         setPos(x(), y() - 1);
     }
@@ -65,18 +65,18 @@ void EnemyBoss::move()
 void EnemyBoss::decreaseHealth()
 {
     setLives(--m_lives);
-    game->m_bossHealthBar->setValue(getLives());
+    game->bossHealthBar->setValue(getLives());
 
     if(getLives() > 20 && getLives() <= 50)
     {
-        game->m_bossHealthBar->setStyleSheet("QProgressBar::chunk { background: orange; }");
+        game->bossHealthBar->setStyleSheet("QProgressBar::chunk { background: orange; }");
     }
     else if(getLives() > 0 && getLives() <= 20)
     {
-        game->m_bossHealthBar->setStyleSheet("QProgressBar::chunk { background: red; }");
+        game->bossHealthBar->setStyleSheet("QProgressBar::chunk { background: red; }");
     }
 
-    game->m_bossHealthBar->update();
+    game->bossHealthBar->update();
 
     if(getLives() == 0)
     {

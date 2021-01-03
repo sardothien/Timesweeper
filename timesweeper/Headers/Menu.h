@@ -16,10 +16,9 @@ class Menu : public QMainWindow
     Q_OBJECT
     public:
         explicit Menu(QWidget *parent = nullptr);
-        ~Menu();
 
-        static Help *m_help;
-        static Options *m_options;
+        static Help *help;
+        static Options *options;
 
     private slots:
         void startButtonClicked();
@@ -28,7 +27,7 @@ class Menu : public QMainWindow
         void helpButtonClicked();
 
     private:
-            Ui::Menu *ui;
+        Ui::Menu *ui;
 };
 
 #endif // MENU_H

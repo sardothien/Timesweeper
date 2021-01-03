@@ -17,10 +17,10 @@ PlayerCharacter::PlayerCharacter()
 {
     setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_no_gun_right.png"));
 
-    m_gunArm           = new GunArm();
-    m_aimDirection     = AimDirection::aimingRight;
-    m_shoulderPosition = pos() + QPointF(35, 60);
-    m_gunArm->setPos(m_shoulderPosition);
+    gunArm           = new GunArm();
+    aimDirection     = AimDirection::aimingRight;
+    shoulderPosition = pos() + QPointF(35, 60);
+    gunArm->setPos(shoulderPosition);
 
     m_projectileSound = new QMediaPlayer();
     m_projectileSound->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/projectile.mp3"));
@@ -28,7 +28,7 @@ PlayerCharacter::PlayerCharacter()
 
 //----------------Getters/Setters-------------------
 
-GunArm *PlayerCharacter::getGunArm() const { return m_gunArm; }
+GunArm *PlayerCharacter::getGunArm() const { return gunArm; }
 
 int PlayerCharacter::getHealth() const { return m_health; }
 
@@ -47,25 +47,25 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
 
     if(event->key() == Qt::Key_P && !m_isPaused)
     {
-        game->m_mainTimer->stop();
-        game->m_music->pause();
+        game->mainTimer->stop();
+        game->music->pause();
         m_isPaused = true;
         game->getPauseLabel()->show();
     }
     else if((event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) && m_isPaused)
     {
-        game->m_mainTimer->start(20);
+        game->mainTimer->start(20);
         game->playMusic();
         m_isPaused = false;
         game->getPauseLabel()->hide();
     }
     else if((event->key() == Qt::Key_O) && m_isPaused)
     {
-        Menu::m_options->show();
+        Menu::options->show();
     }
     else if((event->key() == Qt::Key_H) && m_isPaused)
     {
-        Menu::m_help->show();
+        Menu::help->show();
     }
     else if(event->key() == Qt::Key_R && game->getIsGameOver() == true)
     {
@@ -73,7 +73,7 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         game->setIsGameOver(false);
         m_health = 8;
         emit healthChanged();
-        game->m_levelID--;
+        game->levelID--;
         game->changeLevel();
     }
 
@@ -134,45 +134,45 @@ void PlayerCharacter::aimAtPoint(QPoint point)
 {
     if(!m_isPaused && !game->getIsGameOver())
     {
-        m_targetPoint = game->mapToScene(point);
+        targetPoint = game->mapToScene(point);
 
-        QLineF ln(m_shoulderPosition, m_targetPoint );
+        QLineF ln(shoulderPosition, targetPoint );
         qreal angle = -1 * ln.angle();
 
         if(angle > -90 || angle < -270)
         {
-            m_aimDirection = AimDirection::aimingRight;
-            m_gunArm->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/gun_arm_right.png"));
-            m_gunArm->setTransformOriginPoint(6, 0);
+            aimDirection = AimDirection::aimingRight;
+            gunArm->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/gun_arm_right.png"));
+            gunArm->setTransformOriginPoint(6, 0);
             if(game->getLevelID() != 2)
             {
                 setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_right.png"));
             }
-            m_gunArm->setRotation(angle);
+            gunArm->setRotation(angle);
         }
         else
         {
-            m_aimDirection = AimDirection::aimingLeft;
-            m_gunArm->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/gun_arm_left.png"));
-            m_gunArm->setTransformOriginPoint(m_gunArm->boundingRect().width() - 6, 0);
+            aimDirection = AimDirection::aimingLeft;
+            gunArm->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/gun_arm_left.png"));
+            gunArm->setTransformOriginPoint(gunArm->boundingRect().width() - 6, 0);
             if(game->getLevelID() != 2)
             {
                 setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_left.png"));
             }
-            m_gunArm->setRotation(180 + angle);
+            gunArm->setRotation(180 + angle);
         }
     }
 }
 
 void PlayerCharacter::updateShoudlerPosition()
 {
-    if(m_aimDirection == AimDirection::aimingRight)
+    if(aimDirection == AimDirection::aimingRight)
     {
-        m_shoulderPosition = pos() + QPointF(35, 60);
+        shoulderPosition = pos() + QPointF(35, 60);
     }
-    else if(m_aimDirection == AimDirection::aimingLeft)
+    else if(aimDirection == AimDirection::aimingLeft)
     {
-        m_shoulderPosition = pos() + QPointF(17, 60);
+        shoulderPosition = pos() + QPointF(17, 60);
     }
 }
 
@@ -182,16 +182,16 @@ void PlayerCharacter::shootProjectile()
     {
         auto *projectile = new Projectile(Projectile::Player);
 
-        QLineF ln(m_shoulderPosition, m_targetPoint);
+        QLineF ln(shoulderPosition, targetPoint);
         qreal angle = -1 * ln.angle();
         qreal dy    = 80 * qSin(qDegreesToRadians(angle));
         qreal dx    = 80 * qCos(qDegreesToRadians(angle));
 
-        m_projectileStartPoint = QPointF(m_shoulderPosition + QPointF(dx, dy));
-        projectile->setPos(m_projectileStartPoint.x(), m_projectileStartPoint.y());
+        projectileStartPoint = QPointF(shoulderPosition + QPointF(dx, dy));
+        projectile->setPos(projectileStartPoint.x(), projectileStartPoint.y());
         projectile->setRotation(angle);
 
-        game->m_currentLevel->addItem(projectile);
+        game->currentLevel->addItem(projectile);
 
         if(m_projectileSound->state() == QMediaPlayer::PlayingState)
         {
@@ -255,7 +255,7 @@ void PlayerCharacter::jump()
     }
 
     updateShoudlerPosition();
-    m_gunArm->setPos(m_shoulderPosition);
+    gunArm->setPos(shoulderPosition);
 
     game->centerOn(this);
 }
@@ -263,9 +263,9 @@ void PlayerCharacter::jump()
 void PlayerCharacter::walk()
 {
     // if the player tries to move outside the playable area in the scene
-    if(x() > game->m_currentLevel->width() - 3 * 45) // right
+    if(x() > game->currentLevel->width() - 3 * 45) // right
     {
-        setPos(game->m_currentLevel->width() - 3 * 45, y());
+        setPos(game->currentLevel->width() - 3 * 45, y());
     }
     else if(x() < 0) // left
     {
@@ -275,7 +275,7 @@ void PlayerCharacter::walk()
     setPos(x() + m_velocityX, y());
 
     updateShoudlerPosition();
-    m_gunArm->setPos(m_shoulderPosition);
+    gunArm->setPos(shoulderPosition);
 
     game->centerOn(this);
 }
@@ -341,10 +341,10 @@ void PlayerCharacter::detectCollision()
                 }
             }
             else if(typeid(*(colliding_item)) == typeid(Portal) &&
-                   (game->m_currentLevelPortal->x() - x()) < 30 &&
-                   (game->m_currentLevelPortal->y() - y()) < 30)
+                   (game->currentLevelPortal->x() - x()) < 30 &&
+                   (game->currentLevelPortal->y() - y()) < 30)
             {
-                game->m_currentLevel->removeItem(game->m_player);
+                game->currentLevel->removeItem(game->player);
                 emit enteredPortal();
             }
             else if(typeid(*(colliding_item)) == typeid(GunArm))

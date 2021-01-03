@@ -22,6 +22,6 @@ DialogueBox::DialogueBox(QPair<DialogueHandler::Speaker, QString> &text)
         m_currentText->setPos(2, 2);
     }
 
-    QPointF playerPosition = game->m_player->pos();
+    QPointF playerPosition = game->player->pos();
     setPos(playerPosition + QPointF(50, -100));
 }

@@ -10,8 +10,8 @@ class EnemyHealthBar : public QObject, public QGraphicsRectItem
         EnemyHealthBar(int width, int height);
         ~EnemyHealthBar();
 
-        QGraphicsRectItem* m_barFrame;
-        QGraphicsRectItem* m_bar;
+        QGraphicsRectItem* barFrame;
+        QGraphicsRectItem* bar;
 
     private:
         int m_width;

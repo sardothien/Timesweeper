@@ -35,11 +35,11 @@ class PlayerCharacter : public Character
         };
 
         // Fields
-        AimDirection m_aimDirection;
-        QPointF m_targetPoint;
-        GunArm *m_gunArm;
-        QPointF m_projectileStartPoint;
-        QPointF m_shoulderPosition;
+        AimDirection aimDirection;
+        QPointF targetPoint;
+        GunArm *gunArm;
+        QPointF projectileStartPoint;
+        QPointF shoulderPosition;
 
     private:
         void advance(int phase) override;

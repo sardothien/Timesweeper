@@ -19,11 +19,6 @@ Options::Options(QWidget *parent)
     connect(ui->soundEffect, &QCheckBox::stateChanged, this, &Options::soundEffectStateChanged);
 }
 
-Options::~Options()
-{
-    delete ui;
-}
-
 void Options::backButtonClicked()
 {
     this->hide();
@@ -31,7 +26,7 @@ void Options::backButtonClicked()
 
 void Options::volumeValueChanged()
 {
-    game->m_music->setVolume(ui->volume->value());
+    game->music->setVolume(ui->volume->value());
 }
 
 void Options::soundStateChanged()
@@ -50,11 +45,11 @@ void Options::soundEffectStateChanged()
 {
     if(ui->soundEffect->checkState() == Qt::Unchecked)
     {
-        game->m_player->setSoundEffectOn(false);
+        game->player->setSoundEffectOn(false);
     }
     else
     {
-        game->m_player->setSoundEffectOn(true);
+        game->player->setSoundEffectOn(true);
     }
 }
 

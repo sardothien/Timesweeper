@@ -9,13 +9,15 @@ class QString;
 class Level
 {
     public:
-        static QGraphicsScene* LoadLevel();
-        static QGraphicsScene *m_scene;
+        static QGraphicsScene* loadLevel();
 
     private:
         static void parseLevelFile(QString filename);
-        static void AddObject(char type, int x, int y);
+        static void addObject(char type, int x, int y);
         static void addBuilding(Building::Buildings b, int x, int y);
+
+    private:
+        static QGraphicsScene *m_scene;
 };
 
 #endif // LEVEL_H

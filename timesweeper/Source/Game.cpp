@@ -10,7 +10,7 @@
 #include "Headers/Tile.h"
 #include "ui_Game.h"
 
-int Game::m_levelID;
+int Game::levelID;
 
 Game::Game()
 {
@@ -25,43 +25,43 @@ Game::Game()
     makePauseLabel();
 
     setMouseTracking(true);
-    m_cursor = QCursor(QPixmap(":/Other/Resources/Other/crosshair.png"), 17, 17);
-    setCursor(m_cursor);
+    cursor = QCursor(QPixmap(":/Other/Resources/Other/crosshair.png"), 17, 17);
+    setCursor(cursor);
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(1200, 700);
 
-    m_player = new PlayerCharacter();
-    m_player->setFlag(QGraphicsItem::ItemIsFocusable);
-    m_player->setFocus();
+    player = new PlayerCharacter();
+    player->setFlag(QGraphicsItem::ItemIsFocusable);
+    player->setFocus();
 
-    connect(m_player, &PlayerCharacter::enteredPortal, this, &Game::changeLevel, Qt::QueuedConnection);
-    connect(m_player, &PlayerCharacter::startDialogue, this, &Game::triggerDialogue);
-    connect(m_player, &PlayerCharacter::healthChanged, this, &Game::setHealthBar);
-    connect(m_player, &PlayerCharacter::playerIsDead, this, &Game::gameOver);
+    connect(player, &PlayerCharacter::enteredPortal, this, &Game::changeLevel, Qt::QueuedConnection);
+    connect(player, &PlayerCharacter::startDialogue, this, &Game::triggerDialogue);
+    connect(player, &PlayerCharacter::healthChanged, this, &Game::setHealthBar);
+    connect(player, &PlayerCharacter::playerIsDead, this, &Game::gameOver);
 
-    m_music = new QMediaPlayer();
+    music = new QMediaPlayer();
 
-    m_levelID   = 1;
-    m_mainTimer = new QTimer(this);
+    levelID   = 1;
+    mainTimer = new QTimer(this);
 
     changeLevel();
 }
 
 void Game::mouseMoveEvent(QMouseEvent *event)
 {
-    m_player->aimAtPoint(event->pos());
-    m_player->setFocus();
+    player->aimAtPoint(event->pos());
+    player->setFocus();
 }
 
 void Game::mousePressEvent(QMouseEvent *event)
 {
     if((event->button() == Qt::LeftButton) && (getLevelID() - 1 != 1))
     {
-        m_player->shootProjectile();
+        player->shootProjectile();
     }
-    m_player->setFocus();
+    player->setFocus();
 }
 
 void Game::showCredits()
@@ -76,7 +76,7 @@ void Game::playMusic()
 {
     if(m_soundOn && getLevelID() != 1)
     {
-        m_music->play();
+        music->play();
     }
 }
 
@@ -97,9 +97,9 @@ void Game::makePauseLabel()
 }
 
 //----------Getters/Setters---------------
-void Game::setCurrentLevelPortal(Portal *portal) { m_currentLevelPortal = portal; }
+void Game::setCurrentLevelPortal(Portal *portal) { currentLevelPortal = portal; }
 
-int Game::getLevelID() { return m_levelID; }
+int Game::getLevelID() { return levelID; }
 
 bool Game::getSoundOn() const { return m_soundOn; }
 
@@ -121,49 +121,49 @@ void Game::changeLevel()
 {
     if(getLevelID() != 1)
     {
-        auto allItems = m_currentLevel->items();
+        auto allItems = currentLevel->items();
         for(auto item : allItems)
         {
             if(typeid(*item) == typeid(Tile) || typeid(*item) == typeid(EnemyCharacter) ||
                typeid(*item) == typeid(Portal) || typeid(*item) == typeid(EnemyBoss) ||
                typeid(*item) == typeid(Pickup))
             {
-                m_currentLevel->removeItem(item);
+                currentLevel->removeItem(item);
                 delete item;
             }
         }
     }
 
-    m_currentLevel = Level::LoadLevel();
-    QObject::connect(m_mainTimer, SIGNAL(timeout()), m_currentLevel, SLOT(advance()));
-    m_mainTimer->start(20);
+    currentLevel = Level::loadLevel();
+    QObject::connect(mainTimer, SIGNAL(timeout()), currentLevel, SLOT(advance()));
+    mainTimer->start(20);
 
     DialogueHandler::initializeDialogue();
 
-    setScene(m_currentLevel);
+    setScene(currentLevel);
 
-    m_player->setFocus();
-    m_player->setPos(m_currentLevelPlayerStartPosition);
-
-    if(getLevelID() != 1)
-    {
-        m_player->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_right.png"));
-        m_player->setScale(0.8);
-    }
-    m_currentLevel->addItem(m_player);
+    player->setFocus();
+    player->setPos(currentLevelPlayerStartPosition);
 
     if(getLevelID() != 1)
     {
-        m_currentLevel->addItem(m_player->getGunArm());
+        player->setPixmap(QPixmap(":/CharacterModels/Resources/CharacterModels/player_right.png"));
+        player->setScale(0.8);
+    }
+    currentLevel->addItem(player);
+
+    if(getLevelID() != 1)
+    {
+        currentLevel->addItem(player->getGunArm());
 
     }
-    centerOn(m_player);
+    centerOn(player);
 
-    m_music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_"
+    music->setMedia(QUrl("qrc:/Sounds/Resources/Sounds/bgsound_level_"
                            + QString::number(getLevelID()) + ".mp3"));
     playMusic();
 
-    m_levelID++;
+    levelID++;
 }
 
 void Game::triggerDialogue()
@@ -180,7 +180,7 @@ void Game::setHealthBar()
         health = QString::number(i);
         health = "hb" + health;
 
-        if(m_player->getHealth() == i)
+        if(player->getHealth() == i)
         {
             m_label->setProperty("foo", health);
         }
@@ -193,8 +193,8 @@ void Game::setHealthBar()
 
 void Game::gameOver()
 {
-    m_mainTimer->stop();
-    m_music->pause();
+    mainTimer->stop();
+    music->pause();
     m_isGameOver = true;
     m_gameOverLabel->show();
 }
