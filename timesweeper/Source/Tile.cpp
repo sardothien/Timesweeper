@@ -220,7 +220,7 @@ void Tile::advance(int phase)
 
 void Tile::move()
 {
-    if(m_side == 0) // mobing right
+    if(m_side == 0) // moving right
     {
         if(!m_stopMoving)
         {
@@ -240,7 +240,7 @@ void Tile::move()
             }
         }
     }
-    else if(m_side == 1) // moiving left
+    else if(m_side == 1) // moving left
     {
         if(!m_stopMoving)
         {

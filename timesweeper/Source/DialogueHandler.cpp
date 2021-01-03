@@ -31,7 +31,7 @@ void DialogueHandler::initializeDialogue()
 
     QTextStream in(&file);
 
-    // number if sentances is stored in the first line
+    // number of sentances is stored in the first line
     int numberOfLines = in.readLine().toInt();
 
     QStringList line;
@@ -52,7 +52,7 @@ void DialogueHandler::initializeDialogue()
                 m_sentances.append(qMakePair(Speaker::Game, line.at(1)));
                 break;
             default:
-                qDebug() << "Ivalid number given for enum!\n";
+                qDebug() << "Invalid number given for enum!\n";
         }
     }
 
