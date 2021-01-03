@@ -4,9 +4,9 @@
 0 # The alien swarm has sorounded our base outside, and that big angry boy in the middle...
 0 # is their Alpha, and is going to blow us  up any minute now.
 0 # AAAnyway, the good news is that you got a promotion!
-0 # Congratulations intern, you are the worlds first Timesweeper!
+0 # Congratulations intern, you are the world's first Timesweeper!
 0 # Take this special Time Gun and this special Time Communicator and jump right into...
-0 # that Time Portal there, ill explain everything when you get there.
+0 # that Time Portal there, I will explain everything when you get there.
 1 # Get where?
 0 # You were not following me I see. It's not WHERE, it's WHEN!
 2 # endsection
