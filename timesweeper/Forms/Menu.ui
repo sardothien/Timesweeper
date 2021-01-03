@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Menu</class>
+ <widget class="QWidget" name="Menu">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>TimesweeperMainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#Menu{
+background: url(:/Other/Resources/Other/splash.png);
+background-repeat: none;
+background-color: black;
+background-position: center top
+}</string>
+  </property>
+  <widget class="QPushButton" name="startButton">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>400</y>
+     <width>161</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#startButton{
+text-align: center;
+vertical-align: middle;
+padding: 8px 24px;
+border: 3px solid #44201d;
+border-radius: 0px;
+background: #bc5a50;
+background: -webkit-gradient(linear, left top, left bottom, from(#bc5a50), to(#44201d));
+font: normal normal bold 20px courier new;
+color: #ffffff;
+text-decoration: none;
+}
+#startButton:hover{
+background: #3e3a3a;
+}</string>
+   </property>
+   <property name="text">
+    <string>Start</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="quitButton">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>450</y>
+     <width>161</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#quitButton{
+text-align: center;
+vertical-align: middle;
+padding: 8px 24px;
+border: 3px solid #44201d;
+border-radius: 0px;
+background: #bc5a50;
+background: -webkit-gradient(linear, left top, left bottom, from(#bc5a50), to(#44201d));
+font: normal normal bold 20px courier new;
+color: #ffffff;
+text-decoration: none;
+}
+#quitButton:hover{
+background: #3e3a3a;
+}</string>
+   </property>
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="optionsButton">
+   <property name="geometry">
+    <rect>
+     <x>710</x>
+     <y>10</y>
+     <width>71</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"> text-align: center;
+ vertical-align: middle;
+ padding: 8px 24px;
+border-radius: 0px;
+background: url(:/Other/Resources/Other/options.png);
+font: normal normal bold 20px courier new;
+color: #ffffff;
+text-decoration: none;
+background-repeat:none;
+background-position:center;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="helpButton">
+   <property name="geometry">
+    <rect>
+     <x>710</x>
+     <y>60</y>
+     <width>71</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#helpButton{
+ text-align: center;
+ vertical-align: middle;
+ padding: 8px 24px;
+border-radius: 0px;
+background: url(:/Other/Resources/Other/help.png);
+font: normal normal bold 20px courier new;
+color: #ffffff;
+text-decoration: none;
+background-repeat:none;
+background-position:center;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

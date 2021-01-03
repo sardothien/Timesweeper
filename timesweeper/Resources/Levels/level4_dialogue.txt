@@ -1,0 +1,13 @@
+12
+0 # Oh nice, I didn't know we were sending you to the wild wild west untill right now!
+0 # You're a rootin' tootin' alien sharpshootin' Time Cowboy now, boy!
+0 # Yeah, okay, I know the old west was not actually all gunslingers and saloon fights...
+0 # but we all still like the myths.
+1 # Yeehaw!
+0 # Oh yeah, I probabaly should have said this when you were in the 10th century...
+0 # but maybe don't show your Time Gun to the locals, they might get confused.
+2 # endsection
+0 # Intern, quick! Come back to the future!
+0 # No, wait. Come back to the present?
+0 # Oh never mind! Come back quick! You have to see something!
+2 # endsection

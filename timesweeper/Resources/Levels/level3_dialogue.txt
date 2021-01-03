@@ -1,0 +1,18 @@
+17
+1 # Wait, what? Dinosaurs?
+0 # Yep.
+1 # But didn't you say the first alien encoutner was in 944 AD?
+0 # I did. And that is correct. They jump to different points in our timeline...
+0 # but they do so out of order.     Get it? I know you don't.
+0 # Don't worry yourself with little details, leave to me and the lab boys.
+2 # endsection
+1 # Hey, uumm, doctor? Doesn't this gun run out of ammo?
+0 # HA! Do you really think we would invent something sounding as cool...
+0 # as "Time Gun" and make you worry about ammunition while using that?
+0 # Don't make me laugh
+2 # endsection
+0 # Wow i guess that last alien was pretty important.
+0 # When you killed him, some of the Alphas' rocket pods just dropped...
+0 # and squashed some aliens.
+0 # It was hilalrious! Keep up the good work!
+2 # endsection

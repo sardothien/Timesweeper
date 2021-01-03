@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Game</class>
+ <widget class="QWidget" name="Game">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget
+{
+background: url(:/LevelBackgrounds/Resources/LevelBackgrounds/level_3_dino.jpg);
+}
+QLabel[foo=&quot;hb1&quot;]{background: url(:/Other/Resources/Other/health_bar_1.png);}
+QLabel[foo=&quot;hb2&quot;]{background: url(:/Other/Resources/Other/health_bar_2.png);}
+QLabel[foo=&quot;hb3&quot;]{background: url(:/Other/Resources/Other/health_bar_3.png);}
+QLabel[foo=&quot;hb4&quot;]{background: url(:/Other/Resources/Other/health_bar_4.png);}
+QLabel[foo=&quot;hb5&quot;]{background: url(:/Other/Resources/Other/health_bar_5.png);}
+QLabel[foo=&quot;hb6&quot;]{background: url(:/Other/Resources/Other/health_bar_6.png);}
+QLabel[foo=&quot;hb7&quot;]{background: url(:/Other/Resources/Other/health_bar_7.png);}
+QLabel[foo=&quot;hb8&quot;]{background: url(:/Other/Resources/Other/health_bar_8.png);}
+QLabel[foo=&quot;boss&quot;]{background: url(:/Other/Resources/Other/boss.png);}</string>
+  </property>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
