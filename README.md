@@ -25,7 +25,8 @@ ___
 
 - <b>Option 1 - Run release version:</b><br>
 
-Download the latest release version from [this link](https://gitlab.com/matf-bg-ac-rs/course-rs/projects-2020-2021/06-timesweeper/-/releases) , unpack the downloaded archive, and run the included executable file.
+Download the latest release version (for Windows only) from [this link](https://gitlab.com/matf-bg-ac-rs/course-rs/projects-2020-2021/06-timesweeper/-/releases) , unpack the downloaded archive, and run the included executable file.
+If the first link doesn't work, you can download the release build from [here](https://drive.google.com/file/d/16wUC2wYumvYVEjSmNXyy3BSzsWSr-FK0/view?fbclid=IwAR0OSAK7ZAtX_yZeB5KfNBeJ6Q9F8KT6Oh9y-2fTm1h2p8lva4pPOkPO8Ls)
 
 - <b>Option 2 - Run from source code:</b><br>
 
