@@ -13,6 +13,7 @@ class Options : public QMainWindow
     Q_OBJECT
     public:
         explicit Options(QWidget *parent = nullptr);
+        ~Options();
 
     private slots:
         void backButtonClicked();

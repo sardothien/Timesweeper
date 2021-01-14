@@ -45,7 +45,7 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         DialogueHandler::advanceDialogue();
     }
 
-    if(event->key() == Qt::Key_P && !m_isPaused)
+    if(event->key() == Qt::Key_P && !m_isPaused && !game->isGameWon)
     {
         game->mainTimer->stop();
         game->music->pause();
@@ -59,11 +59,11 @@ void PlayerCharacter::keyPressEvent(QKeyEvent *event)
         m_isPaused = false;
         game->getPauseLabel()->hide();
     }
-    else if((event->key() == Qt::Key_O) && m_isPaused)
+    else if((event->key() == Qt::Key_O) && m_isPaused && !game->isGameWon)
     {
         Menu::options->show();
     }
-    else if((event->key() == Qt::Key_H) && m_isPaused)
+    else if((event->key() == Qt::Key_H) && m_isPaused && !game->isGameWon)
     {
         Menu::help->show();
     }

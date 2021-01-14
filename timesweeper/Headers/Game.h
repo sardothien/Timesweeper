@@ -52,6 +52,7 @@ class Game : public QGraphicsView
         QGraphicsPixmapItem *gameOverScreen;
         QProgressBar *bossHealthBar;
         QLabel *bossHead;
+        bool isGameWon  = false;
 
     public slots:
         void changeLevel();
@@ -65,7 +66,7 @@ class Game : public QGraphicsView
         QLabel *m_gameOverLabel;
         QLabel *m_pauseLabel;
         bool m_soundOn    = true;
-        bool m_isGameOver = false;   
+        bool m_isGameOver = false;
 };
 
 #endif // GAME_H

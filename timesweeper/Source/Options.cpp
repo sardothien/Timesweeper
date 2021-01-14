@@ -19,6 +19,11 @@ Options::Options(QWidget *parent)
     connect(ui->soundEffect, &QCheckBox::stateChanged, this, &Options::soundEffectStateChanged);
 }
 
+Options::~Options()
+{
+    delete ui;
+}
+
 void Options::backButtonClicked()
 {
     this->hide();

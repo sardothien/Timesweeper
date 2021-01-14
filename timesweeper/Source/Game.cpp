@@ -6,6 +6,7 @@
 #include "Headers/EnemyCharacter.h"
 #include "Headers/Game.h"
 #include "Headers/Level.h"
+#include "Headers/Menu.h"
 #include "Headers/Pickup.h"
 #include "Headers/Tile.h"
 #include "ui_Game.h"
@@ -70,6 +71,8 @@ void Game::showCredits()
     m_creditsLabel->setGeometry(0, 0, 1200, 700);
     m_creditsLabel->setPixmap(QPixmap(":/Other/Resources/Other/credits.png"));
     m_creditsLabel->show();
+
+
 }
 
 void Game::playMusic()
@@ -86,6 +89,9 @@ void Game::makeGameOverLabel()
     m_gameOverLabel->setGeometry(300, 120, 590, 360);
     m_gameOverLabel->setPixmap(QPixmap(":/Other/Resources/Other/gameover.png"));
     m_gameOverLabel->hide();
+
+    delete Menu::options;
+    delete Menu::help;
 }
 
 void Game::makePauseLabel()
@@ -163,7 +169,7 @@ void Game::changeLevel()
                            + QString::number(getLevelID()) + ".mp3"));
     playMusic();
 
-    levelID++;
+    levelID=5;
 }
 
 void Game::triggerDialogue()

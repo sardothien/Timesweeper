@@ -13,6 +13,7 @@ class Help : public QMainWindow
     Q_OBJECT
     public:
         explicit Help(QWidget *parent = nullptr);
+        ~Help();
 
     private slots:
         void backButtonClicked();
