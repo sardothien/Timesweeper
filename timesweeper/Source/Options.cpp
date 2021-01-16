@@ -2,8 +2,6 @@
 #include "Headers/Game.h"
 #include "ui_Options.h"
 
-#include <QDebug>
-
 extern Game *game;
 
 Options::Options(QWidget *parent)

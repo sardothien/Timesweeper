@@ -53,9 +53,9 @@ void Projectile::move(int distanceToMove)
                 enemy->decreaseHealth();
                 if(enemy->getLives() == 0)
                 {
-                    scene()->removeItem(enemy);
-                    scene()->removeItem(enemy->healthBar->bar);
-                    scene()->removeItem(enemy->healthBar->barFrame);
+                    enemy->hide();
+                    enemy->healthBar->bar->hide();
+                    enemy->healthBar->barFrame->hide();
                 }
 
                 scene()->removeItem(this);

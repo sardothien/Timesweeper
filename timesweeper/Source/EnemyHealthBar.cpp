@@ -1,5 +1,4 @@
 #include <QPainter>
-#include <iostream>
 
 #include "Headers/EnemyHealthBar.h"
 

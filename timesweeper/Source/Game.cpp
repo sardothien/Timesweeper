@@ -169,7 +169,7 @@ void Game::changeLevel()
                            + QString::number(getLevelID()) + ".mp3"));
     playMusic();
 
-    levelID=5;
+    levelID++;
 }
 
 void Game::triggerDialogue()
