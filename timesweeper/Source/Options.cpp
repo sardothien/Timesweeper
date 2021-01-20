@@ -2,8 +2,6 @@
 #include "Headers/Game.h"
 #include "ui_Options.h"
 
-#include <QDebug>
-
 extern Game *game;
 
 Options::Options(QWidget *parent)
@@ -17,6 +15,11 @@ Options::Options(QWidget *parent)
     connect(ui->volume, &QSlider::valueChanged, this, &Options::volumeValueChanged);
     connect(ui->sound, &QCheckBox::stateChanged, this, &Options::soundStateChanged);
     connect(ui->soundEffect, &QCheckBox::stateChanged, this, &Options::soundEffectStateChanged);
+}
+
+Options::~Options()
+{
+    delete ui;
 }
 
 void Options::backButtonClicked()

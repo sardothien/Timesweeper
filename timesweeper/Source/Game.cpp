@@ -6,6 +6,7 @@
 #include "Headers/EnemyCharacter.h"
 #include "Headers/Game.h"
 #include "Headers/Level.h"
+#include "Headers/Menu.h"
 #include "Headers/Pickup.h"
 #include "Headers/Tile.h"
 #include "ui_Game.h"
@@ -66,10 +67,15 @@ void Game::mousePressEvent(QMouseEvent *event)
 
 void Game::showCredits()
 {
+    DialogueHandler::isDialogueActive = false;
+
     QLabel *m_creditsLabel = new QLabel(this);
     m_creditsLabel->setGeometry(0, 0, 1200, 700);
     m_creditsLabel->setPixmap(QPixmap(":/Other/Resources/Other/credits.png"));
     m_creditsLabel->show();
+
+    delete Menu::options;
+    delete Menu::help;
 }
 
 void Game::playMusic()

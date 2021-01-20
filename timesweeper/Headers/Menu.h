@@ -1,15 +1,15 @@
 #ifndef MENU_H
 #define MENU_H
 
+#include "Headers/Help.h"
+#include "Headers/Options.h"
+
 #include <QMainWindow>
 
 namespace Ui
 {
     class Menu;
 }
-
-class Help;
-class Options;
 
 class Menu : public QMainWindow
 {

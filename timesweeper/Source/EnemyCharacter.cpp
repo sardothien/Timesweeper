@@ -3,6 +3,8 @@
 #include "Headers/PlayerCharacter.h"
 #include "Headers/Projectile.h"
 
+#include <iostream>
+
 extern Game* game;
 
 EnemyCharacter::EnemyCharacter()
@@ -28,9 +30,11 @@ EnemyHealthBar *EnemyCharacter::getHealtBar() const { return healthBar; }
 
 void EnemyCharacter::advance(int phase)
 {
-    QGraphicsItem::advance(phase);
-    move();
-    shoot();
+    if(isVisible()){
+        QGraphicsItem::advance(phase);
+        move();
+        shoot();
+    }
 }
 
 // enemy left/right movement
@@ -123,24 +127,20 @@ void EnemyCharacter::shoot()
 
 void EnemyCharacter::decreaseHealth()
 {
-    if(this->getLives() == 3)
+    if(getLives() == 3)
     {
-        game->currentLevel->removeItem(this->healthBar->bar);
-        this->healthBar->bar = new QGraphicsRectItem(x(), y() - 25, 54, 15);
-        this->healthBar->bar->setBrush(Qt::yellow);
-        game->currentLevel->addItem(this->healthBar->bar);
-        this->setLives(2);
+        healthBar->bar->setRect(0, 0, 54, 15);
+        healthBar->bar->setBrush(Qt::yellow);
+        setLives(2);
     }
-    else if(this->getLives() == 2)
+    else if(getLives() == 2)
     {
-        game->currentLevel->removeItem(this->healthBar->bar);
-        this->healthBar->bar = new QGraphicsRectItem(x(), y() - 25, 28, 15);
-        this->healthBar->bar->setBrush(Qt::red);
-        game->currentLevel->addItem(this->healthBar->bar);
-        this->setLives(1);
+        healthBar->bar->setRect(0, 0, 28, 15);
+        healthBar->bar->setBrush(Qt::red);
+        setLives(1);
     }
     else
     {
-        this->setLives(0);
+        setLives(0);
     }
 }

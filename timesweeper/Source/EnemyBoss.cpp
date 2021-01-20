@@ -80,6 +80,7 @@ void EnemyBoss::decreaseHealth()
 
     if(getLives() == 0)
     {
+        game->isGameWon = true;
         emit alphaDied();
     }
 }
