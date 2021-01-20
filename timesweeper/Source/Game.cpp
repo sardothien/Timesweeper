@@ -67,12 +67,15 @@ void Game::mousePressEvent(QMouseEvent *event)
 
 void Game::showCredits()
 {
+    DialogueHandler::isDialogueActive = false;
+
     QLabel *m_creditsLabel = new QLabel(this);
     m_creditsLabel->setGeometry(0, 0, 1200, 700);
     m_creditsLabel->setPixmap(QPixmap(":/Other/Resources/Other/credits.png"));
     m_creditsLabel->show();
 
-
+    delete Menu::options;
+    delete Menu::help;
 }
 
 void Game::playMusic()
@@ -89,9 +92,6 @@ void Game::makeGameOverLabel()
     m_gameOverLabel->setGeometry(300, 120, 590, 360);
     m_gameOverLabel->setPixmap(QPixmap(":/Other/Resources/Other/gameover.png"));
     m_gameOverLabel->hide();
-
-    delete Menu::options;
-    delete Menu::help;
 }
 
 void Game::makePauseLabel()
