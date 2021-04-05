@@ -1,6 +1,6 @@
 ![splash](https://gitlab.com/matf-bg-ac-rs/course-rs/projects-2020-2021/06-timesweeper/-/raw/develop/timesweeper/Resources/Other/splash.png)
 
-![C++](https://img.shields.io/badge/C%2B%2B-green) ![Qt5](https://img.shields.io/badge/Qt5-blue)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9d6e1baa1ea94567a93575dc003b9b3c)](https://app.codacy.com/gl/mina.milosevic/06-timesweeper/dashboard) ![C++](https://img.shields.io/badge/C%2B%2B-green) ![Qt5](https://img.shields.io/badge/Qt5-blue)
 ### :memo:
 
 Grab your trusty Time gun, jump into a Time Portal, avoid some obstacles and shoot up some Time travelling aliens
