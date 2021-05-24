@@ -25,7 +25,7 @@ ___
 
 - <b>Option 1 - Run release version:</b><br>
 
-Download the latest release version (for Windows only) from [this link](https://gitlab.com/matf-bg-ac-rs/course-rs/projects-2020-2021/06-timesweeper/-/releases) , unpack the downloaded archive, and run the included executable file.
+Download the latest release version (for Windows only) from [this link](https://github.com/sardothien/Timesweeper/releases) , unpack the downloaded archive, and run the included executable file.
 If the first link doesn't work, you can download the release build from [here](https://drive.google.com/file/d/16wUC2wYumvYVEjSmNXyy3BSzsWSr-FK0/view?fbclid=IwAR0OSAK7ZAtX_yZeB5KfNBeJ6Q9F8KT6Oh9y-2fTm1h2p8lva4pPOkPO8Ls)
 
 - <b>Option 2 - Run from source code:</b><br>
@@ -35,7 +35,7 @@ After cloning the repository to a directory of your choosing (or downloading and
 Inside you will find _timesweeper.pro_ and _CMakeLists.txt_ files. Open one of them with Qt Creator. <br>
 Click on the green Run button you will see in the bottom left. This will build the project and run the game.
 <br><br>
-For running project from terminal or for more detailed instructions on how to install everything, check [this page](https://gitlab.com/matf-bg-ac-rs/course-rs/projects-2020-2021/06-timesweeper/-/wikis/Prevo%C4%91enje).
+For running project from terminal or for more detailed instructions on how to install everything, check [this page](https://github.com/sardothien/Timesweeper/wiki/Build).
 
 
 ___
