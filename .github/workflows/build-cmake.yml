@@ -30,3 +30,9 @@ jobs:
         cd build
         cmake ../timesweeper -DCMAKE_INSTALL_PREFIX=/usr -DUSE_QT6=OFF
         make
+
+    - name: Publish artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: timesweeper
+        path: build/timesweeper
