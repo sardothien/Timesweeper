@@ -28,5 +28,5 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake ../timesweeper -g "Unix Makefiles" -DCMAKE_PREFIX_PATH="/usr/lib64/cmake"
+        cmake ../timesweeper -DCMAKE_INSTALL_PREFIX=/usr -DUSE_QT6=OFF
         make
