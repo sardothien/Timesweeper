@@ -30,10 +30,10 @@ jobs:
         cd build
         cmake ../timesweeper -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
         
-    - name: Clang-Tidy
-      run: |
-        cd build
-        clang-tidy -checks='readability-identifier-naming' ../.clang-tidy > clang-tidy-log.txt
+#     - name: Clang-Tidy
+#       run: |
+#         cd build
+#         clang-tidy -checks='readability-identifier-naming' ../.clang-tidy > clang-tidy-log.txt
         
     - name: Clang-Format
       run: |
@@ -44,6 +44,5 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: timesweeper-analysis
-        path: |
-          build/clang-tidy-log.txt
-          build/clang-format.txt
+        path: build/clang-format.txt
+#          build/clang-tidy-log.txt
