@@ -30,7 +30,12 @@ jobs:
         cd build
         cmake ../timesweeper -DCMAKE_INSTALL_PREFIX=/usr -DUSE_QT6=OFF
         make
-
+  
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
     - name: Publish artifacts
       uses: actions/upload-artifact@v3
       with:
