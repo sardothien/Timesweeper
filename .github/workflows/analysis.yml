@@ -28,7 +28,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake ../timesweeper -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+        cmake ../timesweeper -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_INSTALL_PREFIX=/usr -DUSE_QT6=OFF
         
 #     - name: Clang-Tidy
 #       run: |
