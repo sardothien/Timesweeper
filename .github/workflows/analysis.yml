@@ -35,13 +35,6 @@ jobs:
 #         cd build
 #         run-clang-tidy -checks='modernize-*' > clang-tidy-log.txt
 #        clang-tidy -checks='readability-identifier-naming' ../.clang-tidy > clang-tidy-log.txt
-
-    - name: Clang-Tidy
-      uses: HorstBaerbel/action-clang-tidy@1.2
-      with:
-        scandir: 'timesweeper'
-        builddir: 'build'
-        extensions: 'h,cpp'
         
     - name: Clang-Format
       run: |
